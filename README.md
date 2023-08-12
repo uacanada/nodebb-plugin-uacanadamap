@@ -20,5 +20,5 @@ Hi, I'm Viktor from Ukraine. On February 24, 2022, due to the unprovoked and bar
 
 ## 🤝 Connect & Support
 
-💌 For personal inquiries, join us on [Discord](https://discord.gg/pKnXqz3vaq).
-🐛 If you encounter issues or have questions related to this plugin's code, please [open a new issue](https://github.com/uacanada/nodebb-plugin-uacanadamap/issues/new).
+*💌 For personal inquiries, join us on [Discord](https://discord.gg/pKnXqz3vaq).
+*🐛 If you encounter issues or have questions related to this plugin's code, please [open a new issue](https://github.com/uacanada/nodebb-plugin-uacanadamap/issues/new).
