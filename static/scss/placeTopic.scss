@@ -1,0 +1,14 @@
+body.uacanada-map-page{
+    #topicMap{
+        display: none;
+    }
+}
+
+#placeFields {
+    overflow-x: hidden;
+
+    .accordion-button:not(.collapsed) {
+        background-color: transparent;
+    }
+}
+

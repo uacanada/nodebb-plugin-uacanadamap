@@ -1,0 +1,197 @@
+.pro-m-marker.ua-marker-d:after {
+  content: "Pro ⭐⭐⭐⭐⭐";
+  position: absolute;
+  text-transform: capitalize;
+  color: #323232;
+  margin-left: 0;
+  font-size: 8px;
+  border-radius: 3px;
+  left: 26px;
+  bottom: -20px;
+  text-shadow: 2px -1px 3px black;
+  height: 20px;
+  padding: 3px;
+}
+.ua-marker-d {
+  transition: .3s ease;
+}
+
+.ua-markers .circle-icon {
+  width: 24px;
+  height: 24px;
+  text-shadow: -1px 1px 5px rgba(13, 62, 126, 0.33);
+  color: #fff;
+  background-color:$marker-bg;
+  font-size: 10px;
+  transition: .3s ease;
+  text-rendering: geometricPrecision;
+}
+.ua-markers{  font-size: 16px; }
+.ua-markers.two-line-m  .badge-text{  font-size: 12px; line-height: 12px; height: 24px;}
+.ua-markers.one-line-m  .badge-text{  font-size: 14px; line-height: 24px; height: 24px;}
+
+.ua-markers .badge-text {
+  color:$marker-text;
+  transition: .3s ease;
+  letter-spacing: -.4px;
+  text-shadow: .1px .1px .5px rgba(27,31,54,.5),1px -1px 2px #fff;
+  transform: scale(1) translateX(0);
+  /* backdrop-filter: blur(20px); */
+  opacity: 1;
+  border-radius: 10px;
+  filter: drop-shadow(-1px 4px 5px rgba(43, 43, 43, 0.2));
+}
+
+.far-away-zoom .pro-m-marker.ua-marker-d:after{
+  content: '';
+  display: none;
+}
+
+.far-away-zoom .ua-markers .badge-text {
+  opacity: .5;
+  transform: scale(.7) translateX(-1rem);
+}
+.ua-opened-marker {
+  opacity: 0!important;
+}
+.ua-opened-marker.has-neighbors{
+  font-weight: bold;
+  opacity: 1!important;
+
+}
+
+
+
+.ua-markers .circle-icon:after {
+  content: '|';
+  position: absolute;
+  top: 22px;
+  font-weight: bold;
+  color: $marker-bg;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+
+
+
+
+.uac-marker-shadow {
+    box-shadow: 3px 5px 9px -3px rgba(24, 24, 24, 0.4), 1px -8px 7px -8px rgba(112, 112, 112, 0.4)
+}
+
+.leaflet-marker-icon.mycluster {
+    background: url("#{$icons-path}uaCluster.svg?#{$ua-cache}") center center no-repeat;
+    color: rgba(56, 122, 255, 0.33);
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1rem;
+    z-index: 88888!important;
+}
+
+  
+.ua-social-telegram, .ua-social-youtube, .ua-marker-default.ua-bloggers {
+     word-break: break-all;
+    
+  }
+  
+
+  .ua-locate-me-marker {
+    background: #ffc107;
+    color: #0d6efd;
+    font-size: 3px;
+    box-shadow: 0 9px 23px -2px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    font-weight: bold;
+    padding: 6px;
+  }
+ 
+
+  
+  // .cat-crypto {
+  //   background: linear-gradient(45deg, #ffce77, #ef5214);
+  //   color: white;
+  // }
+
+  .leaflet-marker-icon.ua-pin-icon {
+    font-size: 23px;
+  }
+
+ 
+  .pointer-marker{
+    transition: .3s all ease;
+  }
+
+  .pointer-marker-icon{
+        width: 64px!important;
+        height: 64px!important;
+        box-shadow: 0 0 8px -3px rgb(var(--bs-black-rgb));
+        border: solid 3px rgb(var(--bs-white-rgb));
+        transition: .3s all ease;
+          
+        
+  }
+
+ 
+.ua-marker-dot{
+  font-size: 12px;
+}
+
+a.ua-popup-link {
+ 
+  text-decoration: none;
+  margin-right: 1rem;
+  display: block;
+  min-width: 1rem;
+}
+
+
+a.ua-popup-link:hover{
+  text-decoration: none; 
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.7);
+  color: #333;
+  box-shadow: 0 0px 10px -2px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+}
+
+
+.leaflet-popup-content-wrapper {
+  padding: 0 8px;
+  
+}
+
+.mini-latlng {
+  font-size: 0.5rem;
+  font-family: monospace;
+  color: #5a80ff;
+  background: rgba(255, 255, 6, 0.3);
+  padding: 4px 7px;
+  border-radius: 5px;
+  bottom: 5px;
+  left: -2rem;
+  text-align: center;
+}
+
+.ua-popup-codes code {
+  font-size: 0.65rem;
+  color: #444444;
+}
+
+#uaAddNewLoc {
+  background: #f7b04b;
+  margin: 0;
+  font-size: 1rem;
+  color: #0067ff;
+  border: none;
+  padding: .25rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.leaflet-popup-content{
+  .list-group-flush .list-group-item{
+    background: transparent!important;
+  }
+}

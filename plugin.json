@@ -1,0 +1,126 @@
+{
+  "id": "nodebb-plugin-uacanadamap",
+  "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap",
+  "library": "./lib/backend/library.js",
+  "staticDirs": {
+    "static": "./static",
+    "icons": "./static/icons",
+    "leaflet": "./node_modules/leaflet/dist"
+  },
+  "staticNpmDependencies": {
+    "leaflet": "^1.9.3",
+    "leaflet-contextmenu": "^1.4.0",
+    "leaflet-control-geocoder": "^2.4.0",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet.locatecontrol": "^0.79.0",
+    "leaflet.markercluster": "^1.5.3",
+    "leaflet-providers": "^1.13.0",
+    "swiper": "^9.2.4"
+  },
+  "scss": [
+    "static/vendors/css/leaflet.scss",
+    "static/vendors/css/leaflet.fullscreen.scss",
+    "static/scss/imports.scss",
+    "static/scss/variables.scss",
+    "static/scss/animations.scss",
+    "static/scss/bottomSheet.scss",
+    "static/scss/videos.scss",
+    "static/scss/markers.scss",
+    "static/scss/buttons.scss",
+    "static/scss/bottomButton.scss",
+    "static/scss/placeTopic.scss",
+    "static/scss/acp.scss",
+    "static/scss/dirty.scss",
+    "static/scss/uacanadamap.scss",
+    "static/scss/mutations.scss",
+    "static/scss/rewrites.scss"
+  ],
+  "scripts": [
+    "static/lib/main.js"
+  ],
+  "acpScripts": [],
+  "modules": {
+    "leaflet": "./node_modules/leaflet/dist/leaflet.js",
+    "swiper/bundle": "./node_modules/swiper/bundle.js",
+    
+    "../client/map.js": "./static/js/core/uacanadamap.js",
+    "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
+
+    "uacanadamap/interactions": "./static/js/core/interactions.js",
+    "uacanadamap/configurations": "./static/js/core/configurations.js",
+
+    "uacanadamap/handlers": "./static/js/utils/handlers.js",
+    "uacanadamap/mapFeatures": "./static/js/utils/mapFeatures.js",
+
+    "uacanadamap/mapReady": "./static/js/events/mapReady.js",
+    "uacanadamap/swipersCreator": "./static/js/core/swipersCreator.js",
+    "uacanadamap/swipeDetectors": "./static/js/ui/swipeDetectors.js",
+    "uacanadamap/categoriesCreator": "./static/js/population/categoriesCreator.js",
+    "uacanadamap/regionCreator": "./static/js/forms/regionCreator.js",
+    
+    "uacanadamap/markersFetcher": "./static/js/markers/markersFetcher.js",
+    "uacanadamap/markersPopulator": "./static/js/markers/markersPopulator.js",
+    
+    "uacanadamap/elementPositions": "./static/js/ui/elementPositions.js",
+    
+    "uacanadamap/methods": "./static/js/utils/methods.js",
+    
+    "uacanadamap/buttonsSwiper": "./static/js/panels/buttonsSwiper.js",
+    "uacanadamap/cardSwiper": "./static/js/panels/cardSwiper.js",
+    "uacanadamap/bottomSheets": "./static/js/panels/bottomSheets.js",
+
+
+    "uacanadamap/tabsPopulator": "./static/js/population/tabsPopulator.js",
+    "uacanadamap/markersFilter": "./static/js/markers/markersFilter.js",
+    "uacanadamap/advMarkers": "./static/js/markers/advMarkers.js",
+    "uacanadamap/basicListeners": "./static/js/events/basicListeners.js",
+    "uacanadamap/hooks": "./static/js/events/hooks.js",
+    "uacanadamap/expandMap": "./static/js/utils/expandMap.js",
+    "uacanadamap/submitPlace": "./static/js/forms/submitPlace.js",
+    "uacanadamap/editPlace": "./static/js/forms/editPlace.js",
+    "uacanadamap/topicPost": "./static/js/topics/topicPost.js",
+    "uacanadamap/registerableListeners": "./static/js/event/registerableListeners.js"
+  },
+
+  
+
+  "templates": "static/templates",
+  "hooks": [
+    {
+      "hook": "static:app.load",
+      "method": "init"
+    },
+    {
+      "hook": "static:api.routes",
+      "method": "addRoutes"
+    },
+    {
+      "hook": "action:plugin.activate",
+      "method": "activate"
+    },
+    {
+      "hook": "filter:admin.header.build",
+      "method": "addAdminNavigation"
+    },
+    {
+      "hook": "filter:middleware.render",
+      "method": "onEachRender"
+    },
+    {
+      "hook": "filter:widgets.getAreas",
+      "method": "defineWidgetAreas"
+    },
+    {
+      "hook": "filter:widgets.getWidgets",
+      "method": "defineWidget"
+    },
+    {
+      "hook": "filter:topic.get",
+      "method": "addPlaceFieldsToTopic"
+    },
+    {
+      "hook": "filter:middleware.buildHeader",
+      "method": "onTopicBuild"
+    }
+  ]
+}

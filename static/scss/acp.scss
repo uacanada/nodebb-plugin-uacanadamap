@@ -1,0 +1,33 @@
+body.page-admin-uacanadamap{
+    .bootstrap-tagsinput .tag {
+        margin-right: 2px;
+        margin-bottom: 5px;
+        color: #fff;
+        background: linear-gradient(45deg,#0071a4,#03a9f4);
+        padding-left: .5rem;
+        padding-bottom: .25rem;
+        padding-top: .1rem;
+        border-radius: 5px;
+        line-height: 2;
+        font-size: 1rem;
+    }  
+    .bootstrap-tagsinput .tag [data-role=remove]:after {
+        content: "\f2ed";
+        font-family: "Font Awesome 6 Free";
+        font-style: normal;
+        color: #d4eeff;
+        margin: 0 0.25rem;
+        font-size: 0.7rem;
+    }
+
+    .uacanadamap-settings{
+        .card:not([data-container-html])>.card-header{
+            background-color: #252525;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+    }
+   
+}
+
+
