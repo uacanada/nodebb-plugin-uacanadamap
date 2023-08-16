@@ -1,5 +1,5 @@
 'use strict';
-define('core/interactions', ['core/uacanadamap'], function(UacanadaMap) { 
+define('core/interactions', ['../uacanadamap'], function(UacanadaMap) { 
 
     UacanadaMap.api.getLatestLocation = () => {
     let latlng = localStorage.getItem("uamaplocation");

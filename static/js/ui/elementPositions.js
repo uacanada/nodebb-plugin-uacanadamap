@@ -1,5 +1,5 @@
 'use strict';
-define('ui/elementPositions', ['core/uacanadamap'], function(UacanadaMap) { 
+define('ui/elementPositions', ['../uacanadamap'], function(UacanadaMap) { 
 	
 	UacanadaMap.api.setContextCss=(css)=>{
 		if($('#context-styles')[0]){

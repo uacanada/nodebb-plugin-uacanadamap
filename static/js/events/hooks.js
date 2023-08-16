@@ -1,5 +1,5 @@
 'use strict';
-    define('events/hooks',['core/uacanadamap'], function(UacanadaMap) { 
+    define('events/hooks',['../uacanadamap'], function(UacanadaMap) { 
 
 const firstInitTime = Date.now();
 

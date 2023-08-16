@@ -1,5 +1,5 @@
 "use strict";
-define("core/uacanadamap", [
+define( [
  "core/variables",
 "core/initialization", 
 ], function (

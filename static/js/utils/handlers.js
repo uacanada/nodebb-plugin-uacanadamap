@@ -1,5 +1,5 @@
 'use strict';
-define('utils/handlers',['core/uacanadamap'], function(UacanadaMap) { 
+define('utils/handlers',['../uacanadamap'], function(UacanadaMap) { 
 
    
   UacanadaMap.utils = {

@@ -1,5 +1,5 @@
 'use strict';
-define('events/mapReady',['core/uacanadamap'], function(UacanadaMap) { 
+define('events/mapReady',['../uacanadamap'], function(UacanadaMap) { 
     const { map } = UacanadaMap;
     UacanadaMap.isFullscreenMode = false;
     UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();

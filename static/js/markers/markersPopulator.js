@@ -1,5 +1,5 @@
 'use strict';
-define('markers/markerPopulator',['core/uacanadamap'], function(UacanadaMap) { 
+define('markers/markerPopulator',['../uacanadamap'], function(UacanadaMap) { 
     const { L } = UacanadaMap;
   
     function calculateDegreesFromPixels(pixelX, pixelY, zoom) {

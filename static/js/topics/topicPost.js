@@ -1,5 +1,5 @@
 'use strict';
-define('topics/topicPost',['core/uacanadamap'], function(UacanadaMap) { 
+define('topics/topicPost',['../uacanadamap'], function(UacanadaMap) { 
     const { L } = UacanadaMap;
 /* Create post header ONLY WHEN INSIDE TOPIC VIEW !*/
 UacanadaMap.api.setLocationCardtoPost = () => {

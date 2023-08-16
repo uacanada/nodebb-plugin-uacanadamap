@@ -1,5 +1,5 @@
 'use strict';
-define('forms/submitPlace',['core/uacanadamap'], function(UacanadaMap) { 
+define('forms/submitPlace',['../uacanadamap'], function(UacanadaMap) { 
     const { L, map } = UacanadaMap;
   
     UacanadaMap.form.convertToMonth=(dateString)=> {

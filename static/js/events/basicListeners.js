@@ -16,7 +16,7 @@ $.fn.classChange = function (cb) {
   let clustersForReset = []
   
   'use strict';
-  define('events/basicListeners', ['core/uacanadamap'], function(UacanadaMap) { 
+  define('events/basicListeners', ['../uacanadamap'], function(UacanadaMap) { 
    
     const { L } = UacanadaMap;
   
