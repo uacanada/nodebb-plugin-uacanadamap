@@ -4,7 +4,8 @@
   "library": "./lib/backend/library.js",
   "staticDirs": {
     "static": "./static",
-    "icons": "./static/icons",
+    "icons": "./static/assets/icons",
+    "images": "./static/assets/images",
     "leaflet": "./node_modules/leaflet/dist",
     "swiper/bundle": "./node_modules/swiper/bundle.js"
   },
@@ -25,7 +26,6 @@
     "static/scss/variables.scss",
     "static/scss/animations.scss",
     "static/scss/bottomSheet.scss",
-    "static/scss/videos.scss",
     "static/scss/markers.scss",
     "static/scss/buttons.scss",
     "static/scss/bottomButton.scss",
