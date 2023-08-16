@@ -72,7 +72,7 @@
     "forms/editPlace": "static/js/forms/editPlace.js",
     "topics/topicPost": "static/js/topics/topicPost.js",
     "events/registerableListeners": "static/js/events/registerableListeners.js",
-
+    "uacanadamap": "static/js/uacanadamap.js",
     "../client/map.js": "static/js/uacanadamap.js"
 },
 
