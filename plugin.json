@@ -36,14 +36,14 @@
     "static/scss/mutations.scss",
     "static/scss/rewrites.scss"
   ],
-  "scripts": [ "static/js/uacanadamap.js" ],
+  "scripts": [ ],
   "acpScripts": [],
 
   "modules": {
     "leaflet": "./node_modules/leaflet/dist/leaflet.js",
     "swiper/bundle": "./node_modules/swiper/bundle.js",
     "../admin/plugins/uacanadamap.js": "static/acp/adminPage.js",
-
+    "../client/map.js": "static/js/uacanadamap.js",
     "core/variables": "static/js/core/variables.js",
     "core/initialization": "static/js/core/initialization.js",
     "core/interactions": "static/js/core/interactions.js",
@@ -71,9 +71,8 @@
     "forms/submitPlace": "static/js/forms/submitPlace.js",
     "forms/editPlace": "static/js/forms/editPlace.js",
     "topics/topicPost": "static/js/topics/topicPost.js",
-    "events/registerableListeners": "static/js/events/registerableListeners.js",
-    "uacanadamap": "static/js/uacanadamap.js",
-    "../client/map.js": "static/js/uacanadamap.js"
+    "events/registerableListeners": "static/js/events/registerableListeners.js"
+   
 },
 
   
