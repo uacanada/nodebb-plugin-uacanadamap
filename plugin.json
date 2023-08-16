@@ -35,53 +35,50 @@
     "static/scss/mutations.scss",
     "static/scss/rewrites.scss"
   ],
-  "scripts": [
-    "static/js/core/uacanadamap.js"
-  ],
+  "scripts": [],
   "acpScripts": [],
   "modules": {
     "leaflet": "./node_modules/leaflet/dist/leaflet.js",
     "swiper/bundle": "./node_modules/swiper/bundle.js",
-    "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
+    "../admin/plugins/uacanadamap.js": "static/acp/adminPage.js",
+    "../client/map.js": "static/js/core/uacanadamap.js",
+   
+    "uacanadamap/variables": "static/js/core/variables.js",
+    "uacanadamap/initialization": "static/js/core/initialization.js",
+    "uacanadamap/interactions": "static/js/core/interactions.js",
+    "uacanadamap/configurations": "static/js/core/configurations.js",
 
+    "uacanadamap/handlers": "static/js/utils/handlers.js",
+    "uacanadamap/mapFeatures": "static/js/utils/mapFeatures.js",
 
-    "uacanadamap": "./static/js/core/uacanadamap.js",
+    "uacanadamap/mapReady": "static/js/events/mapReady.js",
+    "uacanadamap/swipersCreator": "static/js/core/swipersCreator.js",
+    "uacanadamap/swipeDetectors": "static/js/ui/swipeDetectors.js",
+    "uacanadamap/categoriesCreator": "static/js/population/categoriesCreator.js",
+    "uacanadamap/regionCreator": "static/js/forms/regionCreator.js",
     
-    "uacanadamap/initialization": "./static/js/core/initialization.js",
-    "uacanadamap/interactions": "./static/js/core/interactions.js",
-    "uacanadamap/configurations": "./static/js/core/configurations.js",
-
-    "uacanadamap/handlers": "./static/js/utils/handlers.js",
-    "uacanadamap/mapFeatures": "./static/js/utils/mapFeatures.js",
-
-    "uacanadamap/mapReady": "./static/js/events/mapReady.js",
-    "uacanadamap/swipersCreator": "./static/js/core/swipersCreator.js",
-    "uacanadamap/swipeDetectors": "./static/js/ui/swipeDetectors.js",
-    "uacanadamap/categoriesCreator": "./static/js/population/categoriesCreator.js",
-    "uacanadamap/regionCreator": "./static/js/forms/regionCreator.js",
+    "uacanadamap/markersFetcher": "static/js/markers/markersFetcher.js",
+    "uacanadamap/markersPopulator": "static/js/markers/markersPopulator.js",
     
-    "uacanadamap/markersFetcher": "./static/js/markers/markersFetcher.js",
-    "uacanadamap/markersPopulator": "./static/js/markers/markersPopulator.js",
+    "uacanadamap/elementPositions": "static/js/ui/elementPositions.js",
     
-    "uacanadamap/elementPositions": "./static/js/ui/elementPositions.js",
+    "uacanadamap/methods": "static/js/utils/methods.js",
     
-    "uacanadamap/methods": "./static/js/utils/methods.js",
-    
-    "uacanadamap/buttonsSwiper": "./static/js/panels/buttonsSwiper.js",
-    "uacanadamap/cardSwiper": "./static/js/panels/cardSwiper.js",
-    "uacanadamap/bottomSheets": "./static/js/panels/bottomSheets.js",
+    "uacanadamap/buttonsSwiper": "static/js/panels/buttonsSwiper.js",
+    "uacanadamap/cardSwiper": "static/js/panels/cardSwiper.js",
+    "uacanadamap/bottomSheets": "static/js/panels/bottomSheets.js",
 
 
-    "uacanadamap/tabsPopulator": "./static/js/population/tabsPopulator.js",
-    "uacanadamap/markersFilter": "./static/js/markers/markersFilter.js",
-    "uacanadamap/advMarkers": "./static/js/markers/advMarkers.js",
-    "uacanadamap/basicListeners": "./static/js/events/basicListeners.js",
-    "uacanadamap/hooks": "./static/js/events/hooks.js",
-    "uacanadamap/expandMap": "./static/js/utils/expandMap.js",
-    "uacanadamap/submitPlace": "./static/js/forms/submitPlace.js",
-    "uacanadamap/editPlace": "./static/js/forms/editPlace.js",
-    "uacanadamap/topicPost": "./static/js/topics/topicPost.js",
-    "uacanadamap/registerableListeners": "./static/js/event/registerableListeners.js"
+    "uacanadamap/tabsPopulator": "static/js/population/tabsPopulator.js",
+    "uacanadamap/markersFilter": "static/js/markers/markersFilter.js",
+    "uacanadamap/advMarkers": "static/js/markers/advMarkers.js",
+    "uacanadamap/basicListeners": "static/js/events/basicListeners.js",
+    "uacanadamap/hooks": "static/js/events/hooks.js",
+    "uacanadamap/expandMap": "static/js/utils/expandMap.js",
+    "uacanadamap/submitPlace": "static/js/forms/submitPlace.js",
+    "uacanadamap/editPlace": "static/js/forms/editPlace.js",
+    "uacanadamap/topicPost": "static/js/topics/topicPost.js",
+    "uacanadamap/registerableListeners": "static/js/event/registerableListeners.js"
   },
 
   
