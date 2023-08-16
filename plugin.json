@@ -1,7 +1,7 @@
 {
   "id": "nodebb-plugin-uacanadamap",
   "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap",
-  "library": "./lib/backend/library.js",
+  "library": "./lib/backend/library.js",   
   "staticDirs": {
     "static": "./static",
     "icons": "./static/assets/icons",
@@ -17,7 +17,9 @@
     "leaflet.locatecontrol": "^0.79.0",
     "leaflet.markercluster": "^1.5.3",
     "leaflet-providers": "^1.13.0",
-    "swiper": "^9.2.4"
+    "swiper": "^9.2.4",
+    "path": "^0.12.7",
+    "fs": "^0.0.1-security"
   },
   "scss": [
     "static/vendors/css/leaflet.scss",
