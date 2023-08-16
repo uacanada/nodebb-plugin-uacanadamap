@@ -1,7 +1,7 @@
 {
   "id": "nodebb-plugin-uacanadamap",
   "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap",
-  "library": "./lib/backend/library.js",   
+  "library": "./library.js",   
   "staticDirs": {
     "static": "./static",
     "icons": "./static/assets/icons",
