@@ -36,7 +36,7 @@
     "static/scss/mutations.scss",
     "static/scss/rewrites.scss"
   ],
-  "scripts": [],
+  "scripts": [ "static/js/uacanadamap.js" ],
   "acpScripts": [],
 
   "modules": {
