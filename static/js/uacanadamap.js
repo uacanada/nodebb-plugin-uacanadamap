@@ -10,7 +10,7 @@ define( [
   ) {
 
 
-
+console.log('is ok')
 
 
 UacanadaMap.needReinit = false

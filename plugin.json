@@ -5,7 +5,8 @@
   "staticDirs": {
     "static": "./static",
     "icons": "./static/icons",
-    "leaflet": "./node_modules/leaflet/dist"
+    "leaflet": "./node_modules/leaflet/dist",
+    "swiper/bundle": "./node_modules/swiper/bundle.js"
   },
   "staticNpmDependencies": {
     "leaflet": "^1.9.3",
