@@ -1,6 +1,10 @@
 'use strict';
 define('core/interactions', ['../uacanadamap'], function(UacanadaMap) { 
 
+    console.log(UacanadaMap)
+
+    if(!UacanadaMap.api) return console.log('No api')
+
     UacanadaMap.api.getLatestLocation = () => {
     let latlng = localStorage.getItem("uamaplocation");
 
