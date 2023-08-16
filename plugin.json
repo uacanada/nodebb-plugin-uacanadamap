@@ -36,16 +36,18 @@
     "static/scss/rewrites.scss"
   ],
   "scripts": [
-    "static/lib/main.js"
+    "static/js/core/uacanadamap.js"
   ],
   "acpScripts": [],
   "modules": {
     "leaflet": "./node_modules/leaflet/dist/leaflet.js",
     "swiper/bundle": "./node_modules/swiper/bundle.js",
-    
-    "../client/map.js": "./static/js/core/uacanadamap.js",
     "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
 
+
+    "uacanadamap": "./static/js/core/uacanadamap.js",
+    
+    "uacanadamap/initialization": "./static/js/core/initialization.js",
     "uacanadamap/interactions": "./static/js/core/interactions.js",
     "uacanadamap/configurations": "./static/js/core/configurations.js",
 
