@@ -142,6 +142,6 @@ modules:{},
   routers: {},
 };
 
-module.exports = UacanadaMap;
+return UacanadaMap;
 
 })
