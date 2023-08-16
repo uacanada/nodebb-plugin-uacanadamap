@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/bottomSheets', [ 'uacanadamap'], function(UacanadaMap) { 
+define('panels/bottomSheets',['core/uacanadamap'], function(UacanadaMap) { 
 
     const { Swiper, offcanvas: { modes } } = UacanadaMap;
     const sizes = UacanadaMap.settings.bottomSheetOffset.split(',').map(Number);

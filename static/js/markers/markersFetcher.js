@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/markerFetcher', [ 'uacanadamap'], function(UacanadaMap) { 
+define('markers/markerFetcher', ['core/uacanadamap'], function(UacanadaMap) { 
 
     UacanadaMap.TEMP.eventsArray = []
     UacanadaMap.TEMP.placesArray = []

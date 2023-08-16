@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/swipeDetectors', [ 'uacanadamap'], function(UacanadaMap) { 
+define('ui/swipeDetectors',['core/uacanadamap'], function(UacanadaMap) { 
 
 UacanadaMap.api.listenSwipes = (elements) => {
     let touchstartX = 0;

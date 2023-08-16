@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/swipeDetectors', [ 'uacanadamap'], function(UacanadaMap) { 
+define('population/swipeDetectors',['core/uacanadamap'], function(UacanadaMap) { 
 
 	const handleTabCategories = (UacanadaMap, tab, index) => {
 		const { placeByTagCollector, slug, color, icon } = tab;

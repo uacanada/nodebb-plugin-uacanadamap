@@ -1,6 +1,6 @@
 
 'use strict';
-define('uacanadamap/magicButton', [ 'uacanadamap'], function(UacanadaMap) { 
+define('panels/magicButton',['core/uacanadamap'], function(UacanadaMap) { 
 
     UacanadaMap.api.oprnCertainTab = (magicButton) => { // TODO: rename open
         let tab = magicButton[0]?.getAttribute('data-ua-tabtarget')

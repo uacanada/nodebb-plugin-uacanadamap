@@ -1,5 +1,5 @@
  'use strict';
-define('uacanadamap/buttonsSwiper', [ 'uacanadamap'], function(UacanadaMap) { 
+define('panels/buttonsSwiper', ['core/uacanadamap'], function(UacanadaMap) { 
 
     const { L, Swiper } = UacanadaMap;
 

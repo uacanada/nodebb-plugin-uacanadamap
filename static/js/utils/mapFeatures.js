@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/mapFeatures', [ 'uacanadamap'], function(UacanadaMap) { 
+define('utils/mapFeatures', ['core/uacanadamap'], function(UacanadaMap) { 
 
     UacanadaMap.api.debouncedShow = utils.debounce(() => { 
         setTimeout(() => { 

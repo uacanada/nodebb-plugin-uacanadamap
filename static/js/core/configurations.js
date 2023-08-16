@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/configuration', [  'leaflet', 'swiper/bundle','uacanadamap/variables'], function(require, L,Swiper,UacanadaMap) { 
+define('core/configuration', [  'leaflet', 'swiper/bundle','core/variables'], function(require, L,Swiper,UacanadaMap) { 
     
     require('leaflet-fullscreen');
     require('leaflet-control-geocoder');

@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/editPlace', [ 'uacanadamap'], function(UacanadaMap) { 
+define('forms/editPlace',['core/uacanadamap'], function(UacanadaMap) { 
 
     UacanadaMap.form.reset = () => {
         

@@ -3,7 +3,7 @@
 let tabRouteObject = {};
 
 'use strict';
-define('uacanadamap/methods', [ 'uacanadamap'], function(UacanadaMap) { 
+define('utils/methods', ['core/uacanadamap'], function(UacanadaMap) { 
 
 	const { L, map, Swiper } = UacanadaMap;
 

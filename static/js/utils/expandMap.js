@@ -1,5 +1,5 @@
 'use strict';
-define('uacanadamap/expandMap', [ 'uacanadamap'], function(UacanadaMap) { 
+define('utils/expandMap',['core/uacanadamap'], function(UacanadaMap) { 
  
     const { map } = UacanadaMap;
    

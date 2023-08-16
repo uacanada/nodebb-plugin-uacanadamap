@@ -1,7 +1,6 @@
 "use strict";
 
 define("core/initialization", [
-  
   "core/interactions",
   "core/configurations",
   "utils/handlers",

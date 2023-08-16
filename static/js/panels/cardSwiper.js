@@ -1,5 +1,5 @@
  'use strict';
-  define('uacanadamap/cardSwiper', [ 'uacanadamap'], function(UacanadaMap) { 
+  define('panels/cardSwiper', ['core/uacanadamap'], function(UacanadaMap) { 
       const {Swiper} = UacanadaMap
     
   UacanadaMap.api.animateCards = async (state) => {
