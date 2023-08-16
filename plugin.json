@@ -49,9 +49,9 @@
     "core/configurations": "static/js/core/configurations.js",
     "utils/handlers": "static/js/utils/handlers.js",
     "utils/mapFeatures": "static/js/utils/mapFeatures.js",
-    "event/mapReady": "static/js/event/mapReady.js",
+    "events/mapReady": "static/js/event/mapReady.js",
     "core/swipersCreator": "static/js/core/swipersCreator.js",
-    "core/swipeDetectors": "static/js/core/swipeDetectors.js",
+    "ui/swipeDetectors": "static/js/core/swipeDetectors.js",
     "population/categoriesCreator": "static/js/population/categoriesCreator.js",
     "forms/regionCreator": "static/js/forms/regionCreator.js",
     "markers/markersFetcher": "static/js/markers/markersFetcher.js",
@@ -72,7 +72,7 @@
     "topics/topicPost": "static/js/topics/topicPost.js",
     "events/registerableListeners": "static/js/events/registerableListeners.js",
 
-    "../client/map.js": "static/js/core/uacanadamap.js"
+    "../client/map.js": "static/js/uacanadamap.js"
 },
 
   
