@@ -42,9 +42,9 @@
   "modules": {
     "leaflet": "./node_modules/leaflet/dist/leaflet.js",
     "swiper/bundle": "./node_modules/swiper/bundle.js",
-    "../admin/plugins/uacanadamap.js": "static/acp/adminPage.js",
-    "../client/map.js": "static/js/uacanadamap.js",
-    "uacanadamap": "static/js/uacanadamap.js",
+    "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
+    "../client/map.js": "./static/js/uacanadamap.js",
+   
     "core/variables": "static/js/core/variables.js",
     "core/initialization": "static/js/core/initialization.js",
     "core/interactions": "static/js/core/interactions.js",
