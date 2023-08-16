@@ -5,10 +5,15 @@ define("core/initialization", [
   "core/configurations",
   "utils/handlers",
   "utils/mapFeatures",
-  "events/mapReady",
+
   "core/swipersCreator",
-  "ui/swipeDetectors",
+
   "population/categoriesCreator",
+  
+  "events/mapReady",
+  "ui/swipeDetectors",
+  
+  
   "forms/regionCreator",
   "markers/markersFetcher",
   "markers/markersPopulator",
