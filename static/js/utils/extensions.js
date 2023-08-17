@@ -1,3 +1,6 @@
+'use strict';
+define('utils/extensions', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
+
 const extensions = (UacanadaMap) => {
     UacanadaMap.console = {
         log: (...args) => {
@@ -9,4 +12,5 @@ const extensions = (UacanadaMap) => {
   };
   module.exports = { extensions };
   
-  // TODO
+  return UacanadaMap;
+})
