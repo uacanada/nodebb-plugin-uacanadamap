@@ -95,6 +95,8 @@ define("core/initialization", [
     UacanadaMap.api.setCategory("");
     UacanadaMap.api.filterMarkers(false);
 
+
+    UacanadaMap.api.registerBasicListeners()
     if (UacanadaMap.eventListenersInstance) {
       UacanadaMap.eventListenersInstance.reload();
     } else {
