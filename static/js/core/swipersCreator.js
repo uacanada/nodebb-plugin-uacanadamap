@@ -1,10 +1,9 @@
 "use strict";
 define("core/swipersCreator", [
-   "swiper/bundle",
   "core/variables" /*   Global object UacanadaMap  */,
-], function (Swiper,UacanadaMap) {
+], function (UacanadaMap) {
   UacanadaMap.api.initializeSwipers = () => {
-   
+    const { Swiper } = UacanadaMap;
 
     console.log({UacanadaMap,Swiper}) // TODO debug
 

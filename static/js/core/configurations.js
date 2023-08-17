@@ -1,7 +1,7 @@
 'use strict';
 define('core/configuration', function (require) {
     const L = require('leaflet');
-    const Swiper = require('swiper/bundle');
+    const Swiper = require('swiper/bundle').default;
     const UacanadaMap = require('core/variables');
     require('leaflet-fullscreen');
     require('leaflet-control-geocoder');
