@@ -1,0 +1,122 @@
+{
+  "id": "nodebb-plugin-uacanadamap",
+  "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap",
+  "library": "./library.js",   
+  "staticDirs": {
+    "static": "./static",
+    "icons": "./static/assets/icons",
+    "images": "./static/assets/images",
+    "leaflet": "./node_modules/leaflet/dist",
+    "swiper/bundle": "./node_modules/swiper/bundle.js"
+  },
+  "staticNpmDependencies": {
+    "leaflet": "^1.9.3",
+    "leaflet-contextmenu": "^1.4.0",
+    "leaflet-control-geocoder": "^2.4.0",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet.locatecontrol": "^0.79.0",
+    "leaflet.markercluster": "^1.5.3",
+    "leaflet-providers": "^1.13.0",
+    "swiper": "^9.2.4",
+    "path": "^0.12.7",
+    "fs": "^0.0.1-security"
+  },
+  "scss": [
+    "static/vendor/css/leaflet.scss",
+    "static/vendor/css/leaflet.fullscreen.scss",
+    "static/scss/imports.scss",
+    "static/scss/variables.scss",
+    "static/scss/animations.scss",
+    "static/scss/bottomSheet.scss",
+    "static/scss/markers.scss",
+    "static/scss/buttons.scss",
+    "static/scss/bottomButton.scss",
+    "static/scss/placeTopic.scss",
+    "static/scss/acp.scss",
+    "static/scss/dirty.scss",
+    "static/scss/uacanadamap.scss",
+    "static/scss/mutations.scss",
+    "static/scss/rewrites.scss"
+  ],
+  "scripts": [ ],
+  "acpScripts": [],
+
+  "modules": {
+    "leaflet": "./node_modules/leaflet/dist/leaflet.js",
+    "swiper/bundle": "./node_modules/swiper/bundle.js",
+    "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
+    "../client/map.js": "./static/js/uacanadamap.js",
+    "utils/extensions":"static/js/utils/extensions.js",
+    "core/variables": "static/js/core/variables.js",
+    "core/initialization": "static/js/core/initialization.js",
+    "core/interactions": "static/js/core/interactions.js",
+    "core/configurations": "static/js/core/configurations.js",
+    "utils/handlers": "static/js/utils/handlers.js",
+    "utils/mapFeatures": "static/js/utils/mapFeatures.js",
+    "events/mapReady": "static/js/events/mapReady.js",
+    "core/swipersCreator": "static/js/core/swipersCreator.js",
+    "ui/swipeDetectors": "static/js/ui/swipeDetectors.js",
+    "population/categoriesCreator": "static/js/population/categoriesCreator.js",
+    "forms/regionCreator": "static/js/forms/regionCreator.js",
+    "markers/markersFetcher": "static/js/markers/markersFetcher.js",
+    "markers/markersPopulator": "static/js/markers/markersPopulator.js",
+    "ui/elementPositions": "static/js/ui/elementPositions.js",
+    "utils/methods": "static/js/utils/methods.js",
+    "panels/buttonsSwiper": "static/js/panels/buttonsSwiper.js",
+    "panels/cardSwiper": "static/js/panels/cardSwiper.js",
+    "panels/bottomSheets": "static/js/panels/bottomSheets.js",
+    "population/tabsPopulator": "static/js/population/tabsPopulator.js",
+    "markers/markersFilter": "static/js/markers/markersFilter.js",
+    "markers/advMarkers": "static/js/markers/advMarkers.js",
+    "events/basicListeners": "static/js/events/basicListeners.js",
+    "events/hooks": "static/js/events/hooks.js",
+    "utils/expandMap": "static/js/utils/expandMap.js",
+    "forms/submitPlace": "static/js/forms/submitPlace.js",
+    "forms/editPlace": "static/js/forms/editPlace.js",
+    "topics/topicPost": "static/js/topics/topicPost.js",
+    "events/registerableListeners": "static/js/events/registerableListeners.js"
+   
+},
+
+  
+
+  "templates": "static/templates",
+  "hooks": [
+    {
+      "hook": "static:app.load",
+      "method": "init"
+    },
+    {
+      "hook": "static:api.routes",
+      "method": "addRoutes"
+    },
+    {
+      "hook": "action:plugin.activate",
+      "method": "activate"
+    },
+    {
+      "hook": "filter:admin.header.build",
+      "method": "addAdminNavigation"
+    },
+    {
+      "hook": "filter:middleware.render",
+      "method": "onEachRender"
+    },
+    {
+      "hook": "filter:widgets.getAreas",
+      "method": "defineWidgetAreas"
+    },
+    {
+      "hook": "filter:widgets.getWidgets",
+      "method": "defineWidget"
+    },
+    {
+      "hook": "filter:topic.get",
+      "method": "addPlaceFieldsToTopic"
+    },
+    {
+      "hook": "filter:middleware.buildHeader",
+      "method": "onTopicBuild"
+    }
+  ]
+}

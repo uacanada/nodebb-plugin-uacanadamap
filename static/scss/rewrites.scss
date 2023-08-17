@@ -1,0 +1,94 @@
+html.ua-noscroll body.uacanada-map-page{overflow-y: hidden!important;}
+
+
+  .template-topic .bottombar-nav {
+    transition: 500ms;
+    box-shadow: 0 0 13px -3px rgba(0, 0, 0, 0.8);
+  }
+
+
+  /* Pagination fix */
+
+
+.post-with-map .bottombar .pagination-block.show-pagination-block {
+    display: block!important;
+    transform: translateY(0px);
+}
+
+.post-with-map .bottombar .pagination-block.hide-pagination-block {
+    display: none;
+    transform: translateY(500px);
+}
+  
+
+@media screen and (max-width: 500px) {
+  
+}
+
+
+@media screen and (min-width: 800px) {
+  
+}
+
+
+
+
+body.uacanada-map-page #content{background-color: var(--bs-body-bg);z-index:2;}
+
+
+body.uacanada-map-page{transition: 200ms;}
+// body.uacanada-map-page div#content { 
+//   padding-top: 2rem;
+//   width: 100%;
+//   max-width: 100%;
+//   z-index: 900;
+// } 
+body.uacanada-map-page main#panel{
+  transition: 200ms;
+}
+
+
+
+
+
+
+.leaflet-control-layers-toggle {
+	background-image: url(#{$icons-path}layers.png);
+	width: 36px;
+	height: 36px;
+}
+
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url(#{$icons-path}layers-2x.png);
+	background-size: 26px 26px;
+}
+
+.white-space-pre-line{
+  white-space: pre-line!important;
+}
+
+
+.leaflet-container {
+ //   font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+.leaflet-touch .leaflet-control-fullscreen a:last-child {
+  border-radius: 50%;
+  box-shadow: 0 0 4px 0px rgb(0 0 0 / 57%);
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@200;400;700;900&display=swap');
+
+body,
+.leaflet-container
+{
+    font-family: 'Geologica', sans-serif;
+}
+
