@@ -140,6 +140,7 @@ modules:{},
   sheetPanels: {},
   swipers: {},
   routers: {},
+  settings:{}
 };
 
 return UacanadaMap;
