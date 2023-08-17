@@ -139,8 +139,7 @@ modules:{},
   TEMP: {},
   sheetPanels: {},
   swipers: {},
-  routers: {},
-  settings:{}
+  routers: {}
 };
 
 return UacanadaMap;

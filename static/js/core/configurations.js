@@ -22,7 +22,7 @@ define('core/configuration', function (require) {
     return console.log('No settings')
    }
   
-    const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit } = settings;
+    const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit } = ajaxify.data.UacanadaMapSettings;
     UacanadaMap.timestampNow = Math.floor(dateTime / 1000);
     UacanadaMap.weekDay = UacanadaMap.weekdays[dateTime.getDay()];
     UacanadaMap.userRegistered = app.user.uid && app.user.uid > 0;
