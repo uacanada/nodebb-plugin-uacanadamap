@@ -4,7 +4,7 @@
 const firstInitTime = Date.now();
 
 
-async function registerEvents(){
+UacanadaMap.api.registerHooks = async ()=> {
 
     
 const hooks = await app.require("hooks");
@@ -56,7 +56,7 @@ hooks.on('action:ajaxify.end', (event, data) => {
 }
 
 
-registerEvents()
+
 
 
 })

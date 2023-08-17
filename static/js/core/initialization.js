@@ -97,8 +97,7 @@ define("core/initialization", [
     UacanadaMap.api.cardsOpened(false);
     UacanadaMap.api.setCategory("");
     UacanadaMap.api.filterMarkers(false);
-
-
+    UacanadaMap.api.registerHooks()
     UacanadaMap.api.registerBasicListeners()
     if (UacanadaMap.eventListenersInstance) {
       UacanadaMap.eventListenersInstance.reload();

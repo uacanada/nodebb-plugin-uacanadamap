@@ -3,7 +3,7 @@
 window.UCM_cachedElementSizes = {}; // TODO: remove dependencies
 
 
-define('core/variables',function(module) { 
+define('core/variables',function() { 
 
 
 const UacanadaMap = {

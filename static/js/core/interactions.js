@@ -1,7 +1,7 @@
 'use strict';
 define('core/interactions', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    console.log(UacanadaMap)
+    console.log(UacanadaMap) // TODO remove
 
     if(!UacanadaMap.api) return console.log('No api')
 
