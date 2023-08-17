@@ -1,5 +1,9 @@
 'use strict';
-define('core/configuration', [  'leaflet', 'swiper/bundle','core/variables'], function(require, L,Swiper,UacanadaMap) { 
+define('core/configuration', [  'leaflet', 'swiper/bundle','core/variables'], function(L,Swiper,UacanadaMap,
+    
+      // Built-in AMD modules:
+    require 
+    ) { 
     
     require('leaflet-fullscreen');
     require('leaflet-control-geocoder');
