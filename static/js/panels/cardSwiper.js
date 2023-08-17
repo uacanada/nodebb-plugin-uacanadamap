@@ -151,7 +151,7 @@
       }
   
       try {
-        const ads = cat ? UacanadaMap.api.findMatchedAdv(cat,places[0].json.placetags) : places.length > slideTreshold ? UacanadaMap.settings.advMarkers:[]
+        const ads = cat ? UacanadaMap.api.findMatchedAdv(cat,places[0].json.placetags) : places.length > slideTreshold ? ajaxify.data.UacanadaMapSettings.advMarkers:[]
         for (const ad of ads) {
           html += `<div class="swiper-slide${onlyOneItem ? ' p-2' : ' me-3'}" data-adv-id="${ad.id}" data-latlng-target="${ad.latlng}"><div class="ua-place-card-inner ms-0 me-0 p-3 position-relative">${ad.card}</div></div>`;
         }

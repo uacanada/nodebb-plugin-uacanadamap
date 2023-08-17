@@ -1,12 +1,8 @@
 'use strict';
 define('core/configuration', function (require) {
-            const L = require('leaflet');
-            const Swiper = require('swiper/bundle');
-            const UacanadaMap = require('core/variables');
-            
-
-
-    
+    const L = require('leaflet');
+    const Swiper = require('swiper/bundle');
+    const UacanadaMap = require('core/variables');
     require('leaflet-fullscreen');
     require('leaflet-control-geocoder');
     require('leaflet.markercluster');
@@ -14,28 +10,24 @@ define('core/configuration', function (require) {
     require('leaflet-contextmenu');
     require('leaflet-providers');
 
-    const { data: { uacmp: settings } = {} } = ajaxify || {};
-
-    if (!settings) {
-      // TODO: show warning
-      return;
-    }
+   
     
     const dateTime = new Date(Date.now());
 
    UacanadaMap.L = L
    UacanadaMap.Swiper = Swiper
   
-    const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit } =
-      settings;
+
+   if(!ajaxify.data.UacanadaMapSettings){
+    return console.log('No settings')
+   }
   
-    
+    const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit } = settings;
     UacanadaMap.timestampNow = Math.floor(dateTime / 1000);
     UacanadaMap.weekDay = UacanadaMap.weekdays[dateTime.getDay()];
     UacanadaMap.userRegistered = app.user.uid && app.user.uid > 0;
     UacanadaMap.adminsUID = app.user.isAdmin;
     UacanadaMap.DEFAULT_ZOOM = 11; // TODO get from settings
-  
     UacanadaMap.markerSettings = {
       virtZoom: 16,
       shiftX: 100,
@@ -174,9 +166,9 @@ define('core/configuration', function (require) {
             { maxZoom: 19 }
         );
        
-        UacanadaMap.mapLayers.MapBox = UacanadaMap.settings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", {
+        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", {
             id: "mapbox/streets-v11",
-            accessToken:UacanadaMap.settings.mapBoxApiKey,
+            accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey,
         }):UacanadaMap.StreetsMap;
 
         UacanadaMap.mapProviders = {

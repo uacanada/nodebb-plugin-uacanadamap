@@ -237,7 +237,7 @@ UacanadaMap.api.setLocationCardtoPost = () => {
 
                 var mapbox = L.tileLayer.provider("MapBox", {
                     id: "mapbox/streets-v11",
-                    accessToken: UacanadaMap.settings.mapBoxApiKey,
+                    accessToken: ajaxify.data.UacanadaMapSettings.mapBoxApiKey,
                 });
                 var minimap = L.map("ua-post-minimap", {
                     attributionControl: true,

@@ -368,7 +368,7 @@ Plugin.onEachRender = async (data) => {
 			const { templateData, templateData: { template: { name } } } = data;
 			templateData.bodyClass += name === settings.templateName ? ` ${settings.mapTriggerClass}` : '';
 	
-			data.templateData.uacmp = settings
+			data.templateData.UacanadaMapSettings = settings
 			
 	 
 			if(templateData.mapFields){

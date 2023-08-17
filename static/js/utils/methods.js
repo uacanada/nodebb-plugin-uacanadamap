@@ -179,7 +179,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 					icon: UacanadaMap.errorMarker,
 				})
 					.addTo(map)
-					.bindPopup(UacanadaMap.settings.locationSharingErrorAlert)
+					.bindPopup(ajaxify.data.UacanadaMapSettings.locationSharingErrorAlert)
 					.openPopup();
 
 					UacanadaMap.api.showToast(
@@ -302,7 +302,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 		} else {
 			UacanadaMap.currentmarker = L.marker(e.latlng, { icon: UacanadaMap.errorMarker })
 				.addTo(map)
-				.bindPopup(UacanadaMap.settings.unregisteredUserAlert)
+				.bindPopup(ajaxify.data.UacanadaMapSettings.unregisteredUserAlert)
 				.openPopup();
 			window.location.assign(window.location.origin + "/register");
 		}

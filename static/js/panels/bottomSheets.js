@@ -2,7 +2,7 @@
 define('panels/bottomSheets',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     const { Swiper, offcanvas: { modes } } = UacanadaMap;
-    const sizes = UacanadaMap.settings.bottomSheetOffset.split(',').map(Number);
+    const sizes = ajaxify.data.UacanadaMapSettings.bottomSheetOffset.split(',').map(Number);
 
 
 // Declare a debounce block that prevents the togglePanel function from running too frequently

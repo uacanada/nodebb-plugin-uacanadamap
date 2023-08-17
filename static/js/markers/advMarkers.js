@@ -27,9 +27,9 @@
     }
 
     UacanadaMap.api.populateAdvMarkers = (tags) => {
-        if(UacanadaMap.settings?.advMarkers?.length>0){
+        if(ajaxify.data.UacanadaMapSettings?.advMarkers?.length>0){
 
-            UacanadaMap.settings.advMarkers.forEach((m, index) => {
+            ajaxify.data.UacanadaMapSettings.advMarkers.forEach((m, index) => {
                  try {
 
                     // TODO add filter logic for TAGS
@@ -53,7 +53,7 @@
 
                       
                         UacanadaMap.mapLayers.advMarkers.addLayer(marker);
-                        UacanadaMap.settings.advMarkers[index].marker = marker
+                        ajaxify.data.UacanadaMapSettings.advMarkers[index].marker = marker
                 } catch (error) {
                     UacanadaMap.console.log(error)
                 }
@@ -89,7 +89,7 @@
         const advCards = []
         
         
-        for (const m of UacanadaMap.settings.advMarkers) {
+        for (const m of ajaxify.data.UacanadaMapSettings.advMarkers) {
             try {
 
                const triggers = m.advMarkerTags.split(',')
@@ -111,7 +111,7 @@
     UacanadaMap.api.openAdvMarker=(id,latlng) =>{
 
         UacanadaMap.map.setView(latlng.split(','))
-        UacanadaMap.settings.advMarkers.find(m => m.id == id).marker.openPopup()
+        ajaxify.data.UacanadaMapSettings.advMarkers.find(m => m.id == id).marker.openPopup()
 
     }
 

@@ -32,7 +32,7 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
     
     UacanadaMap.api.setClassWithFarawayZoom=(level)=>{
     
-        if(level < Number(UacanadaMap.settings.zoomThreshold)){
+        if(level < Number(ajaxify.data.UacanadaMapSettings.zoomThreshold)){
           $('body').addClass('far-away-zoom');
         } else {
           $('body').removeClass('far-away-zoom');

@@ -40,7 +40,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	
 		try {
 			
-			ajaxify.data.uacmp.subCategories.forEach((category, index) => { handleSubCategories(category, index); });
+			ajaxify.data.UacanadaMapSettings.subCategories.forEach((category, index) => { handleSubCategories(category, index); });
 			selectEl.html(optionsElements)
 	
 		} catch (error) {
@@ -64,7 +64,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	
 		try {
 			
-			ajaxify.data.uacmp.eventCategories.forEach((category, index) => { handleEventCategories(category, index); });
+			ajaxify.data.UacanadaMapSettings.eventCategories.forEach((category, index) => { handleEventCategories(category, index); });
 			selectEl.html(optionsElements)
 	
 		} catch (error) {
@@ -80,7 +80,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 		try {
 			
 			UacanadaMap.tabCollectorTags = {}
-			ajaxify.data.uacmp.tabCategories.forEach((tab, index) => { handleTabCategories(UacanadaMap, tab, index); });
+			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { handleTabCategories(UacanadaMap, tab, index); });
 		} catch (error) {
 			
 			console.error(error);

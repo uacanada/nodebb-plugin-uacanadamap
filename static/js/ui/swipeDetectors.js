@@ -6,7 +6,7 @@ UacanadaMap.api.listenSwipes = (elements) => {
     let touchstartY = 0;
     let touchendX = 0;
     let touchendY = 0;
-    const swipeResistance = Number(UacanadaMap.settings.swipeResistance)
+    const swipeResistance = Number(ajaxify.data.UacanadaMapSettings.swipeResistance)
 
     if (!swipeResistance) return console.warn("Need set swipeResistance");
 

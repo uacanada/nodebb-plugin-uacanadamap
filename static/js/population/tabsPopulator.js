@@ -8,7 +8,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
     
     function getMatchedSlugs(placetags) {
         if(!placetags) return []
-        return ajaxify.data.uacmp.tabCategories.filter(t => {
+        return ajaxify.data.UacanadaMapSettings.tabCategories.filter(t => {
             let placeTags;
             if (t.placeByTagCollector && typeof t.placeByTagCollector === "string") {
                 placeTags = t.placeByTagCollector.split(',');
@@ -274,7 +274,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       
             if (!el) continue; 
 
-           const tabInfo = getBySlug(ajaxify.data.uacmp.tabCategories, slug);
+           const tabInfo = getBySlug(ajaxify.data.UacanadaMapSettings.tabCategories, slug);
       
             if (!tabInfo) continue; 
       

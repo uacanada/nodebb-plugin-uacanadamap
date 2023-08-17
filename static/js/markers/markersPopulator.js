@@ -211,7 +211,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
   
         const language =
           window.navigator.userLanguage || window.navigator.language; // TODO improve
-        const langRegex = new RegExp(ajaxify.data.uacmp.altContentTrigger, "mig");
+        const langRegex = new RegExp(ajaxify.data.UacanadaMapSettings.altContentTrigger, "mig");
         const bodyTextDetected =
           language.match(langRegex) && placeDescriptionAlt
             ? placeDescriptionAlt

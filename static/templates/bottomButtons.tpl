@@ -14,7 +14,7 @@
                                                 <div class="btn-group w-100" role="group"
                                                         aria-label="First set of Button group">
 
-                                                        {uacmp.magicButtonSlide}
+                                                        {UacanadaMapSettings.magicButtonSlide}
 
 
 

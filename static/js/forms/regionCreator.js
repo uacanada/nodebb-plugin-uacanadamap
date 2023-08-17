@@ -5,7 +5,7 @@ define('forms/regionCreator', ["core/variables" /*   Global object UacanadaMap  
     const citiesEl = $("#ua-custom-loc-form #datalistOptions")
     const provincesEl = $("#location-province")
    
-    const {geographicalEntities,citiesData} = ajaxify.data.uacmp
+    const {geographicalEntities,citiesData} = ajaxify.data.UacanadaMapSettings;
    
     let citiesInnerHtml = ''
     let provincesInnerHtml = ''

@@ -32,8 +32,10 @@ define('utils/mapFeatures', ["core/variables" /*   Global object UacanadaMap  */
       
 
     UacanadaMap.api.fancyHeroText = (() => {
+
+        if(!ajaxify.data.UacanadaMapSettings?.slogans) return;
 		let intervalId = null;
-		const slogans = UacanadaMap.settings.slogans.map(object => object.slogan) 
+		const slogans = ajaxify.data.UacanadaMapSettings.slogans.map(object => object.slogan) 
 		const colors = ['#000'];
 		let i = 0;
 		let j = 0;
