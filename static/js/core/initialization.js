@@ -1,6 +1,7 @@
 "use strict";
 
 define("core/initialization", [
+  "utils/extensions",
   "core/interactions",
   "core/configurations",
   "utils/handlers",
@@ -28,13 +29,13 @@ define("core/initialization", [
   "events/basicListeners",
   "events/hooks",
   "utils/expandMap",
-  "utils/extensions",
+  
   "forms/submitPlace",
   "forms/editPlace",
   "topics/topicPost",
   "events/registerableListeners",
 ], function (
- 
+  extensions,
   interactions,
   configurations,
   handlers,
@@ -57,7 +58,7 @@ define("core/initialization", [
   basicListeners,
   hooks,
   expandMap,
-  extensions,
+
   submitPlace,
   editPlace,
   topicPost,
