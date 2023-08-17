@@ -1,5 +1,5 @@
 'use strict';
-define('core/interactions', ['../uacanadamap'], function(UacanadaMap) { 
+define('core/interactions', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     console.log(UacanadaMap)
 

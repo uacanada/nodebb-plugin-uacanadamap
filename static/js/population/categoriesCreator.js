@@ -1,5 +1,5 @@
 'use strict';
-define('population/swipeDetectors',['../uacanadamap'], function(UacanadaMap) { 
+define('population/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
 	const handleTabCategories = (UacanadaMap, tab, index) => {
 		const { placeByTagCollector, slug, color, icon } = tab;

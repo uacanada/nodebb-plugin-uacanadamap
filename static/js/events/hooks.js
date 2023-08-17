@@ -1,5 +1,5 @@
 'use strict';
-    define('events/hooks',['../uacanadamap'], function(UacanadaMap) { 
+    define('events/hooks',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
 const firstInitTime = Date.now();
 

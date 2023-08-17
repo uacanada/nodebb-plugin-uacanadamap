@@ -1,5 +1,5 @@
 'use strict';
-define('events/registerableListeneres',['../uacanadamap'], function(UacanadaMap) { 
+define('events/registerableListeneres',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
 
 class EventListeners {

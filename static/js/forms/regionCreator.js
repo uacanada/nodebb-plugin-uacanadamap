@@ -1,5 +1,5 @@
 'use strict';
-define('forms/regionCreator', ['../uacanadamap'], function(UacanadaMap) { 
+define('forms/regionCreator', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
    
     const citiesEl = $("#ua-custom-loc-form #datalistOptions")

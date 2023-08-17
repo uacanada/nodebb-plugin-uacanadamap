@@ -3,7 +3,7 @@
 let tabRouteObject = {};
 
 'use strict';
-define('utils/methods', ['../uacanadamap'], function(UacanadaMap) { 
+define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
 	const { L, map, Swiper } = UacanadaMap;
 

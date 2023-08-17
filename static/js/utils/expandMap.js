@@ -1,5 +1,5 @@
 'use strict';
-define('utils/expandMap',['../uacanadamap'], function(UacanadaMap) { 
+define('utils/expandMap',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
  
     const { map } = UacanadaMap;
    

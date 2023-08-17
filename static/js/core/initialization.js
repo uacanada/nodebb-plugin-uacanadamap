@@ -66,7 +66,7 @@ define("core/initialization", [
 ) {
   
   
-  
+  console,log('initialization') // TODO: remove debug 
   module.exports = async (UacanadaMap) => {
     let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
    

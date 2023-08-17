@@ -1,5 +1,5 @@
 'use strict';
-define('population/tabsPopulator', ['../uacanadamap'], function(UacanadaMap) { 
+define('population/tabsPopulator', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
 

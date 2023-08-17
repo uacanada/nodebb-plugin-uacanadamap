@@ -1,5 +1,5 @@
 'use strict';
-    define('markers/advMarkers', ['../uacanadamap'], function(UacanadaMap) { 
+    define('markers/advMarkers', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     if(UacanadaMap.mapLayers?.advMarkers?._leaflet_id){
       //  UacanadaMap.mapLayers.advMarkers.remove()

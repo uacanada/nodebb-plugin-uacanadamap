@@ -1,5 +1,5 @@
 'use strict';
-define('core/swipersCreator', ['../uacanadamap'], function(UacanadaMap) { 
+define('core/swipersCreator', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     const {Swiper} = UacanadaMap
 

@@ -1,5 +1,5 @@
 'use strict';
-    define('markers/markersFilter', ['../uacanadamap'], function(UacanadaMap) { 
+    define('markers/markersFilter', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
     
     UacanadaMap.api.removeMarker = (tid) => {
       if(tid && UacanadaMap.allPlaces[tid]?.marker){

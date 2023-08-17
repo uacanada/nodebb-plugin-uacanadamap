@@ -22,8 +22,8 @@
     "fs": "^0.0.1-security"
   },
   "scss": [
-    "static/vendors/css/leaflet.scss",
-    "static/vendors/css/leaflet.fullscreen.scss",
+    "static/vendor/css/leaflet.scss",
+    "static/vendor/css/leaflet.fullscreen.scss",
     "static/scss/imports.scss",
     "static/scss/variables.scss",
     "static/scss/animations.scss",
