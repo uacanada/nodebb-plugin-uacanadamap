@@ -22,7 +22,9 @@ hooks.on("action:ajaxify.coldLoad", function (data) {
 
 hooks.on('action:ajaxify.end', (data) => {
 
-    const initAge = 100 // event.timeStamp - firstInitTime
+  return console.log({data})  
+  
+  const initAge = 100 // event.timeStamp - firstInitTime
     console.log({data})
 
     UacanadaMap.console.log(`${initAge}ms`,{firstInitTime, eventTimestamp:'TODO'})
@@ -50,7 +52,7 @@ hooks.on('action:ajaxify.end', (data) => {
         document.body.removeAttribute('data-bs-overflow');
     }
 
-    UacanadaMap.console.log("~~~~~end to", data.tpl_url);
+    UacanadaMap.console.log("~~~~~end to", data);
   });
 
 
