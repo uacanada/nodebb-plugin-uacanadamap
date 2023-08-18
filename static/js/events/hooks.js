@@ -20,11 +20,12 @@ hooks.on("action:ajaxify.coldLoad", function (data) {
 
 
 
-hooks.on('action:ajaxify.end', (event, data) => {
+hooks.on('action:ajaxify.end', (data) => {
 
-    const initAge = event.timeStamp - firstInitTime
+    const initAge = 100 // event.timeStamp - firstInitTime
+    console.log({data})
 
-    UacanadaMap.console.log(`${initAge}ms`,{firstInitTime, eventTimestamp: event.timeStamp})
+    UacanadaMap.console.log(`${initAge}ms`,{firstInitTime, eventTimestamp:'TODO'})
     if(data.tpl_url === 'map'){
         
          if(initAge>1e3 || UacanadaMap.needReinit){
