@@ -1,13 +1,13 @@
 {
   "id": "nodebb-plugin-uacanadamap",
   "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap",
-  "library": "./library.js",   
+  "library": "library.js",   
   "staticDirs": {
-    "static": "./static",
-    "icons": "./static/assets/icons",
-    "images": "./static/assets/images",
-    "leaflet": "./node_modules/leaflet/dist",
-    "swiper/bundle": "./node_modules/swiper/bundle.js"
+    "static": "static",
+    "icons": "static/assets/icons",
+    "images": "static/assets/images",
+    "leaflet": "leaflet/dist",
+    "swiper/bundle": "swiper/bundle.js"
   },
   "staticNpmDependencies": {
     "leaflet": "^1.9.3",
@@ -42,8 +42,8 @@
   "acpScripts": [],
 
   "modules": {
-    "leaflet": "./node_modules/leaflet/dist/leaflet.js",
-    "swiper/bundle": "./node_modules/swiper/bundle.js",
+    "leaflet": "leaflet/dist/leaflet.js",
+    "swiper/bundle": "swiper/bundle.js",
     "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
     "../client/map.js": "./static/js/uacanadamap.js",
     "utils/extensions":"static/js/utils/extensions.js",
