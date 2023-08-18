@@ -127,7 +127,7 @@ UacanadaMap.api.getMarkersInView = () => {
 
     for (let i = 0; i < markers.length; i++) {
         const { lat, lng } = markers[i];
-        let markerLatLng = L.latLng(lat, lng);
+        let markerLatLng = UacanadaMap.L.latLng(lat, lng);
         if (bounds.contains(markerLatLng)) {
             markersInView.push(markers[i]);
         } else {

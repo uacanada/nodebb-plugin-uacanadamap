@@ -1,11 +1,11 @@
  'use strict';
 define('panels/buttonsSwiper', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    const { L, Swiper } = UacanadaMap;
+   
 
     const setupDomEvents = (btnDiv) => {
-        L.DomEvent.disableScrollPropagation(btnDiv);
-        L.DomEvent.disableClickPropagation(btnDiv);
+        UacanadaMap.L.DomEvent.disableScrollPropagation(btnDiv);
+        UacanadaMap.L.DomEvent.disableClickPropagation(btnDiv);
     };
 
     const appendButtonsHtml = (buttonsHtml) => {
@@ -34,6 +34,7 @@ define('panels/buttonsSwiper', ["core/variables" /*   Global object UacanadaMap 
 
 
         UacanadaMap.api.initBtnSlider = (buttonsHtml) => {
+            const { L, Swiper } = UacanadaMap;
             try {
                 const btnDiv = L.DomUtil.get('ua-horizontal-buttons-wrapper');
                 setupDomEvents(btnDiv);

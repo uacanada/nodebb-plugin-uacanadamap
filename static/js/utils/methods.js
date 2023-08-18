@@ -166,7 +166,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 	};
 
 	UacanadaMap.api.tryLocate = ({ fornewplace }) => {
-		const {map}=UacanadaMap
+		const {map,L}=UacanadaMap
 		map
 			.locate({ setView: true, maxZoom: 15 })
 			.on("locationfound", function (ev) {
@@ -277,7 +277,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 		if (UacanadaMap.currentmarker) {
 			UacanadaMap.currentmarker.bindPopup("Detecting address... ").openPopup();
 		}
-		const {map} = UacanadaMap
+		const {map,L} = UacanadaMap
 
 		var { lat, lng } = e.latlng;
 		UacanadaMap.choosedLocation = [lat, lng];
@@ -371,7 +371,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 		}
 
 		if (UacanadaMap.currentmarker) map.removeLayer(UacanadaMap.currentmarker);
-		UacanadaMap.currentmarker = L.marker(r.center, { icon: UacanadaMap.newPlaceMarker })
+		UacanadaMap.currentmarker = UacanadaMap.L.marker(r.center, { icon: UacanadaMap.newPlaceMarker })
 			.addTo(map)
 			.bindPopup(popupHtml)
 			.openPopup();
@@ -851,7 +851,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 	};
 
 	UacanadaMap.api.moveMarkerToTop = (c, markerOffset) => {
-	   const {map,showOnlyArea}	= UacanadaMap
+	   const {map,showOnlyArea,L}	= UacanadaMap
 		if (showOnlyArea) {
 			console.log(`Marker not move cause showOnlyArea=true`);
 			// TODO

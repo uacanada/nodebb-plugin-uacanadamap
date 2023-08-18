@@ -6,7 +6,7 @@
         
     } else {
 
-        UacanadaMap.mapLayers.advMarkers = L.markerClusterGroup(
+        UacanadaMap.mapLayers.advMarkers = UacanadaMap.L.markerClusterGroup(
                     
             {
                 // TODO cluster ICON for ads
@@ -29,6 +29,7 @@
     UacanadaMap.api.populateAdvMarkers = (tags) => {
         if(ajaxify.data.UacanadaMapSettings?.advMarkers?.length>0){
 
+            const {L} = UacanadaMap
             ajaxify.data.UacanadaMapSettings.advMarkers.forEach((m, index) => {
                  try {
 
