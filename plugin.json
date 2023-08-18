@@ -20,8 +20,16 @@
     "fs": "^0.0.1-security"
   },
   "scss": [
+
+
+
+    "static/vendor/css/MarkerCluster.Default.scss",
+    "static/vendor/css/MarkerCluster.scss",
+    "static/vendor/css/L.Control.Locate.min.scss",
+    "static/vendor/css/Control.Geocoder.scss",
     "static/vendor/css/leaflet.scss",
     "static/vendor/css/leaflet.fullscreen.scss",
+    
     "static/scss/imports.scss",
     "static/scss/variables.scss",
     "static/scss/animations.scss",
