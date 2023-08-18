@@ -1,15 +1,7 @@
 'use strict';
 define('utils/expandMap',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
  
-    const { map } = UacanadaMap;
-   
-   
-   
-   
-   
-   
-   
-    UacanadaMap.api.expandMap = async (id) => {
+      UacanadaMap.api.expandMap = async (id) => {
       console.log(`  UacanadaMap.api.expandMap id ${id}`)
       
       //UacanadaMap.api.markerIterator.stop();
@@ -30,7 +22,7 @@ define('utils/expandMap',["core/variables" /*   Global object UacanadaMap  */], 
         UacanadaMap.mapExpanded = true;
         UacanadaMap.api.hideBrandTitle(true);
        
-        map.scrollWheelZoom.enable();
+        UacanadaMap.map.scrollWheelZoom?.enable();
         
         
         $('body').addClass('map-touched');
