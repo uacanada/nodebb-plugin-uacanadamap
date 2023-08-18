@@ -5,9 +5,7 @@
   "staticDirs": {
     "static": "static",
     "icons": "static/assets/icons",
-    "images": "static/assets/images",
-    "leaflet": "leaflet/dist",
-    "swiper/bundle": "swiper/bundle.js"
+    "images": "static/assets/images"
   },
   "staticNpmDependencies": {
     "leaflet": "^1.9.3",
@@ -42,10 +40,9 @@
   "acpScripts": [],
 
   "modules": {
-    "leaflet": "leaflet/dist/leaflet.js",
-    "swiper/bundle": "swiper/bundle.js",
-    "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
-    "../client/map.js": "./static/js/uacanadamap.js",
+  
+    "../admin/plugins/uacanadamap.js": "static/acp/adminPage.js",
+    "../client/map.js": "static/js/uacanadamap.js",
     "utils/extensions":"static/js/utils/extensions.js",
     "core/variables": "static/js/core/variables.js",
     "core/initialization": "static/js/core/initialization.js",
