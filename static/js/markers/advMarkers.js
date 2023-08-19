@@ -29,12 +29,12 @@
     UacanadaMap.api.populateAdvMarkers = (tags) => {
         if(ajaxify.data.UacanadaMapSettings?.advMarkers?.length>0){
 
-            const {L} = UacanadaMap
+           
             ajaxify.data.UacanadaMapSettings.advMarkers.forEach((m, index) => {
                  try {
 
                     // TODO add filter logic for TAGS
-                    const marker = L.marker(m.latlng.split(','), { icon: L.divIcon({
+                    const marker = UacanadaMap.L.marker(m.latlng.split(','), { icon: UacanadaMap.L.divIcon({
                         className: 'advMarker',
                         html: `<div class="d-flex align-items-center" data-adv-marker="${m.id}">
                                 <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center" style="color:${m.color}"> <i class="fa fas ${m.icon}"></i> </div>
@@ -46,10 +46,10 @@
                       }) })
                         .bindPopup('<div class="p-2">'+m.popup+'</div>')
                         .on("popupopen", (e) => {
-                       console.log('popup',m.url,m.image)
+                     
                       }).on("click", (e) => {
                         e.sourceTarget.openPopup();
-                        console.log(m.card)
+                       
                       });
 
                       

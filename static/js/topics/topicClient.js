@@ -54,8 +54,6 @@
     }
     
     $(window).on("action:ajaxify.end", function (event, data) {
-
-        console.log('TRY::::::::::::::::::')
         const place = ajaxify?.data?.mapFields;
         if (place?.placeCategory) {
             if (window.L?.version) {
