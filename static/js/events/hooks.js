@@ -1,7 +1,7 @@
 'use strict';
     define('events/hooks',["core/variables" /*   Global object UacanadaMap  */], function( UacanadaMap) {
 
-const firstInitTime = Date.now();
+
 
 
 UacanadaMap.api.registerHooks = async ()=> {
