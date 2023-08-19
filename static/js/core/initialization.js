@@ -33,7 +33,6 @@ define("core/initialization", [
   "forms/submitPlace",
   "forms/editPlace",
   "topics/topicPost",
-  "topics/topicClient",
   "events/registerableListeners",
 ], function (
   extensions,
@@ -63,7 +62,6 @@ define("core/initialization", [
   submitPlace,
   editPlace,
   topicPost,
-  topicClient,
   registerableListeners,
   // Built-in AMD modules:
   module 
