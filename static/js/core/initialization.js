@@ -69,46 +69,81 @@ define("core/initialization", [
 ) {
   
   
-  console.log('initialization') // TODO: remove debug 
+  
+ 
 
-
-  return async (UacanadaMap) => {
-    let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
+  return (UacanadaMap) => {
+    
+    const reload = async () => {
+      let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
    
    
-    UacanadaMap.api.configureMapElements();
-    UacanadaMap.api.mapInit();
-    UacanadaMap.api.addMapLayers();
-    UacanadaMap.api.addMapControls();
-    UacanadaMap.api.initializeSwipers();
-    UacanadaMap.api.createCategories();
-
-    const markersArray = await UacanadaMap.api.fetchMarkers(fromCache);
-    UacanadaMap.api.populatePlaces(markersArray);
-
-    UacanadaMap.api.populateTabs();
-    UacanadaMap.api.mapReLoad();
-    UacanadaMap.api.showCatSelector($("#ua-filter-places").val() ?? "");
-    UacanadaMap.api.mainFrameShow();
-    UacanadaMap.api.OffCanvasPanelHandler();
-    UacanadaMap.api.rotateCards("horizontal");
-    UacanadaMap.api.animateCards("close");
-    UacanadaMap.api.fitElementsPosition();
-    UacanadaMap.api.hideElements(false);
-    UacanadaMap.api.cleanMarkers(true);
-    UacanadaMap.api.cardsOpened(false);
-    UacanadaMap.api.setCategory("");
-    UacanadaMap.api.filterMarkers(false);
-    UacanadaMap.api.registerHooks()
-    UacanadaMap.api.registerBasicListeners()
-    if (UacanadaMap.eventListenersInstance) {
-      UacanadaMap.eventListenersInstance.reload();
-    } else {
-      UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
-      UacanadaMap.eventListenersInstance.register();
+      UacanadaMap.api.configureMapElements();
+      UacanadaMap.api.mapInit();
+      UacanadaMap.api.addMapLayers();
+      UacanadaMap.api.addMapControls();
+      UacanadaMap.api.initializeSwipers();
+      UacanadaMap.api.createCategories();
+  
+      const markersArray = await UacanadaMap.api.fetchMarkers(fromCache);
+      UacanadaMap.api.populatePlaces(markersArray);
+  
+      UacanadaMap.api.populateTabs();
+      UacanadaMap.api.mapReLoad();
+      UacanadaMap.api.showCatSelector($("#ua-filter-places").val() ?? "");
+      UacanadaMap.api.mainFrameShow();
+      UacanadaMap.api.OffCanvasPanelHandler();
+      UacanadaMap.api.rotateCards("horizontal");
+      UacanadaMap.api.animateCards("close");
+      UacanadaMap.api.fitElementsPosition();
+      UacanadaMap.api.hideElements(false);
+      UacanadaMap.api.cleanMarkers(true);
+      UacanadaMap.api.cardsOpened(false);
+      UacanadaMap.api.setCategory("");
+      UacanadaMap.api.filterMarkers(false);
+      UacanadaMap.api.registerHooks()
+      UacanadaMap.api.registerBasicListeners()
+      if (UacanadaMap.eventListenersInstance) {
+        UacanadaMap.eventListenersInstance.reload();
+      } else {
+        UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
+        UacanadaMap.eventListenersInstance.register();
+      }
     }
+    
+    hooks.on('action:ajaxify.end', (data) => {
+      if(data.tpl_url === 'map'){
+           
+            if( UacanadaMap.needReinit){
+               console.log(` reinit `, data)
+               
+               
+               if(app.user.isAdmin){
+                   console.log('ADMIN MODE ajaxify')
+                   reload(UacanadaMap)
+               }else{
+                  // initializeEnvironment(UacanadaMap);
+                  reload(UacanadaMap)
+               }
+   
+   
+            } 
+   
+   
+       }else{
+           UacanadaMap.needReinit = true
+           document.body.style.overflow = '';
+           document.body.removeAttribute('data-bs-overflow');
+       }
+   
+       UacanadaMap.console.log("~~~~~end to", data);
+     });
 
   };
+
+
+
+  
 
 
 

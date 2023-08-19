@@ -1,5 +1,5 @@
 'use strict';
-    define('events/hooks',[ "core/initialization", "core/variables" /*   Global object UacanadaMap  */], function(initialization, UacanadaMap) { // TODO check initialization (must impact only once)
+    define('events/hooks',["core/variables" /*   Global object UacanadaMap  */], function( UacanadaMap) {
 
 const firstInitTime = Date.now();
 
@@ -20,36 +20,6 @@ hooks.on("action:ajaxify.coldLoad", function (data) {
 
 
 
-hooks.on('action:ajaxify.end', (data) => {
-
- 
-  
-    if(data.tpl_url === 'map'){
-        
-         if( UacanadaMap.needReinit){
-            console.log(` reinit `, event, data)
-            
-            
-            if(app.user.isAdmin){
-                console.log('ADMIN MODE ajaxify')
-                initialization(UacanadaMap)
-            }else{
-               // initializeEnvironment(UacanadaMap);
-               initialization(UacanadaMap)
-            }
-
-
-         } 
-
-
-    }else{
-        UacanadaMap.needReinit = true
-        document.body.style.overflow = '';
-        document.body.removeAttribute('data-bs-overflow');
-    }
-
-    UacanadaMap.console.log("~~~~~end to", data);
-  });
 
 
 }
