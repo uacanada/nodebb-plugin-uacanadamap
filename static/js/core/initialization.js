@@ -143,8 +143,8 @@ define("core/initialization", [
 
 
            if(data.tpl_url === 'post'){
-             console.log(data)
-             UacanadaMap.api.showMapInsideTopic(322)
+             console.log(data, data.topic.tid)
+             UacanadaMap.api.showMapInsideTopic(UacanadaMap.allPlaces[data.topic.tid])
            }
 
 
