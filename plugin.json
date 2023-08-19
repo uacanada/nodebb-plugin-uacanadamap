@@ -79,7 +79,7 @@
     "forms/submitPlace": "static/js/forms/submitPlace.js",
     "forms/editPlace": "static/js/forms/editPlace.js",
     "topics/topicPost": "static/js/topics/topicPost.js",
-    "topics/topicClient": "static/js/topics/topicClient.js",
+    "../client/topic.js": "static/js/topics/topicClient.js",
     "events/registerableListeners": "static/js/events/registerableListeners.js"
    
 },

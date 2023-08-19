@@ -1,7 +1,7 @@
 "use strict";
 define('topics/topicClient',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-
+console.log('test')
 
 UacanadaMap.api.showMapInsideTopic = (place) => {
     const {L} = UacanadaMap
