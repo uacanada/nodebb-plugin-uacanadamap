@@ -1,5 +1,5 @@
 'use strict';
-    define('events/hooks',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
+    define('events/hooks',[ "core/initialization", "core/variables" /*   Global object UacanadaMap  */], function(initialization, UacanadaMap) { // TODO check initialization (must impact only once)
 
 const firstInitTime = Date.now();
 
@@ -22,15 +22,11 @@ hooks.on("action:ajaxify.coldLoad", function (data) {
 
 hooks.on('action:ajaxify.end', (data) => {
 
-  return console.log({data})  
+ 
   
-  const initAge = 100 // event.timeStamp - firstInitTime
-    console.log({data})
-
-    UacanadaMap.console.log(`${initAge}ms`,{firstInitTime, eventTimestamp:'TODO'})
     if(data.tpl_url === 'map'){
         
-         if(initAge>1e3 || UacanadaMap.needReinit){
+         if( UacanadaMap.needReinit){
             console.log(` reinit `, event, data)
             
             
