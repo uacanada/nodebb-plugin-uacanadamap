@@ -154,9 +154,9 @@ $.fn.classChange = function (cb) {
         console.log("changed", $(this));
         UacanadaMap.api.setCategoryAndOpenCards($("#location-category-filter").val());
       });
-      $(document).on("change", "#ua-filter-places", function () {
-        UacanadaMap.api.rewriteTabsOnCatChange($(this).val());
-      });
+      // $(document).on("change", "#ua-filter-places", function () {
+      //   UacanadaMap.api.rewriteTabsOnCatChange($(this).val());
+      // });
       $(document).on("show.bs.modal", "#ua-shorts", function (trig) {
         var id = $(trig.relatedTarget).attr("data-ua-storie");
         if (id) UacanadaMap.api.createShortsSelfHosted(id);

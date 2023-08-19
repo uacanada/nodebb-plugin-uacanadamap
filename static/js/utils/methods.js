@@ -78,26 +78,23 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 	UacanadaMap.api.setCategory = (category) => {
 		if (category) {
-			$('#ua-filter-places option[value="' + category + '"]').prop(
-				"selected",
-				true
-			);
+		
 			$('#location-category-filter option[value="' + category + '"]').prop(
 				"selected",
 				true
 			);
 			$("#location-category-filter").val(category).addClass("filter-active");
-			$("#ua-filter-places").val(category);
+			
 
 			UacanadaMap.api.setButton(category, "active");
 
 			if (UacanadaMap.showCtxButtonOnFilter)
 				ctxButton({ show: true, reason: "resetCategory" });
 		} else {
-			$('#ua-filter-places option[value=""]').prop("selected", true);
+			
 			$('#location-category-filter option[value=""]').prop("selected", true);
 			$("#location-category-filter").removeClass("filter-active").val("");
-			$("#ua-filter-places").val("");
+		
 			UacanadaMap.api.setButton(false);
 			if (UacanadaMap.showCtxButtonOnFilter) ctxButton({ show: false });
 		}
@@ -202,57 +199,57 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 		UacanadaMap.api.tryLocate({ fornewplace: true });
 	};
 
-	UacanadaMap.api.loadHtmlTemplates = async () => {
-		UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();
-		UacanadaMap.recoveredOldButtons = ""; //$('#ua-form-event-holder').html();
+	// UacanadaMap.api.loadHtmlTemplates = async () => {
+	// 	UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();
+	// 	UacanadaMap.recoveredOldButtons = ""; //$('#ua-form-event-holder').html();
 
-		$("select#location-category option").each(function (index) {
-			var optText = $(this).text();
-			var optVal = $(this).val();
-			if (optVal) {
-				UacanadaMap.categoryMapper[optVal] = optText;
-				UacanadaMap.markerGroups[optVal] = []; // Category Named Storage for marker groups
-				$("select#ua-filter-places").append(
-					'<option value="' + optVal + '">' + optText + "</option>"
-				);
-			} else {
-				if (UacanadaMap.adminsUID) console.log("no opt val", $(this));
-			}
-		});
+	// 	$("select#location-category option").each(function (index) {
+	// 		var optText = $(this).text();
+	// 		var optVal = $(this).val();
+	// 		if (optVal) {
+	// 			UacanadaMap.categoryMapper[optVal] = optText;
+	// 			UacanadaMap.markerGroups[optVal] = []; // Category Named Storage for marker groups
+	// 			$("select#ua-filter-places").append(
+	// 				'<option value="' + optVal + '">' + optText + "</option>"
+	// 			);
+	// 		} else {
+	// 			if (UacanadaMap.adminsUID) console.log("no opt val", $(this));
+	// 		}
+	// 	});
 
-		$("select#location-province option").each(function (index) {
-			var optText = $(this).text();
-			var optVal = $(this).val();
-			if (optVal) {
-				UacanadaMap.provinceMapper[optText] = optVal;
-			}
-		});
+	// 	$("select#location-province option").each(function (index) {
+	// 		var optText = $(this).text();
+	// 		var optVal = $(this).val();
+	// 		if (optVal) {
+	// 			UacanadaMap.provinceMapper[optText] = optVal;
+	// 		}
+	// 	});
 
-		$("select#event-location-category option").each(function (index) {
-			var optText = $(this).text();
-			var optVal = $(this).val();
-			if (optVal) {
-				UacanadaMap.eventCatMapper[optVal] = optText;
-			}
-		});
+	// 	$("select#event-location-category option").each(function (index) {
+	// 		var optText = $(this).text();
+	// 		var optVal = $(this).val();
+	// 		if (optVal) {
+	// 			UacanadaMap.eventCatMapper[optVal] = optText;
+	// 		}
+	// 	});
 
-		$("ul.sidepanel-tabs li").each(function (index) {
-			var tabNumber = index + 1;
-			var markerIcon = $(this).find("i").attr("class");
-			UacanadaMap.markersIconsmapper[tabNumber] = markerIcon;
-			UacanadaMap.tabTitles[tabNumber] = $(this).find("a").attr("title");
-			UacanadaMap.mapTabsCount++;
-		});
+	// 	$("ul.sidepanel-tabs li").each(function (index) {
+	// 		var tabNumber = index + 1;
+	// 		var markerIcon = $(this).find("i").attr("class");
+	// 		UacanadaMap.markersIconsmapper[tabNumber] = markerIcon;
+	// 		UacanadaMap.tabTitles[tabNumber] = $(this).find("a").attr("title");
+	// 		UacanadaMap.mapTabsCount++;
+	// 	});
 
-		if (UacanadaMap.allPlaces) {
-			// initUaMap({offline:true})
-		} else {
-			//initUaMap({offline:false});
-			UacanadaMap.api.onMapFirstLaunch();
-		}
+	// 	if (UacanadaMap.allPlaces) {
+	// 		// initUaMap({offline:true})
+	// 	} else {
+	// 		//initUaMap({offline:false});
+	// 		UacanadaMap.api.onMapFirstLaunch();
+	// 	}
 
-		return UacanadaMap.mapTabsCount;
-	};
+	// 	return UacanadaMap.mapTabsCount;
+	// };
 
 	UacanadaMap.api.saveMyLocation = () => {
 		if (UacanadaMap.userDeniedGeo) return;
@@ -379,200 +376,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 	};
 
 
-	UacanadaMap.api.rewriteTabs = (criteria) => {
-		let items = [];
-		const {map}=UacanadaMap
-		
-		if (UacanadaMap.adminsUID) {
-		  console.log(`rewriteTabs(${criteria})`);
-		}
-		if (!UacanadaMap.allPlaces) {
-		  return console.log(`No places!!!`);
-		}
-		if (UacanadaMap.pointerMarker) {
-		  map.removeLayer(UacanadaMap.pointerMarker);
-		}
-		
-		const mustBeInCategory = $("#ua-filter-places").val();
-		
-		UacanadaMap.allPlacesArray = []; // clean up
-		const allMarkersObj = UacanadaMap.allPlaces;
-		let placesLength = 0;
-		
-		const anyLocation = criteria === "anyLocation";
-		UacanadaMap.showOnlyArea = anyLocation ? false : true;
-
-
-		UacanadaMap.TEMP.tabHtmlObj = {}; // clean up
-		UacanadaMap.TEMP.tabEventsArray = []; // clean up
-		UacanadaMap.TEMP.tabItemsArray = []; // clean up TODO
-		for (const key in allMarkersObj) {
-		  if (Object.hasOwnProperty.call(allMarkersObj, key)) {
-			
-			const element = allMarkersObj[key];
-			const item = element.json;
-			const isOnMap = UacanadaMap.api.isPlaceVisibleOnMap(map, element.gps);
-			const tid =  Number(item.tid)
-			if (!mustBeInCategory || mustBeInCategory === item.placeCategory) {
-			  UacanadaMap.allPlacesArray.push({
-				tid: tid,
-				lat: element.marker._latlng.lat,
-				lng: element.marker._latlng.lng,
-				json: item,
-				html: element.marker.uaMarkerCardHTML,
-			  });
-			}
-			
-			if (isOnMap || anyLocation) {
-			  items.push({
-				tabs: element.tab_ids,
-				item,
-				index: placesLength,
-				icon: element.marker.icon,
-			  });
-			  placesLength++;
-
-
-			// TODO WIP 
-			
-			const eventDate = item.eventStartDate? new Date(`${item.eventStartDate} ${item.eventStartTime}`):0;
-			const eventTimestamp = eventDate? Math.floor(eventDate.getTime() / 1000):0;
-			if (eventTimestamp > 0) {
-				UacanadaMap.TEMP.tabEventsArray.push({tid, eventTimestamp,everyWeek: item.eventWeekDay, category: item.placeCategory});
-			}else{
-				UacanadaMap.TEMP.tabItemsArray.push({ tid, createdTimestamp: item.created, category: item.placeCategory });
-			}
-			
-			
-
-
-
-
-			} else {
-			}
-		  }
-		}
-		
-
-
-
-		UacanadaMap.api.populateTabsNew();
-
-
-
-
-
-
-
-
-
-		UacanadaMap.tabEventsArray = []; // clean up
-		UacanadaMap.tabItemsArray = []; // clean up
-	
-		
-		for (const x of items) {
-		  const { tabs, item, index, icon } = x;
-		  
-		  for (const tab of tabs) {
-			let lineIcon = `${icon} `;
-			let lineTitle = item.placeTitle || item.mainUsername;
-			let eventTimestamp = 0;
-			let calendarItem = "";
-			const bloggersTabClass = tab === UacanadaMap.tab_numerator.youtube ? ` ua-blogger-${item.socialtype}` : "";
-			const listClassName = `${UacanadaMap.markersClasses[tab]} ua-list-topic${item.tid}${bloggersTabClass}`;
-			
-			if (tab === UacanadaMap.tab_numerator.events && item.eventStartTime) {
-			  const eventDate = new Date(`${item.eventStartDate} ${item.eventStartTime}`);
-			  eventTimestamp = Math.floor(eventDate.getTime() / 1000);
-			  const month = UacanadaMap.months[eventDate.getMonth()];
-			  const dateDigit = eventDate.getDate();
-			  const eventDay = UacanadaMap.weekdays[eventDate.getDay()];
-			  const everyWeek = item.eventWeekDay ? `<p class="calendar-recurrence m-0"><i class="fa-solid fa-rotate-right"></i> Every ${item.eventWeekDay} at ${item.eventStartTime}</p> ` : "";
-			  const startTime = `<span title="${eventDate}">${item.eventStartDate} at ${item.eventStartTime} ${eventDay}</span></br>`;
-			  const endTime = item.eventEndDate || item.eventEndTime ? `${item.eventEndDate}${item.eventEndTime ? ` at ${item.eventEndTime}` : ""}` : "";
-			  const schedule = item.eventWeekDay ? everyWeek : `${startTime}${endTime}`;
-			  lineIcon = `<div class="event-date-sq"><b>${dateDigit}</b> ${month}</div>`;
-			  lineTitle = `${item.eventName}</br>${UacanadaMap.eventCatMapper[item.eventCategory]}</br>${schedule}`;
-			  calendarItem = `
-				<li class="blogger-loc ${listClassName}" data-ua-event-ts=${eventTimestamp} data-marker-id=${item.tid} data-blogger-loc="${item.gps}">
-				  <div class="calendar-item">
-					<div class="calendar-date p-3">
-					  <span class="calendar-day">${dateDigit}</span>
-					  <span class="calendar-month">${month}</span>
-					</div>
-					<div class="calendar-details p-3">
-					  <h3 class="calendar-title"><i class="fa-regular fa-calendar-check"></i> ${item.eventName}</h3>
-					  <p class="calendar-time m-0"><i class="fa fa-clock"></i> <strong>${eventDay}</strong> ${item.eventStartDate} at ${item.eventStartTime} - ${endTime}</p>
-					  ${UacanadaMap.eventCatMapper[item.eventCategory]} ${everyWeek}
-					  <p class="calendar-location"><i class="fa-solid fa-location-pin"></i> ${item.city}, ${item.province}</p>
-					</div>
-				  </div>
-				</li>`;
-			}
-			
-			const userLine = `
-			  <li class="text-truncate blogger-loc ${listClassName}" data-ua-event-ts=${eventTimestamp} data-marker-id=${item.tid} data-blogger-loc="${item.gps}">
-				${lineIcon}
-				${lineTitle} <span class="float-end ms-1">${item.city}, ${item.province}</span>
-			  </li>
-			`;
-			
-			if (eventTimestamp > 0) {
-			  UacanadaMap.tabEventsArray.push({
-				eventTimestamp,
-				targetDiv: `#ua-peoples-target-${tab}`,
-				userLine: calendarItem,
-				everyWeek: item.eventWeekDay,
-				category: item.placeCategory,
-			  });
-
-
-			
-
-			} else {
-			  UacanadaMap.tabItemsArray.push({
-				createdTimestamp: item.created,
-				targetDiv: `#ua-peoples-target-${tab}`,
-				userLine,
-				category: item.placeCategory,
-			  });
-
-			  
-
-			}
-		  }
-		}
-		
-		UacanadaMap.api.populateTabs();
-		
-		UacanadaMap.api.showCatSelector(mustBeInCategory);
-		
-		
-		if (items[0]) {
-
-			
-			UacanadaMap.api.showOnMapOnlyChoosen({  category: $("#ua-filter-places").val() });
-
-			$("#ua-sidebar-warn-placeholder").html("");
-
-		  
-		} else { /* Warn if empty */
-			$("#ua-sidebar-warn-placeholder").html(`<div class="nomanlands-overlay">There is nothing to be found!</div>`);
-			let suggestions = `<li style="color: #383838;background: #ffe1e1;padding: 1rem;margin-top: 1rem;"><i class="fa-solid fa-magnifying-glass-minus"></i> Keep moving the map or zoom out (or press <b style="cursor:pointer" class="show-all-places">Show All</b>)</li>`;
-			
-			if (mustBeInCategory) {
-			  suggestions += `<li style="color: #383838;background: #ffe1e1;padding: 1rem;margin-top: 1rem;"><i class="fa-solid fa-filter-circle-xmark"></i> Note that you are using the category <b>${UacanadaMap.api.getCatName(mustBeInCategory)}</b> as a filter! To see more results - set the filter to <b>All Places</b></li>`;
-			}
-			
-			$(UacanadaMap.ALL_ITEMS_DIV).html(suggestions);
-		}
-		
-		if (criteria === "onlyVisibleArea") {
-		  $("#show-only-map-items").addClass("only-on-map");
-		} else {
-		  $("#show-only-map-items").removeClass("only-on-map");
-		}
-	  };
 	  
 
 	UacanadaMap.api.showOnMapOnlyChoosen = ({ category }) => {
@@ -612,110 +415,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 	
 
-	UacanadaMap.api.populateTabs = () => {
-		var isToday;
-		var newItems = "";
-		var nearestEventsCount = 0;
-		var placescounter = 0;
-		tabRouteObject = {};
-		var htmlUpcoming48h = "";
-		var htmlUpcomingEvents = "";
-		var htmlExpireEvents = "";
-		var htmlRegularEvents = "";
-		tabRouteObject[UacanadaMap.ALL_ITEMS_DIV] = ""; // prevent undefined word in ul li
-		UacanadaMap.tabEventsArray.sort((a, b) => a.eventTimestamp - b.eventTimestamp);
-		UacanadaMap.tabItemsArray.sort(
-			(a, b) => b.createdTimestamp - a.createdTimestamp
-		);
-
-		for (var event of UacanadaMap.tabEventsArray) {
-			isToday = event.everyWeek === UacanadaMap.weekDay;
-			if (UacanadaMap.timestampNow > event.eventTimestamp && !event.everyWeek) {
-				htmlExpireEvents += event.userLine;
-			}
-
-			if (event.everyWeek) {
-				htmlRegularEvents += event.userLine;
-				if (isToday) {
-					htmlUpcoming48h += event.userLine;
-					// nearestEventsCount++
-				}
-			}
-
-			if (UacanadaMap.timestampNow < event.eventTimestamp) {
-				if (event.eventTimestamp - UacanadaMap.timestampNow < 172800 && !isToday) {
-					htmlUpcoming48h += event.userLine;
-
-					// nearestEventsCount++
-				} else {
-					htmlUpcomingEvents += event.userLine;
-				}
-			}
-
-			if (UacanadaMap.api.filterByCategory(event.category))
-				tabRouteObject[UacanadaMap.ALL_ITEMS_DIV] += event.userLine;
-			//  placescounter++;
-			nearestEventsCount++;
-		}
-
-		for (var mapItem of UacanadaMap.tabItemsArray) {
-			if (mapItem.targetDiv !== UacanadaMap.ALL_ITEMS_DIV) {
-				if (tabRouteObject[mapItem.targetDiv]) {
-					tabRouteObject[mapItem.targetDiv] += mapItem.userLine;
-				} else {
-					tabRouteObject[mapItem.targetDiv] = mapItem.userLine;
-				}
-			} else {
-				if (UacanadaMap.api.filterByCategory(mapItem.category)) {
-					tabRouteObject[UacanadaMap.ALL_ITEMS_DIV] += mapItem.userLine;
-				}
-				newItems += mapItem.userLine;
-				placescounter++;
-			}
-		}
-
-		for (const div in tabRouteObject) {
-			if (Object.hasOwnProperty.call(tabRouteObject, div)) {
-				const html = tabRouteObject[div];
-				$(div).html(html);
-			}
-		}
-
-		var eventHtml = [
-			htmlUpcoming48h
-				? "<li><h6>Events In the Next 48 hours</h6></li>" + htmlUpcoming48h
-				: "",
-			htmlRegularEvents
-				? '<li><h6 class="mt-5">Weekly events</h6></li>' + htmlRegularEvents
-				: "",
-			htmlUpcomingEvents
-				? '<li><h6 class="mt-5">Upcoming events</h6></li>' + htmlUpcomingEvents
-				: "",
-			htmlExpireEvents
-				? '<li><h6 class="mt-5">Expired events:</h6></li>' + htmlExpireEvents
-				: "",
-		];
-
-		$("#ua-peoples-target-" + UacanadaMap.tab_numerator.events).html(
-			eventHtml.join("")
-		);
-
-		$("#placescounter").text(placescounter + "+");
-
-		if (nearestEventsCount > 0) {
-			$("#eventscounter")
-				.text(nearestEventsCount + "+")
-				.css("visibility", "visible");
-		} else {
-			$("#eventscounter").css("visibility", "hidden");
-		}
-
-		if (!tabRouteObject[UacanadaMap.ALL_ITEMS_DIV]) {
-			UacanadaMap.api.showNotFoundOnSummaryTab();
-		}
-
-		$("#ua-news-list").html(htmlUpcoming48h + newItems);
-	};
 
 
 	UacanadaMap.api.setCategoryAndOpenCards = (category) => {
@@ -723,34 +422,12 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 		UacanadaMap.api.openCards(null, null);
 	};
 
-	UacanadaMap.api.onTabChange = ({ tab }) => {
-		if (!tab) return 0;
-		if (tab === UacanadaMap.ALL_ITEMS_TAB_ID) {
-			// todo toggle notice about category filter
-		} else {
-			UacanadaMap.api.openSidebarForCat(false);
-		}
-	};
-
 	
-
-	UacanadaMap.api.closeMapSidebar = (force) => {
-		if (!force && $(window).innerWidth() > 1899) return false
-		if (!UacanadaMap.api.sidebarIsOpened()) return false
-		$("#ua-sidepanel").removeClass("opened").addClass("closed")
-		
-			UacanadaMap.api.foldSidebar(false)
-			UacanadaMap.api.resetGeoFilter()
-			UacanadaMap.api.hideBottomsAndBlockScroll(false)
-			UacanadaMap.api.fitElementsPosition()
-		
-		return true
-	};
 
 	UacanadaMap.api.resetGeoFilter = () => {
 		UacanadaMap.showOnlyArea = false;
 		UacanadaMap.api.rewriteTabs("anyLocation");
-		$("#show-only-map-items").removeClass("only-on-map");
+		//$("#show-only-map-items").removeClass("only-on-map");
 	};
 
 	UacanadaMap.api.rewriteTabsOnCatChange = (category) => {
@@ -771,84 +448,14 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 			// $('#location-visible').removeClass('show-top-buttons')
 		}
 
-		if (category) {
-			$("#location-category-filter").addClass("show-top-buttons");
-		} else {
-			$("#location-category-filter").removeClass("show-top-buttons");
-		}
+		// if (category) {
+		// 	$("#location-category-filter").addClass("show-top-buttons");
+		// } else {
+		// 	$("#location-category-filter").removeClass("show-top-buttons");
+		// }
 	};
 
-	UacanadaMap.api.openSidebarForCat = (category) => {
-		UacanadaMap.api.rewriteTabsOnCatChange(category);
-		if (category) {
-			UacanadaMap.api.openMapSidebar(1);
-		}
-	};
 
-	UacanadaMap.api.openMapSidebar = (tab) => {
-		if (tab && Number(tab) > UacanadaMap.mapTabsCount) return; //openMapSidebar(1); // Kinda loop
-		map.setView(map.getCenter(), 13);
-		//UacanadaMap.api.expandMap();
-		UacanadaMap.api.hideBrandTitle(true);
-		UacanadaMap.api.fitElementsPosition();
-		UacanadaMap.api.hideBottomsAndBlockScroll(true);
-		UacanadaMap.api.animateScroll();
-		if (tab) {
-			$(".sidepanel-content .sidebar-tab-link").removeClass("active");
-			$("#ua-sidepanel").removeClass("closed").addClass("opened");
-
-			for (var tabId = 1; tabId < UacanadaMap.mapTabsCount + 1; tabId++) {
-				if (tabId === tab) {
-					$('[data-tab-content="tab-' + tabId + '"]').addClass("active");
-					$('[data-tab-link="tab-' + tabId + '"]').addClass("active");
-					UacanadaMap.api.onTabChange({ tab: tabId });
-				} else {
-					$('[data-tab-content="tab-' + tabId + '"]').removeClass("active");
-					$('[data-tab-link="tab-' + tabId + '"]').removeClass("active");
-				}
-			}
-		}
-	};
-
-	UacanadaMap.api.foldSidebar = (fold) => {
-		if (fold) {
-			$("#ua-sidepanel").addClass("folded-sidebar");
-			$("#fold-mapsidepanel")
-				.attr("data-ua-fold", "unfold")
-				.html('<i class="fa-solid fa-up-right-and-down-left-from-center"></i>');
-
-			UacanadaMap.isSidebarFolded = true;
-		}
-		if (!fold) {
-			$("#ua-sidepanel").removeClass("folded-sidebar");
-			$("#fold-mapsidepanel")
-				.attr("data-ua-fold", "fold")
-				.html('<i class="fa-solid fa-angle-down"></i> Show map zone');
-
-			UacanadaMap.isSidebarFolded = false;
-		}
-		return UacanadaMap.api.fitElementsPosition();
-	};
-
-	UacanadaMap.api.openCardsOnStartup = () => {
-		if (!isMainPage && $("#ua-cards-slider")[0]) {
-			UacanadaMap.api.removeCards();
-			console.log("openCardsOnStartup removeCards ", { isMainPage });
-		}
-		setTimeout(() => {
-			if (
-				$("body").hasClass("map-touched") ||
-				$("#ua-cards-slider")[0] ||
-				!UacanadaMap.api.isMainPage()
-			)
-				return;
-			// var closestMarker = closestMarkerAddress();
-			// if(closestMarker) $('.nearest-on-map').html('Nearest place: '+closestMarker)
-			// niceShown()
-			$("#location-sort").val("latest");
-			UacanadaMap.api.openCards(null, "latest", true);
-		}, 950);
-	};
 
 	UacanadaMap.api.moveMarkerToTop = (c, markerOffset) => {
 	   const {map,showOnlyArea,L}	= UacanadaMap

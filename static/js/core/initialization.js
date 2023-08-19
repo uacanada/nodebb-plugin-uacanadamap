@@ -93,7 +93,7 @@ define("core/initialization", [
   
       UacanadaMap.api.populateTabs();
       UacanadaMap.api.mapReLoad();
-      UacanadaMap.api.showCatSelector($("#ua-filter-places").val() ?? "");
+      UacanadaMap.api.showCatSelector($("#location-category-filter").val() ?? "");
       UacanadaMap.api.mainFrameShow();
       UacanadaMap.api.OffCanvasPanelHandler();
       UacanadaMap.api.rotateCards("horizontal");

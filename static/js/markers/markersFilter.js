@@ -16,14 +16,14 @@
 
     UacanadaMap.api.filterMarkers = (criteria) => {
         if (!UacanadaMap.allPlaces) {
-            return console.log(`No places`);
+            return UacanadaMap.console.log(`No places`);
         }
         if (UacanadaMap.pointerMarker) {
             UacanadaMap.map.removeLayer(UacanadaMap.pointerMarker);
         }
         const anyLocation = criteria === "anyLocation";
         const onlyOnVisibleArea = criteria === "onlyVisible";
-        const mustBeInCategory = $("#ua-filter-places").val();
+        const mustBeInCategory = $("#location-category-filter").val(); // TODO
        
         UacanadaMap.showOnlyArea = onlyOnVisibleArea ? true : false;
         UacanadaMap.currentSortedMarkers = []
@@ -56,7 +56,7 @@
 
     // TODO
     UacanadaMap.api.rewriteTabs = (criteria) => {
-            console.log('!!! UacanadaMap.api.rewriteTabs deprecated, we use     UacanadaMap.api.filterMarkers(criteria)   instead')
+            UacanadaMap.console.log('!!! UacanadaMap.api.rewriteTabs deprecated, we use     UacanadaMap.api.filterMarkers(criteria)   instead')
             UacanadaMap.api.filterMarkers(criteria)
     }
   

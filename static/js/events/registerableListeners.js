@@ -140,10 +140,10 @@ class EventListeners {
     } else if (tc("#show-all-map-items")) {
         UacanadaMap.showOnlyArea = false;
         UacanadaMap.api.rewriteTabs("anyLocation");
-        UacanadaMap.api.openSidebarForCat(false);
+       // UacanadaMap.api.openSidebarForCat(false);
     } else if (tc(".show-all-places")) {
         UacanadaMap.api.rewriteTabs("anyLocation");
-        UacanadaMap.api.openSidebarForCat(false);
+       // UacanadaMap.api.openSidebarForCat(false);
         UacanadaMap.showOnlyArea = false;
     } else if (tc(".ua-category-button")) {
         return UacanadaMap.api.openSidebarForCat(tc(".ua-category-button").attr("data-ua-cat"));

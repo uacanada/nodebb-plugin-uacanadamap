@@ -75,7 +75,6 @@ define('panels/buttonsSwiper', ["core/variables" /*   Global object UacanadaMap 
                 }
             }
             var catFields = '<option value="">All places: ' + total + "</option>" + options;
-            $("#ua-filter-places").html(catFields); // Delete if sidepanel deleted
             $("#location-category-filter").html(catFields);
             if (selected) $("#mapStatusLine").addClass("show");
             UacanadaMap.api.initBtnSlider(buttonsHtml);

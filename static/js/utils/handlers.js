@@ -64,7 +64,7 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
       
     
       UacanadaMap.api.filterByCategory=(cat)=>{
-        UacanadaMap.categoryFilterTemp = $('#ua-filter-places').val();
+        UacanadaMap.categoryFilterTemp = $('#location-category-filter').val();
         var matchCategory = UacanadaMap.categoryFilterTemp === cat;
         var anotherTab = $('[data-tab-link="tab-'+UacanadaMap.ALL_ITEMS_TAB_ID+'"]').hasClass('active') ? false : true;
         var isNoFilter = UacanadaMap.categoryFilterTemp ? false : true; 
