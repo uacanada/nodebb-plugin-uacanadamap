@@ -104,6 +104,7 @@ define("core/initialization", [
       UacanadaMap.api.filterMarkers(false);
       UacanadaMap.api.registerHooks()
       UacanadaMap.api.registerBasicListeners()
+      UacanadaMap.api.reserveClusterForAdvMarkers()
       if (UacanadaMap.eventListenersInstance) {
         UacanadaMap.eventListenersInstance.reload();
       } else {

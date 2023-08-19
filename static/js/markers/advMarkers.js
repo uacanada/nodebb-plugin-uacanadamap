@@ -1,30 +1,35 @@
 'use strict';
     define('markers/advMarkers', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    if(UacanadaMap.mapLayers?.advMarkers?._leaflet_id){
-      //  UacanadaMap.mapLayers.advMarkers.remove()
-        
-    } else {
-
-        UacanadaMap.mapLayers.advMarkers = UacanadaMap.L.markerClusterGroup(
-                    
-            {
-                // TODO cluster ICON for ads
-                iconCreateFunction: function (cluster) {
-                    const mrks = cluster.getAllChildMarkers();
-                    const n = mrks.length;
-                    const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
-                    return UacanadaMap.L.divIcon({
-                        html: n,
-                        className: "mycluster ua-cluster-places",
-                        iconSize: UacanadaMap.L.point(clusterIconSize, clusterIconSize),
-                        iconAnchor: [0, 0],
-                    });
-                }
-                
-            }
-        );
+   
+   
+    UacanadaMap.api.reserveClusterForAdvMarkers = () => {
+        if(UacanadaMap.mapLayers?.advMarkers?._leaflet_id){
+            //  UacanadaMap.mapLayers.advMarkers.remove()
+              
+          } else {
+      
+              UacanadaMap.mapLayers.advMarkers = UacanadaMap.L.markerClusterGroup(
+                          
+                  {
+                      // TODO cluster ICON for ads
+                      iconCreateFunction: function (cluster) {
+                          const mrks = cluster.getAllChildMarkers();
+                          const n = mrks.length;
+                          const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
+                          return UacanadaMap.L.divIcon({
+                              html: n,
+                              className: "mycluster ua-cluster-places",
+                              iconSize: UacanadaMap.L.point(clusterIconSize, clusterIconSize),
+                              iconAnchor: [0, 0],
+                          });
+                      }
+                      
+                  }
+              );
+          }
     }
+    
 
     UacanadaMap.api.populateAdvMarkers = (tags) => {
         if(ajaxify.data.UacanadaMapSettings?.advMarkers?.length>0){
