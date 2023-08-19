@@ -1,5 +1,5 @@
 "use strict";
-define('topics/topicClient',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
+define('topics/topicClient',["uacanadamap" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
 console.log('test',{UacanadaMap})
 
