@@ -1,5 +1,5 @@
 "use strict";
-define(function() { 
+
     function setPlaceMap(L, place, ajaxed) {
         console.log("leaflet.js loaded ", { L, place, ajaxed });
     
@@ -68,4 +68,3 @@ define(function() {
             }
         }
     });
-})
