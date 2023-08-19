@@ -6,6 +6,7 @@ define('topics/topicClient',["core/variables" /*   Global object UacanadaMap  */
 UacanadaMap.api.showMapInsideTopic = (place) => {
     const {L} = UacanadaMap
 	
+    console.log(';;;;;;;;;;;;;;;',place)
 
     if(place.latlng?.length === 2){
         var latlng = place.latlng;
