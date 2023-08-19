@@ -5,7 +5,7 @@ define(function() {
     
         if(place.latlng?.length === 2){
             var latlng = place.latlng;
-            var accessToken = ajaxify.data?.uacanadamapConstants?.mapBoxKey || '';
+            var accessToken = ajaxify.data?.UacanadaMapSettings?.mapBoxApiKey|| '';
             var pinMarkerIcon = L.divIcon({
                 className: "ua-pin-icon",
                 html: '<div class="position-relative"><span class="mini-latlng-inpost position-absolute">' +  place.placeTitle + '</span><span class="ua-bounce-animated-pin">📍</span></div>',
@@ -14,7 +14,6 @@ define(function() {
                 popupAnchor: [5, -5],
             });
             
-            var accessToken = ajaxify.data?.uacanadamapConstants?.mapBoxKey || '';
             var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + accessToken, {
                 maxZoom: 19,
                 id: 'mapbox/streets-v11',
