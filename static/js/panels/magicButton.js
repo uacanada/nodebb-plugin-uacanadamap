@@ -2,7 +2,7 @@
 'use strict';
 define('panels/magicButton',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    UacanadaMap.api.oprnCertainTab = (magicButton) => { // TODO: rename open
+    UacanadaMap.api.openCertainTab = (magicButton) => { // TODO: rename open
         let tab = magicButton[0]?.getAttribute('data-ua-tabtarget')
         if(tab){
 

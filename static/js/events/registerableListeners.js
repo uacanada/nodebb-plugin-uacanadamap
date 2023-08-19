@@ -75,7 +75,7 @@ class EventListeners {
 
 	  if((t= tc('[data-ua-tabtarget]'))){
 		
-		UacanadaMap.api.oprnCertainTab(t)
+		UacanadaMap.api.openCertainTab(t)
 		
 
 	} else
