@@ -140,6 +140,15 @@ define("core/initialization", [
            UacanadaMap.needReinit = true
            document.body.style.overflow = '';
            document.body.removeAttribute('data-bs-overflow');
+
+
+           if(data.tpl_url === 'post'){
+             console.log(data)
+             UacanadaMap.api.showMapInsideTopic(322)
+           }
+
+
+
        }
    
        UacanadaMap.console.log("~~~~~end to", data);

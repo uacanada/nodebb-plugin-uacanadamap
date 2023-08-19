@@ -3,7 +3,7 @@ define('topics/topicClient',["core/variables" /*   Global object UacanadaMap  */
 
 
 
-UacanadaMap.api.setPlaceMap = (place) => {
+UacanadaMap.api.showMapInsideTopic = (place) => {
     const {L} = UacanadaMap
 	
 
