@@ -1,5 +1,5 @@
 "use strict";
-define('topics/topicClient',["uacanadamap" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
+define(function() { 
     function setPlaceMap(L, place, ajaxed) {
         console.log("leaflet.js loaded ", { L, place, ajaxed });
     
