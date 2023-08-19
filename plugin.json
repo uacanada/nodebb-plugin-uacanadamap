@@ -45,7 +45,7 @@
     "static/scss/mutations.scss",
     "static/scss/rewrites.scss"
   ],
-  "scripts": ["static/topics/topicClient.js"],
+  "scripts": ["static/js/topics/topicClient.js"],
   "acpScripts": [],
 
   "modules": {
