@@ -75,7 +75,7 @@ define("core/initialization", [
   return async (UacanadaMap) => {
     
     const firstInitTime = Date.now();
-    const reload = async () => {
+    const reload = async (UacanadaMap) => {
       let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
    
    
@@ -111,6 +111,8 @@ define("core/initialization", [
         UacanadaMap.eventListenersInstance.register();
       }
     }
+
+    reload(UacanadaMap)
     
     const hooks = await app.require("hooks");
     hooks.on('action:ajaxify.end', (data) => {
