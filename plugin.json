@@ -6,7 +6,7 @@
     "static": "static",
     "icons": "static/assets/icons",
     "images": "static/assets/images",
-    "leaflet": "../leaflet/dist"
+    "leaflet": "../node_modules/leaflet/dist"
   },
   "staticNpmDependencies": {
     "leaflet": "^1.9.3",
