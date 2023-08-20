@@ -138,7 +138,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       const { L } = UacanadaMap;
       for (const [index, item] of array.entries()) {
         if (!item.placeCategory || !item.latlng[0]) continue;
-        const newMarker = UacanadaMap.api.createMarker(item)
+        const newMarker = UacanadaMap.api.createMarker(index,item)
         UacanadaMap.mapLayers.markers.addLayer(newMarker);
       }
   

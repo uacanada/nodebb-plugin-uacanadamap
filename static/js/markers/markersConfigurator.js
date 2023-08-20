@@ -1,7 +1,7 @@
 'use strict';
 define('markers/markersConfigurator',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    UacanadaMap.api.createMarker = (item) => {
+    UacanadaMap.api.createMarker = (index,item) => {
 
         
 
