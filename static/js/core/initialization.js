@@ -124,7 +124,7 @@ define("core/initialization", [
     hooks.on('action:ajaxify.end', (data) => {
       if(data.tpl_url === 'map'){
            
-            if(firstInitTime < Date.now()+1000 || UacanadaMap.needReinit){
+            if(firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
                console.log(` reinit `, data)
                
                
