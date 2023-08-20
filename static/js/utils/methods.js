@@ -199,57 +199,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 		UacanadaMap.api.tryLocate({ fornewplace: true });
 	};
 
-	// UacanadaMap.api.loadHtmlTemplates = async () => {
-	// 	UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();
-	// 	UacanadaMap.recoveredOldButtons = ""; //$('#ua-form-event-holder').html();
 
-	// 	$("select#location-category option").each(function (index) {
-	// 		var optText = $(this).text();
-	// 		var optVal = $(this).val();
-	// 		if (optVal) {
-	// 			UacanadaMap.categoryMapper[optVal] = optText;
-	// 			UacanadaMap.markerGroups[optVal] = []; // Category Named Storage for marker groups
-	// 			$("select#ua-filter-places").append(
-	// 				'<option value="' + optVal + '">' + optText + "</option>"
-	// 			);
-	// 		} else {
-	// 			if (UacanadaMap.adminsUID) console.log("no opt val", $(this));
-	// 		}
-	// 	});
-
-	// 	$("select#location-province option").each(function (index) {
-	// 		var optText = $(this).text();
-	// 		var optVal = $(this).val();
-	// 		if (optVal) {
-	// 			UacanadaMap.provinceMapper[optText] = optVal;
-	// 		}
-	// 	});
-
-	// 	$("select#event-location-category option").each(function (index) {
-	// 		var optText = $(this).text();
-	// 		var optVal = $(this).val();
-	// 		if (optVal) {
-	// 			UacanadaMap.eventCatMapper[optVal] = optText;
-	// 		}
-	// 	});
-
-	// 	$("ul.sidepanel-tabs li").each(function (index) {
-	// 		var tabNumber = index + 1;
-	// 		var markerIcon = $(this).find("i").attr("class");
-	// 		UacanadaMap.markersIconsmapper[tabNumber] = markerIcon;
-	// 		UacanadaMap.tabTitles[tabNumber] = $(this).find("a").attr("title");
-	// 		UacanadaMap.mapTabsCount++;
-	// 	});
-
-	// 	if (UacanadaMap.allPlaces) {
-	// 		// initUaMap({offline:true})
-	// 	} else {
-	// 		//initUaMap({offline:false});
-	// 		UacanadaMap.api.onMapFirstLaunch();
-	// 	}
-
-	// 	return UacanadaMap.mapTabsCount;
-	// };
 
 	UacanadaMap.api.saveMyLocation = () => {
 		if (UacanadaMap.userDeniedGeo) return;
@@ -422,13 +372,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 		UacanadaMap.api.openCards(null, null);
 	};
 
-	
-
-	UacanadaMap.api.resetGeoFilter = () => {
-		UacanadaMap.showOnlyArea = false;
-		UacanadaMap.api.rewriteTabs("anyLocation");
-		//$("#show-only-map-items").removeClass("only-on-map");
-	};
 
 	UacanadaMap.api.rewriteTabsOnCatChange = (category) => {
 		$("#location-visible").removeClass("show-top-buttons");
@@ -448,11 +391,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 			// $('#location-visible').removeClass('show-top-buttons')
 		}
 
-		// if (category) {
-		// 	$("#location-category-filter").addClass("show-top-buttons");
-		// } else {
-		// 	$("#location-category-filter").removeClass("show-top-buttons");
-		// }
 	};
 
 
@@ -518,19 +456,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 	};
 
 	
-
-	UacanadaMap.api.createStories = () => {
-
-		return; // TODO REMOVE
-		
-	};
-
-	UacanadaMap.api.createShortsSelfHosted = (storieCardIndex) => {
-		return; // TODO REMOVE
-		
-	};
-
-	UacanadaMap.api.uncluster = (y) => {};
 
 	return UacanadaMap;
 })

@@ -151,23 +151,9 @@ $.fn.classChange = function (cb) {
         UacanadaMap.api.setCategoryAndOpenCards($(this).val());
       });
       $(document).on("change", "#location-sort", function () {
-        console.log("changed", $(this));
         UacanadaMap.api.setCategoryAndOpenCards($("#location-category-filter").val());
       });
-      // $(document).on("change", "#ua-filter-places", function () {
-      //   UacanadaMap.api.rewriteTabsOnCatChange($(this).val());
-      // });
-      $(document).on("show.bs.modal", "#ua-shorts", function (trig) {
-        var id = $(trig.relatedTarget).attr("data-ua-storie");
-        if (id) UacanadaMap.api.createShortsSelfHosted(id);
-      });
-      $(document).on("hide.bs.modal", "#ua-shorts", function (trig) {
-        if (UacanadaMap.player) UacanadaMap.player.dispose();
-        $("#ua-short-wrapper").html("...");
-        $(document).off("click", ".vid-right-area");
-        $(document).off("click", ".vid-left-area");
-      });
-      $(document).on("shown.bs.modal", "#ua-shorts", function (trig) {});
+   
 
     }
   
