@@ -262,7 +262,7 @@
         direction,
         freeMode,
         slidesPerView: 'auto',
-        mousewheel: { invert: false, sensitivity: 0.5, eventsTarget: '#ua-cards-slider' },
+        mousewheel: { invert: false, sensitivity: 0.25, eventsTarget: '#ua-cards-slider' }, // TODO: move sensitivity option to ACP
         autoplay: autoplay ? { delay: 4200, disableOnInteraction: false } : false,
       }).on('slideChangeTransitionEnd', (e) => handleSlideChange(e, places, UacanadaMap)).on('click', (J, event) => handleClick(J, event, UacanadaMap))
 

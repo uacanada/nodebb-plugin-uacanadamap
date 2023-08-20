@@ -75,6 +75,7 @@
     "population/tabsPopulator": "static/js/population/tabsPopulator.js",
     "markers/markersFilter": "static/js/markers/markersFilter.js",
     "markers/advMarkers": "static/js/markers/advMarkers.js",
+    "markers/markersConfigurator": "static/js/markers/markersConfigurator.js",
     "events/basicListeners": "static/js/events/basicListeners.js",
     "events/hooks": "static/js/events/hooks.js",
     "utils/expandMap": "static/js/utils/expandMap.js",
