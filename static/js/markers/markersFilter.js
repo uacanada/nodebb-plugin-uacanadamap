@@ -47,7 +47,7 @@
         return UacanadaMap.currentSortedMarkers;
         
         
-        //UacanadaMap.api.showCatSelector(mustBeInCategory);
+        //UacanadaMap.api.createСategoryButtonsSwiper(mustBeInCategory);
         
         
       

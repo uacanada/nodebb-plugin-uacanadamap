@@ -262,7 +262,7 @@
         direction,
         freeMode,
         slidesPerView: 'auto',
-        mousewheel: { invert: false, sensitivity: 1, eventsTarget: '#ua-cards-slider' },
+        mousewheel: { invert: false, sensitivity: 0.5, eventsTarget: '#ua-cards-slider' },
         autoplay: autoplay ? { delay: 4200, disableOnInteraction: false } : false,
       }).on('slideChangeTransitionEnd', (e) => handleSlideChange(e, places, UacanadaMap)).on('click', (J, event) => handleClick(J, event, UacanadaMap))
 
@@ -421,13 +421,14 @@
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
       UacanadaMap.api.cardsOpened(false)
+      UacanadaMap.api.magicButtonText({text:' Reset Categories',delay:300,to:0})
       setTimeout(() => {
         
        
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
         
-      }, 500);
+      }, 350);
       
       
   };

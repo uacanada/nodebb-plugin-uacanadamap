@@ -15,7 +15,7 @@ define("core/initialization", [
   "markers/markersPopulator",
   "ui/elementPositions",
   "utils/methods",
-  "panels/buttonsSwiper",
+  "panels/categoryButtonsSwiper",
   "panels/cardSwiper",
   "panels/bottomSheets",
   'panels/magicButton',
@@ -44,7 +44,7 @@ define("core/initialization", [
   markersPopulator,
   elementPositions,
   methods,
-  buttonsSwiper,
+  categoryButtonsSwiper,
   cardSwiper,
   bottomSheets,
   magicButton,
@@ -88,7 +88,7 @@ define("core/initialization", [
   
       UacanadaMap.api.populateTabs();
       UacanadaMap.api.mapReLoad();
-      UacanadaMap.api.showCatSelector($("#location-category-filter").val() ?? "");
+      UacanadaMap.api.createСategoryButtonsSwiper($("#location-category-filter").val() ?? "");
       UacanadaMap.api.mainFrameShow();
       UacanadaMap.api.OffCanvasPanelHandler();
       UacanadaMap.api.rotateCards("horizontal");
