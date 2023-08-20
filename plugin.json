@@ -68,7 +68,7 @@
     "markers/markersPopulator": "static/js/markers/markersPopulator.js",
     "ui/elementPositions": "static/js/ui/elementPositions.js",
     "utils/methods": "static/js/utils/methods.js",
-    "panels/buttonsSwiper": "static/js/panels/buttonsSwiper.js",
+    "panels/categoryButtonsSwiper": "static/js/panels/categoryButtonsSwiper.js",
     "panels/cardSwiper": "static/js/panels/cardSwiper.js",
     "panels/bottomSheets": "static/js/panels/bottomSheets.js",
     "panels/magicButton":"static/js/panels/magicButton.js",
