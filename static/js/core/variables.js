@@ -26,7 +26,7 @@ const UacanadaMap = {
     discord: '<i class="fa-brands fa-discord pe-1" style="color: #5865F2;"></i>',
     telegram: '<i class="fa-brands fa-telegram pe-1" style="color:#4faaca"></i>'
 
-},
+    },
 
 
   offcanvas: {

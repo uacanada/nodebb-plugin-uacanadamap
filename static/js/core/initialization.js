@@ -6,16 +6,11 @@ define("core/initialization", [
   "core/configurations",
   "utils/handlers",
   "utils/mapFeatures",
-
   "core/swipersCreator",
-
   "population/categoriesCreator",
-  
   "events/mapReady",
   "ui/swipeDetectors",
-  
-  
-  "forms/regionCreator",
+   "forms/regionCreator",
   "markers/markersFetcher",
   "markers/markersPopulator",
   "ui/elementPositions",
@@ -30,7 +25,6 @@ define("core/initialization", [
   "events/basicListeners",
   "events/hooks",
   "utils/expandMap",
-  
   "forms/submitPlace",
   "forms/editPlace",
   "topics/topicPost",
@@ -75,8 +69,9 @@ define("core/initialization", [
  
 
   return async (UacanadaMap) => {
-    
     const firstInitTime = Date.now();
+    const hooks = await app.require("hooks");
+    
     const reload = async (UacanadaMap) => {
       let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
    
@@ -117,11 +112,11 @@ define("core/initialization", [
 
     reload(UacanadaMap)
     
-    const hooks = await app.require("hooks");
+    
     hooks.on('action:ajaxify.end', (data) => {
       if(data.tpl_url === 'map'){
            
-            if( UacanadaMap.needReinit){
+            if(firstInitTime < Date.now()+1000 || UacanadaMap.needReinit){
                console.log(` reinit `, data)
                
                
@@ -129,7 +124,6 @@ define("core/initialization", [
                    console.log('ADMIN MODE ajaxify')
                    reload(UacanadaMap)
                }else{
-                  // initializeEnvironment(UacanadaMap);
                   reload(UacanadaMap)
                }
    
@@ -138,20 +132,21 @@ define("core/initialization", [
    
    
        }else{
+           
            UacanadaMap.needReinit = true
            document.body.style.overflow = '';
            document.body.removeAttribute('data-bs-overflow');
 
 
            if(data.tpl_url === 'post'){
-             console.log(data, data.topic.tid)
-             UacanadaMap.api.showMapInsideTopic(UacanadaMap.allPlaces[data.topic.tid])
+             
            }
 
 
 
        }
    
+      
        UacanadaMap.console.log("~~~~~end to", data);
      });
 
