@@ -108,9 +108,17 @@ define("core/initialization", [
         UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
         UacanadaMap.eventListenersInstance.register();
       }
+
+      if(app.user.isAdmin){
+        // Make accessible globally for debugging purposes
+          window.UacanadaMap = UacanadaMap;
+      }
+
     }
 
     reload(UacanadaMap)
+
+   
     
     
     hooks.on('action:ajaxify.end', (data) => {
