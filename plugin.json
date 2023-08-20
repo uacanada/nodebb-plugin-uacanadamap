@@ -1,13 +1,12 @@
 {
   "id": "nodebb-plugin-uacanadamap",
   "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap",
-  "library": "./library.js",   
+  "library": "library.js",   
   "staticDirs": {
-    "static": "./static",
-    "icons": "./static/assets/icons",
-    "images": "./static/assets/images",
-    "leaflet": "./node_modules/leaflet/dist",
-    "swiper/bundle": "./node_modules/swiper/bundle.js"
+    "static": "static",
+    "icons": "static/assets/icons",
+    "images": "static/assets/images",
+    "leaflet": "../node_modules/leaflet/dist"
   },
   "staticNpmDependencies": {
     "leaflet": "^1.9.3",
@@ -22,8 +21,16 @@
     "fs": "^0.0.1-security"
   },
   "scss": [
+
+
+
+    "static/vendor/css/MarkerCluster.Default.scss",
+    "static/vendor/css/MarkerCluster.scss",
+    "static/vendor/css/L.Control.Locate.scss",
+    "static/vendor/css/Control.Geocoder.scss",
     "static/vendor/css/leaflet.scss",
     "static/vendor/css/leaflet.fullscreen.scss",
+
     "static/scss/imports.scss",
     "static/scss/variables.scss",
     "static/scss/animations.scss",
@@ -38,14 +45,13 @@
     "static/scss/mutations.scss",
     "static/scss/rewrites.scss"
   ],
-  "scripts": [ ],
+  "scripts": ["static/js/topics/topicClient.js"],
   "acpScripts": [],
 
   "modules": {
-    "leaflet": "./node_modules/leaflet/dist/leaflet.js",
-    "swiper/bundle": "./node_modules/swiper/bundle.js",
-    "../admin/plugins/uacanadamap.js": "./static/acp/adminPage.js",
-    "../client/map.js": "./static/js/uacanadamap.js",
+  
+    "../admin/plugins/uacanadamap.js": "static/acp/adminPage.js",
+    "../client/map.js": "static/js/uacanadamap.js",
     "utils/extensions":"static/js/utils/extensions.js",
     "core/variables": "static/js/core/variables.js",
     "core/initialization": "static/js/core/initialization.js",
@@ -65,6 +71,7 @@
     "panels/buttonsSwiper": "static/js/panels/buttonsSwiper.js",
     "panels/cardSwiper": "static/js/panels/cardSwiper.js",
     "panels/bottomSheets": "static/js/panels/bottomSheets.js",
+    "panels/magicButton":"static/js/panels/magicButton.js",
     "population/tabsPopulator": "static/js/population/tabsPopulator.js",
     "markers/markersFilter": "static/js/markers/markersFilter.js",
     "markers/advMarkers": "static/js/markers/advMarkers.js",

@@ -1,6 +1,6 @@
 'use strict';
 define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
-    const { map } = UacanadaMap;
+    const { map} = UacanadaMap;
     UacanadaMap.isFullscreenMode = false;
     UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();
     $('#place-tag-input').tagsinput({  maxChars: 24, maxTags: 10, tagClass: "badge bg-info", confirmKeys: [13, 44], trimValue: true});

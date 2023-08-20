@@ -1,7 +1,6 @@
 'use strict';
 define('forms/submitPlace',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
-    const { L, map } = UacanadaMap;
-  
+   
     UacanadaMap.form.convertToMonth=(dateString)=> {
       const date = new Date(dateString);
       const options = { month: 'short' };
@@ -44,11 +43,11 @@ define('forms/submitPlace',["core/variables" /*   Global object UacanadaMap  */]
           }
         
           if (UacanadaMap.currentmarker) {
-            map.removeLayer(UacanadaMap.currentmarker);
+            UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
           }
         
-          UacanadaMap.currentmarker = L.marker([lat, lng], { icon: UacanadaMap.icon })
-            .addTo(map)
+          UacanadaMap.currentmarker = UacanadaMap.L.marker([lat, lng], { icon: UacanadaMap.icon })
+            .addTo(UacanadaMap.map)
             .bindPopup(`<p>⏳ Creating a location for you...</p><code>${lat},${lng}</code>`)
             .openPopup();
         
@@ -145,11 +144,11 @@ define('forms/submitPlace',["core/variables" /*   Global object UacanadaMap  */]
           const form = event.target;
         
           if (UacanadaMap.currentmarker) {
-            map.removeLayer(UacanadaMap.currentmarker);
+            UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
           }
         
           if (!canSendForm) {
-            console.log("Already Sent!!!");
+            UacanadaMap.console.log("Already Sent!!!");
             return;
           }
         
@@ -181,7 +180,7 @@ define('forms/submitPlace',["core/variables" /*   Global object UacanadaMap  */]
             const fields = $(form).serializeArray();
         
             const [lat, lng] = $("#ua-latlng-text").val().split(",");
-            UacanadaMap.currentmarker = L.marker([lat, lng], { icon: UacanadaMap.icon }).addTo(map).bindPopup(`<p>⏳ Creating new place...</p><code>${lat},${lng}</code>`).openPopup();
+            UacanadaMap.currentmarker = UacanadaMap.L.marker([lat, lng], { icon: UacanadaMap.icon }).addTo(map).bindPopup(`<p>⏳ Creating new place...</p><code>${lat},${lng}</code>`).openPopup();
             const formData = new FormData();
             
             for (let field of fields) {

@@ -1,8 +1,9 @@
 'use strict';
 define('topics/topicPost',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
-    const { L } = UacanadaMap;
+
 /* Create post header ONLY WHEN INSIDE TOPIC VIEW !*/
 UacanadaMap.api.setLocationCardtoPost = () => {
+    const { L } = UacanadaMap;
     var inpostCardHolder;
     var isTopic = $("body").hasClass("page-topic");
     var classes = $("body").attr("class");

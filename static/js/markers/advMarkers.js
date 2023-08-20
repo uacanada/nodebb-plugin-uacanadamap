@@ -1,39 +1,45 @@
 'use strict';
     define('markers/advMarkers', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    if(UacanadaMap.mapLayers?.advMarkers?._leaflet_id){
-      //  UacanadaMap.mapLayers.advMarkers.remove()
-        
-    } else {
-
-        UacanadaMap.mapLayers.advMarkers = L.markerClusterGroup(
-                    
-            {
-                // TODO cluster ICON for ads
-                iconCreateFunction: function (cluster) {
-                    const mrks = cluster.getAllChildMarkers();
-                    const n = mrks.length;
-                    const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
-                    return UacanadaMap.L.divIcon({
-                        html: n,
-                        className: "mycluster ua-cluster-places",
-                        iconSize: UacanadaMap.L.point(clusterIconSize, clusterIconSize),
-                        iconAnchor: [0, 0],
-                    });
-                }
-                
-            }
-        );
+   
+   
+    UacanadaMap.api.reserveClusterForAdvMarkers = () => {
+        if(UacanadaMap.mapLayers?.advMarkers?._leaflet_id){
+            //  UacanadaMap.mapLayers.advMarkers.remove()
+              
+          } else {
+      
+              UacanadaMap.mapLayers.advMarkers = UacanadaMap.L.markerClusterGroup(
+                          
+                  {
+                      // TODO cluster ICON for ads
+                      iconCreateFunction: function (cluster) {
+                          const mrks = cluster.getAllChildMarkers();
+                          const n = mrks.length;
+                          const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
+                          return UacanadaMap.L.divIcon({
+                              html: n,
+                              className: "mycluster ua-cluster-places",
+                              iconSize: UacanadaMap.L.point(clusterIconSize, clusterIconSize),
+                              iconAnchor: [0, 0],
+                          });
+                      }
+                      
+                  }
+              );
+          }
     }
+    
 
     UacanadaMap.api.populateAdvMarkers = (tags) => {
         if(ajaxify.data.UacanadaMapSettings?.advMarkers?.length>0){
 
+           
             ajaxify.data.UacanadaMapSettings.advMarkers.forEach((m, index) => {
                  try {
 
                     // TODO add filter logic for TAGS
-                    const marker = L.marker(m.latlng.split(','), { icon: L.divIcon({
+                    const marker = UacanadaMap.L.marker(m.latlng.split(','), { icon: UacanadaMap.L.divIcon({
                         className: 'advMarker',
                         html: `<div class="d-flex align-items-center" data-adv-marker="${m.id}">
                                 <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center" style="color:${m.color}"> <i class="fa fas ${m.icon}"></i> </div>
@@ -45,10 +51,10 @@
                       }) })
                         .bindPopup('<div class="p-2">'+m.popup+'</div>')
                         .on("popupopen", (e) => {
-                       console.log('popup',m.url,m.image)
+                     
                       }).on("click", (e) => {
                         e.sourceTarget.openPopup();
-                        console.log(m.card)
+                       
                       });
 
                       

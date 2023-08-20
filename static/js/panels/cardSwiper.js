@@ -37,7 +37,7 @@
     }
   
   UacanadaMap.api.pointerMarker = (tid,place) => {
-     const {map} = UacanadaMap
+     const {map,L} = UacanadaMap
        UacanadaMap.api.cleanMarkers()
       if(!tid)return false    
       const markerImg = place.json.pic ? place.json.pic: place.json.img ? place.json.img : '/static_uaca/uamarker.png';
@@ -58,7 +58,7 @@
         
         try {
           UacanadaMap.cardsCarousel.slideTo(Number(slideId)) 
-          map.setView(place.gps,map.getZoom()+1);   
+          UacanadaMap.map.setView(place.gps,map.getZoom()+1);   
           UacanadaMap.pointerMarker.openPopup(); 
         } catch (error) {
           
@@ -81,7 +81,7 @@
        //   addClassToMarkerIcon(place.marker, 'ua-opened-marker');
         //  if(place.neighborsCount) addClassToMarkerIcon(place.marker,"has-neighbors");
           UacanadaMap.api.fitElementsPosition(place.gps)
-          UacanadaMap.pointerMarker.addTo(map).openPopup()
+          UacanadaMap.pointerMarker.addTo(UacanadaMap.map).openPopup()
           //$('.ua-topic-'+tid).addClass('ua-opened-marker');
          
          // UacanadaMap.api.setContextCss('.ua-marker-default.ua-topic-'+Number(tid)+'{opacity:0!important}')
@@ -114,6 +114,7 @@
   
   
   UacanadaMap.api.openCarousel = async (places, autoplay) =>{
+    const {L} = UacanadaMap
       UacanadaMap.api.animateCards('closed')
       const card = $(UacanadaMap.placeCardDiv);
       const cat = $('#location-category-filter').val();
@@ -250,7 +251,7 @@
   
   
   UacanadaMap.api.openPlacesSwiper = (places,autoplay) => {
-
+  
     let direction = UacanadaMap.cardsCarousel.params?.direction || (window.innerWidth<1000?"horizontal":"vertical")
     let freeMode = {
         enabled: true,

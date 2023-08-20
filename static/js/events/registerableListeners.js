@@ -75,7 +75,7 @@ class EventListeners {
 
 	  if((t= tc('[data-ua-tabtarget]'))){
 		
-		UacanadaMap.api.oprnCertainTab(t)
+		UacanadaMap.api.openCertainTab(t)
 		
 
 	} else
@@ -87,11 +87,6 @@ class EventListeners {
         UacanadaMap.api.tryLocate({ fornewplace: false });
     } else if (tc("#ua-locate-me")) {
         UacanadaMap.api.addNewPlace();
-    } else if (tc("#ua-ctx-button")) {
-        UacanadaMap.api.ctxButton({ action: target.attr("data-ua-trigger") });
-   
-	
- 
 	} else if(tc("#cardsDown")){
 		UacanadaMap.api.rotateCards('horizontal');
 	} else if(tc("a.ua-sort")){
@@ -102,30 +97,16 @@ class EventListeners {
 			UacanadaMap.api.openCards(0,sort_by,false)
 			$('#sortby-label').text(sort_by) 
 		}
-		UacanadaMap.console.log(tc("a.ua-sort").attr('data-ua-sortby'))
 		 
 
 
 	} else if(tc("#rotateCards")){
 		UacanadaMap.api.rotateCards();
-	} else if (tc("#pull-out-button")) {
-        UacanadaMap.api.expandMap("#pull-out-button on click");
-    } else if (tc("#modal-place-link")) {
+	} else if (tc("#modal-place-link")) {
        // $("#ua-place-modal .dyn-content").html("...");
     } else if (tc(".ua-reload-link")) {
         UacanadaMap.api.reloadMainPage();
-    } else if (tc("a.sidebar-tab-link")) {
-        UacanadaMap.api.onTabChange({
-            tab: Number(tc("a.sidebar-tab-link").attr("data-tab-link").replace("tab-", "")),
-        });
-    } else if (tc("#uaAddNewLoc")) {
-        UacanadaMap.api.closeMapSidebar(true);
-    } else if (tc("#close-mapsidepanel")) {
-        UacanadaMap.api.closeMapSidebar(true);
-    } else if (tc('#fold-mapsidepanel[data-ua-fold="fold"]')) {
-        UacanadaMap.api.foldSidebar(true);
-    } else if (tc('#fold-mapsidepanel[data-ua-fold="unfold"]')) {
-        UacanadaMap.api.foldSidebar(false);
+    
     } else if (tc("#chatters")) {
         openMapSidebar(6);
     } else if (tc(".removeCards")) {
@@ -134,16 +115,14 @@ class EventListeners {
 		UacanadaMap.api.magicButtonText({text:'Reset filters...',delay:800,to:UacanadaMap.magicButton.router.main})
     } else if (tc("#show-only-map-items")) {
         UacanadaMap.api.rewriteTabs("onlyVisibleArea");
-        UacanadaMap.api.foldSidebar(true);
-        UacanadaMap.api.openMapSidebar(1);
         UacanadaMap.showOnlyArea = true;
     } else if (tc("#show-all-map-items")) {
         UacanadaMap.showOnlyArea = false;
         UacanadaMap.api.rewriteTabs("anyLocation");
-        UacanadaMap.api.openSidebarForCat(false);
+       // UacanadaMap.api.openSidebarForCat(false);
     } else if (tc(".show-all-places")) {
         UacanadaMap.api.rewriteTabs("anyLocation");
-        UacanadaMap.api.openSidebarForCat(false);
+       // UacanadaMap.api.openSidebarForCat(false);
         UacanadaMap.showOnlyArea = false;
     } else if (tc(".ua-category-button")) {
         return UacanadaMap.api.openSidebarForCat(tc(".ua-category-button").attr("data-ua-cat"));

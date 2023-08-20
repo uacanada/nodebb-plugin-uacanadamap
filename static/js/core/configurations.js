@@ -10,7 +10,7 @@ define('core/configuration', function (require) {
     require('leaflet-contextmenu');
     require('leaflet-providers');
 
-   
+  console.log({L})// TODO debug remove
     
     const dateTime = new Date(Date.now());
 
@@ -152,8 +152,8 @@ define('core/configuration', function (require) {
     
     UacanadaMap.api.configureMapElements = () => {
 
-        
-       
+        const {L} = UacanadaMap 
+      
 
 
         UacanadaMap.BlackWhite = L.tileLayer.provider("Stamen.TonerLite");
@@ -259,24 +259,15 @@ define('core/configuration', function (require) {
         );
 
         UacanadaMap.markersOverlay = { All: UacanadaMap.mapLayers.markers };
-        
 
-        // UacanadaMap.mapLayers.sidePanel = L.control.sidepanel("ua-sidepanel", {
-        //     position: "bottomleft",
-        //     panelPosition: "left",
-        //     pushControls: false,
-        //     tabsPosition: "top",
-        //     startTab: "tab-" + UacanadaMap.tab_numerator.all,
-        // });
-
-        UacanadaMap.mapLayers.locateControl = L.control.locate({
+        UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({
             position: "bottomright",
             flyTo: true,
             maxZoom: 14,
             strings: { title: "Show me where I am, yo!" },
         });
 
-        UacanadaMap.mapLayers.zoomControl = L.control.zoom({ position: "bottomright" });
+        UacanadaMap.mapLayers.zoomControl = UacanadaMap.L.control.zoom({ position: "bottomright" });
 
         UacanadaMap.mapControlsUnused.layerControl = L.control.layers(
             UacanadaMap.mapProviders,
@@ -284,14 +275,14 @@ define('core/configuration', function (require) {
             { position: "topright" }
         );
 
-        UacanadaMap.hiddenControls.geocoder = L.Control.geocoder({
+        UacanadaMap.hiddenControls.geocoder = UacanadaMap.L.Control.geocoder({
             defaultMarkGeocode: false,
             position: "topright",
             query: "",
             placeholder: "Search here",
-            geocoder: L.Control.Geocoder.mapbox(UacanadaMap.geocoderOptions),
+            geocoder: UacanadaMap.L.Control.Geocoder.mapbox(UacanadaMap.geocoderOptions),
         });
-        const myFullscreen = L.Control.Fullscreen.extend({
+        const myFullscreen = UacanadaMap.L.Control.Fullscreen.extend({
             options: {  pseudoFullscreenClass: "fa fa-expand" }
         });
         UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
@@ -299,7 +290,8 @@ define('core/configuration', function (require) {
 	
 
     UacanadaMap.api.mapInit = () => {
-        UacanadaMap.map = L.map("uacamap", MAP_SETTINGS).fitBounds(UacanadaMap.bounds).setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
+
+        UacanadaMap.map = UacanadaMap.L.map("uacamap", MAP_SETTINGS).fitBounds(UacanadaMap.bounds).setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
     }
 
 

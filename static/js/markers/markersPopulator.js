@@ -1,9 +1,9 @@
 'use strict';
 define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
-    const { L } = UacanadaMap;
+    
   
     function calculateDegreesFromPixels(pixelX, pixelY, zoom) {
-      const vancouverLatLng = L.latLng(49.2827, -123.1207);
+      const vancouverLatLng = UacanadaMap.L.latLng(49.2827, -123.1207);
       const startPoint = UacanadaMap.map.project(vancouverLatLng, zoom);
       const endPoint = startPoint.add(L.point(pixelX, pixelY));
       const endPointLatLng = UacanadaMap.map.unproject(endPoint, zoom);
@@ -45,6 +45,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         latDistanceTtrigger,
         lngDistanceTtrigger,
       } = UacanadaMap.markerSettings;
+      const { L } = UacanadaMap;
       const shift = calculateDegreesFromPixels(shiftX, shiftY, virtZoom);
       const treshold = calculateDegreesFromPixels(
         lngDistanceTtrigger,
@@ -85,6 +86,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       const markerGroups = groups.filter((group) => group.length > 1);
       if (forceShift) {
         markerGroups.forEach((group) => {
+
           const groupSize = group.length;
   
           group.forEach((marker, index) => {
@@ -133,7 +135,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       
   
       UacanadaMap.api.cleanUp();
-  
+      const { L } = UacanadaMap;
       for (const [index, item] of array.entries()) {
         if (!item.placeCategory || !item.latlng[0]) continue;
   
