@@ -182,14 +182,12 @@ define('core/configuration', function (require) {
         };
 
 
-        UacanadaMap.icon = L.icon({
-            iconUrl: "/static_uaca/uamarker.png",
-            shadowUrl: "/static_uaca/uamarkersh.png", // TODO remove to defaults
-            iconSize: [30, 30],
-            shadowSize: [30, 30],
-            iconAnchor: [2, 30],
-            shadowAnchor: [6, 30],
-            popupAnchor: [20, -31],
+        UacanadaMap.icon = L.divIcon({
+            className: "ua-locate-me-marker",
+            html: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span> </div>', // TODO move to settings
+            iconSize: [28, 28],
+            iconAnchor: [6, 14],
+            popupAnchor: [8, -3],
         });
         UacanadaMap.westCoast = L.latLng(70, -150); // TODO fetch from settings
         UacanadaMap.eastCoast = L.latLng(15, -45);

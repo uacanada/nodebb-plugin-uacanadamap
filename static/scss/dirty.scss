@@ -1169,17 +1169,7 @@ body.map-touched #uacamap .leaflet-control-attribution.leaflet-control{ opacity:
 }
 
 
-.dynamictext {
-  outline: 0;
-  background:  url(#{$icons-path}mapleLeafs.svg);
-  background-size: contain;
-  background-position: top left;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: #ff343452;
-  font-size: 2rem;
-  font-weight: 900;
-}
+
 .latest-on-map {
   background:var(--bs-body-bg);
   width: auto;
