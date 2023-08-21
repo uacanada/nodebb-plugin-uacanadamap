@@ -61,6 +61,30 @@
 						<div class="card-header tracking-tight settings-header">Content</div>
 						<div class="card-body">
 
+						<div class="mb-5">
+						<h5 class="fw-bold tracking-tight settings-header">Map Hero Title</h5>
+						<input type="text" id="heroTitle" name="heroTitle" title="Setup hero Title" class="form-control mt-2">
+						</div>
+
+						<div class="mb-5">
+						<h5 class="fw-bold tracking-tight settings-header">Map Hero Subtitle</h5>
+						<input type="text" id="heroSubtitle" name="heroSubtitle" title="Setup hero SubTitle" class="form-control mt-2">
+						</div>
+
+
+						<div class="mb-5">
+							<h5 class="fw-bold tracking-tight settings-header">Slogans</h5>
+							<div class="mb-3" data-type="sorted-list" data-sorted-list="slogans"
+								data-item-template="admin/plugins/uacanadamap/partials/sorted-list/item-slogan"
+								data-form-template="admin/plugins/uacanadamap/partials/sorted-list/form-slogan">
+								<ul data-type="list" class="list-group mb-2"></ul>
+								<small class="form-text d-block mb-2"> Define multiple dynamic slogans for your
+									map's landing page. These will display in a rotating manner, providing a diverse
+									introduction to your community map on each visit</small>
+								<button type="button" data-type="add" class="btn btn-sm btn-info">Add
+									slogan</button>
+							</div>
+						</div>
 
 
 							<div class="mb-5">
@@ -97,19 +121,7 @@
 									placeholder="E.g. 'UA|CN|MD'">
 							</div>
 
-							<div class="mb-5">
-								<h5 class="fw-bold tracking-tight settings-header">Slogans</h5>
-								<div class="mb-3" data-type="sorted-list" data-sorted-list="slogans"
-									data-item-template="admin/plugins/uacanadamap/partials/sorted-list/item-slogan"
-									data-form-template="admin/plugins/uacanadamap/partials/sorted-list/form-slogan">
-									<ul data-type="list" class="list-group mb-2"></ul>
-									<small class="form-text d-block mb-2"> Define multiple dynamic slogans for your
-										map's landing page. These will display in a rotating manner, providing a diverse
-										introduction to your community map on each visit</small>
-									<button type="button" data-type="add" class="btn btn-sm btn-info">Add
-										slogan</button>
-								</div>
-							</div>
+							
 
 
 							<div class="mb-5">
