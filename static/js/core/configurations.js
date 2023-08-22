@@ -19,12 +19,13 @@ define('core/configuration', function (require) {
     return console.log('No settings')
    }
   
-    const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit } = ajaxify.data.UacanadaMapSettings;
+    const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit, bottomRightCorner, topLeftCorner } = ajaxify.data.UacanadaMapSettings;
+
     UacanadaMap.timestampNow = Math.floor(dateTime / 1000);
     UacanadaMap.weekDay = UacanadaMap.weekdays[dateTime.getDay()];
     UacanadaMap.userRegistered = app.user.uid && app.user.uid > 0;
     UacanadaMap.adminsUID = app.user.isAdmin;
-    UacanadaMap.DEFAULT_ZOOM = 11; // TODO get from settings
+    UacanadaMap.DEFAULT_ZOOM = 11; // TODO: get from settings
     UacanadaMap.markerSettings = {
       virtZoom: 16,
       shiftX: 100,
@@ -55,68 +56,16 @@ define('core/configuration', function (require) {
       ? initialCoordinates.split(",").map(Number)
       : [49.28269013417919, -123.12086105346681]; // Fallback
   
+   
     UacanadaMap.geocoderOptions = {
-      apiKey: mapBoxApiKey,
-      ...(countryLimit && { geocodingQueryParams: { country: countryLimit } }),
-    };
-
-
-
-    function handleContextMenuClick(e) {
-        try {
-            const { lat, lng } = getLatLng(e);
-    
-            if (!lat || !lng) {
-                return alert('Location error');
-            }
-    
-            $("#ua-form-event-holder").html(UacanadaMap.recoveredOldButtons);
-            $("#ua-latlng-text").val(`${lat},${lng}`);
-    
-            UacanadaMap.api.expandMap(`contextmenuItems`);
-            UacanadaMap.api.createMarkerButton(e, false);
-            UacanadaMap.api.hideBrandTitle(true);
-    
-            
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    
-    function getLatLng(e) {
-        const lat = e.latlng?.lat || e.latlng[0];
-        const lng = e.latlng?.lng || e.latlng[1];
-    
-        return { lat, lng };
-    }
-
-
-    function addMapLayer(layer) {
-        try {
-            layer.addTo(UacanadaMap.map);
-        } catch (error) {
-            console.log(error)
-        }
-        
-    }
-    
-    function handleControlAddition(layer) {
-        try {
-            $("#map-controls .offcanvas-body").append(layer.onAdd(UacanadaMap.map))
-        } catch (error) {
-            handleControlError(layer, error);
-        }
-    }
-    
-    function handleControlError(layer, error) {
-        layer.addTo(UacanadaMap.map);
-        const controlDiv = layer.getContainer();
-        const controlDivCopy = controlDiv.cloneNode(true);
-    
-        $("#map-controls .offcanvas-body").append(controlDivCopy);
+        apiKey: mapBoxApiKey,
+        ...(countryLimit ? { geocodingQueryParams: { country: countryLimit } } : {}),
+      };
       
-    }
 
+
+
+   
 
 
 
@@ -163,7 +112,7 @@ define('core/configuration', function (require) {
         });
         UacanadaMap.westCoast = L.latLng(70, -150); // TODO fetch from settings
         UacanadaMap.eastCoast = L.latLng(15, -45);
-        UacanadaMap.bounds = L.latLngBounds(L.latLng(70, -150), L.latLng(15, -45));
+        
        
         UacanadaMap.newPlaceMarker = L.divIcon({
             className: "ua-locate-me-marker",
@@ -260,28 +209,42 @@ define('core/configuration', function (require) {
 	
 
     UacanadaMap.api.mapInit = () => {
-
+        
+        
+        const parseCoords = corner => corner ? corner.split(",").map(coord => Number(coord.trim())) : null;
+    
+        const bottomRight = parseCoords(bottomRightCorner);
+        const topLeft = parseCoords(topLeftCorner);
+    
+        if (bottomRight && topLeft) {
+            UacanadaMap.bounds = L.latLngBounds(L.latLng(...topLeft), L.latLng(...bottomRight));
+        }
+    
         UacanadaMap.map = UacanadaMap.L.map("uacamap", {
             zoomSnap: 0.15,
             wheelDebounceTime: 120,
             wheelPxPerZoomLevel: 200,
             attributionControl: true,
             zoom: UacanadaMap.DEFAULT_ZOOM,
-            maxBounds: UacanadaMap.bounds,
+            maxBounds: UacanadaMap.bounds, 
             tap: false,
             minZoom: 3,
             zoomControl: false,
             contextmenu: true,
             contextmenuWidth: 330,
-            contextmenuItems: [
-                {
-                    text: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div> Create new place here?</br><button type="button" class="btn btn btn-link p-2">Yes</button>',
-                    callback: handleContextMenuClick,
-                },
-            ],
+            contextmenuItems: [{
+                text: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div> Create new place here?</br><button type="button" class="btn btn btn-link p-2">Yes</button>',
+                callback: handleContextMenuClick,
+            }],
             center: UacanadaMap.latestLocation.latlng,
-        }).fitBounds(UacanadaMap.bounds).setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
+        })
+        .setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
+    
+        if (UacanadaMap.bounds) {
+            UacanadaMap.map.fitBounds(UacanadaMap.bounds);
+        }
     }
+    
 
 
     
@@ -316,6 +279,63 @@ define('core/configuration', function (require) {
 		UacanadaMap.currentMapProvider = UacanadaMap.mapProviders[newProvider];
 		UacanadaMap.map.addLayer(UacanadaMap.currentMapProvider);
 	}
+
+
+    function handleContextMenuClick(e) {
+        try {
+            const { lat, lng } = getLatLng(e);
+    
+            if (!lat || !lng) {
+                return alert('Location error');
+            }
+    
+            $("#ua-form-event-holder").html(UacanadaMap.recoveredOldButtons);
+            $("#ua-latlng-text").val(`${lat},${lng}`);
+    
+            UacanadaMap.api.expandMap(`contextmenuItems`);
+            UacanadaMap.api.createMarkerButton(e, false);
+            UacanadaMap.api.hideBrandTitle(true);
+    
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    function getLatLng(e) {
+        const lat = e.latlng?.lat || e.latlng[0];
+        const lng = e.latlng?.lng || e.latlng[1];
+    
+        return { lat, lng };
+    }
+
+
+    function addMapLayer(layer) {
+        try {
+            layer.addTo(UacanadaMap.map);
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+    
+    function handleControlAddition(layer) {
+        try {
+            $("#map-controls .offcanvas-body").append(layer.onAdd(UacanadaMap.map))
+        } catch (error) {
+            handleControlError(layer, error);
+        }
+    }
+    
+    function handleControlError(layer, error) {
+        layer.addTo(UacanadaMap.map);
+        const controlDiv = layer.getContainer();
+        const controlDivCopy = controlDiv.cloneNode(true);
+    
+        $("#map-controls .offcanvas-body").append(controlDivCopy);
+      
+    }
+
    
 
 
