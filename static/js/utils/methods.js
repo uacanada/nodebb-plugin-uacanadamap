@@ -353,7 +353,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 			
 		}
 
-		UacanadaMap.mapLayers.markers.addTo(map)
+		UacanadaMap.mapLayers.markers.addTo(UacanadaMap.map)
 	
 
 

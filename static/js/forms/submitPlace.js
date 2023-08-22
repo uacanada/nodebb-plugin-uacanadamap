@@ -180,7 +180,7 @@ define('forms/submitPlace',["core/variables" /*   Global object UacanadaMap  */]
             const fields = $(form).serializeArray();
         
             const [lat, lng] = $("#ua-latlng-text").val().split(",");
-            UacanadaMap.currentmarker = UacanadaMap.L.marker([lat, lng], { icon: UacanadaMap.icon }).addTo(map).bindPopup(`<p>⏳ Creating new place...</p><code>${lat},${lng}</code>`).openPopup();
+            UacanadaMap.currentmarker = UacanadaMap.L.marker([lat, lng], { icon: UacanadaMap.icon }).addTo(UacanadaMap.map).bindPopup(`<p>⏳ Creating new place...</p><code>${lat},${lng}</code>`).openPopup();
             const formData = new FormData();
             
             for (let field of fields) {
