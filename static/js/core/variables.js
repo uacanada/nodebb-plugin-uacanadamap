@@ -103,8 +103,6 @@ const UacanadaMap = {
   currentSortedMarkers: [],
   markersIconsmapper: {},
   tabTitles: {},
-  categoryMapper: {},
-  eventCatMapper: {},
   provinceMapper: {},
   markerGroups: {},
   choosedLocation: [],

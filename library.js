@@ -22,6 +22,7 @@ const inputValidator = require('./lib/backend/inputValidator');
 const topicModifier = require('./lib/backend/topicModifier');
 
 
+
 /*
 const nconf = require.main.require('nconf');
 const winston = require.main.require('winston');

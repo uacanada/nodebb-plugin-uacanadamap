@@ -1,145 +1,18 @@
 'use strict';
 define('forms/submitPlace',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
-   
-    UacanadaMap.form.convertToMonth=(dateString)=> {
-      const date = new Date(dateString);
-      const options = { month: 'short' };
-      const month = date.toLocaleString('en-US', options);
-      return month;
-    }
-  
-    UacanadaMap.form.convertToWeekday=(dateString)=> {
-      const date = new Date(dateString);
-      const options = { weekday: 'long' };
-      const weekday = date.toLocaleString(undefined, options);
-      return weekday;
-    }
-  
-    UacanadaMap.form.convertToDay=(dateString)=> {
-      const date = new Date(dateString);
-      const day = date.getDate();
-      return day;
-    }
-  
-     
-    // UacanadaMap.form.placeTagsHandler = () => {
-  
-    //       //bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/
-    //       $('#place-tag-input').tagsinput({  maxChars: 24, maxTags: 10, tagClass: "badge bg-info", confirmKeys: [13, 44], trimValue: true});
-    //   }  
-  
-  
-  // TODO remove  UacanadaMap.form.submitPlace   ???
-      UacanadaMap.form.submitPlace = async (e) => {
-          e.preventDefault();
-          let formIsValid = true;
-          const [lat, lng] = $("#ua-latlng-text").val().split(",");
-          UacanadaMap.choosedLocation = [lat, lng];
-          let notSended = true;
-        
-          if (!notSended) {
-            console.log("AllReady Sended!!!");
-            return;
-          }
-        
-          if (UacanadaMap.currentmarker) {
-            UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
-          }
-        
-          UacanadaMap.currentmarker = UacanadaMap.L.marker([lat, lng], { icon: UacanadaMap.icon })
-            .addTo(UacanadaMap.map)
-            .bindPopup(`<p>⏳ Creating a location for you...</p><code>${lat},${lng}</code>`)
-            .openPopup();
-        
-          const formhtml = $("form#ua-custom-loc-form")[0];
-          const formData = new FormData(formhtml);
-          formData.append("gps", [lat, lng]);
-          formData.append("uid", app.user.uid);
-          formData.append("userslug", app.user.userslug);
-        
-          if ($("input[type=file]#ua-location-cover-img")[0].files[0]) {
-            formData.append("image", $("input[type=file]#ua-location-cover-img")[0].files[0]);
-          }
-        
-          const validatefields = document.querySelectorAll(".needs-validation");
-        
-          Array.from(validatefields).forEach((field) => {
-            if (!field.checkValidity()) {
-              formIsValid = false;
-            }
-        
-            if (!formIsValid) {
-             
-                UacanadaMap.console.log("NOT VALID FORM DATA! ", [...formData]);
-          
-            }
-        
-            if (!$("#ua-newplace-city").val() || !$("#location-province").val()) {
-              const addressAccordion = $("#address-accordion-collapseOne");
-              if (!addressAccordion.hasClass("show")) {
-                addressAccordion.collapse("toggle");
-              }
-            }
-        
-            if (!$("#mainUsername").val()) {
-              const contactsAccordion = $("#contacts-accordion-collapseOne");
-              if (!contactsAccordion.hasClass("show")) {
-                contactsAccordion.collapse("toggle");
-              }
-            }
-        
-            if (!$("#placeDescription").val()) {
-              $("#desc-eng").click();
-            }
-        
-            field.classList.add("was-validated");
-          });
-        
-          if (formIsValid && notSended) {
-            $("#place-creator-offcanvas").offcanvas("hide");
-            notSended = false;
-            localStorage.setItem("uamaplocation", JSON.stringify([lat, lng]));
-        
-            if (UacanadaMap.adminsUID) {
-              console.log("try save localStorage", JSON.stringify([lat, lng]), [...formData]);
-            }
-        
-            try {
-              const res = await fetch("/maplocationapi/", { method: "POST", body: formData });
-              const response = await res.json();
-        
-              if (response.ok && response.url) {
-                // TODO improve design
-                UacanadaMap.currentmarker.bindPopup(`
-                  <p>A topic has been created for your location: <a href="/topic/${response.url}">/topic/${response.url}</a></p>
-                
-                `);
-                UacanadaMap.map.setView([lat, lng], 16);
-                UacanadaMap.currentmarker.openPopup();
-               // $(location).prop("href", `/?place=${response.data.tid}`);
-              } else {
-                UacanadaMap.currentmarker.bindPopup(`Error! ${response.error}`).openPopup();
-              }
-            } catch (error) {
-              if (UacanadaMap.adminsUID) {
-                console.log("Request failed", error);
-              }
-              UacanadaMap.currentmarker.bindPopup("Error...").openPopup();
-            }
-          }
-        };
-        
-  
-  
-        /**
-         * Creating place on map
-         * 
-         */
-  
         let canSendForm = true;
-       
         $('#place-creator-offcanvas').on('hidden.bs.offcanvas', ()=> { canSendForm = true;  });
-        document.getElementById('ua-custom-loc-form').addEventListener('submit', async (event) => {
+        
+        
+
+
+
+
+
+
+        /*
+        
+        document.getElementById('placeForm').addEventListener('submit', async (event) => {
           event.preventDefault();
           const form = event.target;
         
@@ -258,9 +131,172 @@ define('forms/submitPlace',["core/variables" /*   Global object UacanadaMap  */]
           }
         });
         
+       */
+
+
+        document.getElementById('placeForm').addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const form = event.target;
+      
+          if (UacanadaMap.currentmarker) {
+              UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
+          }
+      
+          if (!canSendForm) {
+              UacanadaMap.console.log("Already Sent!!!");
+              return;
+          }
+      
+          let formIsValid = form.checkValidity();
+          form.classList.add("was-validated");
+      
+          if (!formIsValid) {
+              checkFormValidation();
+              UacanadaMap.currentmarker.bindPopup('You need to fix errors before submitting the place!').openPopup();
+              $('#submit-place-errors').html('Please check the required fields and try again');
+          } else {
+              $("#place-creator-offcanvas").offcanvas("hide");
+              await handleSubmit(form);
+          }
+      });
+      
+      function checkFormValidation() {
+          const checkAndToggleAccordion = (selector, inputSelector) => {
+              const accordion = $(selector);
+              if (!$(inputSelector).val() && !accordion.hasClass("show")) {
+                  accordion.collapse("toggle");
+              }
+          }
+      
+          checkAndToggleAccordion("#address-accordion-collapseOne", "#ua-newplace-city, #location-province");
+          checkAndToggleAccordion("#contacts-accordion-collapseOne", "#mainUsername");
+          if (!$("#placeDescription").val()) {
+              $("#desc-eng").click();
+          }
+      }
+      
+      async function handleSubmit(form) {
+          canSendForm = false;
+          const fields = $(form).serializeArray();
+      
+          const [lat, lng] = $("#ua-latlng-text").val().split(",").map(coord => parseFloat(coord.trim()));
+      
+          UacanadaMap.currentmarker = UacanadaMap.L.marker([lat, lng], { icon: UacanadaMap.icon }).addTo(UacanadaMap.map).bindPopup(`<p>⏳ Creating new place...</p><code>${lat},${lng}</code>`).openPopup();
+          const formData = processFormData(fields, lat, lng);
+      
+          try {
+              const response = await fetch('/api/config');
+              if (!response.ok) throw new Error("Failed to fetch CSRF token");
+      
+              const data = await response.json();
+              const postResponse = await sendPlaceData(formData, data.csrf_token);
+      
+              if (!postResponse.ok) throw new Error(postResponse.statusText);
+      
+              handlePostResponse(await postResponse.json(), lat, lng);
+          } catch (error) {
+              canSendForm = true;
+              UacanadaMap.currentmarker.bindPopup(`ERROR: ${error.message}`).openPopup();
+              $('#submit-place-errors').html(`<strong>Error:</strong> ${error.message}`);
+          }
+      }
+      
+      function processFormData(fields, lat, lng) {
+        const formData = new FormData();
+        
+        fields.forEach(field => {
+            const { name, value } = field;
+            formData.append(name, value);
+    
+            switch (name) {
+                case "placeCategory":
+                    appendCategoryName(formData, value, ajaxify.data.UacanadaMapSettings.subCategories);
+                    break;
+                case "eventCategory":
+                    appendCategoryName(formData, value, ajaxify.data.UacanadaMapSettings.eventCategories, "eventCategoryName");
+                    break;
+                case "eventStartDate":
+                    appendDateInfo(formData, value, "start");
+                    break;
+                case "eventEndDate":
+                    appendDateInfo(formData, value, "end");
+                    break;
+            }
+        });
+    
+        appendImageToFormData(formData);
+        formData.append("gps", [lat, lng]);
+    
+        return formData;
+    }
+    
+    function appendCategoryName(formData, value, categories, fieldName = "categoryName") {
+        if (value) {
+            const category = categories.find(cat => cat.slug === value);
+            formData.append(fieldName, category?.name || "");
+        }
+    }
+    
+    function appendDateInfo(formData, dateValue, prefix) {
+        if (dateValue) {
+            formData.append(`${prefix}Month`, UacanadaMap.form.convertToMonth(dateValue));
+            formData.append(`${prefix}DayName`, UacanadaMap.form.convertToWeekday(dateValue));
+            formData.append(`${prefix}DayDigit`, UacanadaMap.form.convertToDay(dateValue));
+        }
+    }
+    
+    function appendImageToFormData(formData) {
+        const imageInput = $("input[type=file]#ua-location-cover-img")[0];
+        if (imageInput.files[0]) {
+            formData.append("image", imageInput.files[0]);
+        }
+    }
+    
+      
+      async function sendPlaceData(formData, csrfToken) {
+          const headers = {
+              'x-csrf-token': csrfToken
+          };
+          return await fetch(UacanadaMap.routers.addplace, { method: 'POST', headers, body: formData });
+      }
+      
+      function handlePostResponse(res, lat, lng) {
+          if (res.status.code === 'ok' && res.response.status === "success") {
+              // $("#place-creator-offcanvas").offcanvas("hide");
+              const tid = Number(res.response.tid);
+              UacanadaMap.currentmarker.bindPopup(`
+                  <p>A topic has been created for your place: <a href="/topic/${tid}">/topic/${tid}</a></p>
+              `);
+              UacanadaMap.map.setView([lat, lng], 13);
+              UacanadaMap.currentmarker.openPopup();
+          } else {
+            $("#place-creator-offcanvas").offcanvas("show");
+              throw new Error(res.response.error || "Unexpected error");
+          }
+      }
+      
   
   
-  
+        UacanadaMap.form.convertToMonth=(dateString)=> {
+          const date = new Date(dateString);
+          const options = { month: 'short' };
+          const month = date.toLocaleString('en-US', options);
+          return month;
+        }
+      
+        UacanadaMap.form.convertToWeekday=(dateString)=> {
+          const date = new Date(dateString);
+          const options = { weekday: 'long' };
+          const weekday = date.toLocaleString(undefined, options);
+          return weekday;
+        }
+      
+        UacanadaMap.form.convertToDay=(dateString)=> {
+          const date = new Date(dateString);
+          const day = date.getDate();
+          return day;
+        }
   
   
   })

@@ -11,7 +11,7 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div id="ua-loc-form-target" class="offcanvas-body overflow-auto offcanvas-body overflow-auto mb-5 pb-5">
-        <form id="ua-custom-loc-form" class="row g-3 needs-validation" action="/api/v3/plugins/map/addplace"
+        <form id="placeForm" class="row g-3 needs-validation" action="/api/v3/plugins/map/addplace"
             enctype="multipart/form-data" method="post" novalidate>
             <div class="col-12 col-sm-6 has-validation mb-3">
                 <div class="input-group">
