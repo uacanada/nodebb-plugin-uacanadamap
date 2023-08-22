@@ -9,15 +9,13 @@ define('core/configuration', function (require) {
     require('leaflet.locatecontrol');
     require('leaflet-contextmenu');
     require('leaflet-providers');
- const dateTime = new Date(Date.now());
+    const dateTime = new Date(Date.now());
 
-   UacanadaMap.L = L
-   UacanadaMap.Swiper = Swiper
+    UacanadaMap.L = L
+    UacanadaMap.Swiper = Swiper
   
 
-   if(!ajaxify.data.UacanadaMapSettings){
-    return console.log('No settings')
-   }
+   console.log(JSON.stringify(ajaxify.data))
   
     const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit, bottomRightCorner, topLeftCorner } = ajaxify.data.UacanadaMapSettings;
 
@@ -25,7 +23,7 @@ define('core/configuration', function (require) {
     UacanadaMap.weekDay = UacanadaMap.weekdays[dateTime.getDay()];
     UacanadaMap.userRegistered = app.user.uid && app.user.uid > 0;
     UacanadaMap.adminsUID = app.user.isAdmin;
-    UacanadaMap.DEFAULT_ZOOM = ajaxify.data.UacanadaMapSettings?.defaultZoom? Number(ajaxify.data.UacanadaMapSettings.defaultZoom) :11; 
+
     UacanadaMap.markerSettings = {
       virtZoom: 16,
       shiftX: 100,
@@ -209,7 +207,7 @@ define('core/configuration', function (require) {
 
     UacanadaMap.api.mapInit = () => {
         
-        
+        UacanadaMap.DEFAULT_ZOOM = ajaxify.data.UacanadaMapSettings.defaultZoom ? Number(ajaxify.data.UacanadaMapSettings.defaultZoom) :11; 
         const parseCoords = corner => corner ? corner.split(",").map(coord => Number(coord.trim())) : null;
     
         const bottomRight = parseCoords(bottomRightCorner);
@@ -220,7 +218,7 @@ define('core/configuration', function (require) {
         }
 
 
-        UacanadaMap.console.log(UacanadaMap.latestLocation.latlng)
+       
     
         UacanadaMap.map = UacanadaMap.L.map("uacamap", {
             zoomSnap: 0.15,
@@ -228,7 +226,7 @@ define('core/configuration', function (require) {
             wheelPxPerZoomLevel: 200,
             attributionControl: true,
             zoom: UacanadaMap.DEFAULT_ZOOM,
-            minZoom: ajaxify.data.UacanadaMapSettings?.maxZoomOut? Number(ajaxify.data.UacanadaMapSettings.maxZoomOut): 2, 
+            minZoom: ajaxify.data.UacanadaMapSettings.maxZoomOut? Number(ajaxify.data.UacanadaMapSettings.maxZoomOut): 2, 
             maxBounds: UacanadaMap.bounds, 
             tap: false,
             zoomControl: false,

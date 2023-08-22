@@ -73,6 +73,8 @@ define("core/initialization", [
   return async (UacanadaMap) => {
     const firstInitTime = Date.now();
     const hooks = await app.require("hooks");
+
+     
     
     const reload = async (UacanadaMap) => {
       let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
@@ -119,7 +121,7 @@ define("core/initialization", [
 
     }
 
-    //reload(UacanadaMap)
+    reload(UacanadaMap)
 
    
     
