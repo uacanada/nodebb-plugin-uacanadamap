@@ -65,31 +65,6 @@ define('core/configuration', function (require) {
 
 
 
-
-
-    const MAP_SETTINGS = {
-        zoomSnap: 0.15,
-        wheelDebounceTime: 120,
-        wheelPxPerZoomLevel: 200,
-        attributionControl: true,
-        zoom: UacanadaMap.DEFAULT_ZOOM,
-        maxBounds: UacanadaMap.bounds,
-        tap: false,
-        minZoom: 3,
-        zoomControl: false,
-        contextmenu: true,
-        contextmenuWidth: 330,
-        contextmenuItems: [
-            {
-                text: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div> Create new place here?</br><button type="button" class="btn btn btn-link p-2">Yes</button>',
-                callback: handleContextMenuClick,
-            },
-        ],
-        center: UacanadaMap.latestLocation.latlng,
-    };
-
-  
-    
     function handleContextMenuClick(e) {
         try {
             const { lat, lng } = getLatLng(e);
@@ -289,7 +264,26 @@ define('core/configuration', function (require) {
 
     UacanadaMap.api.mapInit = () => {
 
-        UacanadaMap.map = UacanadaMap.L.map("uacamap", MAP_SETTINGS).fitBounds(UacanadaMap.bounds).setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
+        UacanadaMap.map = UacanadaMap.L.map("uacamap", {
+            zoomSnap: 0.15,
+            wheelDebounceTime: 120,
+            wheelPxPerZoomLevel: 200,
+            attributionControl: true,
+            zoom: UacanadaMap.DEFAULT_ZOOM,
+            maxBounds: UacanadaMap.bounds,
+            tap: false,
+            minZoom: 3,
+            zoomControl: false,
+            contextmenu: true,
+            contextmenuWidth: 330,
+            contextmenuItems: [
+                {
+                    text: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div> Create new place here?</br><button type="button" class="btn btn btn-link p-2">Yes</button>',
+                    callback: handleContextMenuClick,
+                },
+            ],
+            center: UacanadaMap.latestLocation.latlng,
+        }).fitBounds(UacanadaMap.bounds).setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
     }
 
 
