@@ -61,8 +61,8 @@ UacanadaMap.api.listenSwipes = (elements) => {
                         Number(activeTabName.replace("tab-", "")) > 0
                             ? Number(activeTabName.replace("tab-", ""))
                             : 0;
-                    if (L) UacanadaMap.api.openMapSidebar(activeTabNum + 1);
-                    if (R) UacanadaMap.api.openMapSidebar(activeTabNum - 1);
+                   
+                   
                 }
 
                 if (D && element === "ua-sidepanel" && !$('#ua-sidepanel .sidepanel-content-wrapper').scrollTop()) {

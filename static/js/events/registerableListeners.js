@@ -107,8 +107,6 @@ class EventListeners {
     } else if (tc(".ua-reload-link")) {
         UacanadaMap.api.reloadMainPage();
     
-    } else if (tc("#chatters")) {
-        openMapSidebar(6);
     } else if (tc(".removeCards")) {
         e.preventDefault();
         UacanadaMap.api.removeCards();
@@ -130,7 +128,7 @@ class EventListeners {
         const isNeedOpen = $("#ua-sidepanel").hasClass("opened");
         UacanadaMap.api.animateScroll();
         if (isNeedOpen) {
-            UacanadaMap.api.openMapSidebar(null);
+         
             UacanadaMap.api.fitElementsPosition();
         } else {
             UacanadaMap.api.hideBottomsAndBlockScroll(false);
