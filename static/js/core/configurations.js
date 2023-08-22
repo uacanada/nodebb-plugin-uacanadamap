@@ -110,8 +110,7 @@ define('core/configuration', function (require) {
             iconAnchor: [6, 14],
             popupAnchor: [8, -3],
         });
-        UacanadaMap.westCoast = L.latLng(70, -150); // TODO fetch from settings
-        UacanadaMap.eastCoast = L.latLng(15, -45);
+        
         
        
         UacanadaMap.newPlaceMarker = L.divIcon({

@@ -42,6 +42,7 @@
 									placeholder="Enter your MapBox API Key here">
 							</div>
 
+							<!-- Initial Map Coordinates -->
 							<div class="mb-5">
 								<label class="form-label d-block" for="initialCoordinates">Initial Map
 									Coordinates</label>
@@ -52,6 +53,29 @@
 									title="Set your default map coordinates" class="form-control mt-2"
 									placeholder="49.28269013417919, -123.12086105346681">
 							</div>
+
+
+							<!-- Always Load Default Location Checkbox -->
+							<div class="mb-5 form-check">
+							<input type="checkbox" class="form-check-input" id="alwaysUseDefaultLocation" name="alwaysUseDefaultLocation">
+							<label class="form-check-label" for="alwaysUseDefaultLocation">Always Use Default Location</label>
+							<small class="form-text">If checked, the map will always load on the Initial Map Coordinates, regardless of user's saved location preferences.</small>
+							</div>
+
+							<!-- Default Zoom Level -->
+							<div class="mb-5">
+							<label class="form-label d-block" for="defaultZoom">Default Zoom Level</label>
+							<small class="form-text">Set the default zoom level when the map loads. The larger the number, the closer the zoom.</small>
+							<input type="number" id="defaultZoom" name="defaultZoom" title="Set your default zoom level" class="form-control mt-2" placeholder="10">
+							</div>
+
+							<!-- Maximum Zoom Out Level -->
+							<div class="mb-5">
+							<label class="form-label d-block" for="maxZoomOut">Maximum Zoom Out Level</label>
+							<small class="form-text">Define the maximum zoom-out level allowed. The smaller the number, the farther the zoom-out.</small>
+							<input type="number" id="maxZoomOut" name="maxZoomOut" title="Set the maximum zoom-out level" class="form-control mt-2" placeholder="3">
+							</div>
+
 
 						</div>
 					</div>
