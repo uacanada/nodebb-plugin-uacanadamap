@@ -5,8 +5,6 @@ define("core/swipersCreator", [
   UacanadaMap.api.initializeSwipers = () => {
     const { Swiper } = UacanadaMap;
 
-    console.log({UacanadaMap,Swiper}) // TODO debug
-
     UacanadaMap.swipers.magicButton = new Swiper("#magic-button-swiper", {
       slidesPerView: 1,
       setWrapperSize: true,
