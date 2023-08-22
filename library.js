@@ -191,7 +191,9 @@ Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
 
 
-	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, handleAddPlaceRequest);
+	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
+        await handleAddPlaceRequest(req, res, helpers);
+    });
 
 
 
