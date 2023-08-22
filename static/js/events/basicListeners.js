@@ -45,7 +45,7 @@ $.fn.classChange = function (cb) {
         
         UacanadaMap.placeCardElement = $(UacanadaMap.placeCardDiv);
         UacanadaMap.isFullscreenMode = false;
-        UacanadaMap.api.closeMapSidebar(false);
+      
       });
       
       UacanadaMap.map.on("contextmenu", (e) => {

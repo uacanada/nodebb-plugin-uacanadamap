@@ -194,7 +194,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 	UacanadaMap.api.addNewPlace = () => {
 		UacanadaMap.api.expandMap(`addNewPlace`);
-		UacanadaMap.api.closeMapSidebar(true);
+	
 		UacanadaMap.api.removeCards();
 		UacanadaMap.api.tryLocate({ fornewplace: true });
 	};
@@ -253,7 +253,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 				.openPopup();
 			window.location.assign(window.location.origin + "/register");
 		}
-		UacanadaMap.api.closeMapSidebar(true);
+	
 		UacanadaMap.api.hideBrandTitle(true);
 		if (UacanadaMap.isFullscreenMode) map.toggleFullscreen();
 	};

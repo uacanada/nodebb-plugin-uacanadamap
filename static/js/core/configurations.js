@@ -226,9 +226,10 @@ define('core/configuration', function (require) {
             wheelPxPerZoomLevel: 200,
             attributionControl: true,
             zoom: UacanadaMap.DEFAULT_ZOOM,
+            minZoom: 7, // TODO: get from settings
             maxBounds: UacanadaMap.bounds, 
             tap: false,
-            minZoom: 3,
+            
             zoomControl: false,
             contextmenu: true,
             contextmenuWidth: 330,

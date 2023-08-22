@@ -65,13 +65,11 @@ UacanadaMap.api.listenSwipes = (elements) => {
                    
                 }
 
-                if (D && element === "ua-sidepanel" && !$('#ua-sidepanel .sidepanel-content-wrapper').scrollTop()) {
-                    UacanadaMap.api.closeMapSidebar(true)
-                }
+              
 
                 if (D && element === "ua-place-modal" && !$('#ua-place-modal .modal-body').scrollTop()) {
                     $("#ua-place-modal").offcanvas("hide");
-                    UacanadaMap.api.closeMapSidebar(true)
+                  
                 }
 
                 if (element === "ua-map-cards-fullscreen") {
