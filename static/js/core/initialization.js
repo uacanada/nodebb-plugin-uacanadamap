@@ -78,6 +78,7 @@ define("core/initialization", [
       let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
    
    
+      UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
       UacanadaMap.api.configureMapElements();
       UacanadaMap.api.mapInit();
       UacanadaMap.api.addMapLayers();

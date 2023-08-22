@@ -1,25 +1,22 @@
 'use strict';
 define('core/interactions', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
-
-    console.log(UacanadaMap) // TODO remove
-
     if(!UacanadaMap.api) return console.log('No api')
 
     UacanadaMap.api.getLatestLocation = () => {
     let latlng = localStorage.getItem("uamaplocation");
 
     try {
-        latlng = latlng? JSON.parse(latlng) : UacanadaMap.defaultLatLng;
+        latlng = latlng ? JSON.parse(latlng) : ajaxify.data.UacanadaMapSettings.initialCoordinates.split(',');
     } catch (error) {
-        latlng = UacanadaMap.defaultLatLng;
+        latlng = ['49.282690', ' -123.120861']
     }
 
-    const zoom = 11 // latlng ? 11 : 10;
+    const zoom = 11 
 
     return { latlng, zoom };
-};
+    };
 
 
-UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
+
 
 })
