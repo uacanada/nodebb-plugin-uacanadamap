@@ -5,22 +5,29 @@ define('core/interactions', ["core/variables" /*   Global object UacanadaMap  */
     UacanadaMap.api.getLatestLocation = () => {
         const settings = ajaxify.data.UacanadaMapSettings;
         let latlng;
+        
+        const parseCoordinates = (coordinatesStr) => {
+            return coordinatesStr.split(',').map(coord => parseFloat(coord.trim()));
+        };
     
         if (settings?.alwaysUseDefaultLocation === 'on' && settings?.initialCoordinates) {
-            latlng = settings.initialCoordinates.split(',').map(coord => coord.trim());
+            latlng = parseCoordinates(settings.initialCoordinates);
         } else {
             const storedLocation = localStorage.getItem("uamaplocation");
-    
+        
             try {
-                latlng = storedLocation ? JSON.parse(storedLocation) : settings?.initialCoordinates.split(',').map(coord => coord.trim());
+                latlng = storedLocation ? JSON.parse(storedLocation) : (settings?.initialCoordinates ? parseCoordinates(settings.initialCoordinates) : null);
+                if(!Array.isArray(latlng) || latlng.length !== 2) {
+                    throw new Error("Invalid location format");
+                }
             } catch (error) {
-               
-                latlng = ['49.282690', '-123.120861']; // Vancouver
+                latlng = [49.282690, -123.120861]; // Vancouver
             }
         }
-    
+        
         return { latlng };
     };
+    
     
 
 

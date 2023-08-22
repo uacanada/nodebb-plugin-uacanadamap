@@ -6,9 +6,8 @@
       "defaultZoom": "11",
       "maxZoomOut": "4",
      
-      "bottomRightCorner": " 15, -45",
-      
-      "topLeftCorner": "70, -150",
+      "bottomRightCorner": "15,-45",
+      "topLeftCorner": "70,-150",
      
       "mapTitle": "Ukrainian Community in Canada",
       "heroTitle": "UACANADA",
