@@ -9,13 +9,14 @@ define('core/configuration', function (require) {
     require('leaflet.locatecontrol');
     require('leaflet-contextmenu');
     require('leaflet-providers');
+    
+    
     const dateTime = new Date(Date.now());
-
     UacanadaMap.L = L
     UacanadaMap.Swiper = Swiper
   
 
-   console.log(JSON.stringify(ajaxify.data))
+  
   
     const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit, bottomRightCorner, topLeftCorner } = ajaxify.data.UacanadaMapSettings;
 
@@ -238,11 +239,13 @@ define('core/configuration', function (require) {
             }],
             center: UacanadaMap.latestLocation.latlng,
         })
-        .setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
+      
     
         if (UacanadaMap.bounds) {
             UacanadaMap.map.fitBounds(UacanadaMap.bounds);
         }
+
+        UacanadaMap.map.setView(UacanadaMap.latestLocation.latlng, UacanadaMap.DEFAULT_ZOOM);
     }
     
 
