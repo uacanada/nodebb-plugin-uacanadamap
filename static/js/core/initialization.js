@@ -119,7 +119,7 @@ define("core/initialization", [
 
     }
 
-    reload(UacanadaMap)
+    //reload(UacanadaMap)
 
    
     
