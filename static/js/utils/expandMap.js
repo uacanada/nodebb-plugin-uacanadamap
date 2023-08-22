@@ -34,7 +34,7 @@ define('utils/expandMap',["core/variables" /*   Global object UacanadaMap  */], 
         UacanadaMap.api.fitElementsPosition();
     
         if ($(window).innerWidth() > 2100 && !$('body').hasClass('linked-location')) {
-         // TODO
+         // TODO: removed old sidebar
         }
     
       
