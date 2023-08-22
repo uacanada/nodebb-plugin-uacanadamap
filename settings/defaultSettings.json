@@ -1,6 +1,8 @@
 {
       "initialCoordinates": "51.509865, -0.118092",
-      
+      "alwaysUseDefaultLocation": "",
+      "defaultZoom": "11",
+      "maxZoomOut": "3",
       "mapBoxApiKey": "YOUR_MAPBOX_API_KEY_HERE",
       "bottomRightCorner": "10, -20",
       "topLeftCorner": "60, -150",

@@ -25,7 +25,7 @@ define('core/configuration', function (require) {
     UacanadaMap.weekDay = UacanadaMap.weekdays[dateTime.getDay()];
     UacanadaMap.userRegistered = app.user.uid && app.user.uid > 0;
     UacanadaMap.adminsUID = app.user.isAdmin;
-    UacanadaMap.DEFAULT_ZOOM = 11; // TODO: get from settings
+    UacanadaMap.DEFAULT_ZOOM = ajaxify.data.UacanadaMapSettings?.defaultZoom? Number(ajaxify.data.UacanadaMapSettings.defaultZoom) :11; 
     UacanadaMap.markerSettings = {
       virtZoom: 16,
       shiftX: 100,
@@ -225,10 +225,9 @@ define('core/configuration', function (require) {
             wheelPxPerZoomLevel: 200,
             attributionControl: true,
             zoom: UacanadaMap.DEFAULT_ZOOM,
-            minZoom: 7, // TODO: get from settings
+            minZoom: ajaxify.data.UacanadaMapSettings?.maxZoomOut? Number(ajaxify.data.UacanadaMapSettings.maxZoomOut): 2, 
             maxBounds: UacanadaMap.bounds, 
             tap: false,
-            
             zoomControl: false,
             contextmenu: true,
             contextmenuWidth: 330,

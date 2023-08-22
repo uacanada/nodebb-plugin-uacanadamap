@@ -2,7 +2,9 @@
     
       "initialCoordinates": "49.2826, -123.1208",
       "mapBoxApiKey": "pk.*******SET CORS FIRST******",
-   
+      "alwaysUseDefaultLocation": "on",
+      "defaultZoom": "11",
+      "maxZoomOut": "4",
      
       "bottomRightCorner": " 15, -45",
       
