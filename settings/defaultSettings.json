@@ -1,0 +1,112 @@
+{
+      "initialCoordinates": "51.509865, -0.118092",
+      "alwaysUseDefaultLocation": "",
+      "defaultZoom": "11",
+      "maxZoomOut": "3",
+      "mapBoxApiKey": "YOUR_MAPBOX_API_KEY_HERE",
+      "bottomRightCorner": "10, -20",
+      "topLeftCorner": "60, -150",
+      "mapTitle": "Global Community",
+      "heroTitle": "GLOBAL",
+      "heroSubtitle": "Global Unity: Redefining the Landscape",
+      "slogans": [
+        {
+          "slogan": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "slogan": "Suspendisse et nunc non orci suscipit aliquam."
+        }
+      ],
+      "altContentTitle": "Alternate Version for lang ALT",
+      "altContentTrigger": "ALT",
+      "unregisteredUserAlert": "Please register <a href=\"/register\">here</a>",
+      "locationSharingErrorAlert": "Lorem ipsum: <ul class=\"try-locate-me list-group p-0 mt-2\"><li class=\"list-group-item\"><i class=\"fa-solid fa-location-arrow\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-regular fa-hand-point-down\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-solid fa-magnifying-glass\"></i> Lorem ipsum</li></ul>",
+      "defaultMarkerImage": "/assets/plugins/YOUR_PLUGIN_PATH/icons/placeMarker.png",
+      "clusterIcon": "/assets/plugins/YOUR_PLUGIN_PATH/icons/cluster.svg",
+      "citiesData": "London,Paris,New York,Vancouver",
+      "countryLimit": "",
+      "entityTitle": "Region",
+      "geographicalEntities": [
+        {
+          "province": "GB",
+          "provinceTitle": "United Kingdom"
+        },
+        {
+          "province": "US",
+          "provinceTitle": "United States"
+        }
+      ],
+      "tabCategories": [
+        {
+          "color": "#004683",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "footer": "",
+          "icon": "fa-map",
+          "placeByTagCollector": "place",
+          "slug": "all",
+          "title": "All places"
+        },
+        {
+          "color": "#095bff",
+          "description": "Suspendisse et nunc non orci suscipit aliquam.",
+          "footer": "",
+          "icon": "fa-calendar-check",
+          "placeByTagCollector": "event",
+          "slug": "events",
+          "title": "Events & Heritage"
+        }
+      ],
+      "subCategories": [
+        {
+          "cid": "23",
+          "cidname": "Events",
+          "icon": "fa-people-robbery",
+          "name": "Meetups Events",
+          "parents": "[\"events\"]",
+          "slug": "meetups"
+        },
+        {
+          "cid": "13",
+          "cidname": "HELP",
+          "icon": "fa-hand-holding-heart",
+          "name": "Online Assistance",
+          "parents": "[\"all\"]",
+          "slug": "onlineassist"
+        }
+      ],
+      "eventCategories": [
+        {
+          "name": "Meetups",
+          "slug": "meetups"
+        },
+        {
+          "name": "Walks",
+          "slug": "walks"
+        }
+      ],
+      "advMarkers": [
+        {
+          "advMarkerImg": "/assets/YOUR_PATH/logo.png",
+          "advMarkerTags": "tag1,tag2,tag3,sponsored",
+          "card": "Lorem ipsum dolor sit amet.",
+          "color": "#fe62bd",
+          "icon": "fa-star-of-life",
+          "id": "sponsored",
+          "latlng": "51.509865, -0.118092",
+          "popup": "<strong>Lorem ipsum dolor sit amet.</strong>",
+          "title": "Lorem Ipsum",
+          "url": "https://yourwebsite.org/path"
+        }
+      ],
+      "magicButtonSlide": "YOUR_HTML_CONTENT_HERE",
+      "bottomSheetOffset": "100,40,10,0,0",
+      "mapTriggerClass": "global-map-page",
+      "placeTopicTag": "place",
+      "swipeResistance": "40",
+      "mapPageRouter": "/map",
+      "templateName": "map",
+      "zoomThreshold": "13",
+      "debuginfo": {
+        "activation": 0
+      }
+}    

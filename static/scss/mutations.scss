@@ -1,0 +1,140 @@
+.brand-container {
+    transition: all 0.3s ease-out;
+    z-index: 13;
+   
+}
+
+@keyframes h1Animation {
+    0% { opacity : 0; transform: translateY(-4rem); }
+    20% { opacity : 1; transform: translateY(0); }
+    100% { opacity : 1; transform: translateY(0); }
+  }
+  
+  @keyframes pAnimation {
+    0% { opacity : 0; transform: translateY(-8rem); }
+    18% { opacity : 1; transform: translateY(0); }
+    100% { opacity : 1; transform: translateY(0); }
+  }
+  
+  #mapHero h1 {
+    animation: h1Animation 10s;
+    animation-fill-mode: forwards;
+  }
+  
+  #mapHero p {
+    animation: pAnimation 13s;
+    animation-fill-mode: forwards;
+  }
+#mapHero{
+   // background: linear-gradient(180deg, white, transparent);
+    z-index: 4001;
+    position: relative;
+   
+    // backdrop-filter: blur(1px);
+    // text-shadow: 0.1rem 0.1rem 0.3rem rgba(50, 50, 50, 0.2);
+}
+
+#mapHero p {
+    color: #df0404;
+    font-weight: 900;
+    text-shadow: 0.1rem 0.1rem 0.3rem rgba(50,50,50,.2), 0 0 3px white
+}
+
+#mapHero h1:after {
+    content: ' .org';
+    font-size: 1rem;
+    color: #df0404;
+    font-weight: normal;
+}
+
+
+
+body.uacanada-map-page{
+    .brand-container {
+        margin-top: 2rem;
+       .border-bottom {
+        border-color: transparent!important;
+       }
+
+    }
+
+    .bottombar-nav {
+        background-color: rgba(255,255,255,.2)!important;
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+       
+    }
+
+    // .brand-container:not(.ua-hide-title) {
+    //      box-shadow: 0 -3rem rgba(255, 255, 255, 0.7);
+    // }
+
+    img.leaflet-tile {
+        filter: saturate(1) grayscale(1) brightness(1.1) contrast(1.1) opacity(0.7);
+        transition: filter 2s ease-out;
+    }
+
+    .brand-container.ua-hide-title{
+        transform: translate3d(0,-400px, 0);
+    }
+
+    #reconnect-alert {
+        display: none;
+    }
+
+} 
+
+
+
+body.uacanada-map-page.map-touched {
+    img.leaflet-tile{
+        filter: none;
+    }
+    .brand-container{
+        transform: translate3d(0,-400px, 0);
+    }
+
+    #mapHero{
+        animation-name: fade-and-move;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+      }
+    
+            
+}
+
+body.uacanada-map-page:not(.map-touched){
+
+    .sidepanel .sidepanel-toggle-container{opacity: 0;}
+}
+
+
+.before-map-expand{
+    .ua-markers{
+
+        .circle-icon {
+            background: #e3e3e3;
+        }
+        .circle-icon:after{
+            visibility: hidden;
+        }
+        .badge-text {
+            color: gray;
+        }
+
+    } 
+
+    .leaflet-marker-icon.mycluster {
+       
+        color: transparent;
+        filter: drop-shadow(1px 1px 5px black);
+        width: 30px!important;
+    }
+   
+}
+
+.place-pic{
+    transition: .2s width;
+}
+

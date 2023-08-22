@@ -1,0 +1,59 @@
+{
+  "name": "nodebb-plugin-uacanadamap",
+  "version": "0.1.0",
+  "description": "Interactive map plugin for NodeBB forums. Enhance user engagement by allowing location additions and explore monetization opportunities.",
+  "main": "./lib/backend/library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap"
+  },
+  "keywords": [
+    "nodebb",
+    "plugin",
+    "uacanadamap",
+    "Ukraine",
+    "map",
+    "leaflet",
+    "openstreetmap"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap/issues"
+  },
+  "readmeFilename": "README.md",
+  "nbbpm": {
+    "compatibility": "^3.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.6.3",
+    "@commitlint/config-angular": "17.6.3",
+    "eslint": "8.40.0",
+    "eslint-config-nodebb": "0.2.1",
+    "eslint-plugin-import": "2.27.5",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.2",
+    "resolve-url-loader": "^5.0.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "leaflet-contextmenu": "^1.4.0",
+    "leaflet-control-geocoder": "^2.4.0",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet-providers": "^1.13.0",
+    "leaflet.locatecontrol": "^0.79.0",
+    "leaflet.markercluster": "^1.5.3",
+    "swiper": "^9.2.4"
+  }
+}
