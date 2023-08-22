@@ -218,6 +218,9 @@ define('core/configuration', function (require) {
         if (bottomRight && topLeft) {
             UacanadaMap.bounds = L.latLngBounds(L.latLng(...topLeft), L.latLng(...bottomRight));
         }
+
+
+        UacanadaMap.console.log(UacanadaMap.latestLocation.latlng)
     
         UacanadaMap.map = UacanadaMap.L.map("uacamap", {
             zoomSnap: 0.15,
