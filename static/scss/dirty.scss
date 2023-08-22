@@ -1169,17 +1169,7 @@ body.map-touched #uacamap .leaflet-control-attribution.leaflet-control{ opacity:
 }
 
 
-.dynamictext {
-  outline: 0;
-  background:  url(#{$icons-path}mapleLeafs.svg);
-  background-size: contain;
-  background-position: top left;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: #ff343452;
-  font-size: 2rem;
-  font-weight: 900;
-}
+
 .latest-on-map {
   background:var(--bs-body-bg);
   width: auto;
@@ -1518,4 +1508,52 @@ button#cardsDown {
 
 }
 
+}
+
+
+body.uacanada-map-page,
+#pull-out-button,
+#ua-dragger,
+#ua-mainframe,
+.dragger-content {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    touch-action: pan-y;
+}
+
+
+body.uacanada-map-page #ua-mainframe {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    touch-action: pan-x pan-y;
+}
+
+#ua-mainframe {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+#uacamap-wrapper,
+#uacamap {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#ua-place-modal {
+    height: 85vh;
+    max-width: 800px;
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.dyn-content {
+    padding-bottom: 5rem;
+    background: rgba(0, 88, 255, 0.03);
 }

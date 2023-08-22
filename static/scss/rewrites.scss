@@ -53,13 +53,13 @@ body.uacanada-map-page main#panel{
 
 
 .leaflet-control-layers-toggle {
-	background-image: url(#{$icons-path}layers.png);
+	background-image: url(#{$images-path}layers.png);
 	width: 36px;
 	height: 36px;
 }
 
 .leaflet-retina .leaflet-control-layers-toggle {
-	background-image: url(#{$icons-path}layers-2x.png);
+	background-image: url(#{$images-path}layers-2x.png);
 	background-size: 26px 26px;
 }
 

@@ -45,7 +45,7 @@ $.fn.classChange = function (cb) {
         
         UacanadaMap.placeCardElement = $(UacanadaMap.placeCardDiv);
         UacanadaMap.isFullscreenMode = false;
-        UacanadaMap.api.closeMapSidebar(false);
+      
       });
       
       UacanadaMap.map.on("contextmenu", (e) => {
@@ -86,7 +86,7 @@ $.fn.classChange = function (cb) {
         const sidebarIsOpen = $("#ua-sidepanel.opened").outerHeight();
         if (sidebarIsOpen && UacanadaMap.showOnlyArea && UacanadaMap.moveIterations > 18) {
           UacanadaMap.api.rewriteTabs("onlyVisibleArea");
-          console.log("moveend", UacanadaMap.moveIterations);
+      
         }
       });
       

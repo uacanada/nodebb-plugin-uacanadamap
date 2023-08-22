@@ -81,7 +81,7 @@
 }
 
 .leaflet-marker-icon.mycluster {
-    background: url("#{$icons-path}uaCluster.svg?#{$ua-cache}") center center no-repeat;
+    background: url("#{$icons-path}uaCluster.svg") center center no-repeat;
     color: rgba(56, 122, 255, 0.33);
     text-align: center;
     border-radius: 50%;

@@ -15,13 +15,14 @@ define("core/initialization", [
   "markers/markersPopulator",
   "ui/elementPositions",
   "utils/methods",
-  "panels/buttonsSwiper",
+  "panels/categoryButtonsSwiper",
   "panels/cardSwiper",
   "panels/bottomSheets",
   'panels/magicButton',
   "population/tabsPopulator",
   "markers/markersFilter",
   "markers/advMarkers",
+  "markers/markersConfigurator",
   "events/basicListeners",
   "events/hooks",
   "utils/expandMap",
@@ -44,13 +45,14 @@ define("core/initialization", [
   markersPopulator,
   elementPositions,
   methods,
-  buttonsSwiper,
+  categoryButtonsSwiper,
   cardSwiper,
   bottomSheets,
   magicButton,
   tabsPopulator,
   markersFilter,
   advMarkers,
+  markersConfigurator,
   basicListeners,
   hooks,
   expandMap,
@@ -71,11 +73,14 @@ define("core/initialization", [
   return async (UacanadaMap) => {
     const firstInitTime = Date.now();
     const hooks = await app.require("hooks");
+
+     
     
     const reload = async (UacanadaMap) => {
       let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
    
    
+      UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
       UacanadaMap.api.configureMapElements();
       UacanadaMap.api.mapInit();
       UacanadaMap.api.addMapLayers();
@@ -88,7 +93,7 @@ define("core/initialization", [
   
       UacanadaMap.api.populateTabs();
       UacanadaMap.api.mapReLoad();
-      UacanadaMap.api.showCatSelector($("#location-category-filter").val() ?? "");
+      UacanadaMap.api.createСategoryButtonsSwiper($("#location-category-filter").val() ?? "");
       UacanadaMap.api.mainFrameShow();
       UacanadaMap.api.OffCanvasPanelHandler();
       UacanadaMap.api.rotateCards("horizontal");
@@ -125,7 +130,7 @@ define("core/initialization", [
       if(data.tpl_url === 'map'){
            
             if(firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
-               console.log(` reinit `, data)
+              UacanadaMap.console.log(` reinit `, data)
                
                
                if(app.user.isAdmin){

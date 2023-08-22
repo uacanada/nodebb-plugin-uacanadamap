@@ -61,17 +61,15 @@ UacanadaMap.api.listenSwipes = (elements) => {
                         Number(activeTabName.replace("tab-", "")) > 0
                             ? Number(activeTabName.replace("tab-", ""))
                             : 0;
-                    if (L) UacanadaMap.api.openMapSidebar(activeTabNum + 1);
-                    if (R) UacanadaMap.api.openMapSidebar(activeTabNum - 1);
+                   
+                   
                 }
 
-                if (D && element === "ua-sidepanel" && !$('#ua-sidepanel .sidepanel-content-wrapper').scrollTop()) {
-                    UacanadaMap.api.closeMapSidebar(true)
-                }
+              
 
                 if (D && element === "ua-place-modal" && !$('#ua-place-modal .modal-body').scrollTop()) {
                     $("#ua-place-modal").offcanvas("hide");
-                    UacanadaMap.api.closeMapSidebar(true)
+                  
                 }
 
                 if (element === "ua-map-cards-fullscreen") {

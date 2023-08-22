@@ -1,475 +1,112 @@
 {
-    "mapTitle" : "UACANADA",     
-    "mapBoxApiKey": "",
-    "initialCoordinates": "49.28269013417919, -123.12086105346681",
-    "placeTopicTag": "place",
-    "altContentTitle": "UA Version",
-    "unregisteredUserAlert": "Please register <a href=\"/register\">here</a>",
-    "locationSharingErrorAlert": "The location must be specified: <ul class=\"try-locate-me list-group p-0 mt-2\"><li class=\"list-group-item\"><i class=\"fa-solid fa-location-arrow\"></i> Allow geolocation</li><li class=\"list-group-item\"><i class=\"fa-regular fa-hand-point-down\"></i> Or select a by finger</li><li class=\"list-group-item\"><i class=\"fa-solid fa-magnifying-glass\"></i> Or search Street Address</li></ul>",
-    "mapPageRouter": "/map",
-    "templateName": "map",
-    "bottomSheetOffset": "100,40,10,0,0",
-    "zoomThreshold": "13",
-    "swipeResistance": "40",
-    "mapTriggerClass":"uacanada-map-page",
-    "entityTitle": "Province",
-    "citiesData": "Vancouver,Toronto,Calgary,Edmonton,Winnipeg,Victoria,Vernon,Burnaby,Coquitlam,Richmond,Surrey,Langley,Abbotsford,Chilliwack,MetroVancouver,Brampton,Hamilton,London,Kelowna,WhiteRock,Halifax",
-    "countryLimit": "CA",
-    "altContentTrigger":"UA|RU",
-    "slogans": [
-          {
-                "slogan": "It's not just a platform, but a celebration of resilience, diversity, and a shared vision for a brighter future"
-          },
-          {
-                "slogan": "Here, we show the world the unity of Ukrainians in Canada"
-          }
-    ],
-    "tabCategories": [
-          {
-                "title": "All places",
-                "slug": "all",
-                "description": "Explore the Ukrainian Diaspora members in Canada who provide support and assistance to each other across various categories.",
-                "footer": "",
-                "icon": "fa-map",
-                "color": "#004683",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Events & Cultural Heritage",
-                "slug": "events",
-                "description": "Discover the Ukrainian Diaspora members in Canada who actively promote and preserve the rich cultural heritage of Ukraine.",
-                "footer": "",
-                "icon": "fa-calendar-check",
-                "color": "#095bff",
-                "placeByTagCollector": "meetup,meeting,walk,run,hike,game"
-          },
-          {
-                "title": "Beauty",
-                "slug": "beauty",
-                "description": "Connect with Ukrainian Diaspora members in Canada who excel in various beauty-related services, including hair, nails, and makeup.",
-                "footer": "",
-                "icon": "fa-scissors",
-                "color": "#ac3eca",
-                "placeByTagCollector": "hair,nail,wax,massage,tan"
-          },
-          {
-                "title": "Bloggers",
-                "slug": "bloggers",
-                "description": "Engage with Ukrainian Diaspora members in Canada who share their experiences and insights through blogging and vlogging.",
-                "footer": "",
-                "icon": "fa-youtube-play",
-                "color": "#000000",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Health",
-                "slug": "health",
-                "description": "Find Ukrainian Diaspora members in Canada who provide healthcare services and support to the community.",
-                "footer": "",
-                "icon": "fa-hand-holding-medical",
-                "color": "#ff3d3d",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Study",
-                "slug": "study",
-                "description": "Connect with Ukrainian Diaspora members in Canada who offer educational programs and opportunities for personal and professional growth.",
-                "footer": "",
-                "icon": "fa-graduation-cap",
-                "color": "#0e2b5d",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Childhood",
-                "slug": "childhood",
-                "description": "Discover Ukrainian Diaspora members in Canada who specialize in providing various services and support for children and families.",
-                "footer": "",
-                "icon": "fa-baby-carriage",
-                "color": "#a5dd2c",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Volunteers",
-                "slug": "volunteers",
-                "description": "Join the Ukrainian Diaspora members in Canada who volunteer their time and skills to contribute to community initiatives and projects.",
-                "footer": "",
-                "icon": "fa-handshake-angle",
-                "color": "#0d861d",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Businesses",
-                "slug": "businesses",
-                "description": "Explore the Ukrainian Diaspora members in Canada who run businesses and provide a wide range of products and services.",
-                "footer": "",
-                "icon": "fa-shop",
-                "color": "#ff7f00",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Immigration",
-                "slug": "immigration",
-                "description": "Connect with Ukrainian Diaspora members in Canada who specialize in immigration services and support for individuals and families.",
-                "footer": "",
-                "icon": "fa-passport",
-                "color": "#090f82",
-                "placeByTagCollector": ""
-          },
-          {
-                "title": "Jobs",
-                "slug": "jobs",
-                "description": "Discover Ukrainian Diaspora members in Canada who provide job-related assistance and opportunities for job seekers.",
-                "footer": "",
-                "icon": "fa-handshake-angle",
-                "color": "#ff3030",
-                "placeByTagCollector": ""
-          }
-    ],
-    "subCategories": [
-          {
-                "cid": "23",
-                "cidname": "Events | Події та івенти ",
-                "name": "⛳️ Meetups + Events",
-                "slug": "meetups",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "💬 Communities",
-                "slug": "community",
-                "parents": "[]"
-          },
-          {
-                "cid": "18",
-                "cidname": "Українські ютубери в Канаді",
-                "name": "📺 Vloggers",
-                "slug": "blogger",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "💅🏾 Beauty",
-                "slug": "beauty",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "💅🏾 Hair Styling",
-                "slug": "hair",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "💅🏾 Nail Care",
-                "slug": "nails",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "💅🏾 Makeup",
-                "slug": "makeup",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🦺 Job Seekers",
-                "slug": "needjob",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "👷🏻 Job Offers",
-                "slug": "joboffer",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🥷🏻 Online Volunteers",
-                "slug": "onlinevolunteer",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🪪 Document Services",
-                "slug": "documents",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "💼 Immigration Services",
-                "slug": "immigration",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🏥 Healthcare",
-                "slug": "health",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🚘 Driving Instructors",
-                "slug": "drivinginstructor",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "📦 Parcel Services",
-                "slug": "parcels",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "💳 Finance & Banking",
-                "slug": "finance",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "👨🏼‍🎓 Classes & Education",
-                "slug": "classes",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "👶🏼 Children's Services",
-                "slug": "children",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🐇 Pet Services",
-                "slug": "pets",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🏤 Official Organizations",
-                "slug": "organization",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🗿 Landmark",
-                "slug": "landmark",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "⛪️ Church",
-                "slug": "church",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "⛪️ Charity Funds",
-                "slug": "charityfund",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🥾 Hiking Trails",
-                "slug": "hikes",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🦸🏼‍♀️ Volunteering",
-                "slug": "volunteer",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🤙 Consulting Services",
-                "slug": "consulting",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🏡 Housing Services",
-                "slug": "housing",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🚕 Driver Services",
-                "slug": "driver",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🚚 Moving Services",
-                "slug": "moving",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🚙 Car Dealerships",
-                "slug": "dealership",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🔧 Car Repair Services",
-                "slug": "carrepair",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🧀 Grocery Stores",
-                "slug": "groceries",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "👩🏼‍🍳 Cafés",
-                "slug": "cafe",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "👩🏼‍🍳 Cooking Services",
-                "slug": "cooking",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🧵 Handmade Crafts",
-                "slug": "handmade",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🏪 Shops",
-                "slug": "shop",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🦝 Wildfire",
-                "slug": "wildfire",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "⛰️ Nature",
-                "slug": "nature",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🇺🇦 Services for Ukrainians",
-                "slug": "uaservices",
-                "parents": "[]"
-          },
-          {
-                "cid": "22",
-                "cidname": "",
-                "name": "🔑 Crypto (P2P)",
-                "slug": "crypto",
-                "parents": "[]"
-          }
-    ],
-    "eventCategories": [
-          {
-                "slug": "meetups",
-                "name": "Meetups"
-          },
-          {
-                "slug": "hikes",
-                "name": "Hikes"
-          }
-    ],
-    "geographicalEntities": [
-          {
-              "province": "BC",
-              "provinceTitle": "British Columbia"
-          },
-          {
-              "province": "ON",
-              "provinceTitle": "Ontario"
-          },
-          {
-              "province": "AB",
-              "provinceTitle": "Alberta"
-          },
-          {
-              "province": "QC",
-              "provinceTitle": "Quebec"
-          },
-          {
-              "province": "MB",
-              "provinceTitle": "Manitoba"
-          },
-          {
-              "province": "NS",
-              "provinceTitle": "Nova Scotia"
-          },
-          {
-              "province": "SK",
-              "provinceTitle": "Saskatchewan"
-          },
-          {
-              "province": "PE",
-              "provinceTitle": "Prince Edward Island"
-          },
-          {
-              "province": "NL",
-              "provinceTitle": "Newfoundland and Labrador"
-          },
-          {
-              "province": "NB",
-              "provinceTitle": "New Brunswick"
-          },
-          {
-              "province": "YT",
-              "provinceTitle": "Yukon"
-          },
-          {
-              "province": "NU",
-              "provinceTitle": "Nunavut"
-          },
-          {
-              "province": "NT",
-              "provinceTitle": "Northwest Territories"
-          }
-      ]
-      
-}
+      "initialCoordinates": "51.509865, -0.118092",
+      "alwaysUseDefaultLocation": "",
+      "defaultZoom": "11",
+      "maxZoomOut": "3",
+      "mapBoxApiKey": "YOUR_MAPBOX_API_KEY_HERE",
+      "bottomRightCorner": "10, -20",
+      "topLeftCorner": "60, -150",
+      "mapTitle": "Global Community",
+      "heroTitle": "GLOBAL",
+      "heroSubtitle": "Global Unity: Redefining the Landscape",
+      "slogans": [
+        {
+          "slogan": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "slogan": "Suspendisse et nunc non orci suscipit aliquam."
+        }
+      ],
+      "altContentTitle": "Alternate Version for lang ALT",
+      "altContentTrigger": "ALT",
+      "unregisteredUserAlert": "Please register <a href=\"/register\">here</a>",
+      "locationSharingErrorAlert": "Lorem ipsum: <ul class=\"try-locate-me list-group p-0 mt-2\"><li class=\"list-group-item\"><i class=\"fa-solid fa-location-arrow\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-regular fa-hand-point-down\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-solid fa-magnifying-glass\"></i> Lorem ipsum</li></ul>",
+      "defaultMarkerImage": "/assets/plugins/YOUR_PLUGIN_PATH/icons/placeMarker.png",
+      "clusterIcon": "/assets/plugins/YOUR_PLUGIN_PATH/icons/cluster.svg",
+      "citiesData": "London,Paris,New York,Vancouver",
+      "countryLimit": "",
+      "entityTitle": "Region",
+      "geographicalEntities": [
+        {
+          "province": "GB",
+          "provinceTitle": "United Kingdom"
+        },
+        {
+          "province": "US",
+          "provinceTitle": "United States"
+        }
+      ],
+      "tabCategories": [
+        {
+          "color": "#004683",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "footer": "",
+          "icon": "fa-map",
+          "placeByTagCollector": "place",
+          "slug": "all",
+          "title": "All places"
+        },
+        {
+          "color": "#095bff",
+          "description": "Suspendisse et nunc non orci suscipit aliquam.",
+          "footer": "",
+          "icon": "fa-calendar-check",
+          "placeByTagCollector": "event",
+          "slug": "events",
+          "title": "Events & Heritage"
+        }
+      ],
+      "subCategories": [
+        {
+          "cid": "23",
+          "cidname": "Events",
+          "icon": "fa-people-robbery",
+          "name": "Meetups Events",
+          "parents": "[\"events\"]",
+          "slug": "meetups"
+        },
+        {
+          "cid": "13",
+          "cidname": "HELP",
+          "icon": "fa-hand-holding-heart",
+          "name": "Online Assistance",
+          "parents": "[\"all\"]",
+          "slug": "onlineassist"
+        }
+      ],
+      "eventCategories": [
+        {
+          "name": "Meetups",
+          "slug": "meetups"
+        },
+        {
+          "name": "Walks",
+          "slug": "walks"
+        }
+      ],
+      "advMarkers": [
+        {
+          "advMarkerImg": "/assets/YOUR_PATH/logo.png",
+          "advMarkerTags": "tag1,tag2,tag3,sponsored",
+          "card": "Lorem ipsum dolor sit amet.",
+          "color": "#fe62bd",
+          "icon": "fa-star-of-life",
+          "id": "sponsored",
+          "latlng": "51.509865, -0.118092",
+          "popup": "<strong>Lorem ipsum dolor sit amet.</strong>",
+          "title": "Lorem Ipsum",
+          "url": "https://yourwebsite.org/path"
+        }
+      ],
+      "magicButtonSlide": "YOUR_HTML_CONTENT_HERE",
+      "bottomSheetOffset": "100,40,10,0,0",
+      "mapTriggerClass": "global-map-page",
+      "placeTopicTag": "place",
+      "swipeResistance": "40",
+      "mapPageRouter": "/map",
+      "templateName": "map",
+      "zoomThreshold": "13",
+      "debuginfo": {
+        "activation": 0
+      }
+}    

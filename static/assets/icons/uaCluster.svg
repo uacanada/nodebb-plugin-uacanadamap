@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="uacluster" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 430 430" style="enable-background:new 0 0 430 430;" xml:space="preserve">
+<style type="text/css">
+
+
+@keyframes pulse {
+	50% {
+		transform-origin: center;
+		transform: scale(0.9);
+	}
+}
+	
+@-webkit-keyframes rotate-scale-up {
+  0% {
+    -webkit-transform: scale(1) rotateZ(0);
+            transform: scale(1) rotateZ(0);
+  }
+  50% {
+    -webkit-transform: scale(1.1) rotateZ(3deg);
+            transform: scale(1.1) rotateZ(3deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotateZ(0deg);
+            transform: scale(1) rotateZ(0deg);
+  }
+}
+@keyframes rotate-scale-up {
+  0% {
+    -webkit-transform: scale(1) rotateZ(0);
+            transform: scale(1) rotateZ(0);
+  }
+  50% {
+    -webkit-transform: scale(1.1) rotateZ(3deg);
+            transform: scale(1.1) rotateZ(3deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotateZ(0deg);
+            transform: scale(1) rotateZ(0deg);
+  }
+}
+
+
+
+.nebo {
+	animation: pulse 4s infinite;
+
+	
+}
+
+.pole {
+	animation: pulse 8s infinite;
+
+} 
+.inside {
+	
+
+	-webkit-animation: rotate-scale-up 24s cubic-bezier(0.950, 0.050, 0.795, 0.035) infinite both;
+	        animation: rotate-scale-up 24s cubic-bezier(0.950, 0.050, 0.795, 0.035) infinite both;
+}
+	
+	.inside2 {
+	
+	-webkit-animation: rotate-scale-up 28s cubic-bezier(0.950, 0.050, 0.795, 0.035) infinite both;
+	        animation: rotate-scale-up 28s cubic-bezier(0.950, 0.050, 0.795, 0.035) infinite both;
+}
+	
+	svg{		max-width: 200px;}
+	 
+  
+</style>
+	
+<g class="inside2">
+	 <circle class="nebo" cx="100" cy="66" r="33" style="fill:#338AF3"/>
+    <circle class="pole" cx="100" cy="110" r="33" style="fill:#FFDA44"/>
+    
+	
+
+	<g class="inside">
+
+	 <circle class="pole" cx="270" cy="160" r="55" style="fill:#FFDA44"/>
+	 <circle class="nebo" cx="280" cy="100" r="44" style="fill:#338AF3"/>
+	</g>
+		<g class="inside2">
+	 <circle class="nebo" cx="190" cy="230" r="50" style="fill:#338AF3"/>
+   
+</g>
+    <circle class="pole" cx="210" cy="280" r="44" style="fill:#FFDA44"/>
+    
+
+
+
+</g>
+	
+</svg>
+

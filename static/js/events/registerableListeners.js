@@ -44,7 +44,7 @@ class EventListeners {
 
 		if ((c = clck(".blogger-loc"))) {
 
-			if (!UacanadaMap.isSidebarFolded) {   UacanadaMap.api.closeMapSidebar(false);  }
+			
 			UacanadaMap.api.openCards(c.attr("data-marker-id"), "distance", false);
 
 		} else if ((c = clck("a.edit-place"))) {
@@ -107,8 +107,6 @@ class EventListeners {
     } else if (tc(".ua-reload-link")) {
         UacanadaMap.api.reloadMainPage();
     
-    } else if (tc("#chatters")) {
-        openMapSidebar(6);
     } else if (tc(".removeCards")) {
         e.preventDefault();
         UacanadaMap.api.removeCards();
@@ -130,11 +128,11 @@ class EventListeners {
         const isNeedOpen = $("#ua-sidepanel").hasClass("opened");
         UacanadaMap.api.animateScroll();
         if (isNeedOpen) {
-            UacanadaMap.api.openMapSidebar(null);
+         
             UacanadaMap.api.fitElementsPosition();
         } else {
             UacanadaMap.api.hideBottomsAndBlockScroll(false);
-            UacanadaMap.api.closeMapSidebar(false);
+           
         }
     }
 	};

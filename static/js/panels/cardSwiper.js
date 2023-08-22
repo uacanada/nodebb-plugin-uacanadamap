@@ -40,7 +40,7 @@
      const {map,L} = UacanadaMap
        UacanadaMap.api.cleanMarkers()
       if(!tid)return false    
-      const markerImg = place.json.pic ? place.json.pic: place.json.img ? place.json.img : '/static_uaca/uamarker.png';
+      const markerImg = place.json.pic ? place.json.pic: place.json.img ? place.json.img : '/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png';
       const pointerMarkerIcon = L.divIcon({className: 'pointer-marker', html: `<div class="pointer-marker-icon rounded-circle" style="background: url(${markerImg}) center center / cover no-repeat white; animation:ua-shake-element 600ms ease-in-out both"></div>`, iconSize: [64, 64], iconAnchor: [32, 32],  popupAnchor:  [0, -33]});
       UacanadaMap.pointerMarker = L.marker(place.gps, {icon: pointerMarkerIcon});
       UacanadaMap.pointerMarker.bindPopup(place.marker._popup._content);
@@ -262,7 +262,7 @@
         direction,
         freeMode,
         slidesPerView: 'auto',
-        mousewheel: { invert: false, sensitivity: 1, eventsTarget: '#ua-cards-slider' },
+        mousewheel: { invert: false, sensitivity: 0.25, eventsTarget: '#ua-cards-slider' }, // TODO: move sensitivity option to ACP
         autoplay: autoplay ? { delay: 4200, disableOnInteraction: false } : false,
       }).on('slideChangeTransitionEnd', (e) => handleSlideChange(e, places, UacanadaMap)).on('click', (J, event) => handleClick(J, event, UacanadaMap))
 
@@ -421,13 +421,14 @@
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
       UacanadaMap.api.cardsOpened(false)
+      UacanadaMap.api.magicButtonText({text:' Reset Categories',delay:300,to:0})
       setTimeout(() => {
         
        
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
         
-      }, 500);
+      }, 350);
       
       
   };

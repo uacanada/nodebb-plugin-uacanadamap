@@ -42,6 +42,7 @@
 									placeholder="Enter your MapBox API Key here">
 							</div>
 
+							<!-- Initial Map Coordinates -->
 							<div class="mb-5">
 								<label class="form-label d-block" for="initialCoordinates">Initial Map
 									Coordinates</label>
@@ -53,6 +54,29 @@
 									placeholder="49.28269013417919, -123.12086105346681">
 							</div>
 
+
+							<!-- Always Load Default Location Checkbox -->
+							<div class="mb-5 form-check">
+							<input type="checkbox" class="form-check-input" id="alwaysUseDefaultLocation" name="alwaysUseDefaultLocation">
+							<label class="form-check-label" for="alwaysUseDefaultLocation">Always Use Default Location</label>
+							<small class="form-text">If checked, the map will always load on the Initial Map Coordinates, regardless of user's saved location preferences.</small>
+							</div>
+
+							<!-- Default Zoom Level -->
+							<div class="mb-5">
+							<label class="form-label d-block" for="defaultZoom">Default Zoom Level</label>
+							<small class="form-text">Set the default zoom level when the map loads. The larger the number, the closer the zoom.</small>
+							<input type="number" id="defaultZoom" name="defaultZoom" title="Set your default zoom level" class="form-control mt-2" placeholder="10">
+							</div>
+
+							<!-- Maximum Zoom Out Level -->
+							<div class="mb-5">
+							<label class="form-label d-block" for="maxZoomOut">Maximum Zoom Out Level</label>
+							<small class="form-text">Define the maximum zoom-out level allowed. The smaller the number, the farther the zoom-out.</small>
+							<input type="number" id="maxZoomOut" name="maxZoomOut" title="Set the maximum zoom-out level" class="form-control mt-2" placeholder="3">
+							</div>
+
+
 						</div>
 					</div>
 
@@ -61,6 +85,30 @@
 						<div class="card-header tracking-tight settings-header">Content</div>
 						<div class="card-body">
 
+						<div class="mb-5">
+						<h5 class="fw-bold tracking-tight settings-header">Map Hero Title</h5>
+						<input type="text" id="heroTitle" name="heroTitle" title="Setup hero Title" class="form-control mt-2">
+						</div>
+
+						<div class="mb-5">
+						<h5 class="fw-bold tracking-tight settings-header">Map Hero Subtitle</h5>
+						<input type="text" id="heroSubtitle" name="heroSubtitle" title="Setup hero SubTitle" class="form-control mt-2">
+						</div>
+
+
+						<div class="mb-5">
+							<h5 class="fw-bold tracking-tight settings-header">Slogans</h5>
+							<div class="mb-3" data-type="sorted-list" data-sorted-list="slogans"
+								data-item-template="admin/plugins/uacanadamap/partials/sorted-list/item-slogan"
+								data-form-template="admin/plugins/uacanadamap/partials/sorted-list/form-slogan">
+								<ul data-type="list" class="list-group mb-2"></ul>
+								<small class="form-text d-block mb-2"> Define multiple dynamic slogans for your
+									map's landing page. These will display in a rotating manner, providing a diverse
+									introduction to your community map on each visit</small>
+								<button type="button" data-type="add" class="btn btn-sm btn-info">Add
+									slogan</button>
+							</div>
+						</div>
 
 
 							<div class="mb-5">
@@ -97,19 +145,7 @@
 									placeholder="E.g. 'UA|CN|MD'">
 							</div>
 
-							<div class="mb-5">
-								<h5 class="fw-bold tracking-tight settings-header">Slogans</h5>
-								<div class="mb-3" data-type="sorted-list" data-sorted-list="slogans"
-									data-item-template="admin/plugins/uacanadamap/partials/sorted-list/item-slogan"
-									data-form-template="admin/plugins/uacanadamap/partials/sorted-list/form-slogan">
-									<ul data-type="list" class="list-group mb-2"></ul>
-									<small class="form-text d-block mb-2"> Define multiple dynamic slogans for your
-										map's landing page. These will display in a rotating manner, providing a diverse
-										introduction to your community map on each visit</small>
-									<button type="button" data-type="add" class="btn btn-sm btn-info">Add
-										slogan</button>
-								</div>
-							</div>
+							
 
 
 							<div class="mb-5">
