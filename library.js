@@ -21,7 +21,7 @@ const routeHelpers = require.main.require('./src/routes/helpers');
 // const inputValidator = require('./lib/backend/inputValidator');
 const topicModifier = require('./lib/backend/topicModifier');
 
-
+const winston = require.main.require('winston');
 
 
 
