@@ -247,7 +247,6 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
           //  const mathedSlugs =  [... new Set(getMatchedSlugs(placetags))]
             const tabsForPlace = [...new Set([...parentsTabsSlugs, ...getMatchedSlugs(placetags)])];
  
-            console.log(tabsForPlace)
             tabsForPlace.forEach((tabSlug) => {
               if (UacanadaMap.TEMP.tabPopulatorHtmlObj[tabSlug]) {
                 UacanadaMap.TEMP.tabPopulatorHtmlObj[tabSlug] += li;

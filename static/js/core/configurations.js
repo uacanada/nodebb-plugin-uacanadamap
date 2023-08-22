@@ -9,10 +9,7 @@ define('core/configuration', function (require) {
     require('leaflet.locatecontrol');
     require('leaflet-contextmenu');
     require('leaflet-providers');
-
-  console.log({L})// TODO debug remove
-    
-    const dateTime = new Date(Date.now());
+ const dateTime = new Date(Date.now());
 
    UacanadaMap.L = L
    UacanadaMap.Swiper = Swiper
@@ -117,7 +114,7 @@ define('core/configuration', function (require) {
         const controlDivCopy = controlDiv.cloneNode(true);
     
         $("#map-controls .offcanvas-body").append(controlDivCopy);
-        console.log(error, layer, controlDiv);
+      
     }
 
 

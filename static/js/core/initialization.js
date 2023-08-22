@@ -128,7 +128,7 @@ define("core/initialization", [
       if(data.tpl_url === 'map'){
            
             if(firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
-               console.log(` reinit `, data)
+              UacanadaMap.console.log(` reinit `, data)
                
                
                if(app.user.isAdmin){

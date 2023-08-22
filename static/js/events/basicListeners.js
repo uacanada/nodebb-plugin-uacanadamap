@@ -86,7 +86,7 @@ $.fn.classChange = function (cb) {
         const sidebarIsOpen = $("#ua-sidepanel.opened").outerHeight();
         if (sidebarIsOpen && UacanadaMap.showOnlyArea && UacanadaMap.moveIterations > 18) {
           UacanadaMap.api.rewriteTabs("onlyVisibleArea");
-          console.log("moveend", UacanadaMap.moveIterations);
+      
         }
       });
       

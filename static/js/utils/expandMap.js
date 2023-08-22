@@ -2,7 +2,7 @@
 define('utils/expandMap',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
  
       UacanadaMap.api.expandMap = async (id) => {
-      console.log(`  UacanadaMap.api.expandMap id ${id}`)
+        //UacanadaMap.console.log(`  UacanadaMap.api.expandMap id ${id}`)
       
       //UacanadaMap.api.markerIterator.stop();
       UacanadaMap.api.fancyHeroText.stop();

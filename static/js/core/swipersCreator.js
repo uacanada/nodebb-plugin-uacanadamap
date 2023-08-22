@@ -49,7 +49,7 @@ define("core/swipersCreator", [
       setWrapperSize: true,
     })
       .on("init", (swiper) => {
-        console.log("init", swiper);
+    
       })
       .on("slideChange", (swiper, event) => {
         const activeIndex = UacanadaMap.swipers.tabsSlider.activeIndex;
