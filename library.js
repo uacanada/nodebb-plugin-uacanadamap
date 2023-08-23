@@ -55,49 +55,49 @@ const categories = require.main.require('./src/categories');
 
 
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-		winston.warn('Multer destination function called\n\n\n\n\n\n');
-        const uploadPath = path.join(nconf.get('base_dir'), 'public/uploads/uaplaces');
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+// 		winston.warn('Multer destination function called\n\n\n\n\n\n');
+//         const uploadPath = path.join(nconf.get('base_dir'), 'public/uploads/uaplaces');
 
-        // Логирование пути загрузки
-        winston.info('Upload Path: ', uploadPath);
+//         // Логирование пути загрузки
+//         winston.info('Upload Path: ', uploadPath);
 
-        // Проверка на существование директории
-        if (!fs.existsSync(uploadPath)) {
-            winston.warn('Upload directory does not exist. Trying to create...');
+//         // Проверка на существование директории
+//         if (!fs.existsSync(uploadPath)) {
+//             winston.warn('Upload directory does not exist. Trying to create...');
 
-            // Попытка создания директории
-            try {
-                fs.mkdirSync(uploadPath, { recursive: true });
-                winston.info('Upload directory created successfully.');
-            } catch (error) {
-                winston.error('Error creating upload directory: ', error);
-                return cb(error);
-            }
-        }
+//             // Попытка создания директории
+//             try {
+//                 fs.mkdirSync(uploadPath, { recursive: true });
+//                 winston.info('Upload directory created successfully.');
+//             } catch (error) {
+//                 winston.error('Error creating upload directory: ', error);
+//                 return cb(error);
+//             }
+//         }
 
-        // Проверка прав на запись в директорию
-        fs.access(uploadPath, fs.constants.W_OK, (err) => {
-            if (err) {
-                winston.error('No write permissions for upload directory:', err);
-                return cb(err);
-            }
+//         // Проверка прав на запись в директорию
+//         fs.access(uploadPath, fs.constants.W_OK, (err) => {
+//             if (err) {
+//                 winston.error('No write permissions for upload directory:', err);
+//                 return cb(err);
+//             }
 
-            // Все в порядке, передаем директорию multer
-            cb(null, uploadPath);
-        });
-    },
-    filename: function(req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const ext = path.extname(file.originalname);
+//             // Все в порядке, передаем директорию multer
+//             cb(null, uploadPath);
+//         });
+//     },
+//     filename: function(req, file, cb) {
+//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//         const ext = path.extname(file.originalname);
         
-        const fileName = file.fieldname + '-' + uniqueSuffix + ext;
+//         const fileName = file.fieldname + '-' + uniqueSuffix + ext;
         
-        winston.info('Generated Filename: ', fileName);
-        cb(null, fileName);
-    }
-});
+//         winston.info('Generated Filename: ', fileName);
+//         cb(null, fileName);
+//     }
+// });
 
 
 
@@ -106,18 +106,18 @@ const upload = multer({ dest: path.join(nconf.get('base_dir'), 'public/uploads/'
 
 
 
-function checkMultipartFormData(req, res, next) {
-    const contentType = req.headers['content-type'];
+// function checkMultipartFormData(req, res, next) {
+//     const contentType = req.headers['content-type'];
     
-    if (!contentType || !contentType.startsWith('multipart/form-data')) {
+//     if (!contentType || !contentType.startsWith('multipart/form-data')) {
        
-		winston.warn('Error: Expected multipart/form-data content type');
-    } else {
-		winston.warn(contentType);
-	}
+// 		winston.warn('Error: Expected multipart/form-data content type');
+//     } else {
+// 		winston.warn(contentType);
+// 	}
 
-    next();
-}
+//     next();
+// }
 
 
 
@@ -197,11 +197,11 @@ function getTid(str) {
 Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
 	// upload.single('image')
-	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), checkMultipartFormData, handleUploadErrors];
+	const middlewares = [upload.single('image'), middleware.ensureLoggedIn, handleUploadErrors];
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
 	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
-		 winston.warn(':::::::::::::::req.uid: '+ req.uid+' base_dir: '+nconf.get('base_dir'));
+		 winston.warn(':::::::::::::: '+ req.uid+' base_dir: '+ path.join(nconf.get('base_dir'), 'public/uploads/'));
 		 await handleAddPlaceRequest(req, res, helpers); 
 	});
 
