@@ -117,8 +117,12 @@ define("forms/submitPlace", [
         }
     });
 
-    appendImageToFormData(formData);
+
     formData.append("gps", JSON.stringify([lat, lng]));
+
+
+    appendImageToFormData(formData);
+    
 
     return formData;
 }
