@@ -129,42 +129,7 @@ function getTid(str) {
 }
   
   
-async function editTopic(tid, topicData, uid) {
-	return new Promise(async (resolve, reject) => {
-	  try {
-		const topic = await topics.getTopicData(tid);
-		
-		
-		if (!topic?.mainPid) {
-		  resolve({ error: 'Topic not found' });
-		  return;
-		}
-  
-		const canEdit = await privileges.posts.canEdit(topic.mainPid, uid);
-		if (!canEdit) {
-		  resolve({ error: 'You are not allowed to edit this post' });
-		  return;
-		}
-  
-		
 
-		// topic.title = topicData.title;
-		// topic.content = topicData.content; 
-		// topic.tags = topicData.tags;
-
-		await topics.setTopicFields(tid, topicData)
-		await posts.edit({
-			uid: uid,
-			pid: topic.mainPid,
-			content: topicData.content
-		});
-
-        resolve(topic);
-	  } catch (error) {
-		resolve({ error });
-	  }
-	});
-}
   
 
 
