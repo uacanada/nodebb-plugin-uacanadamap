@@ -99,13 +99,13 @@ define("forms/submitPlace", [
 
   function processFormData(fields, lat, lng) {
     const formData = new FormData();
-    const ignoredFields = new Set(['image']);
+    
 
     fields.forEach((field) => {
         try {
             const { name, value } = field;
 
-            if (value && !ignoredFields.has(name)) {
+            if (value && value !== 'image') {
                 const stringValue = typeof value === 'string' ? value : value.toString();
                 formData.append(name, stringValue);
             }
@@ -186,9 +186,14 @@ function handleSpecialFields(formData, name, value) {
     // }
 
     const imageInput = document.querySelector("input[type=file]#ua-location-cover-img");
-    if (imageInput.files.length > 0) {
-        formData.append("image", imageInput.files[0]);
+
+    if (imageInput && imageInput.files.length > 0) {
+        for (let i = 0; i < imageInput.files.length; i++) {
+            const file = imageInput.files[i];
+            formData.append("image", file);
+        }
     }
+
 
   }
 
