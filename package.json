@@ -2,7 +2,7 @@
   "name": "nodebb-plugin-uacanadamap",
   "version": "0.1.0",
   "description": "Interactive map plugin for NodeBB forums. Enhance user engagement by allowing location additions and explore monetization opportunities.",
-  "main": "./lib/backend/library.js",
+  "main": "library.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap"
