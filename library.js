@@ -1,4 +1,7 @@
 'use strict';
+const Plugin = module.exports;
+
+
 const path = require('path');
 const fs = require('fs')
 
@@ -37,23 +40,26 @@ const categories = require.main.require('./src/categories');
 
 const handleAddPlaceRequest = require('./lib/backend/placeFormHandler');
 const multer = require('multer');
-const upload = multer({dest: path.join('public', 'uploads')});
+//const upload = multer({dest: path.join('public', 'uploads')});
 
-const Plugin = module.exports;
+const upload = multer({dest: 'public/uploads/'});
 
 
-// Middleware to handle multer errors
+
+
 function handleUploadErrors(err, req, res, next) {
     if (err instanceof multer.MulterError) {
         // Errors specific to multer
-        winston.error('Multer error: ', err);
-        return res.status(400).json({ error: 'Problem with file upload.' });
+        winston.warn('Multer error (ignored): ', err);
+        next(); // move to the next middleware
     } else if (err) {
         // Other errors
         winston.error('Server error during file upload: ', err);
+		winston.error('Server error req.body: '+req.body);
         return res.status(500).json({ error: 'Server error during file upload.' });
+    } else {
+        next(); // move to the next middleware if no error
     }
-    next(); // move to the next middleware if no error
 }
 
 
