@@ -60,14 +60,11 @@ const categories = require.main.require('./src/categories');
 // 		winston.warn('Multer destination function called\n\n\n\n\n\n');
 //         const uploadPath = path.join(nconf.get('base_dir'), 'public/uploads/uaplaces');
 
-//         // Логирование пути загрузки
 //         winston.info('Upload Path: ', uploadPath);
 
-//         // Проверка на существование директории
 //         if (!fs.existsSync(uploadPath)) {
 //             winston.warn('Upload directory does not exist. Trying to create...');
 
-//             // Попытка создания директории
 //             try {
 //                 fs.mkdirSync(uploadPath, { recursive: true });
 //                 winston.info('Upload directory created successfully.');
@@ -77,14 +74,13 @@ const categories = require.main.require('./src/categories');
 //             }
 //         }
 
-//         // Проверка прав на запись в директорию
 //         fs.access(uploadPath, fs.constants.W_OK, (err) => {
 //             if (err) {
 //                 winston.error('No write permissions for upload directory:', err);
 //                 return cb(err);
 //             }
 
-//             // Все в порядке, передаем директорию multer
+//           
 //             cb(null, uploadPath);
 //         });
 //     },
@@ -106,18 +102,6 @@ const upload = multer({ dest: path.join(nconf.get('base_dir'), 'public/uploads/'
 
 
 
-// function checkMultipartFormData(req, res, next) {
-//     const contentType = req.headers['content-type'];
-    
-//     if (!contentType || !contentType.startsWith('multipart/form-data')) {
-       
-// 		winston.warn('Error: Expected multipart/form-data content type');
-//     } else {
-// 		winston.warn(contentType);
-// 	}
-
-//     next();
-// }
 
 
 
@@ -134,6 +118,20 @@ function handleUploadErrors(err, req, res, next) {
 		winston.error('Server error req.body: '+JSON.stringify(req.body));
 	}
    
+	const contentType = req.headers['content-type'];
+    
+	    if (!contentType || !contentType.startsWith('multipart/form-data')) {
+		   
+			winston.warn('Error: Expected multipart/form-data content type');
+	    } else {
+			winston.warn(contentType);
+		}
+
+		fs.access(path.join(nconf.get('base_dir'), 'public/uploads/'), fs.constants.W_OK, (err) => {
+			            if (err) {
+			                winston.error('No write permissions for upload directory:', err);
+			              
+			            } });
 
 	next(); // move to the next middleware
 }
