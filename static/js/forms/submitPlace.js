@@ -101,7 +101,8 @@ define("forms/submitPlace", [
     const formData = new FormData();
 
     fields.forEach((field) => {
-      const { name, value } = field;
+      try {
+        const { name, value } = field;
       formData.append(name, value);
 
       switch (name) {
@@ -127,10 +128,14 @@ define("forms/submitPlace", [
           appendDateInfo(formData, value, "end");
           break;
       }
+      } catch (error) {
+        UacanadaMap.console.log(error)
+      }
+      
     });
 
     appendImageToFormData(formData);
-    formData.append("gps", `${lat},${lng}`);
+    formData.append("gps", JSON.stringify([lat,lng]));
 
 
 
@@ -167,10 +172,16 @@ define("forms/submitPlace", [
   }
 
   function appendImageToFormData(formData) {
-    const imageInput = $("input[type=file]#ua-location-cover-img")[0];
-    if (imageInput.files[0]) {
-      formData.append("image", imageInput.files[0]);
+    // const imageInput = $("input[type=file]#ua-location-cover-img")[0];
+    // if (imageInput.files[0]) {
+    //   formData.append("image", imageInput.files[0]);
+    // }
+
+    const imageInput = document.querySelector("input[type=file]#ua-location-cover-img");
+    if (imageInput.files.length > 0) {
+        formData.append("image", imageInput.files[0]);
     }
+
   }
 
   async function sendPlaceData(formData, csrfToken) {
