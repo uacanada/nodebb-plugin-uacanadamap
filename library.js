@@ -1,3 +1,5 @@
+// TODO:The plugin.json field "library" is deprecated. Please use the package.json field "main" instead.
+
 'use strict';
 const Plugin = module.exports;
 
@@ -50,6 +52,7 @@ const handleAddPlaceRequest = require('./lib/backend/placeFormHandler');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
+		winston.warn('Multer destination function called\n\n\n\n\n\n');
         const uploadPath = path.join(nconf.get('base_dir'), 'public/uploads/uaplaces');
 
         // Логирование пути загрузки
