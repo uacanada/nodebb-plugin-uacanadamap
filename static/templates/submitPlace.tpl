@@ -147,7 +147,7 @@
                                     </ul>
                                     <input type="text" class="form-control" id="mainUsername" name="mainUsername"
                                         aria-label="Username on map" placeholder="Main Shortname" required
-                                        pattern="[0-9A-Za-z._-]{2,40}">
+                                        pattern="[0-9A-Za-z._-]">
 
 
                                     <div class="invalid-feedback">Username must be 2-40 and 0-9 A-Z a-z ._- </div>

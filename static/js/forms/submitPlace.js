@@ -99,48 +99,56 @@ define("forms/submitPlace", [
 
   function processFormData(fields, lat, lng) {
     const formData = new FormData();
+    const ignoredFields = new Set(['image']);
 
     fields.forEach((field) => {
-      try {
-        const { name, value } = field;
-      formData.append(name, value);
+        try {
+            const { name, value } = field;
 
-      switch (name) {
-        case "placeCategory":
-          appendCategoryName(
-            formData,
-            value,
-            ajaxify.data.UacanadaMapSettings.subCategories
-          );
-          break;
-        case "eventCategory":
-          appendCategoryName(
-            formData,
-            value,
-            ajaxify.data.UacanadaMapSettings.eventCategories,
-            "eventCategoryName"
-          );
-          break;
-        case "eventStartDate":
-          appendDateInfo(formData, value, "start");
-          break;
-        case "eventEndDate":
-          appendDateInfo(formData, value, "end");
-          break;
-      }
-      } catch (error) {
-        UacanadaMap.console.log(error)
-      }
-      
+            if (value && !ignoredFields.has(name)) {
+                const stringValue = typeof value === 'string' ? value : value.toString();
+                formData.append(name, stringValue);
+            }
+
+            handleSpecialFields(formData, name, value);
+
+        } catch (error) {
+            UacanadaMap.console.log(error);
+        }
     });
 
     appendImageToFormData(formData);
-    formData.append("gps", JSON.stringify([lat,lng]));
-
-
+    formData.append("gps", JSON.stringify([lat, lng]));
 
     return formData;
-  }
+}
+
+function handleSpecialFields(formData, name, value) {
+    switch (name) {
+        case "placeCategory":
+            appendCategoryName(
+                formData,
+                value,
+                ajaxify.data.UacanadaMapSettings.subCategories
+            );
+            break;
+        case "eventCategory":
+            appendCategoryName(
+                formData,
+                value,
+                ajaxify.data.UacanadaMapSettings.eventCategories,
+                "eventCategoryName"
+            );
+            break;
+        case "eventStartDate":
+            appendDateInfo(formData, value, "start");
+            break;
+        case "eventEndDate":
+            appendDateInfo(formData, value, "end");
+            break;
+    }
+}
+
 
   function appendCategoryName(
     formData,
