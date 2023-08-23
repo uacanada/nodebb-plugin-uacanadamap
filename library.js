@@ -48,6 +48,20 @@ const upload = multer({
 });
 
 
+function checkMultipartFormData(req, res, next) {
+    const contentType = req.headers['content-type'];
+    
+    if (!contentType || !contentType.startsWith('multipart/form-data')) {
+       
+		winston.warn('Error: Expected multipart/form-data content type');
+    } else {
+		winston.warn(contentType);
+	}
+
+    next();
+}
+
+
 
 function handleUploadErrors(err, req, res, next) {
 	winston.error('req.body: '+JSON.stringify(req.body));
@@ -160,7 +174,7 @@ async function editTopic(tid, topicData, uid) {
 Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
 	// upload.single('image')
-	const middlewares = [middleware.ensureLoggedIn, handleUploadErrors];
+	const middlewares = [middleware.ensureLoggedIn, checkMultipartFormData, handleUploadErrors];
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
 	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
