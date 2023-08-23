@@ -57,6 +57,18 @@ function handleUploadErrors(err, req, res, next) {
 }
 
 
+function debugPostForm(err, req, res, next)  {
+	try {
+		winston.warn('Headers: ', req.headers);
+		winston.warn('Body: ', req.body);
+		winston.warn('File: ', req.file);
+	} catch (error) {
+		winston.warn('debugPostForm: ', error);
+	}
+
+	next();
+}
+
 
  
 let settings; 
@@ -137,15 +149,10 @@ async function editTopic(tid, topicData, uid) {
 
 Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
-	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), handleUploadErrors];
+	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), handleUploadErrors, debugPostForm];
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
-	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, (req, res, next) => {
-			winston.warn('Headers: ', req.headers);
-			winston.warn('Body: ', req.body);
-			winston.warn('File: ', req.file);
-			next();
-		}, async (req, res) => {
+	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
 		try {
 			await handleAddPlaceRequest(req, res, helpers);
 			winston.warn('[req.body]  ::::::::::  '+JSON.stringify(req.body));
