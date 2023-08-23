@@ -5,11 +5,7 @@ const Plugin = module.exports;
 const path = require('path');
 const fs = require('fs')
 const multer = require('multer');
-
-
-// const fsp = require('fs').promises;
-
-
+const winston = require.main.require('winston');
 const meta = require.main.require('./src/meta');
 const db = require.main.require('./src/database');
 const cache = require.main.require('./src/cache');
@@ -26,7 +22,7 @@ const routeHelpers = require.main.require('./src/routes/helpers');
 // const inputValidator = require('./lib/backend/inputValidator');
 const topicModifier = require('./lib/backend/topicModifier');
 
-const winston = require.main.require('winston');
+
 
 
 
@@ -50,17 +46,52 @@ const handleAddPlaceRequest = require('./lib/backend/placeFormHandler');
 // });
 
 
+
+
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        const uploadPath = path.join(nconf.get('base_dir'), 'public/uploads/');
-        cb(null, uploadPath);
+        const uploadPath = path.join(nconf.get('base_dir'), 'public/uploads/uaplaces');
+
+        // Логирование пути загрузки
+        winston.info('Upload Path: ', uploadPath);
+
+        // Проверка на существование директории
+        if (!fs.existsSync(uploadPath)) {
+            winston.warn('Upload directory does not exist. Trying to create...');
+
+            // Попытка создания директории
+            try {
+                fs.mkdirSync(uploadPath, { recursive: true });
+                winston.info('Upload directory created successfully.');
+            } catch (error) {
+                winston.error('Error creating upload directory: ', error);
+                return cb(error);
+            }
+        }
+
+        // Проверка прав на запись в директорию
+        fs.access(uploadPath, fs.constants.W_OK, (err) => {
+            if (err) {
+                winston.error('No write permissions for upload directory:', err);
+                return cb(err);
+            }
+
+            // Все в порядке, передаем директорию multer
+            cb(null, uploadPath);
+        });
     },
     filename: function(req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         const ext = path.extname(file.originalname);
-        cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+        
+        const fileName = file.fieldname + '-' + uniqueSuffix + ext;
+        
+        winston.info('Generated Filename: ', fileName);
+        cb(null, fileName);
     }
 });
+
+
 
 const upload = multer({ storage: storage });
 
