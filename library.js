@@ -149,16 +149,12 @@ async function editTopic(tid, topicData, uid) {
 
 Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
-	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), debugPostForm, handleUploadErrors];
+	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), handleUploadErrors];
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
 	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
-		try {
-			await handleAddPlaceRequest(req, res, helpers);
-			winston.warn('[req.body]  ::::::::::  '+JSON.stringify(req.body));
-		} catch (error) {
-			winston.error('Error handling request:', error.message);
-		}
+		winston.warn(':::::::::::::::req.uid: ', req.uid);
+		 await handleAddPlaceRequest(req, res, helpers); 
 	});
 
     routeHelpers.setupApiRoute(router, 'get', '/map/delete_all_places/:pincode',middlewaresForAdmin, async (req, res) => {
