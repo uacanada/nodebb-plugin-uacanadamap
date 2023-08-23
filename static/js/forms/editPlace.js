@@ -3,7 +3,7 @@ define('forms/editPlace',["core/variables" /*   Global object UacanadaMap  */], 
 
     UacanadaMap.form.reset = () => {
         
-        document.getElementById("ua-custom-loc-form").reset()
+        document.getElementById("placeForm").reset()
         UacanadaMap.form.tags = []
         $("#tag-container").html('')
          $("#ua-form-event-holder").html('')
@@ -20,7 +20,7 @@ define('forms/editPlace',["core/variables" /*   Global object UacanadaMap  */], 
 
     UacanadaMap.form.socialTypeIconAdjust = (e) => {
         try {
-            const inputs = 'form#ua-custom-loc-form input[name="socialtype"]';
+            const inputs = 'form#placeForm input[name="socialtype"]';
             const checkedInput = $(inputs).filter(':checked');
             const ico = checkedInput.next().find('i');
             const icoFaClasses = ico.attr('class');
@@ -74,13 +74,13 @@ define('forms/editPlace',["core/variables" /*   Global object UacanadaMap  */], 
     
             if (UacanadaMap.adminsUID) console.log(UacanadaMap.choosedLocation, place);
     
-            $('form#ua-custom-loc-form [name="tid"]').val(topic_id);
+            $('form#placeForm [name="tid"]').val(topic_id);
     
             for (const inputKey in place) {
               try {
                 if (inputKey == "eventWeekDay" || inputKey == "socialtype") {
                   const value = place[inputKey] ?? "";
-                  $(`form#ua-custom-loc-form [value="${value}"]`).prop("checked", true);
+                  $(`form#placeForm [value="${value}"]`).prop("checked", true);
                   
                   if (inputKey == "socialtype") UacanadaMap.form.socialTypeIconAdjust();
                 } else if (inputKey == "placetags" && place['placetags'].length > 0) {
@@ -97,7 +97,7 @@ define('forms/editPlace',["core/variables" /*   Global object UacanadaMap  */], 
                    }
                  
                 } else {
-                  $(`form#ua-custom-loc-form [name="${inputKey}"]`).val(place[inputKey]);
+                  $(`form#placeForm [name="${inputKey}"]`).val(place[inputKey]);
                 }
               } catch (error) {
                 console.log(place[inputKey], error);

@@ -39,8 +39,8 @@
   UacanadaMap.api.pointerMarker = (tid,place) => {
      const {map,L} = UacanadaMap
        UacanadaMap.api.cleanMarkers()
-      if(!tid)return false    
-      const markerImg = place.json.pic ? place.json.pic: place.json.img ? place.json.img : '/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png';
+      if(!tid)return false  
+      const markerImg = UacanadaMap.api.getProfileImage(place.json)
       const pointerMarkerIcon = L.divIcon({className: 'pointer-marker', html: `<div class="pointer-marker-icon rounded-circle" style="background: url(${markerImg}) center center / cover no-repeat white; animation:ua-shake-element 600ms ease-in-out both"></div>`, iconSize: [64, 64], iconAnchor: [32, 32],  popupAnchor:  [0, -33]});
       UacanadaMap.pointerMarker = L.marker(place.gps, {icon: pointerMarkerIcon});
       UacanadaMap.pointerMarker.bindPopup(place.marker._popup._content);

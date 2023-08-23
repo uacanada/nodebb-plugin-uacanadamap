@@ -1,25 +1,13 @@
 {
   "id": "nodebb-plugin-uacanadamap",
   "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap",
-  "library": "library.js",   
   "staticDirs": {
     "static": "static",
     "icons": "static/assets/icons",
     "images": "static/assets/images",
     "leaflet": "../node_modules/leaflet/dist"
   },
-  "staticNpmDependencies": {
-    "leaflet": "^1.9.3",
-    "leaflet-contextmenu": "^1.4.0",
-    "leaflet-control-geocoder": "^2.4.0",
-    "leaflet-fullscreen": "^1.0.2",
-    "leaflet.locatecontrol": "^0.79.0",
-    "leaflet.markercluster": "^1.5.3",
-    "leaflet-providers": "^1.13.0",
-    "swiper": "^9.2.4",
-    "path": "^0.12.7",
-    "fs": "^0.0.1-security"
-  },
+  
   "scss": [
 
 
@@ -121,10 +109,16 @@
     {
       "hook": "filter:topic.get",
       "method": "addPlaceFieldsToTopic"
-    },
-    {
-      "hook": "filter:middleware.buildHeader",
-      "method": "onTopicBuild"
     }
-  ]
+  ],
+  "staticNpmDependencies": {
+    "leaflet": "^1.9.3",
+    "leaflet-contextmenu": "^1.4.0",
+    "leaflet-control-geocoder": "^2.4.0",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet.locatecontrol": "^0.79.0",
+    "leaflet.markercluster": "^1.5.3",
+    "leaflet-providers": "^1.13.0",
+    "swiper": "^9.2.4"
+  }
 }
