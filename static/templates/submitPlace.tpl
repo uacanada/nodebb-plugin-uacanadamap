@@ -146,11 +146,10 @@
                                                 class="form-check-label" for="usernameother"> Other ...</label></li>
                                     </ul>
                                     <input type="text" class="form-control" id="mainUsername" name="mainUsername"
-                                        aria-label="Username on map" placeholder="Main Shortname" required
-                                        pattern="[0-9A-Za-z._-]">
+                                        aria-label="Username on map" placeholder="Main Shortname" required>
 
 
-                                    <div class="invalid-feedback">Username must be 2-40 and 0-9 A-Z a-z ._- </div>
+                                    
                                 </div>
                                 <div class="form-text">Required field</div>
 
