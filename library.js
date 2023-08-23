@@ -16,13 +16,19 @@ const posts = require.main.require('./src/posts');
 const topics = require.main.require('./src/topics');
 const privileges = require.main.require('./src/privileges');
 const routeHelpers = require.main.require('./src/routes/helpers');
+
+const handleAddPlaceRequest = require('./lib/backend/placeFormHandler');
+const topicModifier = require('./lib/backend/topicModifier');
+
+
+
 // const { uploadImage, resizeImage } = require.main.require('./src/image');
 
 
 
 // const controllers = require('./lib/backend/controllers');
 // const inputValidator = require('./lib/backend/inputValidator');
-const topicModifier = require('./lib/backend/topicModifier');
+
 
 
 
@@ -38,7 +44,6 @@ const user = require.main.require('./src/user');
 const categories = require.main.require('./src/categories');
 */
 
-const handleAddPlaceRequest = require('./lib/backend/placeFormHandler');
 
 //const upload = multer({dest: path.join('public', 'uploads')});
 
@@ -96,7 +101,9 @@ const storage = multer.diskStorage({
 
 
 
-const upload = multer({ storage: storage });
+
+const upload = multer({ dest: path.join(nconf.get('base_dir'), 'public/uploads/') });
+
 
 
 function checkMultipartFormData(req, res, next) {
