@@ -46,9 +46,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
               : "";
               
           
-          let profileIcon = (placethumb || pic).startsWith('/assets/uploads') ? placethumb || pic : '/assets/uploads/' + (placethumb || pic);
-
-
+          const profileIcon = UacanadaMap.api.getProfileImage(item);
           const markerTitle = placeTitle || categoryName;
           const cardTitle = eventName ? eventName : placeTitle || markerTitle;
           const eventNameHtml = eventName ? `<b>${eventName}</b><br>` : "";
