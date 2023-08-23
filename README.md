@@ -1,8 +1,6 @@
 # 🍁 nodebb-plugin-uacanadamap
 
-## Demo
-
-Experience the plugin in action at [UACANADA.ORG](https://uacanada.org).
+## Demo at [UACANADA.ORG](https://uacanada.org).
 
 
 Turn your NodeBB forum into a powerful app with an interactive map using this plugin. Allow your users to add locations to the map and discover various monetization opportunities for your platform.
@@ -28,7 +26,8 @@ Turn your NodeBB forum into a powerful app with an interactive map using this pl
 3. 🖥️ **Access the NodeBB Control Panel**: `/admin/plugins/uacanadamap`
 4. 🔧 **Configure the plugin**: You're provided with the flexibility to create tabs, categories, and various denominations suited to your unique context.
 5. 💡 **Leverage its adaptability**: This plugin can be tailored for various needs - be it an event map, a real estate platform, or even a social network.
----
+
+
 ## 🤝 Connect & Support
 
 **Feedback**: We are in active development and greatly appreciate any feedback or suggestions. Please don't hesitate to share your thoughts!
