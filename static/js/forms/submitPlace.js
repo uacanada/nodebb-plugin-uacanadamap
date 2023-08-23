@@ -184,21 +184,13 @@ function handleSpecialFields(formData, name, value) {
   }
 
   function appendImageToFormData(formData) {
-    // const imageInput = $("input[type=file]#ua-location-cover-img")[0];
-    // if (imageInput.files[0]) {
-    //   formData.append("image", imageInput.files[0]);
-    // }
-
     const imageInput = document.querySelector("input[type=file]#ua-location-cover-img");
-
     if (imageInput && imageInput.files.length > 0) {
         for (let i = 0; i < imageInput.files.length; i++) {
             const file = imageInput.files[i];
             formData.append("image", file);
         }
     }
-
-
   }
 
   async function sendPlaceData(formData, csrfToken) {
