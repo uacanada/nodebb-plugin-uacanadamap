@@ -11,7 +11,7 @@ const fs = require('fs')
 const meta = require.main.require('./src/meta');
 const db = require.main.require('./src/database');
 const cache = require.main.require('./src/cache');
-
+const nconf = require.main.require('nconf');
 const posts = require.main.require('./src/posts');
 const topics = require.main.require('./src/topics');
 const privileges = require.main.require('./src/privileges');
@@ -31,7 +31,7 @@ const winston = require.main.require('winston');
 /*
 const utils = require.main.require('./src/utils');
 const file = require.main.require('./src/file');
-const nconf = require.main.require('nconf');
+
 const winston = require.main.require('winston');
 const plugins = require.main.require('./src/plugins');
 const user = require.main.require('./src/user');
@@ -42,7 +42,11 @@ const handleAddPlaceRequest = require('./lib/backend/placeFormHandler');
 const multer = require('multer');
 //const upload = multer({dest: path.join('public', 'uploads')});
 
-const upload = multer({dest: 'public/uploads/'});
+//const upload = multer({dest: 'public/uploads/'});
+
+const upload = multer({
+    dest: join(nconf.get('upload_path'), 'ucmp'),
+  });
 
 
 
