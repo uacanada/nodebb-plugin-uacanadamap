@@ -149,7 +149,7 @@ async function editTopic(tid, topicData, uid) {
 
 Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
-	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), handleUploadErrors, debugPostForm];
+	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), debugPostForm, handleUploadErrors];
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
 	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
