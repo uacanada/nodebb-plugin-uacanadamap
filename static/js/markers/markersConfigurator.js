@@ -8,7 +8,8 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
         const {
             tid,
             placeCategory,
-            placethumb,
+            placethumb = "",
+            pic = "",
             placeTitle,
             categoryName,
             eventCategoryName,
@@ -43,7 +44,11 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
               Number(uid) === Number(app.user.uid))
               ? `<div class="ua-edit-link"> <a href="#!" data-topic="${tid}" class="edit-place card-link"><i class="fa-regular fa-pen-to-square"></i> Edit</a></div>`
               : "";
-          const profileIcon = placethumb || "";
+              
+          
+          let profileIcon = (placethumb || pic).startsWith('/assets/uploads') ? placethumb || pic : '/assets/uploads/' + (placethumb || pic);
+
+
           const markerTitle = placeTitle || categoryName;
           const cardTitle = eventName ? eventName : placeTitle || markerTitle;
           const eventNameHtml = eventName ? `<b>${eventName}</b><br>` : "";
