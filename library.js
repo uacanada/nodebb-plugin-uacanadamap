@@ -48,18 +48,19 @@ const upload = multer({dest: 'public/uploads/'});
 
 
 function handleUploadErrors(err, req, res, next) {
-    if (err instanceof multer.MulterError) {
-        // Errors specific to multer
-        winston.warn('Multer error (ignored): ', err);
-        next(); // move to the next middleware
-    } else if (err) {
-        // Other errors
-        winston.error('Server error during file upload: ', err);
-		winston.error('Server error req.body: '+JSON.stringify(req.body));
-        return res.status(500).json({ error: 'Server error during file upload.' });
-    } else {
-        next(); // move to the next middleware if no error
-    }
+	winston.error('req.body: '+JSON.stringify(req.body));
+    // if (err instanceof multer.MulterError) {
+    //     // Errors specific to multer
+    //     winston.warn('Multer error (ignored): ', err);
+    //     next(); // move to the next middleware
+    // } else if (err) {
+    //     // Other errors
+    //     winston.error('Server error during file upload: ', err);
+	// 	winston.error('Server error req.body: '+JSON.stringify(req.body));
+    //     return res.status(500).json({ error: 'Server error during file upload.' });
+    // } else {
+    //     next(); // move to the next middleware if no error
+    // }
 }
 
 
