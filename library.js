@@ -140,6 +140,20 @@ Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), handleUploadErrors];
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
+	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, (req, res, next) => {
+			winston.warn('Headers: ', req.headers);
+			winston.warn('Body: ', req.body);
+			winston.warn('File: ', req.file);
+			next();
+		}, async (req, res) => {
+		try {
+			await handleAddPlaceRequest(req, res, helpers);
+			winston.warn('[req.body]  ::::::::::  '+JSON.stringify(req.body));
+		} catch (error) {
+			winston.error('Error handling request:', error.message);
+		}
+	});
+
     routeHelpers.setupApiRoute(router, 'get', '/map/delete_all_places/:pincode',middlewaresForAdmin, async (req, res) => {
 		
 			try {
@@ -191,9 +205,10 @@ Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
 
 
-	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
-        await handleAddPlaceRequest(req, res, helpers);
-    });
+
+
+	
+	
 
 
 
