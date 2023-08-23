@@ -4,6 +4,8 @@ const Plugin = module.exports;
 
 const path = require('path');
 const fs = require('fs')
+const multer = require('multer');
+
 
 // const fsp = require('fs').promises;
 
@@ -39,13 +41,28 @@ const categories = require.main.require('./src/categories');
 */
 
 const handleAddPlaceRequest = require('./lib/backend/placeFormHandler');
-const multer = require('multer');
+
 //const upload = multer({dest: path.join('public', 'uploads')});
 
 //const upload = multer({dest: 'public/uploads/'});
-const upload = multer({
-    dest: path.join(nconf.get('base_dir'), 'public/uploads/')
+// const upload = multer({
+//     dest: path.join(nconf.get('base_dir'), 'public/uploads/')
+// });
+
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        const uploadPath = path.join(nconf.get('base_dir'), 'public/uploads/');
+        cb(null, uploadPath);
+    },
+    filename: function(req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const ext = path.extname(file.originalname);
+        cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+    }
 });
+
+const upload = multer({ storage: storage });
 
 
 function checkMultipartFormData(req, res, next) {
@@ -64,20 +81,20 @@ function checkMultipartFormData(req, res, next) {
 
 
 function handleUploadErrors(err, req, res, next) {
-	winston.error('req.body: '+JSON.stringify(req.body));
-	next()
-    // if (err instanceof multer.MulterError) {
-    //     // Errors specific to multer
-    //     winston.warn('Multer error (ignored): ', err);
-    //     next(); // move to the next middleware
-    // } else if (err) {
-    //     // Other errors
-    //     winston.error('Server error during file upload: ', err);
-	// 	winston.error('Server error req.body: '+JSON.stringify(req.body));
-    //     return res.status(500).json({ error: 'Server error during file upload.' });
-    // } else {
-    //     next(); // move to the next middleware if no error
-    // }
+	
+	
+    if (err instanceof multer.MulterError) {
+        // Errors specific to multer
+        winston.warn('Multer error (ignored): ', err);
+       
+    } else if (err) {
+        // Other errors
+        winston.error('Server error during file upload: ', err);
+		winston.error('Server error req.body: '+JSON.stringify(req.body));
+	}
+   
+
+	next(); // move to the next middleware
 }
 
 
@@ -139,11 +156,11 @@ function getTid(str) {
 Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
 	// upload.single('image')
-	const middlewares = [middleware.ensureLoggedIn, checkMultipartFormData, handleUploadErrors];
+	const middlewares = [middleware.ensureLoggedIn, upload.single('image'), checkMultipartFormData, handleUploadErrors];
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
 	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
-		 winston.warn(':::::::::::::::req.uid: ', req.uid);
+		 winston.warn(':::::::::::::::req.uid: '+ req.uid+' base_dir: '+nconf.get('base_dir'));
 		 await handleAddPlaceRequest(req, res, helpers); 
 	});
 
