@@ -49,6 +49,7 @@ const upload = multer({dest: 'public/uploads/'});
 
 function handleUploadErrors(err, req, res, next) {
 	winston.error('req.body: '+JSON.stringify(req.body));
+	next()
     // if (err instanceof multer.MulterError) {
     //     // Errors specific to multer
     //     winston.warn('Multer error (ignored): ', err);
@@ -160,7 +161,7 @@ Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 	const middlewaresForAdmin =  [middleware.ensureLoggedIn,middleware.admin.checkPrivileges]
 
 	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
-		winston.warn(':::::::::::::::req.uid: ', req.uid);
+		 winston.warn(':::::::::::::::req.uid: ', req.uid);
 		 await handleAddPlaceRequest(req, res, helpers); 
 	});
 
