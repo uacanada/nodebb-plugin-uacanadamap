@@ -43,11 +43,9 @@ const multer = require('multer');
 //const upload = multer({dest: path.join('public', 'uploads')});
 
 //const upload = multer({dest: 'public/uploads/'});
-
 const upload = multer({
-    dest: join(nconf.get('upload_path'), 'ucmp'),
-  });
-
+    dest: path.join(nconf.get('base_dir'), 'public/uploads/')
+});
 
 
 
