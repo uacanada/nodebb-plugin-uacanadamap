@@ -76,7 +76,7 @@ function getTid(str) {
 
 Plugin.addRoutes = async ({ router, middleware, helpers }) => {
 
-	const middlewares = [, middleware.ensureLoggedIn, handleUploadErrors];
+	const middlewares = [middleware.ensureLoggedIn, handleUploadErrors];
 	routeHelpers.setupApiRoute(router, 'post', '/map/addplace', middlewares, async (req, res) => {
 		 await handleAddPlaceRequest(req, res, helpers); 
 	});
