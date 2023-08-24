@@ -1,24 +1,49 @@
 # 🍁 nodebb-plugin-uacanadamap
 
+## Demo at [UACANADA.ORG](https://uacanada.org).
+
+
 Turn your NodeBB forum into a powerful app with an interactive map using this plugin. Allow your users to add locations to the map and discover various monetization opportunities for your platform.
 
-## Installation
 
-```
-npm install git+https://github.com/uacanada/nodebb-plugin-uacanadamap.git
-```
-:bulb: **NOTE**: This plugin is currently in the process of migrating to GitHub, so the installation might not work. Once the repository is fully set up, this message will be removed.
+🚀 **Installation of the `nodebb-plugin-uacanadamap` Plugin**
 
-## Demo
+🔍 **Prerequisites**: Ensure that NodeBB is properly installed and configured.
 
-Experience the plugin in action at [UACANADA.ORG](https://uacanada.org).
+1. 📂 **Navigate to your NodeBB root directory**:
+   `cd /path/to/your/nodebb`
 
-## About Me (🇺🇦,🇨🇦)
+2. 📦 **Install the stable version of the plugin**:
+   
+   
+   ```
+   npm i nodebb-plugin-uacanadamap
+   ```
 
-Hi, I'm Viktor from Ukraine. On February 24, 2022, due to the unprovoked and barbaric full-scale invasion by Russia on Ukraine, I was forced to leave my home. Currently, I reside in Canada and am actively assisting the local Ukrainian community in integrating into the Canadian landscape.
+**OR**
+
+   ```
+   npm install https://github.com/uacanada/nodebb-plugin-uacanadamap#main
+   ```
+
+   - 🛠️ *For those seeking cutting-edge features*: Install our development version (may be unstable):
+     ```
+     npm install https://github.com/uacanada/nodebb-plugin-uacanadamap#development
+     ```
+3. 🚀 **Initial Setup**: After installing the plugin for the first time, navigate to the `/admin` panel and execute a rebuild and restart.
+4. 🖥️ **Access the UacanadaMap Control Panel**: `/admin/plugins/uacanadamap`
+ - 🔧 **Configure the plugin**: You're provided with the flexibility to create tabs, categories, and various denominations suited to your unique context.
+ - 💡 **Leverage its adaptability**: This plugin can be tailored for various needs - be it an event map, a real estate platform, or even a social network.
+ - ⚙️ **Configuration Changes**: Once you've adjusted and saved the settings, perform another rebuild and restart. This ensures certain settings are transpiled into the core min.js file, allowing the plugin to operate swiftly and gain immediate access to the required environment without any extra requests.
+
 
 
 ## 🤝 Connect & Support
 
+**Feedback**: We are in active development and greatly appreciate any feedback or suggestions. Please don't hesitate to share your thoughts!
 - 💌 For personal inquiries, join us on [Discord](https://discord.gg/pKnXqz3vaq).
 - 🐛 If you encounter issues or have questions related to this plugin's code, please [open a new issue](https://github.com/uacanada/nodebb-plugin-uacanadamap/issues/new).
+
+## About Me (🇺🇦,🇨🇦)
+
+Hi, I'm Viktor from Ukraine. On February 24, 2022, due to the unprovoked and barbaric full-scale invasion by Russia on Ukraine, I was forced to leave my home. Currently, I reside in Canada and am actively assisting the local Ukrainian community in integrating into the Canadian landscape.

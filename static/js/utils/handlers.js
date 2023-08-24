@@ -15,9 +15,7 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
   
   
   UacanadaMap.api.onMapFirstLaunch=()=>{
-        setTimeout(() => {
-          $('#ua-news-modal').modal('show');
-        }, 12000);
+     
       
         setTimeout(() => {
           if(!localStorage.getItem("uamaplocation"))  ctxButton({show:true,reason:'setLocation'})
