@@ -440,27 +440,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     }
   };
 
-  /**
-   * Returns the profile image URL based on the provided place object.
-   * Falls back to a default marker image if neither placethumb nor pic is provided.
-   *
-   * @param {Object} place - Place object containing potential image URLs.
-   * @returns {string} - URL of the profile image.
-   */
-  UacanadaMap.api.getProfileImage = (place) => {
-    const { placethumb, pic } = place;
-    const baseIcon = placethumb || pic;
-    const profileIcon = baseIcon.startsWith("/assets/uploads")
-      ? baseIcon
-      : `/assets/uploads/${baseIcon}`;
-    return (
-      profileIcon ||
-      "/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png"
-    );
-  };
-
-
-
+  
   /**
  * Returns the profile image URL based on the provided place object.
  * Falls back to a default marker image if neither placethumb nor pic is provided.
@@ -483,6 +463,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 	}
 
 
-  return '/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png';
-  //return UacanadaMap;
+ 
+  return UacanadaMap;
 })
