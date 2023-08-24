@@ -37,6 +37,15 @@ Turn your NodeBB forum into a powerful app with an interactive map using this pl
  - ⚙️ **Configuration Changes**: Once you've adjusted and saved the settings, perform another rebuild and restart. This ensures certain settings are transpiled into the core min.js file, allowing the plugin to operate swiftly and gain immediate access to the required environment without any extra requests.
 
 
+---
+🚧 **Plugin Status**: The plugin's still in its early stages, and there's room for improvement. The design aspect especially requires some fine-tuning – there are a few gaps to bridge. However, as an MVP, it's up and running. Early adopters, dive in!
+
+💻 **Testing**: It's been battle-tested on my live forum, but hasn't been tried on a fresh, from-scratch setup.
+
+📢 **Feedback Wanted**: If you manage to get it up and running on your end, give a shout! 
+
+🐛 **Issues & Feedback**: Found a glitch or have a suggestion? Pop it into the 'issues' on GitHub or hit me up on Discord. Gratitude in advance!
+
 
 ## 🤝 Connect & Support
 
