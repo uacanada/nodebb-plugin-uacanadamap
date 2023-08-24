@@ -491,13 +491,16 @@ ul#ua-peoples-target-2 li:first-child h6 ,ul#ua-peoples-target-2 li:first-child 
 
 
 #attribution-modal {
-  max-width: 100%;
-  width: 500px;
-  margin: 0 auto;
-  border-radius: 2rem 2rem 0 0;
   padding: 2rem;
   background: linear-gradient(179deg, rgb(234, 244, 253), rgba(255, 255, 255, 0.4));
   color: black;
+}
+
+.max500-bottom-offcanvas{
+  width: 100%;
+  max-width: 500px;
+  border-radius: 2rem 2rem 0 0;
+  margin: 0 auto;
 }
 
 #nav-height-fixer{

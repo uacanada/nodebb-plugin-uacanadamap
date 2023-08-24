@@ -1,5 +1,5 @@
 <div id="ua-bottom-sheet" class="bottom-sheet offcanvas offcanvas-bottom no-propagation" tabindex="-1" data-ua-size="0"
-        aria-labelledby="ua-bottom-sheet-Label">
+        aria-labelledby="ua-bottom-sheet-Label" aria-hidden="true">
 
 
         <div id="tabs-body" class="offcanvas-body p-0 h-100 no-propagation">
@@ -85,8 +85,7 @@
 
 
 
-<div id="attribution-modal" class="offcanvas offcanvas-bottom no-propagation" tabindex="-1"
-        aria-labelledby="attribution-modal" aria-hidden="true">
+<div id="attribution-modal" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="attribution-modal" aria-hidden="true">
 
         <div class="offcanvas-header">
 
@@ -97,4 +96,20 @@
                 <div id="attribution-text"></div>
         </div>
 
+</div>
+
+
+<div id="sortPlacesOffcanvas" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
+    <div class="offcanvas-header">
+        <h5 id="sortPlacesOffcanvasLabel">Sort By:</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <a class="dropdown-item ua-sort" data-ua-sortby="distance" href="#">Distance</a>
+        <a class="dropdown-item ua-sort" data-ua-sortby="latest" href="#">Latest</a>
+        <a class="dropdown-item ua-sort" data-ua-sortby="oldest" href="#">Oldest</a>
+        <a class="dropdown-item ua-sort" data-ua-sortby="events" href="#">Event Date</a>
+        <a class="dropdown-item ua-sort" data-ua-sortby="category" href="#">Category</a>
+        <select id="location-category-filter" name="categoryfilter" class="form-select shadow me-2" aria-label="category"></select>
+    </div>
 </div>

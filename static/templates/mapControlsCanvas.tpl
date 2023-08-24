@@ -1,5 +1,5 @@
 
-<div id="map-controls" class="offcanvas offcanvas-bottom no-propagation" tabindex="-1" aria-labelledby="attribution-modal"  aria-hidden="true">
+<div id="map-controls" class="offcanvas offcanvas-bottom no-propagation" tabindex="-1" aria-labelledby="map-controls-modal"  aria-hidden="true">
 
         <div class="offcanvas-header">
 
