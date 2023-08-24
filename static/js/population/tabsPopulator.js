@@ -26,11 +26,10 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         placeTitle,
         categoryName,
         tid,
-        gps,
         img
     }) {
         return `<li class="${itemClass}">
-            <div class="location-item blogger-loc" data-marker-id="${tid}" data-blogger-loc="${gps}">
+            <div class="location-item blogger-loc" data-marker-id="${tid}">
                 ${
                  img
                     ? `<img src="${img}" alt="${mainUsername} profile image" class="profile-image">`
@@ -66,7 +65,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         notice
       }) => {
         return `<li class="${itemClass}">
-          <div class="calendar-item blogger-loc" data-ua-event-ts=${eventTimestamp} data-marker-id=${tid} data-blogger-loc="${gps}">
+          <div class="calendar-item blogger-loc" data-ua-event-ts="${eventTimestamp}" data-marker-id="${tid}">
             <div class="calendar-date p-3">
               <span class="calendar-day">${dateDigit}</span>
               <span class="calendar-month">${month}</span>
