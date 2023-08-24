@@ -42,8 +42,9 @@
 
 
 
-<div class="modal fade" id="sortModal" tabindex="-1" aria-labelledby="sortModalLabel" aria-hidden="true">
+<div class="modal fade" id="sortModal" tabindex="-1" aria-labelledby="sortModalLabel" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-centered modal-sm modal-fullscreen-md-down">
+
     <div class="modal-content">
       <div class="modal-body">
         <ul class="list-group list-group-flush">
