@@ -483,6 +483,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 	}
 
 
-
-  return UacanadaMap;
+  return '/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png';
+  //return UacanadaMap;
 })
