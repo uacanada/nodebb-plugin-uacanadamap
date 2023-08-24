@@ -27,13 +27,13 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         categoryName,
         tid,
         gps,
-        pic,
+        img
     }) {
         return `<li class="${itemClass}">
             <div class="location-item blogger-loc" data-marker-id="${tid}" data-blogger-loc="${gps}">
                 ${
-                    pic
-                    ? `<img src="${pic}" alt="${mainUsername} profile image" class="profile-image">`
+                 img
+                    ? `<img src="${img}" alt="${mainUsername} profile image" class="profile-image">`
                     : ""
                 }
                 <div>
@@ -222,6 +222,8 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
               parentTabs,
               placetags,
             } = extendedPlace;
+
+            const img = UacanadaMap.api.getProfileImage(extendedPlace)
         
             const li = createLiElement({
               city,
@@ -232,7 +234,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
               categoryName,
               tid,
               gps,
-              pic,
+              img
             });
         
 
