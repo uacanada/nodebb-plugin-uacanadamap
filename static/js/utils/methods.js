@@ -478,7 +478,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 			return '/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png';
 		}
 
-		const profileIcon = baseIcon.startsWith('/assets/uploads') ? baseIcon : `/assets/uploads/${baseIcon}`;
+		const profileIcon = baseIcon.includes('/assets/uploads') ? baseIcon : `/assets/uploads/${baseIcon}`;
 		return profileIcon;
 	}
 
