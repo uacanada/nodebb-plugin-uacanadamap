@@ -194,13 +194,9 @@
         const modalTitle = placeModal.querySelector('#modal-place-title')
         const modalBodyInput = placeModal.querySelector('#ua-place-modal .dyn-content')
         modalTitle.innerHTML = `${fa_icon} ${p.placeTitle}`
-      
-  
-  
-        const pic = p.pic ? `<div style="background:url(${p.pic}) center center;background-size:cover;width:5rem" class="me-2 mb-1 ratio ratio-1x1 rounded-circle"></div>`:``
-  
+        const img = UacanadaMap.api.getProfileImage(p)
         const latlngSrting = p.latlng.join(',')
-        modalBodyInput.innerHTML = `${pic}
+        modalBodyInput.innerHTML = `<div style="background:url(${img}) center center;background-size:cover;width:5rem" class="me-2 mb-1 ratio ratio-1x1 rounded-circle"></div>
         <div class="white-space-pre-line">
         ${p.placeDescription}  ${p.placeDescriptionAlt?`<p class="w-100 d-flex justify-content-center"><i class="fa-solid fa-language"></i><p>${p.placeDescriptionAlt}`:''}
         </div>

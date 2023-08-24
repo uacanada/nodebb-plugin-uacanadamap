@@ -1328,13 +1328,9 @@ body.map-touched #uacamap .leaflet-control-attribution.leaflet-control{ opacity:
   width: 100%;
 }
 
-@media screen and (max-width: 500px) {
+// @media screen and (max-width: 500px) {
 
-  #ua-shorts button.btn-close,
-  #ua-shorts .vjs-control-bar {
-    position: fixed !important;
-  }
-}
+// }
 
 
 

@@ -92,9 +92,7 @@ UacanadaMap.api.listenSwipes = (elements) => {
                     UacanadaMap.api.animateScroll();
                 }
 
-                if ((D || U) && element === "ua-short-wrapper") {
-                    $("#ua-shorts").modal("hide");
-                }
+               
 
                 if (element === "ua-dragger" && !UacanadaMap.mapExpanded && D) {
                     UacanadaMap.api.expandMap(`swipe dragger`);

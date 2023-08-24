@@ -14,6 +14,14 @@ Turn your NodeBB forum into a powerful app with an interactive map using this pl
    `cd /path/to/your/nodebb`
 
 2. 📦 **Install the stable version of the plugin**:
+   
+   
+   ```
+   npm i nodebb-plugin-uacanadamap
+   ```
+
+**OR**
+
    ```
    npm install https://github.com/uacanada/nodebb-plugin-uacanadamap#main
    ```
@@ -22,10 +30,12 @@ Turn your NodeBB forum into a powerful app with an interactive map using this pl
      ```
      npm install https://github.com/uacanada/nodebb-plugin-uacanadamap#development
      ```
+3. 🚀 **Initial Setup**: After installing the plugin for the first time, navigate to the `/admin` panel and execute a rebuild and restart.
+4. 🖥️ **Access the UacanadaMap Control Panel**: `/admin/plugins/uacanadamap`
+ - 🔧 **Configure the plugin**: You're provided with the flexibility to create tabs, categories, and various denominations suited to your unique context.
+ - 💡 **Leverage its adaptability**: This plugin can be tailored for various needs - be it an event map, a real estate platform, or even a social network.
+ - ⚙️ **Configuration Changes**: Once you've adjusted and saved the settings, perform another rebuild and restart. This ensures certain settings are transpiled into the core min.js file, allowing the plugin to operate swiftly and gain immediate access to the required environment without any extra requests.
 
-3. 🖥️ **Access the NodeBB Control Panel**: `/admin/plugins/uacanadamap`
-4. 🔧 **Configure the plugin**: You're provided with the flexibility to create tabs, categories, and various denominations suited to your unique context.
-5. 💡 **Leverage its adaptability**: This plugin can be tailored for various needs - be it an event map, a real estate platform, or even a social network.
 
 
 ## 🤝 Connect & Support
