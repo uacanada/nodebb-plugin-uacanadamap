@@ -28,11 +28,11 @@
 
   body.map-touched{
     .ua-magic-button {
-        -webkit-transform: rotateY(10deg);
-        -moz-transform: rotateY(10deg);
-        -o-transform: rotateY(10deg);
-        -ms-transform: rotateY(10deg);
-        transform: rotateX(10deg);
+        -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        -o-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateX(0deg);
   
         top: 0;
         
@@ -51,29 +51,34 @@
     &:hover,
     &.active {
       .ua-magic-button {
-        -webkit-transform: rotateY(10deg);
-        -moz-transform: rotateY(10deg);
-        -o-transform: rotateY(10deg);
-        -ms-transform: rotateY(10deg);
-        transform: rotateX(10deg);
+        -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        -o-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateX(0deg);
   
-        top:0;
+        top:3px;
         
         box-shadow: 0 3px #1a3a8a, 0 6rem 3rem rgba(66, 112, 234, .1);
       }
     }
   }
   
+
+
+
+
+
+
   .ua-magic-button {
     position: absolute;
     top: -4rem;
     cursor: pointer;
-    border-radius: 4rem;
-    width: 20rem;
-    height: 2.4rem;
+    background: var(--bs-primary-border-subtle);
+    padding: 0.5rem;
     text-align: center;
     color: #fff;
-    box-shadow: 0 8px #264BAC, 0 3rem 1.5rem rgba(66, 112, 234, .19);
+    box-shadow: 0 8px var(--bs-primary-border-subtle), 0 2rem 2rem var(--bs-primary-border-subtle);
     
     -webkit-transform: rotateY(40deg);
     -moz-transform: rotateY(40deg);
@@ -86,44 +91,44 @@
     -o-transition: all 1s;
     transition: all 1s;
 
-    button{
-      height: 2.4rem;
-    }
+    // button{
+    //   height: 2.4rem;
+    // }
 
-    .btn-magic-start{
-      width: 8rem;
+    // .btn-magic-start{
+    //   width: 8rem;
      
-      border-radius: 4rem 0 0 4rem;
-      .btn-label{
-        max-width: 8rem;
-        padding-right: 0.25rem;
-        padding:0.5rem;
-        font-size: 0.75rem;
-        line-height: 0.9rem;
+    //   border-radius: 4rem 0 0 4rem;
+    //   .btn-label{
+    //     max-width: 8rem;
+    //     padding-right: 0.25rem;
+    //     padding:0.5rem;
+    //     font-size: 0.75rem;
+    //     line-height: 0.9rem;
         
-      }
-    }
+    //   }
+    // }
 
-    .btn-magic-middle{
-      width: 4rem;
+    // .btn-magic-middle{
+    //   width: 4rem;
      
-      border-radius: 0;
+    //   border-radius: 0;
      
-    }
+    // }
 
-    .btn-magic-end{
-      width: 8rem;
-      border-radius: 0 4rem 4rem 0;
-      .btn-label{
-        max-width: 8rem;
-        padding-right: 0.25rem;
-        border: 2px solid white;
-        padding: 0.1rem 0.5rem;
-        font-size: 0.75rem;
-        line-height: 0.9rem;
-        float: right;
-      }
-    }
+    // .btn-magic-end{
+    //   width: 8rem;
+    //   border-radius: 0 4rem 4rem 0;
+    //   .btn-label{
+    //     max-width: 8rem;
+    //     padding-right: 0.25rem;
+    //     border: 2px solid white;
+    //     padding: 0.1rem 0.5rem;
+    //     font-size: 0.75rem;
+    //     line-height: 0.9rem;
+    //     float: right;
+    //   }
+    // }
 
 
   }

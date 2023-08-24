@@ -119,6 +119,6 @@
     "leaflet.locatecontrol": "^0.79.0",
     "leaflet.markercluster": "^1.5.3",
     "leaflet-providers": "^1.13.0",
-    "swiper": "^9.2.4"
+    "swiper": "^10.2.0"
   }
 }
