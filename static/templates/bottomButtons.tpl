@@ -19,24 +19,7 @@
                                 <button title="Close Place Cards" class="btn btn-danger rounded-pill m-1 removeCards" type="button">
                                 <i class="fa-solid fa-xmark"></i>
                                 </button>
-                                <div class="dropdown-center">
-                                <button title="Sort Places" class="btn btn-primary rounded-pill m-1 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span id="sortby-label" class="btn-label d-inline-block text-truncate rounded-pill btn-sm"> Distance
-                                        <i class="fa fa-solid fa-arrow-down-a-z"></i>
-                                        </span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                        <li>Sort By:</li>
-                                        <li><a class="dropdown-item ua-sort" data-ua-sortby="distance" href="#">Distance</a></li>
-                                        <li><a class="dropdown-item ua-sort" data-ua-sortby="latest" href="#">Latest</a></li>
-                                        <li><a class="dropdown-item ua-sort" data-ua-sortby="oldest" href="#">Oldest</a></li>
-                                        <li><a class="dropdown-item ua-sort" data-ua-sortby="events" href="#">Event Date</a></li>
-                                        <li><a class="dropdown-item ua-sort" data-ua-sortby="category" href="#">Category</a></li>
-                                        <li>
-                                        <select id="location-category-filter" name="categoryfilter" class="form-select shadow me-2" aria-label="category"></select>
-                                        </li>
-                                </ul>
-                                </div>
+                                <button title="Sort Places" class="btn btn-primary rounded-pill m-1" type="button" data-bs-toggle="modal" data-bs-target="#sortModal"> <span id="sortby-label" class="btn-label d-inline-block text-truncate rounded-pill btn-sm"> Distance  <i class="fa fa-solid fa-arrow-down-a-z"></i> </span> </button>
                         </div>
                 </div>
 
@@ -52,6 +35,31 @@
                 </div>
         
        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="sortModal" tabindex="-1" aria-labelledby="sortModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm modal-fullscreen-md-down">
+    <div class="modal-content">
+      <div class="modal-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Sort By:</li>
+          <li class="list-group-item"><a class="dropdown-item ua-sort" data-ua-sortby="distance" href="#">Distance</a></li>
+          <li class="list-group-item"><a class="dropdown-item ua-sort" data-ua-sortby="latest" href="#">Latest</a></li>
+          <li class="list-group-item"><a class="dropdown-item ua-sort" data-ua-sortby="oldest" href="#">Oldest</a></li>
+          <li class="list-group-item"><a class="dropdown-item ua-sort" data-ua-sortby="events" href="#">Event Date</a></li>
+          <li class="list-group-item"><a class="dropdown-item ua-sort" data-ua-sortby="category" href="#">Category</a></li>
+          <li class="list-group-item">
+            <select id="location-category-filter" name="categoryfilter" class="form-select shadow me-2" aria-label="category"></select>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
