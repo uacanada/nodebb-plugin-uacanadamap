@@ -46,7 +46,7 @@
              <!-- IMPORT contextButtons.tpl -->
              <!-- IMPORT sheets.tpl -->
              <!-- IMPORT submitPlace.tpl -->
-             <div id="targetForNewPlace d-none">
+             <div id="targetForNewPlace" class="d-none">
                 <div class="ua-markers marker-selector d-flex align-items-center marker-container">
                     <span id="locationSelectionLatLng"></span> 
                     <button title="Add place here" class="btn btn-sm rounded-pill newlocation-create-button" type="button"><i class="fa fas fa-solid fa-check"></i> Create</button>
