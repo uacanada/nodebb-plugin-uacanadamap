@@ -165,7 +165,7 @@
         </div>
         </div>
 
-        <div id="geocoderSearchbox"></div>
+        <div id="geocoderSearchbox" class="mt-3"></div>
 
     </div>
 </div>
