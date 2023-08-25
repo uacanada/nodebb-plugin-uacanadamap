@@ -43,7 +43,7 @@
                         class="fa-solid fa-circle-info"></i></span>
             </div>
 
-             <!-- IMPORT bottomButtons.tpl -->
+             <!-- IMPORT contextButtons.tpl -->
              <!-- IMPORT sheets.tpl -->
              <!-- IMPORT submitPlace.tpl -->
         </div>

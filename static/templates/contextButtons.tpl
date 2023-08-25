@@ -7,7 +7,10 @@
                         <div class="btn-group w-100" role="group" aria-label="Buttons when cards is opened">
                         {UacanadaMapSettings.contextButtonSlide}
                         
-                        <button class="btn btn-primary rounded-pill m-1" type="button"><i class="fa-solid fa-settings"></i></button>
+                        <button class="btn btn-primary rounded-circle p-2" type="button">
+                                <i class="fas fa-ellipsis-v"></i>
+                        </button>
+
                         </div>
                 </div>
         
