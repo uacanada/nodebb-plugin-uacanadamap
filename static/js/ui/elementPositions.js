@@ -72,7 +72,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
         var leftNav = $('nav.sidebar.sidebar-left').outerWidth();
         var navRealH = $( '.bottombar-nav' ).outerHeight() || 0;
         var bottomButtonsH = $('#ua-horizontal-buttons-wrapper').outerHeight() || 0;
-		var magicButton = $('#ua-magic-button-wrapper').outerHeight() || 0;
+		var contextButton = $('#ua-context-buttons-wrapper').outerHeight() || 0;
         var placeCardH = $(UacanadaMap.placeCardDiv).outerHeight() || 0; 
         var sidebarH = Math.floor($('.opened.folded-sidebar').outerHeight()) || 0;
         var sidebarW = Math.floor($('.sidepanel.opened').outerWidth(true)) || 0;
@@ -87,7 +87,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
         var isDesktop = (screenW > 800 || screenW > screenH)? true : false;
         var cardStackSize = Math.floor((screenW - rightNav - leftNav)/500);
         const panelDragButtonH = $('#ua-dragger .line-button').outerHeight(); 
-        window.UCM_cachedElementSizes = {screenH,screenW,bottomButtonsH,navRealH,rightNav,leftNav,sidebarH,sidebarW,placeCardH,bottomMargin,bottomElementsH,visibleMap,mapHalf,markerOffset,onePercentH,isDesktop,cardStackSize,panelDragButtonH,magicButton}
+        window.UCM_cachedElementSizes = {screenH,screenW,bottomButtonsH,navRealH,rightNav,leftNav,sidebarH,sidebarW,placeCardH,bottomMargin,bottomElementsH,visibleMap,mapHalf,markerOffset,onePercentH,isDesktop,cardStackSize,panelDragButtonH,contextButton}
         return  window.UCM_cachedElementSizes;
       };
 
@@ -100,7 +100,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 			
 			const {
 				bottomButtonsH,
-				magicButton,
+				contextButton,
 				bottomElementsH,
 				sidebarH,
 				sidebarW,
@@ -128,7 +128,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 			} else {
 
 				
-				zoomControlsPosition = {  bottom: `${Math.floor(navRealH+placeCardH+magicButton)}px`};
+				zoomControlsPosition = {  bottom: `${Math.floor(navRealH+placeCardH+contextButton)}px`};
 			
 			}
 

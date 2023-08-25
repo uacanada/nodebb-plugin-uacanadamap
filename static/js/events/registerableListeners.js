@@ -110,7 +110,7 @@ class EventListeners {
     } else if (tc(".removeCards")) {
         e.preventDefault();
         UacanadaMap.api.removeCards();
-		UacanadaMap.api.magicButtonText({text:'Reset filters...',delay:800,to:UacanadaMap.magicButton.router.main})
+		UacanadaMap.api.contextButtonText({text:'Reset filters...',delay:800,to:UacanadaMap.contextButton.router.main})
     } else if (tc("#show-only-map-items")) {
         UacanadaMap.api.rewriteTabs("onlyVisibleArea");
         UacanadaMap.showOnlyArea = true;

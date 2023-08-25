@@ -491,13 +491,16 @@ ul#ua-peoples-target-2 li:first-child h6 ,ul#ua-peoples-target-2 li:first-child 
 
 
 #attribution-modal {
-  max-width: 100%;
-  width: 500px;
-  margin: 0 auto;
-  border-radius: 2rem 2rem 0 0;
   padding: 2rem;
   background: linear-gradient(179deg, rgb(234, 244, 253), rgba(255, 255, 255, 0.4));
   color: black;
+}
+
+.max500-bottom-offcanvas{
+  width: 100%;
+  max-width: 500px;
+  border-radius: 2rem 2rem 0 0;
+  margin: 0 auto;
 }
 
 #nav-height-fixer{
@@ -1082,7 +1085,7 @@ body.uacanada-map-page #ua-dragger {
 
 
 
-#location-category-filter, #location-sort, #location-visible {
+ #location-sort, #location-visible {
   max-width: 50%;
   font-weight: bold;
   color: #0d6efd;
@@ -1094,13 +1097,12 @@ body.uacanada-map-page #ua-dragger {
   transition: 200ms all;
 }
 
-#location-category-filter,#location-visible{
+#location-visible{
   transform: translate3d(-20rem, -20rem, 0);
   transition: 200ms all;
 }
 
-#location-visible.show-top-buttons, 
-#location-category-filter.show-top-buttons{
+#location-visible.show-top-buttons{
   transition: 200ms all;
   transform: translate3d(0rem, 0rem, 0);
 }
@@ -1108,10 +1110,7 @@ body.uacanada-map-page #ua-dragger {
 #location-sort,#location-visible{
   max-width: 6rem;
 }
-#location-category-filter.filter-active {
-  color: white;
-  background-color:rgba(var(--bs-primary-rgb));
-}
+
 #uacamap .leaflet-control-attribution.leaflet-control {
   position: fixed;
   background: transparent;
@@ -1342,7 +1341,7 @@ body.map-touched #uacamap .leaflet-control-attribution.leaflet-control{ opacity:
     position: relative;
   }
 
-  #location-category-filter,
+ 
   #location-sort {
     max-width: 400px;
     width: auto;
@@ -1385,7 +1384,7 @@ body.map-touched{
 
 }
 
-#ua-magic-button-wrapper{
+#ua-context-buttons-wrapper{
   transition: bottom .3s;
  
 }
@@ -1401,7 +1400,7 @@ body.map-touched{
 }
 
 body.cards-opened{
-  #ua-magic-button-wrapper{
+  #ua-context-buttons-wrapper{
     bottom: 1rem;
   }
 }

@@ -1,0 +1,27 @@
+// VERTICAL ALIGN MIXIN
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+
+#ua-context-buttons-wrapper {
+  bottom: 4rem;
+  z-index: 495;
+
+  .swiper-container {
+    max-width: 580px;
+    margin: 0 auto;
+    border-radius: $border-radius;
+    overflow: hidden;
+
+    .swiper-slide {
+      background: rgba(var(--bs-primary-rgb), 0.7);
+    }
+
+  }
+}

@@ -92,3 +92,29 @@ body,
     font-family: 'Geologica', sans-serif;
 }
 
+.leaflet-control-geocoder-alternatives{
+
+
+    position: fixed;
+    top: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 98%;
+    max-width: 480px;
+    margin: 0 auto;
+    z-index: 200;
+    box-shadow: 0 0 15px -5px black;
+
+    a{
+      color: rgb(46, 60, 255);
+    }
+
+
+}
+
+.leaflet-control-geocoder.leaflet-bar{
+  padding: 1rem;
+  border-radius: 1rem;
+}

@@ -1,17 +1,4 @@
-button#ua-ctx-button {
-    position: absolute;
-    box-shadow: 0 0rem 0.8rem 0.1rem rgba(255, 74, 74, 0.9);
-    background: #ff3e3e;
-    color: white;
-    opacity: 0!important;
-    transition: 1s all cubic-bezier(0, 0, 0, 1);
-    transform: translate3d(-600px, 0px, 0px);
-  }
-  
-  button#ua-ctx-button.ctx-shown {
-    opacity: 1!important;
-    transform: translate3d(0px, 0px, 0px);
-  }
+
 
 
   
@@ -51,12 +38,7 @@ button#ua-ctx-button {
     transform: translate(0rem, 0px);
   }
   
-  #ua-ctx-button .button-subtitle {
-    font-size: 0.55rem;
-    text-align: left;
-    line-height: 1;
-    padding-left: 0.5rem;
-  }
+
   [data-ua-trigger="show_all_category"] {
     font-size: 0.75rem!important;
     background: #ff6666!important;

@@ -1,7 +1,6 @@
 <div id="ua-horizontal-buttons-wrapper" class="position-fixed d-block w-100 top-0">
     <div id="ua-place-buttons" class="swiper">
-        <!-- <button id="ua-ctx-button" type="button" data-ua-ctx-cb="" style="z-index: 25;" class="m-2 rounded-pill btn accent-animation"><i class="fa-solid fa-fire"></i> NEW</button> -->
-
+       
         <ul class="swiper-wrapper container p-2">
             <!-- <li class="swiper-slide">
                         <button id="ua-locate-me" type="button" class="rounded-pill me-3 btn"><i class="fa fa-location-crosshairs"></i> New</button>

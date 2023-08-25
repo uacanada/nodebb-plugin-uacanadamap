@@ -165,7 +165,7 @@
       html += '</div></div>'
       places.length
   
-      UacanadaMap.api.magicButtonText({text:'Open '+places.length+' places... '+UacanadaMap.api.getCatName(cat),delay:1300,to:UacanadaMap.magicButton.router.cards})
+      UacanadaMap.api.contextButtonText({text:'Open '+places.length+' places... '+UacanadaMap.api.getCatName(cat),delay:1300,to:UacanadaMap.contextButton.router.cards})
   
   
       await sleep(33);
@@ -417,7 +417,7 @@
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
       UacanadaMap.api.cardsOpened(false)
-      UacanadaMap.api.magicButtonText({text:' Reset Categories',delay:300,to:0})
+      UacanadaMap.api.contextButtonText({text:' Reset Categories',delay:300,to:0})
       setTimeout(() => {
         
        
@@ -436,7 +436,7 @@
     if(y && !b.hasClass(c))  b.addClass(c);
     if(!y && b.hasClass(c))  b.removeClass(c);
   
-    // UacanadaMap.swipers.magicButton.slideTo(1)
+    // UacanadaMap.swipers.contextButton.slideTo(1)
    // if($(window).innerWidth()<500){}
   }
   

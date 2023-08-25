@@ -5,31 +5,29 @@ define("core/swipersCreator", [
   UacanadaMap.api.initializeSwipers = () => {
     const { Swiper } = UacanadaMap;
 
-    UacanadaMap.swipers.magicButton = new Swiper("#magic-button-swiper", {
-      slidesPerView: 1,
-      setWrapperSize: true,
-      centeredSlides: true,
+    UacanadaMap.swipers.contextButton = new Swiper("#context-buttons-swiper .swiper", {
+      // slidesPerView: 1,
+      // setWrapperSize: true,
+      // centeredSlides: true,
       allowTouchMove: false,
-      // effect: "cube",
-      // grabCursor: true,
-      // cubeEffect: {
-      //   shadow: true,
-      //   slideShadows: true,
-      //   shadowOffset: 20,
-      //   shadowScale: 0.94,
-      // },
-
-      // autoplay: {
-      //     delay: 10000,
-      //     disableOnInteraction: true,
-      // },
-      effect: "fade",
-      //  effect: "flip",
+     
+      effect: "creative",
+      creativeEffect: {
+     prev: {
+       shadow: true,
+           translate: [0, 0, -2000],
+           rotate: [180, 0, 5],
+           opacity:0
+     },
+     next: {
+      shadow: true,
+           translate: [0, 0, -2000],
+           rotate: [180, 0, 15],
+       opacity: 1, // Fade in
+     }
+   }
     }).on("click", (swiper, event) => {
-      // console.log({swiper,event},
-      //    swiper.clickedSlide
-      //     //event.target.getAttribute('data-ua-tabtarget')
-      //     )
+      
     });
 
     UacanadaMap.swipers.buttonsSlider = new Swiper("#ua-sheet-swiper-buttons", {
