@@ -23,13 +23,13 @@ UacanadaMap.api.getLocationSelectionMarker = () => {
   console.log(`Coordinates: Latitude: ${coordinates.lat}, Longitude: ${coordinates.lng}`);
 }
 
-document.getElementById('addLocationSelectionMarker').addEventListener('click', function() {
-  UacanadaMap.api.addLocationSelectionMarker();
-});
+// document.getElementById('addLocationSelectionMarker').addEventListener('click', function() {
+//   UacanadaMap.api.addLocationSelectionMarker();
+// });
 
-document.getElementById('getLocationSelectionMarker').addEventListener('click', function() {
-  UacanadaMap.api.getLocationSelectionMarker();
-});
+// document.getElementById('getLocationSelectionMarker').addEventListener('click', function() {
+//   UacanadaMap.api.getLocationSelectionMarker();
+// });
 
   
 
