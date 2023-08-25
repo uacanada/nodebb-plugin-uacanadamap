@@ -23,7 +23,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       `,
         iconSize: [150, 50],
         iconAnchor: [92, 48],
-        popupAnchor: [0, 50],
+        popupAnchor: [-5, -50],
        })})
        .bindPopup(`<div class="p-2"><p>Navigate to the desired area and press Create.</p><p><strong>If you have the exact address of the location</strong> you'd like to add, please enter it into the search field and select from the dropdown list that will present suggested matches.</p></div>`)
        .addTo(map);
