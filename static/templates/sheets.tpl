@@ -102,9 +102,9 @@
 <div id="sortPlacesOffcanvas" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation p-3" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
     <div class="offcanvas-header">
         <h5 id="sortPlacesOffcanvasLabel">Sort By:</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
+    <div class="offcanvas-body overflow-auto ">
      
                 <div class="list-group">
                 <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="distance" href="#">
@@ -134,19 +134,21 @@
 </div>
 
 
-
-<div id="addPlaceInstructions" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation p-3" tabindex="-1" aria-labelledby="addPlaceInstructionsOffcanvasLabel" aria-hidden="true">
+<div id="addPlaceInstructions" class="ua-bottom-sheet d-flex flex-column no-propagation offcanvas offcanvas-bottom p-3" tabindex="-1" aria-labelledby="addPlaceInstructionsOffcanvasLabel" aria-hidden="true">
     <div class="offcanvas-header">
         <h5 id="addPlaceInstructionsOffcanvasLabel">Add a Place to the Map</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
      
-    {UacanadaMapSettings.placeInstruction}
-    <div id="geocoderSearchbox" class="mt-3"></div>
+        {UacanadaMapSettings.placeInstruction}
+        <div id="geocoderSearchbox" class="mt-3"></div>
 
     </div>
 </div>
+
+
+
 
 
 
