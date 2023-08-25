@@ -550,8 +550,8 @@
                   "url": "https://uacanada.org/services4ukrainians/koho/"
             }
       ],
-      "contextButtonSlide": "<a href=\"/categories\"\r\n  ><button class=\"btn btn-primary btn-context-start\" type=\"button\">\r\n    <i class=\"fa-solid fa-comment-dots\"></i> Community\r\n  </button>\r\n</a>\r\n\r\n<button\r\n  class=\"btn btn-primary\"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"main-first-tab\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n><i class=\"fa fas fa-solid fa-angle-up fa-fade\"></i>\r\n</button>\r\n\r\n<button\r\n  class=\"btn btn-primary btn-context-end\"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"events\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n>\r\n  <i class=\"fa fa-solid fa-calendar\"></i>\r\n</button>",
-     
+      "contextButtonSlide": "<a title=\"Forum Link\" href=\"/categories\"\r\n  ><button title=\"Open Forum\" class=\"btn btn-primary rounded-pill m-1 \" type=\"button\">\r\n    <i class=\"fa-solid fa-comment-dots\"></i> Community\r\n  </button>\r\n</a>\r\n\r\n<button title=\"Open Sheet\"\r\n  class=\"btn btn-primary rounded-pill m-1 \"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"main-first-tab\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n><i class=\"fa fas fa-solid fa-angle-up fa-fade\"></i>\r\n</button>\r\n\r\n<button title=\"Open Events\"\r\n  class=\"btn btn-primary rounded-pill m-1 \"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"events\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n>\r\n  <i class=\"fa fa-solid fa-calendar\"></i>\r\n</button>",
+      
       "bottomSheetOffset": "100,40,10,0,0",
       "mapTriggerClass": "uacanada-map-page",
       "placeTopicTag": "place",
