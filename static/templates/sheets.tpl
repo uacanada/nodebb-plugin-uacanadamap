@@ -122,8 +122,8 @@
                 <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="category" href="#">
                         <i class="fas fa-folder me-2"></i> Category
                 </a>
-                <div class="list-group-item border-bottom py-2">
-                        <i class="fas fa-folder me-2"></i> <select id="location-category-filter" name="categoryfilter" class="form-select w-100" aria-label="category"></select>
+                <div class="list-group-item border-bottom mt-5 py-2">
+                   <select id="location-category-filter" name="categoryfilter" class="form-select w-100 rounded-pill" aria-label="category"></select>
                 </div>
                 </div>
 

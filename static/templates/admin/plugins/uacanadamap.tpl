@@ -406,15 +406,15 @@
 
 
 									<div class="mb-5">
-										<label class="form-label" for="magicButtonSlide">magic Button Slide</label>
-										<div id="magicButtonSlideEditor"></div>
-										<textarea type="text" id="magicButtonSlide" name="magicButtonSlide"
+										<label class="form-label" for="contextButtonSlide">context Button Slide</label>
+										<div id="contextButtonSlideEditor"></div>
+										<textarea type="text" id="contextButtonSlide" name="contextButtonSlide"
 											class="d-none"></textarea>
 
 
 
 										<small class="form-text">
-											magicButtonSlide
+											contextButtonSlide
 										</small>
 
 									</div>

@@ -33,7 +33,7 @@ define('core/configuration', function (require) {
       latDistanceTtrigger: 45,
     };
   
-    UacanadaMap.magicButton = {
+    UacanadaMap.contextButton = {
       router: {
         text: 3,
         main: 0,

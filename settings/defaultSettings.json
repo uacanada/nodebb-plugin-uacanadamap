@@ -98,7 +98,7 @@
           "url": "https://yourwebsite.org/path"
         }
       ],
-      "magicButtonSlide": "YOUR_HTML_CONTENT_HERE",
+      "contextButtonSlide": "YOUR_HTML_CONTENT_HERE",
       "bottomSheetOffset": "100,40,10,0,0",
       "mapTriggerClass": "global-map-page",
       "placeTopicTag": "place",

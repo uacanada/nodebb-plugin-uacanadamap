@@ -162,8 +162,8 @@ UacanadaMap.api.debounce = (func, delay) => {
 
 
 
-UacanadaMap.api.openCertainTab = (magicButton) => {
-  let tab = magicButton[0]?.getAttribute('data-ua-tabtarget')
+UacanadaMap.api.openCertainTab = (contextButton) => {
+  let tab = contextButton[0]?.getAttribute('data-ua-tabtarget')
   if(tab){
 
   const slides = UacanadaMap.swipers.buttonsSlider.slides
