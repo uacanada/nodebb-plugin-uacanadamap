@@ -40,7 +40,11 @@
                 
                 
                 <div class="swiper-slide rounded-pill"> 
-                        <div class="rounded-pill p-2 text-bg-primary"><i class="fa fas fa-solid fa-wand-context-sparkles fa-beat"></i> <span id="text-info-button">...</span></div>
+                        <div class="d-flex align-items-center justify-content-center rounded-pill p-2 text-bg-primary">
+                        <i class="fa fas fa-solid fa-wand-context-sparkles fa-beat"></i>
+                        <span id="text-info-button">...</span>
+                </div>
+              
                 
                 </div>
         
