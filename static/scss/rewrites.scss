@@ -114,6 +114,7 @@ body,
 
 }
 
-.leaflet-control-geocoder .leaflet-bar{
-  padding: 0.5rem;
+.leaflet-control-geocoder.leaflet-bar{
+  padding: 1rem;
+  border-radius: 1rem;
 }
