@@ -419,7 +419,7 @@
 
 									</div>
 
-
+ 
 
 
 								</div>
@@ -429,6 +429,35 @@
 
 
 					</div>
+
+
+					<div class="accordion mb-5" id="placeInstructionsAccordion">
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="placeInstructionsHeading">
+								<button
+									class="accordion-button collapsed tracking-tight settings-header bg-primary text-bg-primary"
+									type="button" data-bs-toggle="collapse" data-bs-target="#placeInstructionsCollapse"
+									aria-expanded="false" aria-controls="placeInstructionsCollapse">
+									Context Button
+								</button>
+							</h2>
+							<div id="placeInstructionsCollapse" class="accordion-collapse collapse"
+								aria-labelledby="placeInstructionsHeading" data-bs-parent="#placeInstructionsAccordion">
+								<div class="accordion-body">
+									<div class="mb-5">
+										<label class="form-label" for="placeInstruction">context Button Slide</label>
+										<div id="placeInstructionEditor"></div>
+										<textarea type="text" id="placeInstruction" name="placeInstruction"
+											class="d-none"></textarea>
+										<small class="form-text">
+											addPlaceInstruction
+										</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 
 
 

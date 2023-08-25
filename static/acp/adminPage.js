@@ -39,7 +39,8 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			 return parentOptionsHtml;
 			});
 
-			initACE('contextButtonSlideEditor', 'html', '#contextButtonSlide' )
+			initACE('contextButtonSlideEditor', 'html', '#contextButtonSlide' );
+			initACE('placeInstructionEditor', 'html', '#placeInstruction' );
 
 		
 		});
