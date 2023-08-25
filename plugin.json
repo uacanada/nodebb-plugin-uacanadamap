@@ -34,7 +34,7 @@
     "static/scss/rewrites.scss"
   ],
   "scripts": ["static/js/topics/topicClient.js"],
-  "acpScripts": [],
+  "acpScripts": ["lib/backend/uacanadamap.js"],
 
   "modules": {
   
