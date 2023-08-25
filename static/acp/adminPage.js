@@ -4,6 +4,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		
 	var ACP = {};
 	let loadedSettings;
+	console.log('ACP')
 
 	const createOptionsHtml = (loadedSettings) =>{
 		let optionsHtml = ''
@@ -23,8 +24,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 			loadedSettings = currentSettings
 
-			//setupColorInputs('body'); 
-			//$('#save-uacanadamap-settings').on('click', saveSettings);
+			
 			$('#console_log').on('click', logConsoleSettings);
 			
 
@@ -34,17 +34,13 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			} catch (error) {
 				
 			}
-
-
-
 			const parentOptionsHtml = createOptionsHtml(currentSettings)
-			
-			
 			Benchpress.registerHelper('renderParentsOptions', function() {
 			 return parentOptionsHtml;
 			});
 
-			initACE('magicButtonSlideEditor', 'html', '#magicButtonSlide' )
+			initACE('contextButtonSlideEditor', 'html', '#contextButtonSlide' );
+			initACE('placeInstructionEditor', 'html', '#placeInstruction' );
 
 		
 		});
@@ -114,17 +110,9 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		
 		$(document).on('click', '#exportJson', exportSettingsJson);
 		$(document).on('click', '#resetSettings', resetSettings);
-
-		
 		$(document).on('click', '.save-settings-uacanadamap', saveSettings);
 		categorySelector.init($('[component="category-selector"]'));
 		
-		
-		
-		
-
-		// hooks.on('action:category.selector.options', function (selector) {  })
-
 		hooks.on('action:settings.sorted-list.modal', function ({ modal }) {
 			
 			

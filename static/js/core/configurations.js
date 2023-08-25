@@ -33,7 +33,7 @@ define('core/configuration', function (require) {
       latDistanceTtrigger: 45,
     };
   
-    UacanadaMap.magicButton = {
+    UacanadaMap.contextButton = {
       router: {
         text: 3,
         main: 0,
@@ -263,7 +263,7 @@ define('core/configuration', function (require) {
         $.each(UacanadaMap.mapProviders, (providerName) => {
             const $button = $('<button/>', {
                 id: `provider-button-${providerName}`,
-                class: 'provider-button',
+                class: 'provider-button d-block w-100',
                 text: providerName,
                 // css: { backgroundImage: `url('/path/to/${providerName}-image.png')`, // Replace with your own image path pattern  },
                 click: () => {  UacanadaMap.switchMapProvider(providerName);  },
@@ -324,7 +324,7 @@ define('core/configuration', function (require) {
     
     function handleControlAddition(layer) {
         try {
-            $("#map-controls .offcanvas-body").append(layer.onAdd(UacanadaMap.map))
+            $("#geocoderSearchbox").append(layer.onAdd(UacanadaMap.map))
         } catch (error) {
             handleControlError(layer, error);
         }
@@ -335,7 +335,7 @@ define('core/configuration', function (require) {
         const controlDiv = layer.getContainer();
         const controlDivCopy = controlDiv.cloneNode(true);
     
-        $("#map-controls .offcanvas-body").append(controlDivCopy);
+        $("#geocoderSearchbox").append(controlDivCopy);
       
     }
 

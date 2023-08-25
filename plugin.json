@@ -25,7 +25,7 @@
     "static/scss/bottomSheet.scss",
     "static/scss/markers.scss",
     "static/scss/buttons.scss",
-    "static/scss/bottomButton.scss",
+    "static/scss/contextButton.scss",
     "static/scss/placeTopic.scss",
     "static/scss/acp.scss",
     "static/scss/dirty.scss",
@@ -34,7 +34,7 @@
     "static/scss/rewrites.scss"
   ],
   "scripts": ["static/js/topics/topicClient.js"],
-  "acpScripts": [],
+  "acpScripts": ["lib/backend/uacanadamap.js"],
 
   "modules": {
   
@@ -59,7 +59,7 @@
     "panels/categoryButtonsSwiper": "static/js/panels/categoryButtonsSwiper.js",
     "panels/cardSwiper": "static/js/panels/cardSwiper.js",
     "panels/bottomSheets": "static/js/panels/bottomSheets.js",
-    "panels/magicButton":"static/js/panels/magicButton.js",
+    "panels/contextButton":"static/js/panels/contextButton.js",
     "population/tabsPopulator": "static/js/population/tabsPopulator.js",
     "markers/markersFilter": "static/js/markers/markersFilter.js",
     "markers/advMarkers": "static/js/markers/advMarkers.js",
@@ -119,6 +119,6 @@
     "leaflet.locatecontrol": "^0.79.0",
     "leaflet.markercluster": "^1.5.3",
     "leaflet-providers": "^1.13.0",
-    "swiper": "^9.2.4"
+    "swiper": "^10.2.0"
   }
 }

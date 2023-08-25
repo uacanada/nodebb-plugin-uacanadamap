@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-uacanadamap",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Interactive map plugin for NodeBB forums. Enhance user engagement by allowing location additions and explore monetization opportunities.",
   "main": "lib/backend/main.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/uacanada/nodebb-plugin-uacanadamap"
   },
   "keywords": [
-    "nodebb",
+    "NodeBB",
     "plugin",
     "uacanadamap",
     "Ukraine",
@@ -54,6 +54,6 @@
     "leaflet-providers": "^1.13.0",
     "leaflet.locatecontrol": "^0.79.0",
     "leaflet.markercluster": "^1.5.3",
-    "swiper": "^9.2.4"
+    "swiper": "^10.2.0"
   }
 }

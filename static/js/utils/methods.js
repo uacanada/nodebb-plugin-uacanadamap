@@ -106,63 +106,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     );
   };
 
-  UacanadaMap.api.ctxButton = ({ show, reason, action }) => {
-    var el = $("#ua-ctx-button");
-
-    var CTX_BUTT_REASONS = {
-      resetCategory: {
-        html: '<div class="button-subtitle">Press to remove filter</div>',
-        trigger: "show_all_category",
-      },
-      addPlace: {
-        html: '<i class="fa-solid fa-map-pin"></i> Add new place',
-        trigger: "add_new_place",
-      },
-      signUpRequire: {
-        html: '<i class="fa-solid fa-user-plus"></i> Create account',
-        trigger: "sign_up",
-      },
-      setLocation: {
-        html: '<i class="fa-solid fa-location-crosshairs"></i> Set Location',
-        trigger: "set_location",
-      },
-    };
-    var additionalContext = "";
-    if (reason === "resetCategory") {
-      var catName =
-        UacanadaMap.categoryMapper[$("#location-category-filter").val()];
-      if (!catName) return;
-      additionalContext =
-        "<b>" + catName + '</b> <i class="fa-solid fa-delete-left"></i></span>';
-    }
-
-    if (show && reason) {
-      el.html(CTX_BUTT_REASONS[reason].html + additionalContext);
-      el.attr("data-ua-trigger", CTX_BUTT_REASONS[reason].trigger);
-
-      el.addClass("ctx-shown");
-      UacanadaMap.api.shakeElements(["#ua-ctx-button"], "accent-animation");
-    } else {
-      //} else if(!action) {
-      el.removeClass("ctx-shown");
-    }
-
-    if (action === "show_all_category") {
-      UacanadaMap.api.rewriteTabsOnCatChange("");
-    }
-
-    if (action === "add_new_place") {
-      UacanadaMap.api.addNewPlace();
-    }
-
-    if (action === "sign_up") {
-      window.location.assign(window.location.origin + "/register");
-    }
-
-    if (action === "set_location") {
-      UacanadaMap.api.tryLocate({ fornewplace: false });
-    }
-  };
+  
 
   UacanadaMap.api.tryLocate = ({ fornewplace }) => {
     const { map, L } = UacanadaMap;
