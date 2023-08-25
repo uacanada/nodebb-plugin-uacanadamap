@@ -9,7 +9,25 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     addMarker: () => {
       const { L, map } = UacanadaMap;
       UacanadaMap.api.locationSelection.cleanMarker();
-      UacanadaMap.locationSelectionMarker = L.marker(map.getCenter()).addTo(map);
+
+
+
+      UacanadaMap.locationSelectionMarker= L.marker(map.getCenter(), { icon: L.divIcon({
+        className: "ua-pin-icon",
+        html: `<div class="ua-markers marker-selector d-flex align-items-center">
+                  <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center">
+                    <i class="'fa fa-fw fas fa-solid fa-question"></i> 
+                  </div>
+                <span class="ms-1 badge-text"><button>Y</button>    <button>N</button></span> 
+              </div>`,
+        iconSize: [150, 24],
+        iconAnchor: [11, 35],
+        popupAnchor: [0, 0],
+       })}).addTo(map);
+
+
+
+
       map.on('move', () => {
         UacanadaMap.locationSelectionMarker.setLatLng(map.getCenter());
       });
