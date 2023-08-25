@@ -105,11 +105,30 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <a class="dropdown-item ua-sort" data-ua-sortby="distance" href="#">Distance</a>
-        <a class="dropdown-item ua-sort" data-ua-sortby="latest" href="#">Latest</a>
-        <a class="dropdown-item ua-sort" data-ua-sortby="oldest" href="#">Oldest</a>
-        <a class="dropdown-item ua-sort" data-ua-sortby="events" href="#">Event Date</a>
-        <a class="dropdown-item ua-sort" data-ua-sortby="category" href="#">Category</a>
-        <select id="location-category-filter" name="categoryfilter" class="form-select shadow me-2" aria-label="category"></select>
+     
+                <div class="list-group">
+                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="distance" href="#">
+                        <i class="fas fa-road me-2"></i> Distance
+                </a>
+                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="latest" href="#">
+                        <i class="fas fa-hourglass-start me-2"></i> Latest
+                </a>
+                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="oldest" href="#">
+                        <i class="fas fa-hourglass-end me-2"></i> Oldest
+                </a>
+                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="events" href="#">
+                        <i class="fas fa-calendar-alt me-2"></i> Event Date
+                </a>
+                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="category" href="#">
+                        <i class="fas fa-folder me-2"></i> Category
+                </a>
+                <div class="list-group-item border-bottom py-2">
+                        <select id="location-category-filter" name="categoryfilter" class="form-select shadow w-100" aria-label="category"></select>
+                </div>
+                </div>
+
+
+
+
     </div>
 </div>
