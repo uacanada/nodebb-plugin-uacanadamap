@@ -15,11 +15,10 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       UacanadaMap.locationSelectionMarker= L.marker(map.getCenter(), { icon: L.divIcon({
         className: "ua-pin-icon",
         html: `<div class="ua-markers marker-selector d-flex align-items-center">
-                <span class="me-1 badge-text"><button>Here</button>    <span id="locationSelectionLatLng">:::</span></span> 
-                  <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center">
-                    <i class="'fa fa-fw fas fa-solid fa-compass fa-spin"></i> 
-                  </div>
-                <span class="ms-1 badge-text"><button>Cancel</button></span> 
+        <span id="locationSelectionLatLng">:::</span> 
+                <button title="Add place here" class="btn btn-primary btn-sm rounded-pill me-1" type="button"><i class="fa fas fa-solid fa-check"></i></button>  
+                  <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center"><i class="'fa fa-fw fas fa-solid fa-compass fa-spin"></i> </div>
+                <button title="Add place here" class="btn btn-danger btn-sm rounded-pill ms-1" type="button"><i class="fa-solid fa-xmark"></i></button>  
               </div>`,
         iconSize: [150, 24],
         iconAnchor: [11, 35],
