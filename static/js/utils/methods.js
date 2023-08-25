@@ -22,7 +22,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       </div>
       `,
         iconSize: [150, 50],
-        iconAnchor: [-89, -47],
+        iconAnchor: [89, 47],
         popupAnchor: [0, 0],
        })}).addTo(map);
 
