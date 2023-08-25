@@ -6,14 +6,7 @@
                 <div class="swiper-slide rounded-pill">
                         <div class="btn-group w-100" role="group" aria-label="Buttons when cards is opened">
                         {UacanadaMapSettings.contextButtonSlide}
-                        
-                        
-                        <div class="d-flex align-items-center justify-content-center text-bg-primary fs-3" style="width: 4rem;" type="button"  data-bs-toggle="offcanvas"  data-bs-target="#map-controls" aria-controls="map-controls">
-                        <i class="fas fa-ellipsis-v"></i>
-                      </div>
-                        
-
-                        </div>
+                       </div>
                 </div>
         
                 <div class="swiper-slide rounded-pill">
@@ -41,7 +34,7 @@
                 
                 <div class="swiper-slide rounded-pill"> 
                         <div class="d-flex align-items-center justify-content-center rounded-pill p-2 text-bg-primary">
-                        <i class="fa fas fa-solid fa-wand-context-sparkles fa-beat"></i>
+                        <i class="fa fas fa-solid fa-puzzle-piece fa-beat me-3"></i>
                         <span id="text-info-button">...</span>
                 </div>
               
