@@ -142,30 +142,8 @@
     </div>
     <div class="offcanvas-body">
      
-    Welcome to our location addition interface! Here, you can contribute to our growing community by adding a new place to the map. Whether it's your favorite café, a historical landmark, or a hidden gem, we'd love to include it!
-
-
-        <div class="container mt-4">
-        <div class="row">
-        <div class="col-1 d-flex align-items-center justify-content-center">
-        <i class="fa fa-map-marker-alt fa-2x text-primary"></i>
-        </div>
-        <div class="col-11">
-        <p class="mb-0"><strong>To add a location on the map,</strong> simply navigate to the desired area and perform a long tap or right-click on the specific spot.</p>
-        </div>
-        </div>
-        <hr class="my-3">
-        <div class="row">
-        <div class="col-1 d-flex align-items-center justify-content-center">
-        <i class="fa fa-search-location fa-2x text-primary"></i>
-        </div>
-        <div class="col-11">
-        <p class="mb-0"><strong>If you have the exact address of the location</strong> you'd like to add, please enter it into the search field and select from the dropdown list that will present suggested matches.</p>
-        </div>
-        </div>
-        </div>
-
-        <div id="geocoderSearchbox" class="mt-3"></div>
+    {UacanadaMapSettings.placeInstruction}
+    <div id="geocoderSearchbox" class="mt-3"></div>
 
     </div>
 </div>
