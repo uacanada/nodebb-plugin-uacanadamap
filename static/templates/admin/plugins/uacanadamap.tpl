@@ -394,12 +394,12 @@
 							<h2 class="accordion-header" id="headingExpert">
 								<button
 									class="accordion-button collapsed tracking-tight settings-header bg-primary text-bg-primary"
-									type="button" data-bs-toggle="collapse" data-bs-target="#collapseMagicButton"
-									aria-expanded="false" aria-controls="collapseMagicButton">
-									Magic Button
+									type="button" data-bs-toggle="collapse" data-bs-target="#collapseContextButton"
+									aria-expanded="false" aria-controls="collapseContextButton">
+									Context Button
 								</button>
 							</h2>
-							<div id="collapseMagicButton" class="accordion-collapse collapse"
+							<div id="collapseContextButton" class="accordion-collapse collapse"
 								aria-labelledby="headingExpert" data-bs-parent="#acpAccordionMb">
 								<div class="accordion-body">
 
