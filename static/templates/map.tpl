@@ -4,10 +4,8 @@
 
             <!-- IMPORT mapHero.tpl -->
             <!-- IMPORT topButtons.tpl -->
-            <!-- IMPORT sheets.tpl -->
-            <!-- IMPORT submitPlace.tpl -->
-
-            <!-- IMPORT mapControlsCanvas.tpl -->
+           
+            
 
             <div id="mapStatusLine" class="position-absolute top-0 align-items-center border-0 m-2">
                 <div class="d-flex">
@@ -45,7 +43,9 @@
                         class="fa-solid fa-circle-info"></i></span>
             </div>
 
-            <!-- IMPORT bottomButtons.tpl -->
+             <!-- IMPORT bottomButtons.tpl -->
+             <!-- IMPORT sheets.tpl -->
+             <!-- IMPORT submitPlace.tpl -->
         </div>
     </div>
 </div>

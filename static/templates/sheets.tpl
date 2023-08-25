@@ -99,7 +99,7 @@
 </div>
 
 
-<div id="sortPlacesOffcanvas" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
+<div id="sortPlacesOffcanvas" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation p-3" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
     <div class="offcanvas-header">
         <h5 id="sortPlacesOffcanvasLabel">Sort By:</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -123,7 +123,7 @@
                         <i class="fas fa-folder me-2"></i> Category
                 </a>
                 <div class="list-group-item border-bottom py-2">
-                        <select id="location-category-filter" name="categoryfilter" class="form-select shadow w-100" aria-label="category"></select>
+                        <i class="fas fa-folder me-2"></i> <select id="location-category-filter" name="categoryfilter" class="form-select w-100" aria-label="category"></select>
                 </div>
                 </div>
 
@@ -131,4 +131,21 @@
 
 
     </div>
+</div>
+
+
+
+<div id="map-controls" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="map-controls-modal"  aria-hidden="true">
+
+        <div class="offcanvas-header">
+
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body overflow-auto">
+           
+
+        <div id="tile-chooser"></div>
+
+        </div>
+
 </div>
