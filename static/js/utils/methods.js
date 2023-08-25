@@ -5,32 +5,35 @@ let tabRouteObject = {};
 'use strict';
 define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) {
 
-UacanadaMap.api.addLocationSelectionMarker = () => {
-  const { L, map } = UacanadaMap;
-  if(UacanadaMap.locationSelectionMarker){  
-    map.removeLayer(UacanadaMap.locationSelectionMarker);
-  }
-  UacanadaMap.locationSelectionMarker = L.marker(map.getCenter()).addTo(map);
-  map.on('move', function() {
-    UacanadaMap.locationSelectionMarker.setLatLng(map.getCenter());
-  });
-}
-
-UacanadaMap.api.getLocationSelectionMarker = () => {
-  const { locationSelectionMarker } = UacanadaMap;
-  const coordinates = locationSelectionMarker ? locationSelectionMarker.getLatLng() : null;
-  if(!coordinates) return;
-  console.log(`Coordinates: Latitude: ${coordinates.lat}, Longitude: ${coordinates.lng}`);
-}
-
-// document.getElementById('addLocationSelectionMarker').addEventListener('click', function() {
-//   UacanadaMap.api.addLocationSelectionMarker();
-// });
-
-// document.getElementById('getLocationSelectionMarker').addEventListener('click', function() {
-//   UacanadaMap.api.getLocationSelectionMarker();
-// });
-
+   UacanadaMap.api.locationSelection = {
+    addMarker: () => {
+      const { L, map } = UacanadaMap;
+      UacanadaMap.api.locationSelection.cleanMarker();
+      UacanadaMap.locationSelectionMarker = L.marker(map.getCenter()).addTo(map);
+      map.on('move', () => {
+        UacanadaMap.locationSelectionMarker.setLatLng(map.getCenter());
+      });
+    },
+  
+    getMarker: () => {
+      const { locationSelectionMarker } = UacanadaMap;
+      if (!locationSelectionMarker) return;
+      const coordinates = locationSelectionMarker.getLatLng();
+      console.log(`Coordinates: Latitude: ${coordinates.lat}, Longitude: ${coordinates.lng}`);
+    },
+  
+    cleanMarker: () => {
+      const { map } = UacanadaMap;
+      if (UacanadaMap.locationSelectionMarker) {
+        map.removeLayer(UacanadaMap.locationSelectionMarker);
+        UacanadaMap.locationSelectionMarker = null;
+      }
+    },
+  };
+  
+// UacanadaMap.api.locationSelection.cleanMarker()
+// UacanadaMap.api.locationSelection.getMarker()
+// UacanadaMap.api.locationSelection.addMarker()
   
 
   // TODO REFACTOR
