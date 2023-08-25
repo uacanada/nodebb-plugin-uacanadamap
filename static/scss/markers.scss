@@ -33,6 +33,42 @@
   font-size: 16px;
 }
 
+
+.newlocation-create-button {
+  font-size: 8px;
+  width: 70px;
+  height: 20px;
+  padding: 0px 5px;
+  line-height: 19px;
+  overflow: hidden;
+  background: #18a16e;
+  color: #ffffff;
+}
+
+
+.newlocation-cancel-button {
+  font-size: 16px;
+  width: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: red;
+  height: 20px;
+  padding: 0px 5px;
+  overflow: hidden;
+}
+
+#locationSelectionLatLng {
+  position: absolute;
+  top: -20px;
+  font-weight: bold;
+  padding: 0 5px;
+  font-size: 10px;
+  border-radius: 7px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+
 .ua-markers{  font-size: 16px; }
 .ua-markers.two-line-m  .badge-text{  font-size: 12px; line-height: 12px; height: 24px;}
 .ua-markers.one-line-m  .badge-text{  font-size: 14px; line-height: 24px; height: 24px;}
@@ -81,6 +117,19 @@
 
 
 
+
+
+.ua-markers.marker-selector .circle-icon:after {
+  content: "\f063";
+  font-family: 'Font Awesome 6 Free';
+  position: absolute;
+  top: 30px;
+  font-style: normal;
+  font-weight: 700;
+  color: $marker-bg;
+  font-size: 14px;
+  text-shadow: 0px 3px 3px #08117c99;
+}
 
 
 .uac-marker-shadow {

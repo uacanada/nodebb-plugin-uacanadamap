@@ -13,15 +13,16 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 
       UacanadaMap.locationSelectionMarker= L.marker(map.getCenter(), { icon: L.divIcon({
-        className: "ua-pin-icon",
-        html: `<div class="ua-markers marker-selector d-flex align-items-center">
-        <span id="locationSelectionLatLng">:::</span> 
-                <button title="Add place here" class="btn btn-primary btn-sm rounded-pill me-1" type="button"><i class="fa fas fa-solid fa-check"></i></button>  
-                  <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center"><i class="'fa fa-fw fas fa-solid fa-compass fa-spin"></i> </div>
-                <button title="Add place here" class="btn btn-danger btn-sm rounded-pill ms-1" type="button"><i class="fa-solid fa-xmark"></i></button>  
-              </div>`,
-        iconSize: [150, 24],
-        iconAnchor: [11, 35],
+        className: "ua-sekector-icon",
+        html:  `<div class="ua-markers marker-selector d-flex align-items-center marker-container">
+        <span id="locationSelectionLatLng"></span> 
+        <button title="Add place here" class="btn btn-sm rounded-pill newlocation-create-button" type="button"><i class="fa fas fa-solid fa-check"></i> Create</button>
+        <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center"><i class="'fa fa-fw fas fa-solid fa-compass fa-spin"></i></div>
+        <button title="Add place here" class="btn rounded-pill newlocation-cancel-button" type="button"><i class="fa-solid fa-xmark"></i></button>  
+      </div>
+      `,
+        iconSize: [150, 50],
+        iconAnchor: [-89, -47],
         popupAnchor: [0, 0],
        })}).addTo(map);
 
