@@ -396,7 +396,7 @@
 									class="accordion-button collapsed tracking-tight settings-header bg-primary text-bg-primary"
 									type="button" data-bs-toggle="collapse" data-bs-target="#collapseContextButton"
 									aria-expanded="false" aria-controls="collapseContextButton">
-									Context Button
+									Context Buttons
 								</button>
 							</h2>
 							<div id="collapseContextButton" class="accordion-collapse collapse"
@@ -406,7 +406,7 @@
 
 
 									<div class="mb-5">
-										<label class="form-label" for="contextButtonSlide">context Button Slide</label>
+										<label class="form-label" for="contextButtonSlide">HTML and Bootstrap+FontAwesome classes</label>
 										<div id="contextButtonSlideEditor"></div>
 										<textarea type="text" id="contextButtonSlide" name="contextButtonSlide"
 											class="d-none"></textarea>
@@ -414,7 +414,8 @@
 
 
 										<small class="form-text">
-											contextButtonSlide
+										Customize the context buttons that will appear at the bottom of the screen. You can utilize these buttons to provide links or to trigger off-canvas panels. Knowledge of HTML and Bootstrap is essential to craft effective buttons. Consider using standard Bootstrap classes and FontAwesome icons to ensure compatibility and visual coherence.
+
 										</small>
 
 									</div>
@@ -438,19 +439,19 @@
 									class="accordion-button collapsed tracking-tight settings-header bg-primary text-bg-primary"
 									type="button" data-bs-toggle="collapse" data-bs-target="#placeInstructionsCollapse"
 									aria-expanded="false" aria-controls="placeInstructionsCollapse">
-									Context Button
+									Custom Map Location Instructions
 								</button>
 							</h2>
 							<div id="placeInstructionsCollapse" class="accordion-collapse collapse"
 								aria-labelledby="placeInstructionsHeading" data-bs-parent="#placeInstructionsAccordion">
 								<div class="accordion-body">
 									<div class="mb-5">
-										<label class="form-label" for="placeInstruction">context Button Slide</label>
+										<label class="form-label" for="placeInstruction">HTML and Bootstrap+FontAwesome classes</label>
 										<div id="placeInstructionEditor"></div>
 										<textarea type="text" id="placeInstruction" name="placeInstruction"
 											class="d-none"></textarea>
 										<small class="form-text">
-											addPlaceInstruction
+										Enter your customized HTML instructions to guide users in adding a location to the map. These instructions will appear in a bottom sheet popup above a permanent search bar. When crafting your content, consider leading into the search bar functionality as it will always be present at the bottom of the instructions panel.
 										</small>
 									</div>
 								</div>
