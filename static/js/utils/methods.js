@@ -7,49 +7,57 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
    UacanadaMap.api.locationSelection = {
     addMarker: () => {
-      const { L, map } = UacanadaMap;
-      UacanadaMap.api.locationSelection.cleanMarker();
-
-
-
-      UacanadaMap.locationSelectionMarker= L.marker(map.getCenter(), { icon: L.divIcon({
-        className: "ua-sekector-icon",
-        html:  `<div class="ua-markers marker-selector d-flex align-items-center marker-container">
-        <span id="locationSelectionLatLng"></span> 
-        <button title="Add place here" class="btn btn-sm rounded-pill newlocation-create-button" type="button"><i class="fa fas fa-solid fa-check"></i> Create</button>
-        <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center"><i class="'fa fa-fw fas fa-solid fa-compass fa-spin"></i></div>
-        <button title="Add place here" class="btn rounded-pill newlocation-cancel-button" type="button"><i class="fa-solid fa-xmark"></i></button>  
-      </div>
-      `,
-        iconSize: [150, 50],
-        iconAnchor: [92, 48],
-        popupAnchor: [-5, -50],
-       })})
-       .bindPopup(`<div class="p-2"><p>Navigate to the desired area and press Create.</p><p><strong>If you have the exact address of the location</strong> you'd like to add, please enter it into the search field and select from the dropdown list that will present suggested matches.</p></div>`)
-       .addTo(map);
-       //.openPopup();
-
-
-
-
-      map.on('move', () => {
-        UacanadaMap.locationSelectionMarker.setLatLng(map.getCenter());
+      const mapContainer = $('#uacamap'); // Assuming your Leaflet map container has the ID 'map'
+      const targetDiv = $('#targetForNewPlace'); // Your custom div
+      
+      // Initially set the div to be hidden and position it
+      targetDiv.addClass('d-none').css({
+          'position': 'absolute',
+          'left': 0,
+          'top': 0,
+          'opacity': 0,
+          'z-index': 1000
       });
+
+      // Calculate the center of the map container
+      const mapCenterX = mapContainer.width() / 2;
+      const mapCenterY = mapContainer.height() / 2;
+
+      // Given offsets for centering the div
+      const offsetX = 92;
+      const offsetY = 48;
+
+      // Calculate where the div should be placed
+      const targetDivX = mapCenterX - offsetX;
+      const targetDivY = mapCenterY - offsetY;
+
+      // First make the div visible but opacity 0
+      targetDiv.removeClass('d-none');
+
+      // Animate to the final position with full opacity
+      targetDiv.animate({
+          'left': `${targetDivX}px`,
+          'top': `${targetDivY}px`,
+          'opacity': 1
+      }, 1000); // 1000ms or 1s animation duration
     },
   
     getMarker: () => {
-      const { locationSelectionMarker } = UacanadaMap;
-      if (!locationSelectionMarker) return;
-      const coordinates = locationSelectionMarker.getLatLng();
-      console.log(`Coordinates: Latitude: ${coordinates.lat}, Longitude: ${coordinates.lng}`);
+      console.log(UacanadaMap.map.getCenter());
     },
   
     cleanMarker: () => {
-      const { map } = UacanadaMap;
-      if (UacanadaMap.locationSelectionMarker) {
-        map.removeLayer(UacanadaMap.locationSelectionMarker);
-        UacanadaMap.locationSelectionMarker = null;
-      }
+     
+      const targetDiv = $('#targetForNewPlace'); // Your custom div
+      targetDiv.animate({
+        'opacity': 0
+    }, 500, function() {
+        // Callback after animation completes
+        targetDiv.addClass('d-none').css({
+            'left': 0,
+            'top': 0
+        });
+    });
     },
   };
   
