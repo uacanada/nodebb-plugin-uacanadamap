@@ -25,7 +25,7 @@
     "static/scss/bottomSheet.scss",
     "static/scss/markers.scss",
     "static/scss/buttons.scss",
-    "static/scss/bottomButton.scss",
+    "static/scss/contextButton.scss",
     "static/scss/placeTopic.scss",
     "static/scss/acp.scss",
     "static/scss/dirty.scss",
