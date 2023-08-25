@@ -135,6 +135,43 @@
 
 
 
+<div id="addPlaceInstructions" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation p-3" tabindex="-1" aria-labelledby="addPlaceInstructionsOffcanvasLabel" aria-hidden="true">
+    <div class="offcanvas-header">
+        <h5 id="addPlaceInstructionsOffcanvasLabel">Add a Place to the Map</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+     
+    Welcome to our location addition interface! Here, you can contribute to our growing community by adding a new place to the map. Whether it's your favorite café, a historical landmark, or a hidden gem, we'd love to include it!
+
+
+        <div class="container mt-4">
+        <div class="row">
+        <div class="col-1 d-flex align-items-center justify-content-center">
+        <i class="fa fa-map-marker-alt fa-2x text-primary"></i>
+        </div>
+        <div class="col-11">
+        <p class="mb-0"><strong>To add a location on the map,</strong> simply navigate to the desired area and perform a long tap or right-click on the specific spot.</p>
+        </div>
+        </div>
+        <hr class="my-3">
+        <div class="row">
+        <div class="col-1 d-flex align-items-center justify-content-center">
+        <i class="fa fa-search-location fa-2x text-primary"></i>
+        </div>
+        <div class="col-11">
+        <p class="mb-0"><strong>If you have the exact address of the location</strong> you'd like to add, please enter it into the search field and select from the dropdown list that will present suggested matches.</p>
+        </div>
+        </div>
+        </div>
+
+        <div id="geocoderSearchbox"></div>
+
+    </div>
+</div>
+
+
+
 <div id="map-controls" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="map-controls-modal"  aria-hidden="true">
 
         <div class="offcanvas-header">
