@@ -203,6 +203,38 @@ define('core/configuration', function (require) {
             options: {  pseudoFullscreenClass: "fa fa-expand" }
         });
         UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
+            
+            const addplaceControl = L.Control.extend({
+                options: { position: 'bottomright'},
+            
+                onAdd(map) {
+                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-addplace');
+                const button = L.DomUtil.create('button', '', container);
+                button.innerHTML = 'New';
+            
+                
+                button.onclick = () => {
+                    console.log('add place')
+                };
+            
+                return container;
+                },
+            });
+            
+            
+            
+            
+        UacanadaMap.mapLayers.addPlaceButton = new addplaceControl();
+           
+  
+
+
+
+
+
+
+
+
     }
 	
 
