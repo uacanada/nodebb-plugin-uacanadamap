@@ -323,7 +323,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
        <small>You can edit or remove the legal address for privacy in the next step.</small>
        <div class="d-flex mt-2">
          <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
-         <button title="Cancel creating place here" type="button" class="btn btn-sm btn-warning"><i class="fa fas fa-solid fa-xmark"></i></button>
        </div>
      </div>
      
