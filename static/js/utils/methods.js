@@ -20,6 +20,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     addMarker: function() {
       if (this.isVisible) return;  // Exit if the marker is already visible
       $('#geocoderSearchbox').addClass('show')
+      $('#ua-horizontal-buttons-wrapper').addClass('hidden')
       const mapContainer = $('#uacamap');
       const targetDiv = $('#targetForNewPlace');
       const mapCenter = {
@@ -59,6 +60,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   
     cleanMarker: function() {
       $('#geocoderSearchbox').removeClass('show')
+      $('#ua-horizontal-buttons-wrapper').removeClass('hidden')
       if (!this.isVisible) return;  // Exit if the marker is already hidden
   
       this.toggleVisibility(false);

@@ -1416,9 +1416,18 @@ body.map-touched{
   opacity: 1;
 }
 #ua-horizontal-buttons-wrapper{
-  transition: transform .3s;
+  top: 0;
+  transition: transform .3s ease-in;
   transform: translate3d(0,0,0);
   z-index: 500;
+  &.hidden{
+    transform: translate3d(0,-300px,0);
+  }
+  &.movedown{
+   top: auto;
+   bottom: 5rem;
+   z-index: 1080;
+  }
 }
 
 body.cards-opened{
