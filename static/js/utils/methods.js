@@ -5,62 +5,83 @@ let tabRouteObject = {};
 'use strict';
 define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) {
 
-   UacanadaMap.api.locationSelection = {
-    addMarker: () => {
-      const mapContainer = $('#uacamap'); // Assuming your Leaflet map container has the ID 'map'
-      const targetDiv = $('#targetForNewPlace'); // Your custom div
-      
-      // Initially set the div to be hidden and position it
-      targetDiv.addClass('d-none').css({
-          'position': 'absolute',
-          'left': 0,
-          'top': 0,
-          'opacity': 0,
-          'z-index': 1000
-      });
-
-      // Calculate the center of the map container
-      const mapCenterX = mapContainer.width() / 2;
-      const mapCenterY = mapContainer.height() / 2;
-
-      // Given offsets for centering the div
-      const offsetX = 92;
-      const offsetY = 48;
-
-      // Calculate where the div should be placed
-      const targetDivX = mapCenterX - offsetX;
-      const targetDivY = mapCenterY - offsetY;
-
-      // First make the div visible but opacity 0
-      targetDiv.removeClass('d-none');
-
-      // Animate to the final position with full opacity
-      targetDiv.animate({
-          'left': `${targetDivX}px`,
-          'top': `${targetDivY}px`,
-          'opacity': 1
-      }, 1000); // 1000ms or 1s animation duration
+  const LOCATION_MARKER_OFFSET_X = 92;
+  const LOCATION_MARKER_OFFSET_Y = 48;
+  const ANIMATION_DURATION = 300;
+  const FADE_OUT_DURATION = 500;
+  
+  UacanadaMap.api.locationSelection = {
+    isVisible: false,  // Changed from 'visible' to 'isVisible' for clarity
+  
+    toggleVisibility: function(state) {
+      this.isVisible = state;
     },
   
-    getMarker: () => {
+    addMarker: function() {
+      if (this.isVisible) return;  // Exit if the marker is already visible
+  
+      const mapContainer = $('#uacamap');
+      const targetDiv = $('#targetForNewPlace');
+      const mapCenter = {
+        x: mapContainer.width() / 2,
+        y: mapContainer.height() / 2
+      };
+  
+      this.toggleVisibility(true);
+  
+      const targetPosition = {
+        left: mapCenter.x - LOCATION_MARKER_OFFSET_X,
+        top: mapCenter.y - LOCATION_MARKER_OFFSET_Y
+      };
+  
+      targetDiv.addClass('d-none').css({
+        position: 'absolute',
+        left: `${targetPosition.left}px`,
+        top: '-300px',
+        opacity: 0,
+        'z-index': 1000
+      });
+  
+      targetDiv.removeClass('d-none').animate({
+        left: `${targetPosition.left}px`,
+        top: `${targetPosition.top}px`,
+        opacity: 1
+      }, ANIMATION_DURATION);
+    },
+  
+    cleanMarker: function() {
+      if (!this.isVisible) return;  // Exit if the marker is already hidden
+  
+      this.toggleVisibility(false);
+  
+      const targetDiv = $('#targetForNewPlace');
+  
+      targetDiv.animate({
+        opacity: 0
+      }, FADE_OUT_DURATION, () => {
+        targetDiv.addClass('d-none').css({
+          left: 0,
+          top: 0
+        });
+      });
+    },
+  
+    getMarker: function() {
       console.log(UacanadaMap.map.getCenter());
     },
-  
-    cleanMarker: () => {
+
+    showLatLng: function() {
+      try {
+        const {lat,lng} = UacanadaMap.map.getCenter();
+        $('#locationSelectionLatLng').text(`${lat},${lng}`)
+      } catch (error) {
+        UacanadaMap.console.log(error)
+      }
      
-      const targetDiv = $('#targetForNewPlace'); // Your custom div
-      targetDiv.animate({
-        'opacity': 0
-    }, 500, function() {
-        // Callback after animation completes
-        targetDiv.addClass('d-none').css({
-            'left': 0,
-            'top': 0
-        });
-    });
     },
   };
   
+// UacanadaMap.api.locationSelection.isVisible
 // UacanadaMap.api.locationSelection.cleanMarker()
 // UacanadaMap.api.locationSelection.getMarker()
 // UacanadaMap.api.locationSelection.addMarker()
