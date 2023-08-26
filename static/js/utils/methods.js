@@ -48,6 +48,14 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
         opacity: 1
       }, ANIMATION_DURATION);
     },
+
+    addPlace: function(){
+
+      UacanadaMap.api.createMarkerButton(UacanadaMap.map.getCenter(), false);
+      this.cleanMarker()
+
+
+    },
   
     cleanMarker: function() {
       if (!this.isVisible) return;  // Exit if the marker is already hidden
@@ -225,7 +233,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
   UacanadaMap.api.addNewPlace = () => {
     UacanadaMap.api.expandMap(`addNewPlace`);
-
     UacanadaMap.api.removeCards();
     UacanadaMap.api.tryLocate({ fornewplace: true });
   };
@@ -249,6 +256,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   };
 
   UacanadaMap.api.createMarkerButton = (e, fromAddress) => {
+    UacanadaMap.api.locationSelection.cleanMarker()
     if (UacanadaMap.currentmarker) {
       UacanadaMap.currentmarker.bindPopup("Detecting address... ").openPopup();
     }
@@ -301,28 +309,26 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       region,
       country,
     } = r.properties;
-    var popupHtml = "";
+    let popupHtml = "";
     if (country === "Canada") {
       var addressIcon = address ? "📮 " : "📍 ";
       var addressLine = r.name; // (address||'')+' '+text+', '+place+' '+postcode;
       var subAdress = (neighborhood || "") + " " + district + ", " + region;
-      popupHtml =
-        '<div class="ua-popup-codes mt-3">' +
-        "<code>" +
-        addressIcon +
-        addressLine +
-        "</code></br>" +
-        "<code>🗺️ " +
-        subAdress +
-        "</code></br>" +
-        "<code>🧭 " +
-        lat.toString().substring(0, 8) +
-        "," +
-        lng.toString().substring(0, 10) +
-        "</code>" +
-        "</div>" +
-        '<p style="font-size:0.75rem">To create a location at different coordinates: move the map to the desired location and make a long tap or right-click. If you know the exact address, use the search box and enter the address directly there!</p> ' +
-        '<button id="uaAddNewLoc" type="button" class="btn btn-link" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Yes, here!</button>';
+       popupHtml = `<div class="p-2">
+      <div class="ua-popup-codes mt-3">
+        <code>${addressIcon}${addressLine}</code></br>
+        <code>🗺️ ${subAdress}</code></br>
+        <code>🧭 ${lat.toString().substring(0, 8)},${lng.toString().substring(0, 10)}</code>
+      </div>
+      <small>
+      The legal address provided above can be edited in the next form or completely removed for your privacy.
+      </small>
+      <button id="uaAddNewLoc" title="Confirm creating place here" type="button" class="btn btn-sm btn-link" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
+      <button id="uaAddNewLoc" title="Cancel creating place here" type="button" class="btn btn-sm btn-link"><i class="fa fas fa-solid fa-xmark"></i></button>
+      </div>
+    `;
+    
+    
 
       $("#uaMapAddress").val(addressLine);
       $("#subaddress").val(subAdress);
@@ -335,16 +341,11 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
             '"'
         ).prop("selected", true);
     } else {
-      popupHtml =
-        "<b>⁉️ Looks like the location you provided is not in Canada: </br><code>" +
-        country +
-        " " +
-        place +
-        " " +
-        neighborhood +
-        " " +
-        region +
-        "</code></br>Correct your choice on the map!</b></br>It must be a Canadian place";
+      popupHtml = `
+      <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
+      <code>${country} ${place} ${neighborhood} ${region}</code></br>
+      Correct your choice on the map!</b></br>
+    `; // TODO: Move To ACP
     }
 
     if (UacanadaMap.currentmarker) map.removeLayer(UacanadaMap.currentmarker);
