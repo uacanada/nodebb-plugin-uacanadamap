@@ -152,6 +152,17 @@ $.fn.classChange = function (cb) {
       $(document).on("change", "#location-sort", function () {
         UacanadaMap.api.setCategoryAndOpenCards($("#location-category-filter").val());
       });
+
+
+
+
+      $('#sortPlacesOffcanvas').on('hide.bs.offcanvas', function (e) {
+        $('#ua-horizontal-buttons-wrapper').removeClass('movedown')
+      });
+      $('#sortPlacesOffcanvas').on('show.bs.offcanvas', function (e) {
+        $('#ua-horizontal-buttons-wrapper').addClass('movedown').removeClass('hidden')
+      });
+            
    
 
     }
