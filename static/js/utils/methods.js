@@ -334,12 +334,8 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       $("#subaddress").val(subAdress);
       if (place) $("#ua-newplace-city").val(place);
 
-      if (region && UacanadaMap.provinceMapper[region])
-        $(
-          '#location-province option[value="' +
-            UacanadaMap.provinceMapper[region] +
-            '"'
-        ).prop("selected", true);
+    if (region && UacanadaMap.provinceMapper[region])
+        $('#location-province option[value="' + UacanadaMap.provinceMapper[region] +  '"' ).prop("selected", true); // TODO: refactor to more friendly aprocach
     } else {
       popupHtml = `
       <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
