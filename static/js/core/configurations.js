@@ -209,8 +209,7 @@ define('core/configuration', function (require) {
             
                 onAdd(map) {
                 const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-addplace');
-                const button = L.DomUtil.create('button', 'btn btn-primary rounded-circle', container);
-                button.innerHTML = '<i class="fas fa-map-marker-alt"></i>';
+                container.innerHTML = '<button title="Add New Place" class="newlocation-open-marker btn btn-primary rounded-circle p-0"><i class="fa fas fa-solid fa-map-pin"></i></button>';
             
                 
                 button.onclick = () => {
