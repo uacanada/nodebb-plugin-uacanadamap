@@ -497,20 +497,14 @@ ul#ua-peoples-target-2 li:first-child h6 ,ul#ua-peoples-target-2 li:first-child 
 }
 
 
-.max500-bottom-offcanvas{
-  width: 100%;
-  max-width: 680px;
-  border-radius: 2rem 2rem 0 0;
-  margin: 0 auto;
- 
-    height: 60vh!important;
-}
 
-.ua-bottom-sheet{
+
+.ua-bottom-panels{
   width: 100%;
   max-width: 680px;
   border-radius: 2rem 2rem 0 0;
   margin: 0 auto;
+  height: 60vh!important;
   .offcanvas-header {
     flex-shrink: 0; /* Prevents header from shrinking */
   }

@@ -85,7 +85,7 @@
 
 
 
-<div id="attribution-modal" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="attribution-modal" aria-hidden="true">
+<div id="attribution-modal" class="ua-bottom-panels offcanvas offcanvas-bottom no-propagation" tabindex="-1" aria-labelledby="attribution-modal" aria-hidden="true">
 
         <div class="offcanvas-header">
 
@@ -99,7 +99,7 @@
 </div>
 
 
-<div id="sortPlacesOffcanvas" class="ua-bottom-sheet offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation p-3" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
+<div id="sortPlacesOffcanvas" class="ua-bottom-panels offcanvas offcanvas-bottom no-propagation p-3" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
     <div class="offcanvas-header">
         <h5 id="sortPlacesOffcanvasLabel">Sort By:</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -134,7 +134,7 @@
 </div>
 
 
-<div id="addPlaceInstructions" class="ua-bottom-sheet d-flex flex-column no-propagation offcanvas offcanvas-bottom p-3" tabindex="-1" aria-labelledby="addPlaceInstructionsOffcanvasLabel" aria-hidden="true">
+<div id="addPlaceInstructions" class="ua-bottom-panels d-flex flex-column no-propagation offcanvas offcanvas-bottom p-3" tabindex="-1" aria-labelledby="addPlaceInstructionsOffcanvasLabel" aria-hidden="true">
     <div class="offcanvas-header">
         <h5 id="addPlaceInstructionsOffcanvasLabel">Add a Place to the Map</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -152,7 +152,7 @@
 
 
 
-<div id="map-controls" class="ua-bottom-sheet offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="map-controls-modal"  aria-hidden="true">
+<div id="map-controls" class="ua-bottom-panels offcanvas offcanvas-bottom no-propagation" tabindex="-1" aria-labelledby="map-controls-modal"  aria-hidden="true">
 
         <div class="offcanvas-header">
 
