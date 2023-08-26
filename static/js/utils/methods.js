@@ -314,18 +314,19 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       var addressIcon = address ? "📮 " : "📍 ";
       var addressLine = r.name; // (address||'')+' '+text+', '+place+' '+postcode;
       var subAdress = (neighborhood || "") + " " + district + ", " + region;
-       popupHtml = `<div class="p-2">
-      <div class="ua-popup-codes mt-3">
-        <code>${addressIcon}${addressLine}</code></br>
-        <code>🗺️ ${subAdress}</code></br>
-        <code>🧭 ${lat.toString().substring(0, 8)},${lng.toString().substring(0, 10)}</code>
-      </div>
-      <small>
-      The legal address provided above can be edited in the next form or completely removed for your privacy.
-      </small>
-      <button id="uaAddNewLoc" title="Confirm creating place here" type="button" class="btn btn-sm btn-link" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
-      <button id="uaAddNewLoc" title="Cancel creating place here" type="button" class="btn btn-sm btn-link"><i class="fa fas fa-solid fa-xmark"></i></button>
-      </div>
+       popupHtml = `<div class="p-1 d-flex flex-column align-items-start">
+       <div class="ua-popup-codes">
+         <code>${addressIcon}${addressLine}</code></br>
+         <code>🗺️ ${subAdress}</code></br>
+         <code>🧭 ${lat.toString().substring(0, 8)},${lng.toString().substring(0, 10)}</code>
+       </div>
+       <small>You can edit or remove the legal address for privacy in the next step.</small>
+       <div class="d-flex mt-2">
+         <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
+         <button title="Cancel creating place here" type="button" class="btn btn-sm btn-warning"><i class="fa fas fa-solid fa-xmark"></i></button>
+       </div>
+     </div>
+     
     `;
     
     
