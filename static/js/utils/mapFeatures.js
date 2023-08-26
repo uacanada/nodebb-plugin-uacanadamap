@@ -19,7 +19,7 @@ define('utils/mapFeatures', ["core/variables" /*   Global object UacanadaMap  */
             }else{
                 UacanadaMap.api.debouncedShow()
             }
-            UacanadaMap.api.locationSelection.cleanMarker()
+           
         } else {
             UacanadaMap.api.debouncedShow()
             
