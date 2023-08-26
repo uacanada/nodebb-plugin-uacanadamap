@@ -107,19 +107,19 @@
     <div class="offcanvas-body overflow-auto ">
      
                 <div class="list-group">
-                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="distance" href="#">
+                <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="distance" href="#">
                         <i class="fas fa-road me-2"></i> Distance
                 </a>
-                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="latest" href="#">
+                <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="latest" href="#">
                         <i class="fas fa-hourglass-start me-2"></i> Latest
                 </a>
-                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="oldest" href="#">
+                <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="oldest" href="#">
                         <i class="fas fa-hourglass-end me-2"></i> Oldest
                 </a>
-                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="events" href="#">
+                <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="events" href="#">
                         <i class="fas fa-calendar-alt me-2"></i> Event Date
                 </a>
-                <a class="list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="category" href="#">
+                <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom" data-ua-sortby="category" href="#">
                         <i class="fas fa-folder me-2"></i> Category
                 </a>
                 <div class="list-group-item border-bottom mt-5 py-2">
