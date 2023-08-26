@@ -1,4 +1,4 @@
-<div id="ua-context-buttons-wrapper" class="position-fixed start-0 end-0 w-100 no-propagation">
+<div id="ua-context-buttons-wrapper" class="position-fixed start-0 end-0 w-100 no-propagation px-2">
   <div id="context-buttons-swiper" class="swiper-container">
     <div class="swiper">
       <div class="swiper-wrapper">

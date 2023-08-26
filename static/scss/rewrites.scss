@@ -92,21 +92,45 @@ body,
     font-family: 'Geologica', sans-serif;
 }
 
+
+
+
+
+
+#geocoderSearchbox{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 1rem;
+  transition: .2s transform ease-in;
+  transform: translate3d(0,-500px,0);
+  z-index: 1020;
+  &.show{
+    transform: translate3d(0px,0,0);
+  }
+  &:after {
+    content: 'Enter an address or drag the map to your preferred location';
+    border-radius: 5px;
+    margin-top: 5px;
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    color: #445474;
+    display: block;
+    padding: 5px 2px;
+    font-size: 9px;
+    font-weight: bold;
+  }
+}
+
+
+
 .leaflet-control-geocoder-alternatives{
-
-
-    position: fixed;
-    top: 2rem;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(4px);
-    border-radius: 1rem;
-    padding: 1rem;
     width: 98%;
     max-width: 480px;
     margin: 0 auto;
     z-index: 200;
-    box-shadow: 0 0 15px -5px black;
-
     a{
       color: rgb(46, 60, 255);
     }

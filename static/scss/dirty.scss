@@ -496,12 +496,30 @@ ul#ua-peoples-target-2 li:first-child h6 ,ul#ua-peoples-target-2 li:first-child 
   color: black;
 }
 
-.max500-bottom-offcanvas{
+
+
+
+.ua-bottom-panels{
   width: 100%;
-  max-width: 500px;
+  max-width: 680px;
   border-radius: 2rem 2rem 0 0;
   margin: 0 auto;
+  height: 60vh!important;
+  .offcanvas-header {
+    flex-shrink: 0; /* Prevents header from shrinking */
+  }
+  .offcanvas-body {
+    max-height: calc(100vh - 100px); /* 100px can be adjusted based on header height and other elements */
+    overflow-y: auto;
+    flex-grow: 1; /* Makes the body grow to fill available space */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5rem;
+  }
 }
+ 
+
+
 
 #nav-height-fixer{
   transition: 800ms all cubic-bezier(0, 0, 0, 1.33);
@@ -1394,9 +1412,19 @@ body.map-touched{
   opacity: 1;
 }
 #ua-horizontal-buttons-wrapper{
-  transition: transform .3s;
+  top: 0;
+  transition: transform .3s ease-in;
   transform: translate3d(0,0,0);
   z-index: 500;
+  &.hidden{
+    transform: translate3d(0,-300px,0);
+  }
+  &.movedown{
+  
+   top: auto;
+   bottom: 5rem;
+   z-index: 4200;
+  }
 }
 
 body.cards-opened{

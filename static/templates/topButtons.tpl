@@ -1,4 +1,4 @@
-<div id="ua-horizontal-buttons-wrapper" class="position-fixed d-block w-100 top-0">
+<div id="ua-horizontal-buttons-wrapper" class="position-fixed d-block w-100">
     <div id="ua-place-buttons" class="swiper">
        
         <ul class="swiper-wrapper container p-2">

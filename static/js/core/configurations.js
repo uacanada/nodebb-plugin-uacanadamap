@@ -234,7 +234,7 @@ define('core/configuration', function (require) {
             contextmenu: true,
             contextmenuWidth: 330,
             contextmenuItems: [{
-                text: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div> Create new place here?</br><button type="button" class="btn btn btn-link p-2">Yes</button>',
+                text: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div> Create new place here?</br><button type="button" class="btn btn btn-link p-2">Yes</button>', // TODO: move text to ACP
                 callback: handleContextMenuClick,
             }],
             center: UacanadaMap.latestLocation.latlng,
@@ -284,12 +284,16 @@ define('core/configuration', function (require) {
 	}
 
 
+
+    
+
+
     function handleContextMenuClick(e) {
         try {
             const { lat, lng } = getLatLng(e);
     
             if (!lat || !lng) {
-                return alert('Location error');
+                return console.warn('Location error');
             }
     
             $("#ua-form-event-holder").html(UacanadaMap.recoveredOldButtons);
@@ -298,6 +302,7 @@ define('core/configuration', function (require) {
             UacanadaMap.api.expandMap(`contextmenuItems`);
             UacanadaMap.api.createMarkerButton(e, false);
             UacanadaMap.api.hideBrandTitle(true);
+            UacanadaMap.api.locationSelection.cleanMarker()
     
             
         } catch (error) {

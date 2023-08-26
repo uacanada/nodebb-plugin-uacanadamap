@@ -83,11 +83,10 @@ $.fn.classChange = function (cb) {
         UacanadaMap.moveIterations++;
         UacanadaMap.api.hideElements(false)
       
-        const sidebarIsOpen = $("#ua-sidepanel.opened").outerHeight();
-        if (sidebarIsOpen && UacanadaMap.showOnlyArea && UacanadaMap.moveIterations > 18) {
-          UacanadaMap.api.rewriteTabs("onlyVisibleArea");
-      
+        if(UacanadaMap.api.locationSelection.isVisible){
+          UacanadaMap.api.locationSelection.showLatLng()
         }
+       
       });
       
     
@@ -153,6 +152,17 @@ $.fn.classChange = function (cb) {
       $(document).on("change", "#location-sort", function () {
         UacanadaMap.api.setCategoryAndOpenCards($("#location-category-filter").val());
       });
+
+
+
+
+      $('#sortPlacesOffcanvas').on('hide.bs.offcanvas', function (e) {
+        $('#ua-horizontal-buttons-wrapper').removeClass('movedown')
+      });
+      $('#sortPlacesOffcanvas').on('show.bs.offcanvas', function (e) {
+        $('#ua-horizontal-buttons-wrapper').addClass('movedown').removeClass('hidden')
+      });
+            
    
 
     }

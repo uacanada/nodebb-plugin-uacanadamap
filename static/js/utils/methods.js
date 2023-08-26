@@ -4,7 +4,99 @@ let tabRouteObject = {};
 
 'use strict';
 define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) {
-  const { L, map, Swiper } = UacanadaMap;
+
+  const LOCATION_MARKER_OFFSET_X = 92;
+  const LOCATION_MARKER_OFFSET_Y = 48;
+  const ANIMATION_DURATION = 600;
+  const FADE_OUT_DURATION = 200;
+  
+  UacanadaMap.api.locationSelection = {
+    isVisible: false,  // Changed from 'visible' to 'isVisible' for clarity
+  
+    toggleVisibility: function(state) {
+      this.isVisible = state;
+    },
+  
+    addMarker: function() {
+      if (this.isVisible) return this.cleanMarker();  // Exit if the marker is already visible
+      $('#geocoderSearchbox').addClass('show')
+      $('#ua-horizontal-buttons-wrapper').addClass('hidden')
+      const mapContainer = $('#uacamap');
+      const targetDiv = $('#targetForNewPlace');
+      const mapCenter = {
+        x: mapContainer.width() / 2,
+        y: mapContainer.height() / 2
+      };
+  
+      this.toggleVisibility(true);
+  
+      const targetPosition = {
+        left: mapCenter.x - LOCATION_MARKER_OFFSET_X,
+        top: mapCenter.y - LOCATION_MARKER_OFFSET_Y
+      };
+  
+      targetDiv.addClass('d-none').css({
+        position: 'absolute',
+        left: `${targetPosition.left}px`,
+        top: '-300px',
+        opacity: 0,
+        'z-index': 1000
+      });
+  
+      targetDiv.removeClass('d-none').animate({
+        left: `${targetPosition.left}px`,
+        top: `${targetPosition.top}px`,
+        opacity: 1
+      }, ANIMATION_DURATION);
+    },
+
+    addPlace: function(){
+      
+      UacanadaMap.api.createMarkerButton({latlng: UacanadaMap.map.getCenter()}, false);
+      
+
+
+    },
+  
+    cleanMarker: function() {
+      $('#geocoderSearchbox').removeClass('show')
+      $('#ua-horizontal-buttons-wrapper').removeClass('hidden')
+      if (!this.isVisible) return;  // Exit if the marker is already hidden
+  
+      this.toggleVisibility(false);
+  
+      const targetDiv = $('#targetForNewPlace');
+  
+      targetDiv.animate({
+        opacity: 0
+      }, FADE_OUT_DURATION, () => {
+        targetDiv.addClass('d-none').css({
+          left: 0,
+          top: 0
+        });
+      });
+    },
+  
+    getMarker: function() {
+      console.log(UacanadaMap.map.getCenter());
+    },
+
+    showLatLng: function() {
+      try {
+        const {lat,lng} = UacanadaMap.map.getCenter();
+        $('#locationSelectionLatLng').text(`${lat},${lng}`)
+      } catch (error) {
+        UacanadaMap.console.log(error)
+      }
+     
+    },
+  };
+  
+// UacanadaMap.api.locationSelection.isVisible
+// UacanadaMap.api.locationSelection.cleanMarker()
+// UacanadaMap.api.locationSelection.getMarker()
+// UacanadaMap.api.locationSelection.addMarker()
+  
 
   // TODO REFACTOR
   UacanadaMap.api.mainFrameShow = (Y) => {
@@ -144,7 +236,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
   UacanadaMap.api.addNewPlace = () => {
     UacanadaMap.api.expandMap(`addNewPlace`);
-
     UacanadaMap.api.removeCards();
     UacanadaMap.api.tryLocate({ fornewplace: true });
   };
@@ -168,12 +259,13 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   };
 
   UacanadaMap.api.createMarkerButton = (e, fromAddress) => {
+    UacanadaMap.api.locationSelection.cleanMarker()
     if (UacanadaMap.currentmarker) {
       UacanadaMap.currentmarker.bindPopup("Detecting address... ").openPopup();
     }
     const { map, L } = UacanadaMap;
 
-    var { lat, lng } = e.latlng;
+    const { lat, lng } = e.latlng;
     UacanadaMap.choosedLocation = [lat, lng];
     localStorage.setItem(
       "uamaplocation",
@@ -220,50 +312,39 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       region,
       country,
     } = r.properties;
-    var popupHtml = "";
+    let popupHtml = "";
     if (country === "Canada") {
       var addressIcon = address ? "📮 " : "📍 ";
       var addressLine = r.name; // (address||'')+' '+text+', '+place+' '+postcode;
       var subAdress = (neighborhood || "") + " " + district + ", " + region;
-      popupHtml =
-        '<div class="ua-popup-codes mt-3">' +
-        "<code>" +
-        addressIcon +
-        addressLine +
-        "</code></br>" +
-        "<code>🗺️ " +
-        subAdress +
-        "</code></br>" +
-        "<code>🧭 " +
-        lat.toString().substring(0, 8) +
-        "," +
-        lng.toString().substring(0, 10) +
-        "</code>" +
-        "</div>" +
-        '<p style="font-size:0.75rem">To create a location at different coordinates: move the map to the desired location and make a long tap or right-click. If you know the exact address, use the search box and enter the address directly there!</p> ' +
-        '<button id="uaAddNewLoc" type="button" class="btn btn-link" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Yes, here!</button>';
+       popupHtml = `<div class="p-1 d-flex flex-column align-items-start">
+       <div class="ua-popup-codes">
+         <code>${addressIcon}${addressLine}</code></br>
+         <code>🗺️ ${subAdress}</code></br>
+         <code>🧭 ${lat.toString().substring(0, 8)},${lng.toString().substring(0, 10)}</code>
+       </div>
+       <small>You can edit or remove the legal address for privacy in the next step.</small>
+       <div class="d-flex mt-2">
+         <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
+       </div>
+     </div>
+     
+    `;
+    
+    
 
       $("#uaMapAddress").val(addressLine);
       $("#subaddress").val(subAdress);
       if (place) $("#ua-newplace-city").val(place);
 
-      if (region && UacanadaMap.provinceMapper[region])
-        $(
-          '#location-province option[value="' +
-            UacanadaMap.provinceMapper[region] +
-            '"'
-        ).prop("selected", true);
+    if (region && UacanadaMap.provinceMapper[region])
+        $('#location-province option[value="' + UacanadaMap.provinceMapper[region] +  '"' ).prop("selected", true); // TODO: refactor to more friendly aprocach
     } else {
-      popupHtml =
-        "<b>⁉️ Looks like the location you provided is not in Canada: </br><code>" +
-        country +
-        " " +
-        place +
-        " " +
-        neighborhood +
-        " " +
-        region +
-        "</code></br>Correct your choice on the map!</b></br>It must be a Canadian place";
+      popupHtml = `
+      <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
+      <code>${country} ${place} ${neighborhood} ${region}</code></br>
+      Correct your choice on the map!</b></br>
+    `; // TODO: Move To ACP
     }
 
     if (UacanadaMap.currentmarker) map.removeLayer(UacanadaMap.currentmarker);
