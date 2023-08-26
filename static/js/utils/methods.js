@@ -50,9 +50,9 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     },
 
     addPlace: function(){
-
-      UacanadaMap.api.createMarkerButton(UacanadaMap.map.getCenter(), false);
-      this.cleanMarker()
+      
+      UacanadaMap.api.createMarkerButton({latlng: UacanadaMap.map.getCenter()}, false);
+      
 
 
     },
@@ -262,7 +262,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     }
     const { map, L } = UacanadaMap;
 
-    var { lat, lng } = e.latlng;
+    const { lat, lng } = e.latlng;
     UacanadaMap.choosedLocation = [lat, lng];
     localStorage.setItem(
       "uamaplocation",
