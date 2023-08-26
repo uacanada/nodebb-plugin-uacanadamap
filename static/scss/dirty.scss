@@ -1424,9 +1424,10 @@ body.map-touched{
     transform: translate3d(0,-300px,0);
   }
   &.movedown{
+  
    top: auto;
    bottom: 5rem;
-   z-index: 1080;
+   z-index: 4200;
   }
 }
 
