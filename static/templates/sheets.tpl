@@ -99,7 +99,7 @@
 </div>
 
 
-<div id="sortPlacesOffcanvas" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation p-3" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
+<div id="sortPlacesOffcanvas" class="ua-bottom-sheet offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation p-3" tabindex="-1" aria-labelledby="sortPlacesOffcanvasLabel" aria-hidden="true">
     <div class="offcanvas-header">
         <h5 id="sortPlacesOffcanvasLabel">Sort By:</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -152,7 +152,7 @@
 
 
 
-<div id="map-controls" class="offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="map-controls-modal"  aria-hidden="true">
+<div id="map-controls" class="ua-bottom-sheet offcanvas offcanvas-bottom max500-bottom-offcanvas no-propagation" tabindex="-1" aria-labelledby="map-controls-modal"  aria-hidden="true">
 
         <div class="offcanvas-header">
 
