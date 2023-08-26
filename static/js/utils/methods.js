@@ -7,8 +7,8 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
   const LOCATION_MARKER_OFFSET_X = 92;
   const LOCATION_MARKER_OFFSET_Y = 48;
-  const ANIMATION_DURATION = 300;
-  const FADE_OUT_DURATION = 500;
+  const ANIMATION_DURATION = 600;
+  const FADE_OUT_DURATION = 200;
   
   UacanadaMap.api.locationSelection = {
     isVisible: false,  // Changed from 'visible' to 'isVisible' for clarity
@@ -18,7 +18,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     },
   
     addMarker: function() {
-      if (this.isVisible) return;  // Exit if the marker is already visible
+      if (this.isVisible) return this.cleanMarker();  // Exit if the marker is already visible
       $('#geocoderSearchbox').addClass('show')
       $('#ua-horizontal-buttons-wrapper').addClass('hidden')
       const mapContainer = $('#uacamap');
