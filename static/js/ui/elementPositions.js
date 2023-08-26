@@ -74,20 +74,15 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
         var bottomButtonsH = $('#ua-horizontal-buttons-wrapper').outerHeight() || 0;
 		var contextButton = $('#ua-context-buttons-wrapper').outerHeight() || 0;
         var placeCardH = $(UacanadaMap.placeCardDiv).outerHeight() || 0; 
-        var sidebarH = Math.floor($('.opened.folded-sidebar').outerHeight()) || 0;
-        var sidebarW = Math.floor($('.sidepanel.opened').outerWidth(true)) || 0;
-        var visibleMap = $('#uacamap').outerHeight() || 0;
-        var sidepanelOrButtons = sidebarH>1 ? sidebarH:bottomButtonsH; 
-        var bottomElementsH =  Math.floor(navRealH+placeCardH+sidepanelOrButtons);
+		var visibleMap = $('#uacamap').outerHeight() || 0;
+     	var bottomElementsH =  Math.floor(navRealH+placeCardH);
         var mapHalf = Math.floor(visibleMap / 2);
-        var visibleMapWhenCards = Math.floor(visibleMap - sidebarH - placeCardH - bottomButtonsH);
+        var visibleMapWhenCards = Math.floor(visibleMap - placeCardH - bottomButtonsH);
         var onePercentH = Math.floor(screenH / 100);
         var markerOffset = (visibleMapWhenCards < mapHalf) ? Math.floor(mapHalf-visibleMapWhenCards) : 0;
-        var bottomMargin = sidebarH ? sidebarH :  ($('.sidepanel').hasClass('opened') ) ? bottomButtonsH: bottomButtonsH; 
         var isDesktop = (screenW > 800 || screenW > screenH)? true : false;
         var cardStackSize = Math.floor((screenW - rightNav - leftNav)/500);
-        const panelDragButtonH = $('#ua-dragger .line-button').outerHeight(); 
-        window.UCM_cachedElementSizes = {screenH,screenW,bottomButtonsH,navRealH,rightNav,leftNav,sidebarH,sidebarW,placeCardH,bottomMargin,bottomElementsH,visibleMap,mapHalf,markerOffset,onePercentH,isDesktop,cardStackSize,panelDragButtonH,contextButton}
+        window.UCM_cachedElementSizes = {screenH,screenW,bottomButtonsH,navRealH,rightNav,leftNav,placeCardH,bottomElementsH,visibleMap,mapHalf,markerOffset,onePercentH,isDesktop,cardStackSize,contextButton}
         return  window.UCM_cachedElementSizes;
       };
 
@@ -102,8 +97,6 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 				bottomButtonsH,
 				contextButton,
 				bottomElementsH,
-				sidebarH,
-				sidebarW,
 				screenH,
 				screenW,
 				rightNav,
@@ -113,14 +106,8 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 				onePercentH,
 			} = UacanadaMap.api.getDivSizes();
 
-			let cardsOffset = Math.floor(bottomButtonsH + sidebarH + 5);
 			let zoomControlsPosition = { bottom: `5rem`};
-            let elementOffsetWhenSidebarOpened = (screenW > 500 + sidebarW) ?  sidebarW : 0;
-            const leftOffset = {left:`${elementOffsetWhenSidebarOpened}px`} 
-
-            $("#mapStatusLine").css(leftOffset);
-			$(UacanadaMap.placeCardDiv).css(leftOffset);
-            $('#ua-horizontal-buttons-wrapper').css(leftOffset);
+           
 
 
 			if($(UacanadaMap.placeCardDiv).hasClass('verticalCards') && screenW>700){
@@ -132,19 +119,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 			
 			}
 
-			if ($(".sidepanel").hasClass("opened")) {
-				$("body").addClass("ua-sidepanel-opened");
-
-				if (elementOffsetWhenSidebarOpened) {
-					cardsOffset = bottomButtonsH;
-					
-
-				} else {
-					cardsOffset = sidebarH;
-				}
-			} else {
-				$("body").removeClass("ua-sidepanel-opened");
-			}
+			
 
 			$(".leaflet-bottom").css(zoomControlsPosition);
 			
@@ -153,11 +128,6 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 				const markerOffset = placeCardH > Math.floor(onePercentH * 50) ? Math.floor(onePercentH * 30) : -50
 				
 				
-					// sidebarH > 50 && screenW < sidebarW + 500
-					// 	? Math.floor(onePercentH * 30)
-					// 	: screenH > 1600
-					// 	? -100
-					// 	: Math.floor(onePercentH * 10);
 
 						
 				UacanadaMap.api.moveMarkerToTop(latlng, markerOffset);
@@ -169,19 +139,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 
 
 
-    UacanadaMap.api.sidebarIsOpened=()=>{ return $("#ua-sidepanel").hasClass("opened")};
-
-      UacanadaMap.api.niceShown=()=>{
-        setTimeout(() => {
-          $('#ua-splash-text').remove();
-          $('#ua-splash-bg').remove();
-        }, 4000);
-      
-       if( $('#ua-splash-text').hasClass('nice-remove') ) return;
-        $('#ua-splash-text').addClass('nice-shown');
-        $('#ua-splash-bg').addClass('nice-shown');
-      
-      }
+     
 
 
 })

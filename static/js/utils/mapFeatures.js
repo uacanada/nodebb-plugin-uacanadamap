@@ -15,9 +15,11 @@ define('utils/mapFeatures', ["core/variables" /*   Global object UacanadaMap  */
         if(forced){
             if($('body').hasClass('uacanada-map-page')){
                 $('body').addClass('hiddenElements');
+                
             }else{
                 UacanadaMap.api.debouncedShow()
             }
+           
         } else {
             UacanadaMap.api.debouncedShow()
             

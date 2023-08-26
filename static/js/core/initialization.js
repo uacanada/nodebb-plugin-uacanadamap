@@ -114,6 +114,9 @@ define("core/initialization", [
         UacanadaMap.eventListenersInstance.register();
       }
 
+      $('#ua-horizontal-buttons-wrapper').removeClass('movedown').removeClass('hidden')
+      $('#geocoderSearchbox').removeClass('show')
+
       if(app.user.isAdmin){
         // Make accessible globally for debugging purposes
           window.UacanadaMap = UacanadaMap;

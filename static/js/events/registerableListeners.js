@@ -42,15 +42,19 @@ class EventListeners {
 			
 		}
 
-		if ((c = clck(".blogger-loc"))) {
-
-			
+		if ((c = clck(".place-with-coordinates"))) {
 			UacanadaMap.api.openCards(c.attr("data-marker-id"), "distance", false);
 
 		} else if ((c = clck("a.edit-place"))) {
 
 			UacanadaMap.form.editPlace(c.attr("data-topic"));
 
+		} else if ((c = clck("button.newlocation-create-button"))) {
+			UacanadaMap.api.locationSelection.addPlace()
+		} else if ((c = clck("button.newlocation-cancel-button"))) {
+			UacanadaMap.api.locationSelection.cleanMarker()
+		} else if ((c = clck("button.newlocation-open-marker"))) {
+			UacanadaMap.api.locationSelection.addMarker()
 		}
       
 	};
