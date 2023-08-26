@@ -142,7 +142,7 @@
     <div class="offcanvas-body">
      
         {UacanadaMapSettings.placeInstruction}
-        <div id="geocoderSearchbox" class="mt-3"></div>
+        
 
     </div>
 </div>

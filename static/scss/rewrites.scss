@@ -92,6 +92,25 @@ body,
     font-family: 'Geologica', sans-serif;
 }
 
+
+
+
+
+
+#geocoderSearchbox{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 1rem;
+  transition: .2s;
+  transform: translate3d(-200px,0,0);
+  &.show{
+    transform: translate3d(0px,0,0);
+  }
+}
+
+
+
 .leaflet-control-geocoder-alternatives{
 
 

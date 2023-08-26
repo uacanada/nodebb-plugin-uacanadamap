@@ -54,6 +54,8 @@
                     <button title="Add place here" class="btn rounded-pill newlocation-cancel-button" type="button"><i class="fa-solid fa-xmark"></i></button>  
                 </div>
              </div>
+
+             <div id="geocoderSearchbox"></div>
         </div>
     </div>
 </div>
