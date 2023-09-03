@@ -38,6 +38,7 @@ define('core/configuration', function (require) {
         text: 3,
         main: 0,
         cards: 1,
+        addplace:4
       },
     };
   

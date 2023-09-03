@@ -37,9 +37,25 @@
                         <i class="fa fas fa-solid fa-puzzle-piece fa-beat me-3"></i>
                         <span id="text-info-button">...</span>
                 </div>
+
+
+                <div class="swiper-slide rounded-pill"> 
+                         <div class="btn-group w-100" role="group" aria-label="Buttons when place chooser is opened">
+                         <button title="Tap to Add a Business or Place at These Coordinates" class="btn btn-primary rounded-pill m-1 newLocationCreateButton" type="button">
+                         <i class="fa fa-solid fa-pin"></i> Add Place Here
+                       </button>
+                       
+                       <button title="Close place adding" class="btn btn-danger rounded-pill m-1 newLocationCancelButton" type="button">
+                         <i class="fa fa-solid fa-times"></i> Cancel
+                       </button>
+                       
+                               
+                                
+                        </div>
+                </div>
               
                 
-                </div>
+           
         
        
       </div>

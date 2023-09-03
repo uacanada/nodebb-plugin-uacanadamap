@@ -1440,7 +1440,7 @@ body.hiddenElements{
       transform: translate3d(0,100%, 0);
   }
   
-  .newlocation-create-button, .newlocation-cancel-button, #locationSelectionLatLng {
+  .newLocationCreateButton, .newLocationCancelButton, #locationSelectionLatLng {
     opacity: 0;
     transition: .2s;
 }
@@ -1459,9 +1459,7 @@ body.hiddenElements:not(.cards-opened) {
     transform: translate3d(150%, 0, 0);
   }
 
-  #ua-context-buttons-wrapper{
-    opacity: 0.8;
-  }
+ 
 
 }
 button#cardsDown {
