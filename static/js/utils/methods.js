@@ -20,6 +20,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     addMarker: function() {
       UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:1300,to:UacanadaMap.contextButton.router.addplace})
       if (this.isVisible) return this.cleanMarker();  // Exit if the marker is already visible
+      $('body').addClass('addPlaceMode')
       $('#geocoderSearchbox').addClass('show')
       $('#ua-horizontal-buttons-wrapper').addClass('hidden')
       const mapContainer = $('#uacamap');
@@ -60,6 +61,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     },
   
     cleanMarker: function() {
+      $('body').removeClass('addPlaceMode')
       $('#geocoderSearchbox').removeClass('show')
       $('#ua-horizontal-buttons-wrapper').removeClass('hidden')
       UacanadaMap.api.contextButtonText({text:'',delay:0,to:UacanadaMap.contextButton.router.main})
