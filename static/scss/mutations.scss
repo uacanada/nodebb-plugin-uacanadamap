@@ -102,6 +102,13 @@ body.uacanada-map-page.map-touched.addPlaceMode {
     img.leaflet-tile {
         filter: $filterValues;
     }
+
+    .leaflet-marker-pane{
+        transition: .2s;
+        opacity: 0.25;
+    }
+
+
 }
 
 
