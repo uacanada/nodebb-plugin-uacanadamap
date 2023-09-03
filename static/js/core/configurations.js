@@ -322,13 +322,13 @@ define('core/configuration', function (require) {
                 return console.warn('Location error');
             }
     
-            $("#ua-form-event-holder").html(UacanadaMap.recoveredOldButtons);
+           
             $("#ua-latlng-text").val(`${lat},${lng}`);
     
-            UacanadaMap.api.expandMap(`contextmenuItems`);
+           
             UacanadaMap.api.createMarkerButton(e, false);
-            UacanadaMap.api.hideBrandTitle(true);
-            UacanadaMap.api.locationSelection.cleanMarker()
+
+           
     
             
         } catch (error) {
