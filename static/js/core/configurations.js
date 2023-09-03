@@ -38,6 +38,7 @@ define('core/configuration', function (require) {
         text: 3,
         main: 0,
         cards: 1,
+        addplace:4
       },
     };
   
@@ -203,6 +204,31 @@ define('core/configuration', function (require) {
             options: {  pseudoFullscreenClass: "fa fa-expand" }
         });
         UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
+            
+            const addplaceControl = L.Control.extend({
+                options: { position: 'bottomright'},
+            
+                onAdd(map) {
+                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-addplace');
+                container.innerHTML = '<button title="Add New Place" class="newlocation-open-marker btn btn-primary rounded-circle p-0"><i class="fa fas fa-solid fa-map-pin"></i></button>';
+                 return container;
+                },
+            });
+            
+            
+            
+            
+        UacanadaMap.mapLayers.addPlaceButton = new addplaceControl();
+           
+  
+
+
+
+
+
+
+
+
     }
 	
 
@@ -296,13 +322,13 @@ define('core/configuration', function (require) {
                 return console.warn('Location error');
             }
     
-            $("#ua-form-event-holder").html(UacanadaMap.recoveredOldButtons);
+           
             $("#ua-latlng-text").val(`${lat},${lng}`);
     
-            UacanadaMap.api.expandMap(`contextmenuItems`);
+           
             UacanadaMap.api.createMarkerButton(e, false);
-            UacanadaMap.api.hideBrandTitle(true);
-            UacanadaMap.api.locationSelection.cleanMarker()
+
+           
     
             
         } catch (error) {

@@ -1439,7 +1439,11 @@ body.hiddenElements{
   [component="bottombar"]{
       transform: translate3d(0,100%, 0);
   }
-
+  
+  .newLocationCreateButton, .newLocationCancelButton, #locationSelectionLatLng {
+    opacity: 0;
+    transition: .2s;
+}
  
   #mapattribution{
       opacity:0;
@@ -1451,9 +1455,11 @@ body.hiddenElements:not(.cards-opened) {
   #ua-horizontal-buttons-wrapper {
     transform: translate3d(0, -100%, 0);
   }
-  .leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen {
+  .leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen,.leaflet-control-addplace {
     transform: translate3d(150%, 0, 0);
   }
+
+ 
 
 }
 button#cardsDown {

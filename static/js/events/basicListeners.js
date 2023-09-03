@@ -73,7 +73,7 @@ $.fn.classChange = function (cb) {
       
       UacanadaMap.map.on("move", () => {
         UacanadaMap.moveIterations++;
-        if (UacanadaMap.moveIterations > 15) {
+        if (UacanadaMap.moveIterations > 21) {
           UacanadaMap.api.hideElements(true)
          // UacanadaMap.api.expandMap();
         }

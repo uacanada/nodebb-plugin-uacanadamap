@@ -49,9 +49,9 @@
              <div id="targetForNewPlace" class="d-none">
                 <div class="ua-markers marker-selector d-flex align-items-center marker-container">
                     <span id="locationSelectionLatLng"></span> 
-                    <button title="Add place here" class="btn btn-sm rounded-pill newlocation-create-button" type="button"><i class="fa fas fa-solid fa-check"></i> Create</button>
+                    <button title="Add place here" class="btn btn-sm rounded-pill newLocationCreateButton" type="button"><i class="fa fas fa-solid fa-check"></i> Create</button>
                     <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center"><i class="'fa fa-fw fas fa-solid fa-compass fa-spin"></i></div>
-                    <button title="Add place here" class="btn rounded-pill newlocation-cancel-button" type="button"><i class="fa-solid fa-xmark"></i></button>  
+                    <button title="Add place here" class="btn rounded-pill newLocationCancelButton" type="button"><i class="fa-solid fa-xmark"></i></button>  
                 </div>
              </div>
 
