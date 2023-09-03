@@ -3,9 +3,19 @@ define("forms/submitPlace", [
   "core/variables" /*   Global object UacanadaMap  */,
 ], function (UacanadaMap) {
   let canSendForm = true;
+ 
   $("#place-creator-offcanvas").on("hidden.bs.offcanvas", () => {
     canSendForm = true;
   });
+
+  $("#place-creator-offcanvas").on("show.bs.offcanvas", () => {
+    $("#ua-form-event-holder").html('');
+    UacanadaMap.api.expandMap(`contextmenuItems`);
+    UacanadaMap.api.hideBrandTitle(true);
+    UacanadaMap.api.locationSelection.cleanMarker()
+  });
+
+
   document
     .getElementById("placeForm")
     .addEventListener("submit", async (event) => {
