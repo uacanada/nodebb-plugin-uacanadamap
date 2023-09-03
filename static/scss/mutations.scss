@@ -44,6 +44,11 @@ $filterValues: saturate(1) grayscale(1) brightness(1.1) contrast(1.1) opacity(0.
     }
 }
 
+.brand-container {
+    transition: all 0.3s ease-out;
+    z-index: 13;
+   
+}
 
 
 
@@ -69,33 +74,40 @@ body.uacanada-map-page {
     img.leaflet-tile {
         filter: $filterValues;
         transition: filter 2s ease-out;
-
-        &.map-touched {
-            filter: none;
-        }
-
-        &.map-touched.addPlaceMode {
-            filter: $filterValues;
-        }
     }
 
     #reconnect-alert {
         display: none;
     }
 
-    #mapHero.map-touched {
+    
+}
+
+body.uacanada-map-page.map-touched {
+    img.leaflet-tile {
+        filter: none;
+    }
+
+    .brand-container {
+        transform: translate3d(0, -400px, 0);
+    }
+
+    #mapHero {
         animation: fade-and-move $animationDuration $animationTiming forwards;
+    }
+
+}
+
+body.uacanada-map-page.map-touched.addPlaceMode {
+    img.leaflet-tile {
+        filter: $filterValues;
     }
 }
 
 
 
 
-.brand-container {
-    transition: all 0.3s ease-out;
-    z-index: 13;
-   
-}
+
 
 .before-map-expand{
     .ua-markers{
