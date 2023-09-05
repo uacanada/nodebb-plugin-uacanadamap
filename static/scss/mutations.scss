@@ -45,6 +45,22 @@ $filterValuesAddPlaceMode: grayscale(0.9);
     }
 }
 
+#ua-logo-wrapper{
+    transition: transform .2s ease-in;
+    transform: translate3d(-300px,0,0);
+    z-index: 666;
+    span {
+        background: url(/assets/uploads/system/site-logo.png) no-repeat;
+        background-position: center;
+        background-size: contain;
+        backdrop-filter: blur(3px);
+    }
+    i.fa-home{
+        color: transparent;
+    }
+}
+
+
 .brand-container {
     transition: all 0.3s ease-out;
 }
@@ -85,6 +101,13 @@ body.uacanada-map-page {
 body.uacanada-map-page.map-touched {
     img.leaflet-tile {
         filter: none;
+    }
+
+    
+
+
+    #ua-logo-wrapper{
+        transform: translate3d(0,0,0);
     }
 
     .brand-container {
@@ -133,6 +156,8 @@ body.before-map-expand:not(.map-touched) {
         filter: drop-shadow(1px 1px 5px black);
         width: 30px !important;
     }
+
+   
 }
 
 
