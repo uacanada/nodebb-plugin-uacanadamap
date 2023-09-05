@@ -169,7 +169,7 @@ class EventListeners {
 
 		window.addEventListener("optimizedScroll", this.onOptimizedScroll);
 
-		const bottomPanelOffcanvas = $('#ua-bottom-sheet')
+		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 		['hide','hidden','show'].forEach(triggerName => {
 			bottomPanelOffcanvas.on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
@@ -194,7 +194,7 @@ class EventListeners {
 		window.removeEventListener("optimizedScroll", this.onOptimizedScroll);
 		window.removeEventListener("scroll", this.throttledScroll);
 		
-		const bottomPanelOffcanvas = $('#ua-bottom-sheet')
+		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 		['hide','hidden','show'].forEach(triggerName => {
 			bottomPanelOffcanvas.off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
