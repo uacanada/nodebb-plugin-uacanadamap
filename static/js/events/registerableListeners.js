@@ -1,8 +1,8 @@
 'use strict';
 define('events/registerableListeneres',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-const bottomPanelOffcanvasTriggers = ['hide','hidden','show']
+
+const bottomPanelOffcanvasTriggers = ['hide','show']
 
 class EventListeners {
 	constructor(UacanadaMap) {
@@ -13,17 +13,15 @@ class EventListeners {
 
 	bottomOffcanvasTriggers = {
 		hide:  () => {
+			const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 			UacanadaMap.api.setBottomSheetSize(0);
 			bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)
 		
 			UacanadaMap.console.log('hide',bottomPanelOffcanvas.attr('data-ua-size'))
 		},
-		hidden:() => {
-			UacanadaMap.console.log('hidden',bottomPanelOffcanvas.attr('data-ua-size'))
-
-			
-		},
+		
 		show:  () => {
+			const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 			UacanadaMap.console.log('shown',bottomPanelOffcanvas.attr('data-ua-size'))
 			UacanadaMap.api.setBottomSheetSize(1)
 			try {
@@ -169,6 +167,11 @@ class EventListeners {
 	register = () => {
 		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).on('click', this.clickHandler);
+
+		
+	
+
+
 		$("#ua-mainframe").on(
 			this.hasPointerEventSupport(),
 			this.handleMainframeClick
@@ -180,8 +183,9 @@ class EventListeners {
 		this.optimizedScrollEvent = new Event("optimizedScroll");
 
 		window.addEventListener("optimizedScroll", this.onOptimizedScroll);
-
+        const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 		bottomPanelOffcanvasTriggers.forEach(triggerName => {
+
 			bottomPanelOffcanvas.on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
 		
@@ -194,6 +198,7 @@ class EventListeners {
 	};
 
 	remove = () => {
+		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 		$(document).off(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).off('click', this.clickHandler);
 		$("#ua-mainframe").off(
@@ -244,12 +249,6 @@ class EventListeners {
 	};
 }
   
-//   const eventListenersInstance = new EventListeners(UacanadaMap, map, L);
-//   eventListenersInstance.eventListeners();
-  
-//   // you can use the following methods to remove or re-add all event listeners
-//   eventListenersInstance.removeAllListeners();
-//   eventListenersInstance.eventListeners();
   
   return EventListeners;
 
