@@ -389,7 +389,7 @@ UacanadaMap.swipers.createContentSlide = (tab, index) => {
                   </li>
               </ul>
               <div class="swiper-scrollbar"></div>
-              <div class="space-filler w-100 h-100"></div>
+         
               <div class="places-tab-footer">${footer}</div>
           </div>
           </div>

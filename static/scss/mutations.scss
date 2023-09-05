@@ -47,8 +47,6 @@ $filterValuesAddPlaceMode: grayscale(0.9);
 
 .brand-container {
     transition: all 0.3s ease-out;
-    z-index: 13;
-   
 }
 
 
@@ -56,7 +54,7 @@ $filterValuesAddPlaceMode: grayscale(0.9);
 body.uacanada-map-page {
     .brand-container {
         margin-top: 2rem;
-
+        z-index: 13;
         .border-bottom {
             border-color: transparent !important;
         }
@@ -117,29 +115,34 @@ body.uacanada-map-page.map-touched.addPlaceMode {
 
 
 
-.before-map-expand{
-    .ua-markers{
-
+body.before-map-expand:not(.map-touched) {
+    .ua-markers {
         .circle-icon {
             background: #e3e3e3;
         }
-        .circle-icon:after{
+        .circle-icon:after {
             visibility: hidden;
         }
         .badge-text {
             color: gray;
         }
-
-    } 
+    }
 
     .leaflet-marker-icon.mycluster {
-       
         color: transparent;
         filter: drop-shadow(1px 1px 5px black);
-        width: 30px!important;
+        width: 30px !important;
     }
-   
 }
+
+
+body.addPlaceMode{
+    #targetForNewPlaceWrapper{
+      z-index: 500;
+      background:radial-gradient(transparent, rgba(7, 25, 75, 0.3));
+    }
+}
+
 
 .place-pic{
     transition: .2s width;

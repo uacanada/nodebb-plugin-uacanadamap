@@ -34,6 +34,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     
       const mapContainer = $('#uacamap');
       const targetDiv = $('#targetForNewPlace');
+      const wrapper =  $('#targetForNewPlaceWrapper');
       const mapCenter = {
         x: mapContainer.width() / 2,
         y: mapContainer.height() / 2
@@ -46,19 +47,26 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
         top: mapCenter.y - LOCATION_MARKER_OFFSET_Y
       };
   
-      targetDiv.addClass('d-none').css({
+     
+
+      targetDiv.css({
         position: 'absolute',
         left: `${targetPosition.left}px`,
         top: '-300px',
         opacity: 0,
         'z-index': 1000
       });
+      wrapper.removeClass('d-none')
   
-      targetDiv.removeClass('d-none').animate({
+      targetDiv.animate({
         left: `${targetPosition.left}px`,
         top: `${targetPosition.top}px`,
         opacity: 1
       }, ANIMATION_DURATION);
+
+
+      $('#targetForNewPlace i.fa-compass').addClass('fa-spin')
+
     },
 
     addPlace: function(){
@@ -73,6 +81,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       $('body').removeClass('addPlaceMode')
       $('#geocoderSearchbox').removeClass('show')
       $('#ua-horizontal-buttons-wrapper').removeClass('hidden')
+      $('#targetForNewPlace i.fa-compass').removeClass('fa-spin')
       UacanadaMap.api.removeCards()
       UacanadaMap.api.contextButtonText({text:'',delay:0,to:UacanadaMap.contextButton.router.main})
       
@@ -81,14 +90,14 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       this.toggleVisibility(false);
   
       const targetDiv = $('#targetForNewPlace');
+      const wrapper =  $('#targetForNewPlaceWrapper');
   
       targetDiv.animate({
         opacity: 0
       }, FADE_OUT_DURATION, () => {
-        targetDiv.addClass('d-none').css({
-          left: 0,
-          top: 0
-        });
+       
+        targetDiv.css({ left:0,top:0});
+        wrapper.addClass('d-none')
       });
     },
   
@@ -107,10 +116,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     },
   };
   
-// UacanadaMap.api.locationSelection.isVisible
-// UacanadaMap.api.locationSelection.cleanMarker()
-// UacanadaMap.api.locationSelection.getMarker()
-// UacanadaMap.api.locationSelection.addMarker()
   
 
   // TODO REFACTOR

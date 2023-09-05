@@ -46,12 +46,14 @@
              <!-- IMPORT contextButtons.tpl -->
              <!-- IMPORT sheets.tpl -->
              <!-- IMPORT submitPlace.tpl -->
-             <div id="targetForNewPlace" class="d-none">
-                <div class="ua-markers marker-selector d-flex align-items-center marker-container">
-                    <span id="locationSelectionLatLng"></span> 
-                    <button title="Add place here" class="btn btn-sm rounded-pill newLocationCreateButton" type="button"><i class="fa fas fa-solid fa-check"></i> Create</button>
-                    <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center"><i class="'fa fa-fw fas fa-solid fa-compass fa-spin"></i></div>
-                    <button title="Add place here" class="btn rounded-pill newLocationCancelButton" type="button"><i class="fa-solid fa-xmark"></i></button>  
+             <div id="targetForNewPlaceWrapper" class="d-none position-fixed top-0 start-0 w-100 h-100 p-0 m-0">
+                <div id="targetForNewPlace">
+                    <div class="ua-markers marker-selector d-flex align-items-center marker-container">
+                        <span id="locationSelectionLatLng"></span> 
+                        <button title="Add place here" class="btn btn-sm rounded-pill newLocationCreateButton" type="button"><i class="fa fas fa-solid fa-check"></i> Create</button>
+                        <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center"><i class="fa fa-fw fas fa-solid fa-compass"></i></div>
+                        <button title="Add place here" class="btn rounded-pill newLocationCancelButton" type="button"><i class="fa-solid fa-xmark"></i></button>  
+                    </div>
                 </div>
              </div>
 
