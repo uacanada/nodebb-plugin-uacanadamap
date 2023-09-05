@@ -73,7 +73,7 @@ define("panels/categoryButtonsSwiper", [
     var catFields =
       '<option value="">All places: ' + total + "</option>" + options;
     $("#location-category-filter").html(catFields);
-    if (selected) $("#mapStatusLine").addClass("show");
+    
     initializeСategoryButtonsSwiper(buttonsHtml);
   };
 });

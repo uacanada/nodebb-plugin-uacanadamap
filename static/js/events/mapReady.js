@@ -32,7 +32,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         }, 100);
         
         setTimeout(() => {
-                $("#mapStatusLine").addClass("show");
+               
 
 
                 UacanadaMap.api.disablePropagationToMap(UacanadaMap.L,null)

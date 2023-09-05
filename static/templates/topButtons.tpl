@@ -2,11 +2,11 @@
     <div id="ua-place-buttons" class="swiper">
        
         <ul class="swiper-wrapper container p-2">
-            <!-- <li class="swiper-slide">
-                        <button id="ua-locate-me" type="button" class="rounded-pill me-3 btn"><i class="fa fa-location-crosshairs"></i> New</button>
+                <li class="swiper-slide logo-button">
+                        <button id="ua-locate-me" type="button" class="rounded-pill me-3 btn"><i class="fa fa-location-crosshairs"></i> UA</button>
                 </li> 
 
-
+ <!-- 
             <li class="swiper-slide">
                 <select id="location-sort" name="location-sort" class="form-select shadow me-2" aria-label="sort">
                     <option value="distance" selected>Distance</option>

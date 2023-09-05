@@ -7,14 +7,7 @@
            
             
 
-            <div id="mapStatusLine" class="position-absolute top-0 align-items-center border-0 m-2">
-                <div class="d-flex">
-                    <a href="/" role="button" class="top-reload btn rounded-pill me-3"><i
-                            class="fa-solid fa-arrow-rotate-right"></i></a>
-
-
-                </div>
-            </div>
+           
 
 
 

@@ -352,16 +352,7 @@ input#ua-location-cover-img:before {
 
 
 
-#mapStatusLine {
-  z-index: 1000;
-  color: white;
-  transition: 800ms;
-  transform: translate(0px, -70px);
-}
 
-.map-touched #mapStatusLine.show {
-  transform: translate(0px, 0px);
-}
 
 
 
