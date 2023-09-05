@@ -2,7 +2,7 @@
 define('events/registerableListeneres',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
 const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-const bottomPanelOffcanvasTriggers = ['hide','hidden','show']
+const bottomPanelOffcanvasTriggers = ['hide','hidden','shown']
 
 class EventListeners {
 	constructor(UacanadaMap) {
@@ -13,13 +13,16 @@ class EventListeners {
 
 	bottomOffcanvasTriggers = {
 		hide:  () => {
-			//UacanadaMap.api.setBottomSheetSize(0);bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)
+		
 			UacanadaMap.console.log('hide',bottomPanelOffcanvas.attr('data-ua-size'))
 		},
 		hidden:() => {
 			UacanadaMap.console.log('hidden',bottomPanelOffcanvas.attr('data-ua-size'))
+
+			UacanadaMap.api.setBottomSheetSize(0);
+			bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)
 		},
-		show:  () => {
+		shown:  () => {
 			UacanadaMap.console.log('shown',bottomPanelOffcanvas.attr('data-ua-size'))
 			UacanadaMap.api.setBottomSheetSize(1)
 			try {
