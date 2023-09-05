@@ -45,10 +45,8 @@
 
 
                                 <div class="swiper-slide rounded-pill">
-                                        <div
-                                                class="d-flex align-items-center justify-content-center rounded-pill p-2 text-bg-primary">
-                                                <i class="fa fas fa-solid fa-puzzle-piece fa-beat me-3"></i>
-                                                <span id="text-info-button">...</span>
+                                        <div class="d-flex align-items-center justify-content-center rounded-pill p-1 text-bg-primary">  <i class="fa fas fa-solid fa-puzzle-piece fa-beat me-3"></i>
+                                                <span id="text-info-button" class="text-truncate">...</span>
                                         </div>
 
 

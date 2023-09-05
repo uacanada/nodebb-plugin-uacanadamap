@@ -1,8 +1,8 @@
 'use strict';
 define('panels/bottomSheets',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    const { Swiper, offcanvas: { modes } } = UacanadaMap;
-    const sizes = ajaxify.data.UacanadaMapSettings.bottomSheetOffset.split(',').map(Number);
+const { Swiper, offcanvas: { modes } } = UacanadaMap;
+const sizes = ajaxify.data.UacanadaMapSettings.bottomSheetOffset.split(',').map(Number);
 
 
 // Declare a debounce block that prevents the togglePanel function from running too frequently
@@ -184,6 +184,7 @@ UacanadaMap.api.openCertainTab = (contextButton) => {
 
 
 UacanadaMap.api.setBottomSheetSize = (i) => {
+  UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes})
   modes.forEach(modeClass => {
     offCanvasPanel.removeClass(modeClass)
   });
