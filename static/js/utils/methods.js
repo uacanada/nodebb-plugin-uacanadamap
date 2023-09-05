@@ -24,7 +24,10 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       UacanadaMap.api.removeCards()
       $('#geocoderSearchbox').addClass('show')
       $('#ua-horizontal-buttons-wrapper').addClass('hidden')
-      UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:1200,to:UacanadaMap.contextButton.router.addplace})
+      setTimeout(() => {
+        UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:1200,to:UacanadaMap.contextButton.router.addplace})
+      }, 400);
+    
       const mapContainer = $('#uacamap');
       const targetDiv = $('#targetForNewPlace');
       const mapCenter = {

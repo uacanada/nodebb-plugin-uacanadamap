@@ -419,8 +419,7 @@
       UacanadaMap.api.cardsOpened(false)
       
       setTimeout(() => {
-        
-       
+               
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
         
