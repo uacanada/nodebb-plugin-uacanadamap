@@ -409,7 +409,7 @@
   
   
   UacanadaMap.api.removeCards = async () => { 
-     
+      UacanadaMap.api.contextButtonText({text:'',delay:100,to:0})
       UacanadaMap.api.rotateCards('horizontal');
       UacanadaMap.api.animateCards('close')
       UacanadaMap.api.fitElementsPosition();
@@ -417,14 +417,14 @@
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
       UacanadaMap.api.cardsOpened(false)
-      UacanadaMap.api.contextButtonText({text:' Reset Categories',delay:300,to:0})
+      
       setTimeout(() => {
         
        
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
         
-      }, 350);
+      }, 200);
       
       
   };

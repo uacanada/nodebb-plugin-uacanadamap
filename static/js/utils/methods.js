@@ -20,11 +20,11 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     addMarker: function() {
      
       if (this.isVisible) return this.cleanMarker();  // Exit if the marker is already visible
-      UacanadaMap.api.removeCards()
-      UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:1300,to:UacanadaMap.contextButton.router.addplace})
       $('body').addClass('addPlaceMode')
+      UacanadaMap.api.removeCards()
       $('#geocoderSearchbox').addClass('show')
       $('#ua-horizontal-buttons-wrapper').addClass('hidden')
+      UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:1200,to:UacanadaMap.contextButton.router.addplace})
       const mapContainer = $('#uacamap');
       const targetDiv = $('#targetForNewPlace');
       const mapCenter = {
