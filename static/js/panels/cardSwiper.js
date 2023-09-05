@@ -351,7 +351,7 @@
         var otherMarkers = [];
     
         for (const markerDist of allMarkers) {
-          if(markerDist.json.placeCategory === UacanadaMap.allPlaces[firstMarker.tid].json.placeCategory && markerDist.json.city === UacanadaMap.allPlaces[firstMarker.tid].json.city){
+          if(markerDist && firstMarker?.tid && markerDist.json.placeCategory === UacanadaMap.allPlaces[firstMarker.tid]?.json.placeCategory && markerDist.json.city === UacanadaMap.allPlaces[firstMarker.tid].json.city){
             sameCatSameCity.push(markerDist)
           } else {
             otherMarkers.push(markerDist)
@@ -365,7 +365,6 @@
           var sort_criteriaA = (a.json.eventStartDate) ? Math.floor(Date.parse(a.json.eventStartDate+' '+(a.json.eventStartTime||''))/1000)+1e5 : a.json.created;
           var sort_criteriaB = (b.json.eventStartDate) ? Math.floor(Date.parse(b.json.eventStartDate+' '+(b.json.eventStartTime||''))/1000)+1e5 : b.json.created;
   
-          console.log({sort_criteriaB,sort_criteriaA})
           return sort_criteriaB-sort_criteriaA;
         
         });
