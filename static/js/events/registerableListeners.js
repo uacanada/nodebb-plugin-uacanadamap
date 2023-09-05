@@ -12,9 +12,15 @@ class EventListeners {
 	}
 
 	bottomOffcanvasTriggers = {
-		hide:  () => {UacanadaMap.api.setBottomSheetSize(0);bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)},
-		hidden:() => {},
+		hide:  () => {
+			//UacanadaMap.api.setBottomSheetSize(0);bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)
+			UacanadaMap.console.log('hide',bottomPanelOffcanvas.attr('data-ua-size'))
+		},
+		hidden:() => {
+			UacanadaMap.console.log('hidden',bottomPanelOffcanvas.attr('data-ua-size'))
+		},
 		show:  () => {
+			UacanadaMap.console.log('shown',bottomPanelOffcanvas.attr('data-ua-size'))
 			UacanadaMap.api.setBottomSheetSize(1)
 			try {
 				UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
