@@ -116,7 +116,6 @@
   UacanadaMap.api.openCarousel = async (places, autoplay) =>{
       const {L} = UacanadaMap
       UacanadaMap.api.animateCards('closed')
-      UacanadaMap.api.locationSelection.cleanMarker()
       const card = $(UacanadaMap.placeCardDiv);
       const cat = $('#location-category-filter').val();
       const { isDesktop } = UacanadaMap.api.getDivSizes();
@@ -378,6 +377,11 @@
   
   
   UacanadaMap.api.openCards = async (topic_id,sort_by,autoplay) => {
+
+       if($('body').hasClass(addPlaceMode)){
+        return  UacanadaMap.api.shakeElements([".newLocationCancelButton"],'ua-shake-vert');
+       } 
+
       const offCanvasPanel =  $('#ua-bottom-sheet') 
       let tid = Number(topic_id)
       let thisMarker=null
