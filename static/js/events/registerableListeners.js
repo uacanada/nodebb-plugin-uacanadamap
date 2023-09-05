@@ -1,6 +1,8 @@
 'use strict';
 define('events/registerableListeneres',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
+const bottomPanelOffcanvas = $('#ua-bottom-sheet');
+const bottomPanelOffcanvasTriggers = ['hide','hidden','show']
 
 class EventListeners {
 	constructor(UacanadaMap) {
@@ -169,8 +171,7 @@ class EventListeners {
 
 		window.addEventListener("optimizedScroll", this.onOptimizedScroll);
 
-		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-		['hide','hidden','show'].forEach(triggerName => {
+		bottomPanelOffcanvasTriggers.forEach(triggerName => {
 			bottomPanelOffcanvas.on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
 		
@@ -194,8 +195,7 @@ class EventListeners {
 		window.removeEventListener("optimizedScroll", this.onOptimizedScroll);
 		window.removeEventListener("scroll", this.throttledScroll);
 		
-		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-		['hide','hidden','show'].forEach(triggerName => {
+		bottomPanelOffcanvasTriggers.forEach(triggerName => {
 			bottomPanelOffcanvas.off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
 	};
