@@ -201,7 +201,7 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
   
     offCanvasPanel.on("hide.bs.offcanvas", () => {
         offCanvasPanel.css('transform',`translate3d(0,100vh,0)`)
-    // $('body').css('overflow', '').removeAttr('data-bs-overflow');
+       // $('body').css('overflow', '').removeAttr('data-bs-overflow');
     });
 
     offCanvasPanel.on("hidden.bs.offcanvas", () => {
@@ -222,21 +222,11 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-const debouncedDetectSwipeBehavior = UacanadaMap.api.debounce(detectSwipeBehavior, 10);
+    const debouncedDetectSwipeBehavior = UacanadaMap.api.debounce(detectSwipeBehavior, 10);
 
 
 const waitContent = setInterval(() => {
-
-  if (UacanadaMap.swipers.canActivateVertical) {
+    if (UacanadaMap.swipers.canActivateVertical) {
     clearInterval(waitContent);
 
    UacanadaMap.swipers.vertical = new Swiper(".vertical-places-list", {
@@ -277,10 +267,10 @@ const waitContent = setInterval(() => {
       };
      
      
-      s.on('reachBeginning', () => console.log('reachBeginning'))
-      s.on('reachEnd', () =>{
+     // s.on('reachBeginning', () => console.log('reachBeginning'))
+      // s.on('reachEnd', () =>{
       
-      } )
+      // } )
    
       s.on('touchStart', (s,e) => { 
         
@@ -295,32 +285,20 @@ const waitContent = setInterval(() => {
       });
       
       s.on('touchMove', (swiperEvent,event) => {
+
+        console.log({s})
         const { clientY , clientX } = event;
         const swiper = UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex] // TODO CHECK AND DEBUG
-
-       
-      
-       
-  
         if (!event.debounceHandled && !event.preventedByNestedSwiper && !handled) {
-
           const deltaX = Math.abs(clientX-prevClientX)
           const deltaY = Math.abs(clientY-prevClientY)
           const isDiagonal = deltaX >= deltaY * 0.8
           const currentTime = new Date().getTime();
           const elapsedTime = currentTime - startTime;
-
-         
           if (prevClientY !== null && !isDiagonal && elapsedTime > 4) {
-
-           
-        
-            
             const swipeUp = clientY < prevClientY
             const swipeDown = clientY > prevClientY
-
             if(!swipeDown && !swipeUp) return
-
             const gestureDown = swiper.progress < previousProgress
             const gestureUp = swiper.progress > previousProgress
             const hasScroll = swiper.virtualSize > swiper.size
@@ -346,32 +324,15 @@ const waitContent = setInterval(() => {
              }  
              
 
-              duration.up += elapsedTime;
+                duration.up += elapsedTime;
                 dstnc.up  += distance;
-
-
-
-                
-                
-
-                
-                
-
                 const releaseScrollUp = (hasScroll && isBottom && !gestureDown ) || !hasScroll ||  !isFH
                 const inTheEnd = isFH&& isBottom && !gestureDown && hasScroll && swiper.progress > 1.013
-
-               // console.log( Number(offCanvasPanel.attr("data-ua-size")) , fullHeight)
-
-               if(inTheEnd) {
+              if(inTheEnd) {
                   return offCanvasPanel.offcanvas('hide')
                }
-               
-
-
-
-                if(releaseScrollUp) {
+               if(releaseScrollUp) {
                //   console.log(` ${gestureUp?'⬆️':gestureDown?'⬇️':'?'}  releaseScrollUp=${releaseScrollUp} clientY=${clientY} prevClientY=${prevClientY}  ${hasScroll?'📜':' '}  ${isBottom?'🔚':''}   ${isTop?'🔝':''}  elapsedTime=${elapsedTime} progress=${swiper.progress} velocity=${swiper.velocity} touchStartTime=${swiper.touchEventsData.touchStartTime}`)
-               
                  handled = debouncedDetectSwipeBehavior({ up:true, down:false, t: duration.up, d: dstnc });
                 } else {
                  // console.log({hasScroll, isTop,isBottom, gestureDown, gestureUp, clientY, prevClientY})
@@ -384,14 +345,8 @@ const waitContent = setInterval(() => {
                 duration.down  += elapsedTime;
 
                 const releaseScrollDown = (hasScroll && !gestureUp && isTop ) || !hasScroll
-
-
-               
-
-                if(releaseScrollDown) {
-            //      console.log(` ${gestureUp?'⬆️':gestureDown?'⬇️':'?'}  releaseScrollDown=${releaseScrollDown} clientY=${clientY} prevClientY=${prevClientY}  ${hasScroll?'📜':' '}  ${isBottom?'🔚':''}   ${isTop?'🔝':''}  elapsedTime=${elapsedTime} progress=${swiper.progress} velocity=${swiper.velocity} touchStartTime=${swiper.touchEventsData.touchStartTime}`)
-               
-                  handled = debouncedDetectSwipeBehavior({ down:true, up:false, t: duration.down , d: dstnc  });
+               if(releaseScrollDown) {
+                   handled = debouncedDetectSwipeBehavior({ down:true, up:false, t: duration.down , d: dstnc  });
 
                 } else{
                  // console.log({hasScroll, isTop,isBottom, gestureDown, gestureUp, clientY, prevClientY})
