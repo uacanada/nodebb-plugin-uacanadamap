@@ -114,8 +114,9 @@
   
   
   UacanadaMap.api.openCarousel = async (places, autoplay) =>{
-    const {L} = UacanadaMap
+      const {L} = UacanadaMap
       UacanadaMap.api.animateCards('closed')
+      UacanadaMap.api.locationSelection.cleanMarker()
       const card = $(UacanadaMap.placeCardDiv);
       const cat = $('#location-category-filter').val();
       const { isDesktop } = UacanadaMap.api.getDivSizes();
@@ -397,7 +398,7 @@
         UacanadaMap.api.openMarker(tid)
         thisMarker = UacanadaMap.allPlaces[tid].marker;
       }
-      UacanadaMap.console.log('DEBUG :: ',{ activecard:$('#ua-cards-slider li.is-active .ua-place-card-inner').attr('data-ua-tid'),topic_id,tid,s,sort_by},Number(topic_id)>0,markersTemp.length)
+      // UacanadaMap.console.log('DEBUG :: ',{ activecard:$('#ua-cards-slider li.is-active .ua-place-card-inner').attr('data-ua-tid'),topic_id,tid,s,sort_by},Number(topic_id)>0,markersTemp.length)
     
       UacanadaMap.api.openCarousel(markersTemp,autoplay)
       UacanadaMap.currentSortedMarkers = markersTemp 
