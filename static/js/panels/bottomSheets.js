@@ -36,7 +36,7 @@ const togglePanel = (direction) => {
     }, 100);
   
     // Get the current panel mode from its data attribute
-    const currentMode = Number(offCanvasPanel.attr("data-ua-size")) || 0;
+    const currentMode = Number(offCanvasPanel.attr("data-ua-size"));
     // Define an array of available panel modes
     
   
@@ -60,15 +60,17 @@ const togglePanel = (direction) => {
   
     // Update the panel's data attribute and CSS class to reflect the new mode
   
-    modes.forEach(modeClass => {
-      offCanvasPanel.removeClass(modeClass)
-    });
+    // modes.forEach(modeClass => {
+    //   offCanvasPanel.removeClass(modeClass)
+    // });
   
-    offCanvasPanel
-      .attr("data-ua-size", newMode)
-    //  .removeClass(modes[currentMode])
-      .addClass(modes[newMode])
-      .css('transform',`translate3d(0,${sizes[newMode]}vh,0)`)
+    // offCanvasPanel
+    //   .attr("data-ua-size", newMode)
+    // //  .removeClass(modes[currentMode])
+    //  // .addClass(modes[newMode])
+    //   .css('transform',`translate3d(0,${sizes[newMode]}vh,0)`)
+
+      UacanadaMap.api.setBottomSheetSize(newMode)
   
   
      
@@ -99,19 +101,19 @@ const detectSwipeBehavior = (values) => {
 
 const { up, down, t, d } = values;
 if (isDirectionGlitch({up, down}, d)) {
-  console.log('Direction Glitch:', { up, down, t, d });
+  UacanadaMap.console.log('Direction Glitch:', { up, down, t, d });
 } else if (isNormalSwipe(t, d)) {
-  console.log('Normal:', { up, down, t, d });
+  UacanadaMap.console.log('Normal:', { up, down, t, d });
   return togglePanel({up, down, power:d});
  
 } else if (isAbnormalSwipe(t, d)) {
-  console.log('Abnormal!', { up, down, t, d });
+  UacanadaMap.console.log('Abnormal!', { up, down, t, d });
 } else if (isTinySwipe(t, d)) {
-  console.log('Too Tiny Swipes!', { up, down, t, d });
+  UacanadaMap.console.log('Too Tiny Swipes!', { up, down, t, d });
 } else if (isStrangeBehavior(t, d)) {
-  console.log('Strange Behavior - Spending Too Much Time for Tiny Swipe!', { up, down, t, d });
+  UacanadaMap.console.log('Strange Behavior - Spending Too Much Time for Tiny Swipe!', { up, down, t, d });
 } else {
-  console.log('DEBUG:', { up, down, t, d });
+  UacanadaMap.console.log('DEBUG:', { up, down, t, d });
 }
 
 return false
@@ -128,7 +130,7 @@ function addTranslate3dY(value) {
     }
   
     const element = document.getElementById('ua-bottom-sheet'); 
-    const currentTransform = window.getComputedStyle(element).getPropertyValue('transform');
+    //const currentTransform = window.getComputedStyle(element).getPropertyValue('transform');
   
     const style = window.getComputedStyle(element);
     const matrix = new DOMMatrixReadOnly(style.transform);
@@ -185,10 +187,13 @@ UacanadaMap.api.openCertainTab = (contextButton) => {
 
 UacanadaMap.api.setBottomSheetSize = (i) => {
   UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes})
-  modes.forEach(modeClass => {
-    offCanvasPanel.removeClass(modeClass)
-  });
-  offCanvasPanel.addClass(modes[i]).attr("data-ua-size", String(i)).css('transform',`translate3d(0,${sizes[i]}vh,0)`)
+  // modes.forEach(modeClass => {
+  //   offCanvasPanel.removeClass(modeClass)
+  // });
+  offCanvasPanel
+  //.addClass(modes[i])
+  .attr("data-ua-size", String(i))
+  .css('transform',`translate3d(0,${sizes[i]}vh,0)`)
 }
 
 UacanadaMap.api.OffCanvasPanelHandler = () => {
@@ -199,25 +204,7 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
     let once = true
 
   
-    offCanvasPanel.on("hide.bs.offcanvas", () => {
-        offCanvasPanel.css('transform',`translate3d(0,100vh,0)`)
-       // $('body').css('overflow', '').removeAttr('data-bs-overflow');
-    });
-
-    offCanvasPanel.on("hidden.bs.offcanvas", () => {
-      UacanadaMap.api.setBottomSheetSize(0)
-        once = true
-    });
-    offCanvasPanel.on("show.bs.offcanvas", () => {
-      UacanadaMap.api.setBottomSheetSize(1)
-       
-        try {
-            UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
-        } catch (error) {
-            
-        }
     
-    });
 
 
 
@@ -286,7 +273,6 @@ const waitContent = setInterval(() => {
       
       s.on('touchMove', (swiperEvent,event) => {
 
-        console.log({s})
         const { clientY , clientX } = event;
         const swiper = UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex] // TODO CHECK AND DEBUG
         if (!event.debounceHandled && !event.preventedByNestedSwiper && !handled) {

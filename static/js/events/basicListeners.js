@@ -162,6 +162,10 @@ $.fn.classChange = function (cb) {
       $('#sortPlacesOffcanvas').on('show.bs.offcanvas', function (e) {
         $('#ua-horizontal-buttons-wrapper').addClass('movedown').removeClass('hidden')
       });
+
+
+
+      
             
    
 

@@ -9,6 +9,19 @@ class EventListeners {
 		this.throttledScroll;
 	}
 
+	bottomOffcanvasTriggers = {
+		hide:  () => {bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)},
+		hidden:() => {UacanadaMap.api.setBottomSheetSize(0); once = true},
+		show:  () => {
+			UacanadaMap.api.setBottomSheetSize(1)
+			try {
+				UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
+			} catch (error) {
+				
+			}
+		}
+	}
+
 	hasPointerEventSupport = () => {
 		if (window.PointerEvent && "maxTouchPoints" in navigator) {
 			return "pointerup";
@@ -155,6 +168,18 @@ class EventListeners {
 		this.optimizedScrollEvent = new Event("optimizedScroll");
 
 		window.addEventListener("optimizedScroll", this.onOptimizedScroll);
+
+		const bottomPanelOffcanvas = $('#ua-bottom-sheet')
+		['hide','hidden','show'].forEach(triggerName => {
+			bottomPanelOffcanvas.on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
+		});
+		
+
+
+		
+		
+
+
 	};
 
 	remove = () => {
@@ -168,6 +193,11 @@ class EventListeners {
 
 		window.removeEventListener("optimizedScroll", this.onOptimizedScroll);
 		window.removeEventListener("scroll", this.throttledScroll);
+		
+		const bottomPanelOffcanvas = $('#ua-bottom-sheet')
+		['hide','hidden','show'].forEach(triggerName => {
+			bottomPanelOffcanvas.off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
+		});
 	};
 
 	reload = () => {
