@@ -1,4 +1,4 @@
-<div id="ua-logo-wrapper" class="position-fixed d-block p-2 start-0 top-0">
+<div id="ua-logo-wrapper" class="position-fixed d-block p-2 top-0">
    <a href="/" class="btn btn-sm btn-link me-1 position-relative">
    <span class="w-100 h-100 position-absolute top-0 start-0"></span>
 
