@@ -12,8 +12,8 @@ class EventListeners {
 	}
 
 	bottomOffcanvasTriggers = {
-		hide:  () => {bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)},
-		hidden:() => {UacanadaMap.api.setBottomSheetSize(0); once = true},
+		hide:  () => {UacanadaMap.api.setBottomSheetSize(0);bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)},
+		hidden:() => {},
 		show:  () => {
 			UacanadaMap.api.setBottomSheetSize(1)
 			try {

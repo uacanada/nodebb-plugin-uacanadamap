@@ -187,13 +187,7 @@ UacanadaMap.api.openCertainTab = (contextButton) => {
 
 UacanadaMap.api.setBottomSheetSize = (i) => {
   UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes})
-  // modes.forEach(modeClass => {
-  //   offCanvasPanel.removeClass(modeClass)
-  // });
-  offCanvasPanel
-  //.addClass(modes[i])
-  .attr("data-ua-size", String(i))
-  .css('transform',`translate3d(0,${sizes[i]}vh,0)`)
+  offCanvasPanel.attr("data-ua-size", String(i)).css('transform',`translate3d(0,${sizes[i]}vh,0)`)
 }
 
 UacanadaMap.api.OffCanvasPanelHandler = () => {
