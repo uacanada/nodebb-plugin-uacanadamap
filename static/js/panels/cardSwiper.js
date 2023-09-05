@@ -378,7 +378,7 @@
   
   UacanadaMap.api.openCards = async (topic_id,sort_by,autoplay) => {
 
-       if($('body').hasClass(addPlaceMode)){
+       if($('body').hasClass('addPlaceMode')){
         return  UacanadaMap.api.shakeElements([".newLocationCancelButton"],'ua-shake-vert');
        } 
 
