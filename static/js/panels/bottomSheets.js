@@ -187,9 +187,8 @@ UacanadaMap.api.openCertainTab = (contextButton) => {
 
 UacanadaMap.api.setBottomSheetSize = (i) => {
  
-  offCanvasPanel.attr("data-ua-size", String(i))
-  offCanvasPanel.css('transform',`translate3d(0,${sizes[i]}vh,0)`)
-  UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes,offCanvasPanel},offCanvasPanel.attr("data-ua-size"))
+  $('#ua-bottom-sheet').attr("data-ua-size", String(i)).css('transform',`translate3d(0,${sizes[i]}vh,0)`)
+  UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes,offCanvasPanel},offCanvasPanel.attr("data-ua-size"),$('#ua-bottom-sheet').attr("data-ua-size"))
 
 }
 
