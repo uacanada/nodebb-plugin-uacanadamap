@@ -21,7 +21,11 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
      
       if (this.isVisible) return this.cleanMarker();  // Exit if the marker is already visible
       $('body').addClass('addPlaceMode')
-      UacanadaMap.api.removeCards()
+     
+      if($('body').hasClass('cards-opened')){
+        UacanadaMap.api.removeCards()
+      }
+     
       $('#geocoderSearchbox').addClass('show')
       $('#ua-horizontal-buttons-wrapper').addClass('hidden')
       setTimeout(() => {
