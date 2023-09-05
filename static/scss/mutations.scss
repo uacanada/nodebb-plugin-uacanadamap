@@ -141,6 +141,9 @@ body.addPlaceMode{
       z-index: 500;
       background:radial-gradient(transparent, rgba(7, 25, 75, 0.3));
     }
+    [component="bottombar"]{
+        transform: translate3d(0,100%, 0);
+    }
 }
 
 

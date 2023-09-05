@@ -1330,12 +1330,6 @@ body.map-touched #uacamap .leaflet-control-attribution.leaflet-control{ opacity:
 
 
 
-  body.uacanada-map-page.ua-sidepanel-opened .bottombar {
-    bottom: -10rem!important;
-  }
-
-
-
 
 
 
@@ -1440,7 +1434,7 @@ body.hiddenElements{
       transform: translate3d(0,100%, 0);
   }
   
-  .newLocationCreateButton, .newLocationCancelButton, #locationSelectionLatLng {
+  .newLocationCreateButton, #locationSelectionLatLng {
     opacity: 0;
     transition: .2s;
 }
