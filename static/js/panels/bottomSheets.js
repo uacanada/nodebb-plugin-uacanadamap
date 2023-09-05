@@ -7,7 +7,7 @@ const sizes = ajaxify.data.UacanadaMapSettings.bottomSheetOffset.split(',').map(
 
 // Declare a debounce block that prevents the togglePanel function from running too frequently
 let isDebounceBlocked = false;
-const offCanvasPanel =  $('#ua-bottom-sheet');
+
 
 // Constants definition for thresholds
 const thresholds = {
@@ -26,6 +26,7 @@ const thresholds = {
 
   // This function adjusts the state of the off-canvas panel based on a direction input
 const togglePanel = (direction) => {
+  const offCanvasPanel =  $('#ua-bottom-sheet');
     // Return early if the debounce block is active
     if (isDebounceBlocked) return false;
   
@@ -188,27 +189,18 @@ UacanadaMap.api.openCertainTab = (contextButton) => {
 UacanadaMap.api.setBottomSheetSize = (i) => {
  
   $('#ua-bottom-sheet').attr("data-ua-size", String(i)).css('transform',`translate3d(0,${sizes[i]}vh,0)`)
-  UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes,offCanvasPanel},offCanvasPanel.attr("data-ua-size"),$('#ua-bottom-sheet').attr("data-ua-size"))
+  UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes,offCanvasPanel},$('#ua-bottom-sheet').attr("data-ua-size"))
 
 }
 
 UacanadaMap.api.OffCanvasPanelHandler = () => {
   
-  
+  const offCanvasPanel =  $('#ua-bottom-sheet');
     const fullHeight = modes.length - 2
     const bigHeight = modes.length - 3
     let once = true
-
-  
-    
-
-
-
-
     const debouncedDetectSwipeBehavior = UacanadaMap.api.debounce(detectSwipeBehavior, 10);
-
-
-const waitContent = setInterval(() => {
+    const waitContent = setInterval(() => {
     if (UacanadaMap.swipers.canActivateVertical) {
     clearInterval(waitContent);
 
@@ -230,6 +222,7 @@ const waitContent = setInterval(() => {
 
    
     function handleSwiperGesture(s) {
+     
       let previousProgress = 0;
       let prevClientY = null;
       let prevClientX = null;
