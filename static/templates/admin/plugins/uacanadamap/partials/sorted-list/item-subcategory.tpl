@@ -18,7 +18,11 @@
             NEED SET PARENT CATEGORIES!
             {{{end}}}
 
-            Is Category Visible In "All":  {visibleOnlyWhenChosen}
+           
+
+
+            {{{ if visibleOnlyWhenChosen == 'on' }}}  Markers in this category show only when selected. {{{end}}}
+              
         </div>
         <div class="col-3 text-end">
 
