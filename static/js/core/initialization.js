@@ -77,7 +77,7 @@ define("core/initialization", [
      
     
     const reload = async (UacanadaMap) => {
-      let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
+      let allowLoadOldfromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
    
    
       UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
@@ -87,7 +87,7 @@ define("core/initialization", [
       UacanadaMap.api.addMapControls();
       UacanadaMap.api.initializeSwipers();
       UacanadaMap.api.createCategories();
-      UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(fromCache));
+      UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache));
       UacanadaMap.api.populateTabs();
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.createСategoryButtonsSwiper($("#location-category-filter").val() ?? "");
@@ -119,9 +119,11 @@ define("core/initialization", [
           window.UacanadaMap = UacanadaMap;
       }
 
+      return UacanadaMap
+
     }
 
-    reload(UacanadaMap)
+    await reload(UacanadaMap)
 
    
     
