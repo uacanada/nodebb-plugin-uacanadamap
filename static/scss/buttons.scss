@@ -113,7 +113,7 @@
   .leaflet-bottom.leaflet-right .leaflet-bar{
     box-shadow: none!important;
   }
-  .leaflet-control-zoom-in, .leaflet-control-zoom-out, .leaflet-control-locate a, .leaflet-control-fullscreen, .leaflet-control-addplace button{
+  .leaflet-control-zoom-in, .leaflet-control-zoom-out, .leaflet-control-locate a, .leaflet-control-fullscreen{
     border-radius: 50%!important;
     margin-bottom: 0.25rem!important;
     width: 2.5rem!important;
@@ -130,7 +130,17 @@
 }
   
   
+body.hiddenElements:not(.cards-opened) {
+  #ua-horizontal-buttons-wrapper {
+    transform: translate3d(0, -100%, 0);
+  }
+  .leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen,.leaflet-control-addplace {
+    transform: translate3d(150%, 0, 0);
+  }
 
+ 
+
+}
 
 .leaflet-control-locate a, .leaflet-control-zoom a {
   background: rgba(5, 5, 5, 0.3);

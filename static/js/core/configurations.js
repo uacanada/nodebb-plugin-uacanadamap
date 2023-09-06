@@ -188,16 +188,16 @@ define('core/configuration', function (require) {
                 options: { position },
                 onAdd() {
                 const container = L.DomUtil.create('div', `leaflet-bar leaflet-control ${classes}`);
-                container.innerHTML = `<button title="${title}" class="btn btn-primary rounded-pill p-2"><i class="${icon}"></i></button>`;
+                container.innerHTML = `<button title="${title}" class="btn btn-primary btn-sm rounded-circle"><i class="${icon}"></i></button>`;
                 return container;
                 }
             });
 
-            UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'leaflet-control-addplace', title: 'Add New Place', icon: 'fa fas fa-solid fa-map-pin' }));
+                   UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fas fa-solid fa-map-pin' }));
 
             if (app.user.isAdmin) {
-                UacanadaMap.mapLayers.removeCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'me-minus60px removeCards', title: 'Remove Cards', icon: 'fa fas fa-solid fa-xmark'}));
-                UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'me-minus60px', title: 'Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical'}));
+                UacanadaMap.mapLayers.removeCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'removeCards', title: 'Remove Cards', icon: 'fa fas fa-solid fa-xmark'}));
+                UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'expandRightButtons', title: 'Expand Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical'}));
             }
 
                     

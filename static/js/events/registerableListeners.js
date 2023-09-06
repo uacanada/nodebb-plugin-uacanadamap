@@ -72,11 +72,11 @@ class EventListeners {
 
 			UacanadaMap.form.editPlace(c.attr("data-topic"));
 
-		} else if ((c = clck("button.newLocationCreateButton"))) {
+		} else if ((c = clck(".newLocationCreateButton"))) {
 			UacanadaMap.api.locationSelection.addPlace()
-		} else if ((c = clck("button.newLocationCancelButton"))) {
+		} else if ((c = clck(".newLocationCancelButton"))) {
 			UacanadaMap.api.locationSelection.cleanMarker()
-		} else if ((c = clck("button.newlocation-open-marker"))) {
+		} else if ((c = clck(".newLocationOpenMarker"))) {
 			UacanadaMap.api.locationSelection.addMarker()
 		}
       
