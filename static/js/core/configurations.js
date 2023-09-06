@@ -176,46 +176,16 @@ define('core/configuration', function (require) {
             ajaxify.data.UacanadaMapSettings.subCategories.forEach((category) => {  createCluster(category) });
 
           
-            UacanadaMap.markersOverlay = { };
+            UacanadaMap.markersOverlay = {};
 
         
             for (const category in UacanadaMap.categoryClusters) {
                 const clusterGroup = UacanadaMap.categoryClusters[category];
                 UacanadaMap.markersOverlay[category] = clusterGroup
-                
-              }
+            }
               
 
-
-
-        UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({
-            position: "bottomright",
-            flyTo: true,
-            maxZoom: 14,
-            strings: { title: "Show me where I am, yo!" },
-        });
-
-        UacanadaMap.mapLayers.zoomControl = UacanadaMap.L.control.zoom({ position: "bottomright" });
-
-        UacanadaMap.mapControlsUnused.layerControl = L.control.layers(
-            UacanadaMap.mapProviders,
-            UacanadaMap.markersOverlay,
-            { position: "topright" }
-        );
-
-        UacanadaMap.hiddenControls.geocoder = UacanadaMap.L.Control.geocoder({
-            defaultMarkGeocode: false,
-            position: "topright",
-            query: "",
-            placeholder: "Search here",
-            geocoder: UacanadaMap.L.Control.Geocoder.mapbox(UacanadaMap.geocoderOptions),
-        });
-        const myFullscreen = UacanadaMap.L.Control.Fullscreen.extend({
-            options: {  pseudoFullscreenClass: "fa fa-expand" }
-        });
-        UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
-            
-            const addplaceControl = L.Control.extend({
+              const addplaceControl = L.Control.extend({
                 options: { position: 'bottomright'},
             
                 onAdd(map) {
@@ -255,6 +225,36 @@ define('core/configuration', function (require) {
             UacanadaMap.mapLayers.removeCardsButton = new removeCardsControl();
             UacanadaMap.mapLayers.menuControlButton = new menuControl();
         }
+
+
+        UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({
+            position: "bottomright",
+            flyTo: true,
+            maxZoom: 14,
+            strings: { title: "Show me where I am, yo!" },
+        });
+
+        UacanadaMap.mapLayers.zoomControl = UacanadaMap.L.control.zoom({ position: "bottomright" });
+
+        UacanadaMap.mapControlsUnused.layerControl = L.control.layers(
+            UacanadaMap.mapProviders,
+            UacanadaMap.markersOverlay,
+            { position: "topright" }
+        );
+
+        UacanadaMap.hiddenControls.geocoder = UacanadaMap.L.Control.geocoder({
+            defaultMarkGeocode: false,
+            position: "topright",
+            query: "",
+            placeholder: "Search here",
+            geocoder: UacanadaMap.L.Control.Geocoder.mapbox(UacanadaMap.geocoderOptions),
+        });
+        const myFullscreen = UacanadaMap.L.Control.Fullscreen.extend({
+            options: {  pseudoFullscreenClass: "fa fa-expand" }
+        });
+        UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
+            
+          
         
            
   
