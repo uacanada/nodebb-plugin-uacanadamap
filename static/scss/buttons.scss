@@ -237,20 +237,20 @@ a.leaflet-contextmenu-item button {
 
 .leaflet-control-container{
   .newLocationOpenMarker{
-    transition: .3s transform ease;
+    transition: 1s transform ease;
     transform: translate3d(0, 0, 0);
   }
   .removeCards,
   .rotateCards,
   .filterPlaces {
-    transition: .3s transform ease;
+    transition: 1s transform ease;
     transform: translate3d(0, 100vh, 0);
   }
 }
 
 body.cards-opened{
   #ua-context-buttons-wrapper{
-    bottom: -13rem;
+    bottom: -10rem;
   }
 
   .leaflet-control-container {

@@ -13,8 +13,8 @@
                                 <div class="swiper-slide rounded-pill">
                                         <div class="btn-group w-100" role="group"
                                                 aria-label="Buttons when cards is opened">
-                                                <button title="Toggle place cards to list view" id="rotateCards"
-                                                        class="btn btn-primary rounded-pill m-1 py-1" type="button">
+                                                <button title="Toggle place cards to list view"
+                                                        class="btn btn-primary rounded-pill m-1 py-1 rotateCards" type="button">
                                                         <i class="fa-solid fa-toggle-off"></i> List
                                                 </button>
                                                 <button title="Close Place Cards"

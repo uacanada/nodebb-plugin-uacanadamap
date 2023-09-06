@@ -127,7 +127,7 @@ class EventListeners {
 		 
 
 
-	} else if(tc("#rotateCards")){
+	} else if(tc(".rotateCards")){
 		UacanadaMap.api.rotateCards();
 	} else if (tc("#modal-place-link")) {
        // $("#ua-place-modal .dyn-content").html("...");
@@ -138,30 +138,7 @@ class EventListeners {
         e.preventDefault();
         UacanadaMap.api.removeCards();
 		UacanadaMap.api.contextButtonText({text:'Reset filters...',delay:800,to:UacanadaMap.contextButton.router.main})
-    } else if (tc("#show-only-map-items")) {
-        UacanadaMap.api.rewriteTabs("onlyVisibleArea");
-        UacanadaMap.showOnlyArea = true;
-    } else if (tc("#show-all-map-items")) {
-        UacanadaMap.showOnlyArea = false;
-        UacanadaMap.api.rewriteTabs("anyLocation");
-       // UacanadaMap.api.openSidebarForCat(false);
-    } else if (tc(".show-all-places")) {
-        UacanadaMap.api.rewriteTabs("anyLocation");
-       // UacanadaMap.api.openSidebarForCat(false);
-        UacanadaMap.showOnlyArea = false;
-    } else if (tc(".ua-category-button")) {
-        return UacanadaMap.api.openSidebarForCat(tc(".ua-category-button").attr("data-ua-cat"));
-    } else if (tc(".sidepanel-toggle-button")) {
-        const isNeedOpen = $("#ua-sidepanel").hasClass("opened");
-        UacanadaMap.api.animateScroll();
-        if (isNeedOpen) {
-         
-            UacanadaMap.api.fitElementsPosition();
-        } else {
-            UacanadaMap.api.hideBottomsAndBlockScroll(false);
-           
-        }
-    }
+    } 
 	};
 
 	register = () => {

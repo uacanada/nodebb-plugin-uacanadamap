@@ -87,46 +87,21 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 		
 		setTimeout(() => {
 			
-			const {
-				
-				contextButton,
-				
-				screenW,
-				
-				
-				placeCardH,
-				onePercentH,
-			} = UacanadaMap.api.getDivSizes();
-
-			let zoomControlsPosition = { bottom: `5rem`};
-           
-
-
-			if($(UacanadaMap.placeCardDiv).hasClass('verticalCards') && screenW>700){
+			const { screenW, placeCardH, onePercentH} = UacanadaMap.api.getDivSizes();
+			let zoomControlsPosition = { bottom: `4rem`};
+           	if($(UacanadaMap.placeCardDiv).hasClass('verticalCards') && screenW>700){
 
 			} else {
-
-				
-				zoomControlsPosition = {  bottom: `${Math.floor(placeCardH+contextButton)}px`};
-			
+				zoomControlsPosition = {  bottom: `${Math.floor(placeCardH)}px`};
 			}
-
-			
-
 			$(".leaflet-bottom").css(zoomControlsPosition);
-			
-
 			if (latlng) {
 				const markerOffset = placeCardH > Math.floor(onePercentH * 50) ? Math.floor(onePercentH * 30) : -50
-				
-				
-
-						
 				UacanadaMap.api.moveMarkerToTop(latlng, markerOffset);
 			}
 			UacanadaMap.api.detectMapViewport();
 			UacanadaMap.map.invalidateSize();
-		}, 55);
+		}, 150);
 	};
 
 
