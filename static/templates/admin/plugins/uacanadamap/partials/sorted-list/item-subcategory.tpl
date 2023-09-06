@@ -17,6 +17,8 @@
             {{{else}}}
             NEED SET PARENT CATEGORIES!
             {{{end}}}
+
+            Is Category Visible In "All":  {isCategoryVisibleInAll}
         </div>
         <div class="col-3 text-end">
 
