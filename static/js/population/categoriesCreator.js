@@ -28,11 +28,11 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	
 		const handleSubCategories = (category, index) => {
 			try {
-				const {slug,cid,cidname,parents,name,icon} = category
+				const {slug,cid,cidname,parents,name,icon,isCategoryVisibleInAll} = category
 				const tabs = UacanadaMap.utils.tagsParseJSON(parents)
 				optionsElements += `<option value="${slug}">${name}</option>`
 
-				UacanadaMap.subCategoryRouterObject[slug] = {tabs,name,cid,icon,cidname,total:0}
+				UacanadaMap.subCategoryRouterObject[slug] = {tabs,name,cid,icon,cidname,isCategoryVisibleInAll,total:0}
 			} catch (error) {
 				console.error(error);
 			}

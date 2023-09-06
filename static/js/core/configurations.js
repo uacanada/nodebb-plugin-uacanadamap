@@ -127,6 +127,79 @@ define('core/configuration', function (require) {
             iconAnchor: [10, 0],
             popupAnchor: [5, 5],
         });
+
+
+
+
+
+
+
+            // Initialize the main marker cluster group to hold multiple categories
+            UacanadaMap.mapLayers.markers = L.layerGroup();
+
+            // Initialize category-specific cluster groups
+            UacanadaMap.categoryClusters = {};
+
+            ajaxify.data.UacanadaMapSettings.subCategories.forEach((category) => { 
+                
+                UacanadaMap.categoryClusters[category.slug] = L.markerClusterGroup(
+                    {
+                        disableClusteringAtZoom: 16,
+                        maxClusterRadius: 50,
+                        spiderfyDistanceMultiplier: 1,
+                        spiderfyOnMaxZoom: false,
+                        showCoverageOnHover: false,
+                        zoomToBoundsOnClick: true,
+                        // removeOutsideVisibleBounds:true, // TODO check bugs
+                        iconCreateFunction: function (cluster) {
+                            const mrks = cluster.getAllChildMarkers();
+                            const n = mrks.length;
+                            const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
+                            return L.divIcon({
+                                html: n,
+                                className: "mycluster ua-cluster-places",
+                                iconSize: L.point(clusterIconSize, clusterIconSize),
+                                iconAnchor: [0, 0],
+                            });
+                        },
+                        spiderfyShapePositions: function (count, centerPt) {
+                            var distanceFromCenter = 33,
+                                markerDistance = 33,
+                                lineLength = markerDistance * (count - 1),
+                                lineStart = centerPt.y - lineLength / 2,
+                                res = [],
+                                i;
+        
+                            res.length = count;
+        
+                            for (i = count - 1; i >= 0; i--) {
+                                res[i] = L.point(
+                                    centerPt.x + distanceFromCenter,
+                                    lineStart + markerDistance * i
+                                );
+                            }
+        
+                            return res;
+                        },
+                        spiderLegPolylineOptions: {
+                            weight: 1,
+                            color: "#000",
+                            opacity: 0.4,
+                            dashArray: "5, 5",
+                        },
+                    }
+                );
+            
+            
+            });
+
+          
+
+
+
+
+        /*
+
         UacanadaMap.mapLayers.markers = L.markerClusterGroup(
             //.layerSupport
             {
@@ -176,7 +249,12 @@ define('core/configuration', function (require) {
             }
         );
 
+      
+
+        */
+
         UacanadaMap.markersOverlay = { All: UacanadaMap.mapLayers.markers };
+
 
         UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({
             position: "bottomright",

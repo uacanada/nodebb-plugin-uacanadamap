@@ -23,7 +23,7 @@ $.fn.classChange = function (cb) {
 
     UacanadaMap.api.registerBasicListeners = () => {
        const { L } = UacanadaMap;
-       UacanadaMap.mapLayers.markers.on('spiderfied', function (a) {
+       UacanadaMap.mapLayers.markers.on('spiderfied', function (a) { // TODO revise
         clustersForReset.push(a.cluster)
       });
     

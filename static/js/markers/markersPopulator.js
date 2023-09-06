@@ -135,18 +135,37 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       
   
       UacanadaMap.api.cleanUp();
-      const { L } = UacanadaMap;
-      for (const [index, item] of array.entries()) {
-        if (!item.placeCategory || !item.latlng[0]) continue;
-        const newMarker = UacanadaMap.api.createMarker(index,item)
-        UacanadaMap.mapLayers.markers.addLayer(newMarker);
-      }
+      
+      // for (const [index, item] of array.entries()) {
+      //   if (!item.placeCategory || !item.latlng[0]) continue;
+      //   const newMarker = UacanadaMap.api.createMarker(index,item)
+      //   UacanadaMap.mapLayers.markers.addLayer(newMarker);
+      // }
   
-      UacanadaMap.mapLayers.markers.addTo(UacanadaMap.map);
+      // UacanadaMap.mapLayers.markers.addTo(UacanadaMap.map);
+
+
+       // Populate category-specific clusters with markers
+          for (const [index, item] of array.entries()) {
+            if (!item.placeCategory || !item.latlng[0]) continue;
+
+            const newMarker = UacanadaMap.api.createMarker(index,item);// Replace with your custom marker creation code
+
+            // Add marker to the respective category cluster
+            if (UacanadaMap.categoryClusters[item.placeCategory]) {
+                UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
+            }
+        }
+
+        // Add category clusters to main cluster group
+        for (const category in UacanadaMap.categoryClusters) {
+          UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.categoryClusters[category]);
+        }
+
   
       try {
         shiftMarkersWithCloseNeighbors(
-          UacanadaMap.mapLayers.markers.getLayers(),
+         UacanadaMap.mapLayers.markers.getLayers(),
           true
         );
       } catch (error) {
