@@ -33,6 +33,16 @@
     </div>
 
 
+    <div class="form-check mb-3">
+  <input class="form-check-input" type="checkbox" value="" id="isCategoryVisibleInAll">
+  <label class="form-check-label" for="isCategoryVisibleInAll">
+    If checked, markers within this category will only be displayed on the frontend when users explicitly choose to view this specific category.
+  </label>
+</div>
+
+  
+
+
     <div class="mb-3">
         <label class="form-label" for="acp-ua-icon">Marker icon</label>
         <button id="iconPickerButton" class="w-100 btn rounded btn-outline-secondary" type="button"

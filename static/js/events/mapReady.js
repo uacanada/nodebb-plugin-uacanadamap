@@ -1,5 +1,6 @@
 'use strict';
 define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
+    
     UacanadaMap.api.disablePropagationToMap = (L,className) => {
         const querySelector = className||'.no-propagation';
         const elements = document.querySelectorAll(querySelector);
