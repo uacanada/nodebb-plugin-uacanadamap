@@ -1,20 +1,79 @@
 'use strict';
     define('markers/markersFilter', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
     
+    
+
+
+
+
+    UacanadaMap.api.filterMarkers = (criteria) => {
+
+      if (!UacanadaMap.allPlaces) {
+        return UacanadaMap.console.log(`No places`);
+      }
+      if (UacanadaMap.pointerMarker) {
+          UacanadaMap.map.removeLayer(UacanadaMap.pointerMarker);
+      }
+      const mustBeInCategory = $("#location-category-filter").val();
+
+      if(mustBeInCategory){
+
+        UacanadaMap.map.removeLayer(UacanadaMap.mapLayers.markers)
+
+        for (const category in UacanadaMap.categoryClusters) {
+          const clusterGroup = UacanadaMap.categoryClusters[category];
+          UacanadaMap.map.removeLayer(clusterGroup)
+        }
+
+        UacanadaMap.map.addLayer(UacanadaMap.categoryClusters[mustBeInCategory])
+        
+
+      } else {
+        
+        UacanadaMap.map.addLayer(UacanadaMap.mapLayers.markers)
+      }
+
+      UacanadaMap.currentSortedMarkers = []
+      for (const tid in UacanadaMap.allPlaces) {
+        if (Object.hasOwnProperty.call(UacanadaMap.allPlaces, tid)) {
+          const place = UacanadaMap.allPlaces[tid];
+          if(!place) continue;
+          const canShow = onlyOnVisibleArea ? UacanadaMap.api.isPlaceVisibleOnMap(UacanadaMap.map, place.gps) : true
+       
+          if (canShow && (!mustBeInCategory || mustBeInCategory === place.json.placeCategory)) {
+            UacanadaMap.currentSortedMarkers.push({ tid, lat: place.marker._latlng.lat,  lng: place.marker._latlng.lng, json: place.json, html: place.marker.uaMarkerCardHTML});
+            
+          }
+        }
+      }
+
+      UacanadaMap.currentSortedMarkers= [...UacanadaMap.currentSortedMarkers]
+      return UacanadaMap.currentSortedMarkers;
+
+
+      
+
+    }
+
+    
+
+
+
+
+
     UacanadaMap.api.removeMarker = (tid) => {
       if(tid && UacanadaMap.allPlaces[tid]?.marker){
-     //   UacanadaMap.mapLayers.markers.removeLayer(UacanadaMap.allPlaces[tid].marker); TODO revise
+        UacanadaMap.mapLayers.markers.removeLayer(UacanadaMap.allPlaces[tid].marker); 
       }
     }
 
     UacanadaMap.api.addMarker = (tid) => {
       if(tid && UacanadaMap.allPlaces[tid]?.marker){
-      //  UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.allPlaces[tid].marker); TODO revise
+          UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.allPlaces[tid].marker); 
       }
     }
 
-
-    UacanadaMap.api.filterMarkers = (criteria) => {
+    UacanadaMap.api.filterMarkersOld = (criteria) => {
         if (!UacanadaMap.allPlaces) {
             return UacanadaMap.console.log(`No places`);
         }
