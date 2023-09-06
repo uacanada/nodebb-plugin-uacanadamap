@@ -72,7 +72,7 @@ UacanadaMap.api.listenSwipes = (elements) => {
                   
                 }
 
-                if (element === "ua-map-cards-fullscreen") {
+                if (element === "cardsSwiperPlaceholder") {
                     
 
                     if (U) {

@@ -416,7 +416,6 @@
       UacanadaMap.api.contextButtonText({text:'',delay:100,to:0})
       UacanadaMap.api.rotateCards('horizontal');
       UacanadaMap.api.animateCards('close')
-      
       UacanadaMap.api.hideElements(false)
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
@@ -426,7 +425,7 @@
         UacanadaMap.api.fitElementsPosition();
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
-        
+        $(UacanadaMap.placeCardDiv).html('')
       }, 200);
       
       
@@ -448,7 +447,7 @@
    
     if(!UacanadaMap.cardsCarousel?.changeDirection)return
   
-    const crds = $('#ua-map-cards-fullscreen')
+    const crds = $('#cardsSwiperPlaceholder')
    
     setTimeout(() => {
       UacanadaMap.cardsCarousel.update()

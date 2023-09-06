@@ -11,7 +11,7 @@
 
 
 
-            <div id="ua-map-cards-fullscreen" class="ps-1 slider-closed">
+            <div id="cardsSwiperPlaceholder" class="ps-1 slider-closed">
 
             </div>
 

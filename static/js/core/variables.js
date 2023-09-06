@@ -43,7 +43,7 @@ const UacanadaMap = {
     "ua-place-modal",
     "ua-sidepanel",
     "ua-map-cards",
-    "ua-map-cards-fullscreen",
+    "cardsSwiperPlaceholder",
     "ua-short-wrapper",
     "ua-mainframe",
     "ua-welcome-description",
@@ -76,8 +76,8 @@ const UacanadaMap = {
 
   markersClasses: ["no-class"], // TODO: remove
 
-  placeCardDiv: "#ua-map-cards-fullscreen",
-  placeCardDivFullScreen: "#ua-map-cards-fullscreen",
+  placeCardDiv: "#cardsSwiperPlaceholder",
+  placeCardDivFullScreen: "#cardsSwiperPlaceholder",
 
   mapRoomClass: "uacanada-map-page",
   mapLayers: {},
