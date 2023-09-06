@@ -48,12 +48,20 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         lngDistanceTtrigger,
       } = UacanadaMap.markerSettings;
       const { L } = UacanadaMap;
+
+      
+
+
       const shift = calculateDegreesFromPixels(shiftX, shiftY, virtZoom);
       const treshold = calculateDegreesFromPixels(
         lngDistanceTtrigger,
         latDistanceTtrigger,
         virtZoom
       );
+
+      const smallerShift = calculateDegreesFromPixels(shiftX / 2, shiftY / 2, virtZoom);
+      const smallerTreshold = calculateDegreesFromPixels(lngDistanceTtrigger / 2, latDistanceTtrigger / 2, virtZoom);
+
       let groups = [];
   
       for (let i = 0; i < markers.length; i++) {
@@ -95,27 +103,35 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
           const groupSize = group.length;
         
           group.forEach((marker, index) => {
+
             const m = UacanadaMap.allPlaces[marker.tid];
             const realGps = m.marker._latlng || [
-              Number(m.gps[0]),
-              Number(m.gps[1]),
+                Number(m.gps[0]),
+                Number(m.gps[1]),
             ];
-            const idx = index + 1;
-        
+
             m.neighborIndex = index;
             m.neighborsCount = groupSize;
             m.neighbors = group;
-        
+
             const currentLatLng = marker.getLatLng();
+
+
+            
             
             // Calculate angle based on index
             const angle = (2 * Math.PI / groupSize) * idx;
         
             // Calculate new lat and lng based on angle
+            // const shiftedLatLng = L.latLng(
+            //   currentLatLng.lat + shift.lat * Math.sin(angle),
+            //   currentLatLng.lng + shift.lng * Math.cos(angle)
+            // );
+
             const shiftedLatLng = L.latLng(
-              currentLatLng.lat + shift.lat * Math.sin(angle),
-              currentLatLng.lng + shift.lng * Math.cos(angle)
-            );
+              currentLatLng.lat + smallerShift.lat * index,  // Изменено на smallerShift
+              currentLatLng.lng
+          );
         
             m.shifted = true;
             marker.setLatLng(shiftedLatLng);
@@ -128,8 +144,8 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             const markerDot = L.divIcon({
               className: "ua-marker-dot",
               html: '<i class="fa fa-regular fa-circle-dot"></i>',
-              iconSize: [15, 15],
-              iconAnchor: [7, 7],
+              iconSize: [10, 10],
+              iconAnchor: [5, 5],
             });
             L.marker(realGps, { icon: markerDot }).addTo(UacanadaMap.map);
           });

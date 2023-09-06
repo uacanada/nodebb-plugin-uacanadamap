@@ -133,11 +133,11 @@ define('core/configuration', function (require) {
                         iconCreateFunction: function (cluster) {
                             const markers = cluster.getAllChildMarkers();
                             const count = markers.length;
-                            const iconSize = Math.floor(count * 2 + 40);
+                            const iconSize = Math.floor(count * 2 + 44);
                             const anchorSize = iconSize / 2;
                             return L.divIcon({
                               html:`<div class="cluster-icon">
-                              <div class="badge-number">5</div>
+                              <div class="badge-number">${count}</div>
                               <div class="icon-wrapper">
                                 <i class="fas fa-home"></i>
                                 <i class="fas fa-cut"></i>
@@ -146,7 +146,7 @@ define('core/configuration', function (require) {
                                 <i class="fas fa-hospital"></i>
                               </div>
                             </div>
-                            ` , // TODO revise cluster icon
+                            ` , // TODO revise cluster icon and move to ACP
                               className: "ucmpcluster",
                               iconSize: L.point(iconSize, iconSize),
                               iconAnchor: [anchorSize, anchorSize]
