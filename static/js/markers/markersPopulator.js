@@ -38,6 +38,8 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
     }
   
     function shiftMarkersWithCloseNeighbors(markers, forceShift) {
+
+     
       const {
         virtZoom,
         shiftX,
@@ -82,13 +84,16 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
           }
         }
       }
+
+     
+      
   
       const markerGroups = groups.filter((group) => group.length > 1);
       if (forceShift) {
-        markerGroups.forEach((group) => {
 
+        markerGroups.forEach((group) => {
           const groupSize = group.length;
-  
+        
           group.forEach((marker, index) => {
             const m = UacanadaMap.allPlaces[marker.tid];
             const realGps = m.marker._latlng || [
@@ -96,18 +101,22 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               Number(m.gps[1]),
             ];
             const idx = index + 1;
-  
+        
             m.neighborIndex = index;
             m.neighborsCount = groupSize;
             m.neighbors = group;
-  
+        
             const currentLatLng = marker.getLatLng();
-            const randomMul = getRandomNumber();
+            
+            // Calculate angle based on index
+            const angle = (2 * Math.PI / groupSize) * idx;
+        
+            // Calculate new lat and lng based on angle
             const shiftedLatLng = L.latLng(
-              currentLatLng.lat - shift.lat * idx * 0.3,
-              currentLatLng.lng + shift.lng * idx * randomMul
+              currentLatLng.lat + shift.lat * Math.sin(angle),
+              currentLatLng.lng + shift.lng * Math.cos(angle)
             );
-  
+        
             m.shifted = true;
             marker.setLatLng(shiftedLatLng);
             L.polyline([realGps, shiftedLatLng], {
@@ -118,13 +127,56 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             }).addTo(UacanadaMap.map);
             const markerDot = L.divIcon({
               className: "ua-marker-dot",
-              html: `📍`,
+              html: '<i class="fa fa-regular fa-circle-dot"></i>',
               iconSize: [15, 15],
               iconAnchor: [7, 7],
             });
             L.marker(realGps, { icon: markerDot }).addTo(UacanadaMap.map);
           });
         });
+
+        // markerGroups.forEach((group) => {
+
+        //   const groupSize = group.length;
+  
+        //   group.forEach((marker, index) => {
+        //     const m = UacanadaMap.allPlaces[marker.tid];
+        //     const realGps = m.marker._latlng || [
+        //       Number(m.gps[0]),
+        //       Number(m.gps[1]),
+        //     ];
+        //     const idx = index + 1;
+  
+        //     m.neighborIndex = index;
+        //     m.neighborsCount = groupSize;
+        //     m.neighbors = group;
+  
+        //     const currentLatLng = marker.getLatLng();
+        //     //const randomMul = getRandomNumber();
+        //     const angle = (2 * Math.PI / groupSize) * idx;
+        //     const shiftedLatLng = L.latLng(
+        //       currentLatLng.lat + shift.lat * Math.sin(angle),
+        //       currentLatLng.lng + shift.lng * Math.cos(angle)
+        //     );
+            
+  
+        //     m.shifted = true;
+        //     marker.setLatLng(shiftedLatLng);
+        //     L.polyline([realGps, shiftedLatLng], {
+        //       weight: 1,
+        //       color: "#ff2424",
+        //       opacity: 0.6,
+        //       dashArray: "5, 5",
+        //     }).addTo(UacanadaMap.map);
+        //     const markerDot = L.divIcon({
+        //       className: "ua-marker-dot",
+        //       html: '<i class="fa fa-regular fa-circle-dot"></i>',
+        //       iconSize: [15, 15],
+        //       iconAnchor: [7, 7],
+        //     });
+        //     L.marker(realGps, { icon: markerDot }).addTo(UacanadaMap.map);
+        //   });
+        // });
       }
   
       return markerGroups;

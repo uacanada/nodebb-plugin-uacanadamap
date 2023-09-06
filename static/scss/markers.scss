@@ -197,7 +197,11 @@
 
  
 .ua-marker-dot{
-  font-size: 12px;
+  i.fa{
+    font-size: 12px;
+  }
+  background-color:$marker-bg;
+  
 }
 
 a.ua-popup-link {
