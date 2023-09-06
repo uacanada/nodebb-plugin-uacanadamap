@@ -191,7 +191,7 @@ define('core/configuration', function (require) {
                 );
             }
 
-            createCluster('allMarkersCluster')
+            createCluster({slug:'allMarkersCluster'})
 
             ajaxify.data.UacanadaMapSettings.subCategories.forEach((category) => {  createCluster(category) });
 
