@@ -229,8 +229,18 @@ define('core/configuration', function (require) {
                 options: { position: 'bottomright'},
             
                 onAdd(map) {
-                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control removeCards');
-                container.innerHTML = '<button title="Remove Cards" class="btn btn-primary rounded-circle p-0"><i class="fa fas fa-solid fa-cancel"></i></button>';
+                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control me-minus60px removeCards');
+                container.innerHTML = '<button title="Remove Cards" class="btn btn-primary rounded-pill p-2"><i class="fa fas fa-solid fa-xmark pe-60px"></i></button>';
+                 return container;
+                },
+            });
+
+            const menuControl = L.Control.extend({
+                options: { position: 'bottomright'},
+            
+                onAdd(map) {
+                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control me-minus60px');
+                container.innerHTML = '<button title="Remove Cards" class="btn btn-primary rounded-pill p-2"><i class="fa fas fa-solid fa-ellipsis-vertical pe-60px"></i></button>';
                  return container;
                 },
             });
@@ -243,6 +253,7 @@ define('core/configuration', function (require) {
         if(app.user.isAdmin){
             // TODO make public after 
             UacanadaMap.mapLayers.removeCardsButton = new removeCardsControl();
+            UacanadaMap.mapLayers.menuControlButton = new menuControl();
         }
         
            
