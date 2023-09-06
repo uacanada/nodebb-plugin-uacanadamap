@@ -122,7 +122,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             L.polyline([realGps, shiftedLatLng], {
               weight: 1,
               color: "#ff2424",
-              opacity: 0.6,
+              opacity: 0.5,
               dashArray: "5, 5",
             }).addTo(UacanadaMap.map);
             const markerDot = L.divIcon({
