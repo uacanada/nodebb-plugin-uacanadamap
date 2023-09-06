@@ -255,7 +255,7 @@ define('core/configuration', function (require) {
 
         UacanadaMap.markersOverlay = { All: UacanadaMap.mapLayers.markers };
 
-        UacanadaMap.categoryClusters.forEach((layer) => {UacanadaMap.markersOverlay[layer] = layer })
+        
         for (const category in UacanadaMap.categoryClusters) {
             const clusterGroup = UacanadaMap.categoryClusters[category];
             UacanadaMap.markersOverlay[category] = clusterGroup
