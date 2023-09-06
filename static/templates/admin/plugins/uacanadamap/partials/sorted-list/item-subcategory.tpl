@@ -18,10 +18,10 @@
             NEED SET PARENT CATEGORIES!
             {{{end}}}
 
-           
+            <span class="visibleOnlyWhenChosen{visibleOnlyWhenChosen}">OnlyWhenChosen</span>
 
 
-            {{{ if visibleOnlyWhenChosen == 'on' }}}  Markers in this category show only when selected. {{{end}}}
+            
               
         </div>
         <div class="col-3 text-end">
