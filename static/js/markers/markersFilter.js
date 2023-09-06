@@ -1,7 +1,7 @@
 'use strict';
     define('markers/markersFilter', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
     
-    UacanadaMap.api.filterMarkers = (criteria) => {
+    UacanadaMap.api.filterMarkers = (criteria,markers) => {
 
       if (!UacanadaMap.allPlaces) {
         return UacanadaMap.console.log(`No places`);
@@ -28,6 +28,7 @@
           if(!place) continue;
           
           if (!mustBeInCategory || mustBeInCategory === place.json.placeCategory){
+            // TODO: add more sorting options
             UacanadaMap.currentSortedMarkers.push({ tid, lat: place.marker._latlng.lat,  lng: place.marker._latlng.lng, json: place.json, html: place.marker.uaMarkerCardHTML});
             
           }

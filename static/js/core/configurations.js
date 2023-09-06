@@ -174,8 +174,6 @@ define('core/configuration', function (require) {
 
             createCluster({slug:'allMarkersCluster'})
             ajaxify.data.UacanadaMapSettings.subCategories.forEach((category) => {  createCluster(category) });
-
-          
             UacanadaMap.markersOverlay = {};
 
         
@@ -185,46 +183,30 @@ define('core/configuration', function (require) {
             }
               
 
-              const addplaceControl = L.Control.extend({
-                options: { position: 'bottomright'},
-            
-                onAdd(map) {
-                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-addplace');
-                container.innerHTML = '<button title="Add New Place" class="newlocation-open-marker btn btn-primary rounded-circle p-0"><i class="fa fas fa-solid fa-map-pin"></i></button>';
-                 return container;
-                },
+           
+
+            UacanadaMap.api.addLeafletButton = ({position, classes, title, icon}) => L.Control.extend({
+                options: { position },
+                onAdd() {
+                const container = L.DomUtil.create('div', `leaflet-bar leaflet-control ${classes}`);
+                container.innerHTML = `<button title="${title}" class="btn btn-primary rounded-pill p-2"><i class="${icon}"></i></button>`;
+                return container;
+                }
             });
 
-            const removeCardsControl = L.Control.extend({
-                options: { position: 'bottomright'},
-            
-                onAdd(map) {
-                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control me-minus60px removeCards');
-                container.innerHTML = '<button title="Remove Cards" class="btn btn-primary rounded-pill p-2"><i class="fa fas fa-solid fa-xmark pe-60px"></i></button>';
-                 return container;
-                },
-            });
+            UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'leaflet-control-addplace', title: 'Add New Place', icon: 'fa fas fa-solid fa-map-pin' }));
 
-            const menuControl = L.Control.extend({
-                options: { position: 'bottomright'},
-            
-                onAdd(map) {
-                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control me-minus60px');
-                container.innerHTML = '<button title="Remove Cards" class="btn btn-primary rounded-pill p-2"><i class="fa fas fa-solid fa-ellipsis-vertical pe-60px"></i></button>';
-                 return container;
-                },
-            });
-            
-            
-            
-            
-        UacanadaMap.mapLayers.addPlaceButton = new addplaceControl();
+            if (app.user.isAdmin) {
+                UacanadaMap.mapLayers.removeCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'me-minus60px removeCards', title: 'Remove Cards', icon: 'fa fas fa-solid fa-xmark'}));
+                UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'me-minus60px', title: 'Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical'}));
+            }
 
-        if(app.user.isAdmin){
-            // TODO make public after 
-            UacanadaMap.mapLayers.removeCardsButton = new removeCardsControl();
-            UacanadaMap.mapLayers.menuControlButton = new menuControl();
-        }
+                    
+
+
+
+
+
 
 
         UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({

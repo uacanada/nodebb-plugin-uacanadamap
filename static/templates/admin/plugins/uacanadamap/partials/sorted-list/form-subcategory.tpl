@@ -34,8 +34,8 @@
 
 
     <div class="form-check mb-3">
-  <input class="form-check-input" type="checkbox" value="on" name="isCategoryVisibleInAll" id="isCategoryVisibleInAll">
-  <label class="form-check-label" for="isCategoryVisibleInAll">
+  <input class="form-check-input" type="checkbox" value="on" name="visibleOnlyWhenChosen" id="visibleOnlyWhenChosen">
+  <label class="form-check-label" for="visibleOnlyWhenChosen">
     If checked, markers within this category will only be displayed on the frontend when users explicitly choose to view this specific category.
   </label>
 </div>

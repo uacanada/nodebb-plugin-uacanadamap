@@ -153,9 +153,15 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             if (!item.placeCategory || !item.latlng[0]) continue;
 
             const newMarker = UacanadaMap.api.createMarker(index,item);// Replace with your custom marker creation code
+            const { visibleOnlyWhenChosen } = ajaxify.data.UacanadaMapSettings.subCategories.find(({ slug }) => slug === item.placeCategory) || {};
 
             
-            UacanadaMap.categoryClusters['allMarkersCluster'].addLayer(newMarker);
+            if(!visibleOnlyWhenChosen || visibleOnlyWhenChosen !== 'on'){
+              UacanadaMap.categoryClusters['allMarkersCluster'].addLayer(newMarker);
+            }
+
+            
+            
             // Add marker to the respective category cluster
             if (UacanadaMap.categoryClusters[item.placeCategory]) {
                 UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
