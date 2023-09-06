@@ -136,8 +136,18 @@ define('core/configuration', function (require) {
                             const iconSize = Math.floor(count * 2 + 40);
                             const anchorSize = iconSize / 2;
                             return L.divIcon({
-                              html: count, // TODO revise cluster icon
-                              className: "mycluster",
+                              html:`<div class="cluster-icon">
+                              <div class="badge-number">5</div>
+                              <div class="icon-wrapper">
+                                <i class="fas fa-home"></i>
+                                <i class="fas fa-cut"></i>
+                                <i class="fas fa-car"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-hospital"></i>
+                              </div>
+                            </div>
+                            ` , // TODO revise cluster icon
+                              className: "ucmpcluster",
                               iconSize: L.point(iconSize, iconSize),
                               iconAnchor: [anchorSize, anchorSize]
                             });
