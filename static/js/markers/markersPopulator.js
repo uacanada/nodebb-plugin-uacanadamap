@@ -158,19 +158,32 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         }
 
         // Add category clusters to main cluster group
+        let allMarkersMixed = [];
         for (const category in UacanadaMap.categoryClusters) {
           UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.categoryClusters[category]);
+          allMarkersMixed = allMarkersMixed.concat(UacanadaMap.categoryClusters[category].getLayers());
+          
+
+          // try {
+          //   shiftMarkersWithCloseNeighbors(
+          //     UacanadaMap.categoryClusters[category].getLayers(),
+          //     true
+          //   );
+          // } catch (error) {
+          //   console.log(error);
+          // }
+          
+
+
         }
 
+        shiftMarkersWithCloseNeighbors(allMarkersMixed, true);
+
+
+       
+
   
-      try {
-        shiftMarkersWithCloseNeighbors(
-         UacanadaMap.mapLayers.markers.getLayers(),
-          true
-        );
-      } catch (error) {
-        console.log(error);
-      }
+      
   
      // UacanadaMap.api.mapReLoaded(UacanadaMap.initUaMapCount);
       return UacanadaMap.initUaMapCount;
