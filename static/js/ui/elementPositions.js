@@ -18,22 +18,16 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
     
 	UacanadaMap.api.updateCSS = () => {
 		const {
-			screenH,
-			navRealH,
-			screenW,
+		
 			rightNav,
 			leftNav,
-			visibleMap,
-			bottomButtonsH,
+			
 		} = UacanadaMap.api.getDivSizes();
-		const thirdScreen = Math.floor(screenH * 0.6);
-		const mapWidth = Math.floor(screenW - rightNav - leftNav);
+		
 		const bodyWithMap = "body." + UacanadaMap.mapRoomClass;
-		const bodyWithMapTouched = bodyWithMap + ".map-touched";
-		const forcedMapHeight = Math.floor(screenH - navRealH);
-		const mapMainFrame = screenW > 990 ? forcedMapHeight : forcedMapHeight;
-		const mapWrapperHeight = forcedMapHeight;
-		const mapHeight = forcedMapHeight;
+		
+		
+	
 		const styles = ` #uacamap-wrapper {
 			  	padding-right: ${rightNav}px !important;
 				padding-left: ${leftNav}px !important;
@@ -94,14 +88,12 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 		setTimeout(() => {
 			
 			const {
-				bottomButtonsH,
+				
 				contextButton,
-				bottomElementsH,
-				screenH,
+				
 				screenW,
-				rightNav,
-                leftNav,
-				navRealH,
+				
+				
 				placeCardH,
 				onePercentH,
 			} = UacanadaMap.api.getDivSizes();
@@ -115,7 +107,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 			} else {
 
 				
-				zoomControlsPosition = {  bottom: `${Math.floor(navRealH+placeCardH+contextButton)}px`};
+				zoomControlsPosition = {  bottom: `${Math.floor(placeCardH+contextButton)}px`};
 			
 			}
 
