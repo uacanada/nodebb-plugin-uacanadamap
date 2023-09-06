@@ -49,18 +49,8 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       } = UacanadaMap.markerSettings;
       const { L } = UacanadaMap;
 
-      
-
-
-      const shift = calculateDegreesFromPixels(shiftX, shiftY, virtZoom);
-      const treshold = calculateDegreesFromPixels(
-        lngDistanceTtrigger,
-        latDistanceTtrigger,
-        virtZoom
-      );
-
-      const smallerShift = calculateDegreesFromPixels(shiftX / 2, shiftY / 2, virtZoom);
-      const smallerTreshold = calculateDegreesFromPixels(lngDistanceTtrigger / 2, latDistanceTtrigger / 2, virtZoom);
+      const smallerShift = calculateDegreesFromPixels(shiftX / 4, shiftY / 4, virtZoom);
+      const smallerTreshold = calculateDegreesFromPixels(lngDistanceTtrigger / 4, latDistanceTtrigger / 4, virtZoom);
 
       let groups = [];
   
@@ -77,10 +67,10 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
           if (
             Math.abs(
               currentMarker.getLatLng().lat - otherMarker.getLatLng().lat
-            ) < treshold.lat &&
+            ) < smallerTreshold.lat &&
             Math.abs(
               currentMarker.getLatLng().lng - otherMarker.getLatLng().lng
-            ) < treshold.lng
+            ) < smallerTreshold.lng
           ) {
             hasNeighbors = true;
   
