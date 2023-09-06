@@ -38,9 +38,8 @@
         if (Object.hasOwnProperty.call(UacanadaMap.allPlaces, tid)) {
           const place = UacanadaMap.allPlaces[tid];
           if(!place) continue;
-          const canShow = onlyOnVisibleArea ? UacanadaMap.api.isPlaceVisibleOnMap(UacanadaMap.map, place.gps) : true
-       
-          if (canShow && (!mustBeInCategory || mustBeInCategory === place.json.placeCategory)) {
+          
+          if (!mustBeInCategory || mustBeInCategory === place.json.placeCategory){
             UacanadaMap.currentSortedMarkers.push({ tid, lat: place.marker._latlng.lat,  lng: place.marker._latlng.lng, json: place.json, html: place.marker.uaMarkerCardHTML});
             
           }
