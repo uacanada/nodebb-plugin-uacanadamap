@@ -18,7 +18,7 @@
 
       if(mustBeInCategory){
 
-        UacanadaMap.map.removeLayer(UacanadaMap.mapLayers.markers)
+        //UacanadaMap.map.removeLayer(UacanadaMap.categoryClusters['allMarkersCluster'])
 
         for (const category in UacanadaMap.categoryClusters) {
           const clusterGroup = UacanadaMap.categoryClusters[category];
@@ -30,7 +30,7 @@
 
       } else {
         
-        UacanadaMap.map.addLayer(UacanadaMap.mapLayers.markers)
+        UacanadaMap.map.addLayer(UacanadaMap.categoryClusters['allMarkersCluster'])
       }
 
       UacanadaMap.currentSortedMarkers = []

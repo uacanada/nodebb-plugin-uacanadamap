@@ -140,8 +140,8 @@ define('core/configuration', function (require) {
             // Initialize category-specific cluster groups
             UacanadaMap.categoryClusters = {};
 
-            ajaxify.data.UacanadaMapSettings.subCategories.forEach((category) => { 
-                
+
+            function createCluster(category){
                 UacanadaMap.categoryClusters[category.slug] = L.markerClusterGroup(
                     {
                         disableClusteringAtZoom: 16,
@@ -189,12 +189,23 @@ define('core/configuration', function (require) {
                         },
                     }
                 );
-            
-            
-            });
+            }
+
+            createCluster('allMarkersCluster')
+
+            ajaxify.data.UacanadaMapSettings.subCategories.forEach((category) => {  createCluster(category) });
 
           
+            UacanadaMap.markersOverlay = { };
 
+        
+            for (const category in UacanadaMap.categoryClusters) {
+                const clusterGroup = UacanadaMap.categoryClusters[category];
+                UacanadaMap.markersOverlay[category] = clusterGroup
+                
+              }
+              
+    
 
 
 
@@ -253,16 +264,7 @@ define('core/configuration', function (require) {
 
         */
 
-        UacanadaMap.markersOverlay = { All: UacanadaMap.mapLayers.markers };
-
-        
-        for (const category in UacanadaMap.categoryClusters) {
-            const clusterGroup = UacanadaMap.categoryClusters[category];
-            UacanadaMap.markersOverlay[category] = clusterGroup
-            
-          }
-          
-
+      
 
 
 
