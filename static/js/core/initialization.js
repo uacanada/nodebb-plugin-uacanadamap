@@ -87,10 +87,7 @@ define("core/initialization", [
       UacanadaMap.api.addMapControls();
       UacanadaMap.api.initializeSwipers();
       UacanadaMap.api.createCategories();
-  
-      const markersArray = await UacanadaMap.api.fetchMarkers(fromCache);
-      UacanadaMap.api.populatePlaces(markersArray);
-  
+      UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(fromCache));
       UacanadaMap.api.populateTabs();
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.createСategoryButtonsSwiper($("#location-category-filter").val() ?? "");
