@@ -235,7 +235,7 @@ a.leaflet-contextmenu-item button {
  
 }
 
-.leaflet-control{
+.leaflet-control-container{
   .newLocationOpenMarker{
     transition: .3s transform ease;
     transform: translate3d(0, 0, 0);
@@ -250,10 +250,10 @@ a.leaflet-contextmenu-item button {
 
 body.cards-opened{
   #ua-context-buttons-wrapper{
-    bottom: -10rem;
+    bottom: -13rem;
   }
 
-  .leaflet-control{
+  .leaflet-control-container {
     .newLocationOpenMarker{ transform: translate3d(0, 100vh, 0);  }
     .removeCards,
     .rotateCards,
