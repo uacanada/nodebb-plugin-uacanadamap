@@ -110,7 +110,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		
 		$(document).on('click', '#exportJson', exportSettingsJson);
 		$(document).on('click', '#resetSettings', resetSettings);
-		$(document).on('click', '.save-settings-uacanadamap', saveSettings);
+		$(document).on('click', '#save', saveSettings);
 		categorySelector.init($('[component="category-selector"]'));
 		
 		hooks.on('action:settings.sorted-list.modal', function ({ modal }) {

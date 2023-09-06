@@ -607,12 +607,9 @@
 
 				<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal"
 					class="export-settings-uacanadamap btn btn-primary position-fixed end-0 px-3 py-2 mb-4 me-4 rounded-circle fs-4"
-					type="button" style="width: 64px; height: 64px; bottom: 100px"><i
+					type="button" style="width: 64px; height: 64px; bottom: 1rem"><i
 						class="fa fa-fw fas fa-solid fa-download"></i></button>
-				<button id="save"
-					class="save-settings-uacanadamap btn btn-primary position-fixed bottom-0 end-0 px-3 py-2 mb-4 me-4 rounded-circle fs-4"
-					type="button" style="width: 64px; height: 64px;"><i
-						class="fa fa-fw fas fa-floppy-disk"></i></button>
+				
 			</form>
 
 
