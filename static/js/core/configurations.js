@@ -63,35 +63,17 @@ define('core/configuration', function (require) {
       };
       
 
-
-
-   
-
-
-
-
-    
     UacanadaMap.api.configureMapElements = () => {
 
         const {L} = UacanadaMap 
-      
-
 
         UacanadaMap.BlackWhite = L.tileLayer.provider("Stamen.TonerLite");
         UacanadaMap.Terrain = L.tileLayer.provider("Stamen.Terrain");
         UacanadaMap.MinimalMap = L.tileLayer.provider("Esri.WorldGrayCanvas");
         UacanadaMap.SatMap = L.tileLayer.provider("Esri.WorldImagery");
         UacanadaMap.Classic = L.tileLayer.provider("Esri.NatGeoWorldMap");
-        UacanadaMap.StreetsMap = L.tileLayer(
-            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-            { maxZoom: 19 }
-        );
-       
-        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", {
-            id: "mapbox/streets-v11",
-            accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey,
-        }):UacanadaMap.StreetsMap;
-
+        UacanadaMap.StreetsMap = L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  );
+        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):UacanadaMap.StreetsMap;
         UacanadaMap.mapProviders = {
             MapBox: UacanadaMap.mapLayers.MapBox,
             OSM: UacanadaMap.StreetsMap,
@@ -110,9 +92,6 @@ define('core/configuration', function (require) {
             iconAnchor: [6, 14],
             popupAnchor: [8, -3],
         });
-        
-        
-       
         UacanadaMap.newPlaceMarker = L.divIcon({
             className: "ua-locate-me-marker",
             html: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span> </div>', // TODO move to settings
@@ -144,22 +123,24 @@ define('core/configuration', function (require) {
             function createCluster(category){
                 UacanadaMap.categoryClusters[category.slug] = L.markerClusterGroup(
                     {
-                        disableClusteringAtZoom: 16,
-                        maxClusterRadius: 50,
+                        disableClusteringAtZoom: 17,
+                        maxClusterRadius: 40,
                         spiderfyDistanceMultiplier: 1,
                         spiderfyOnMaxZoom: false,
                         showCoverageOnHover: false,
                         zoomToBoundsOnClick: true,
                         // removeOutsideVisibleBounds:true, // TODO check bugs
                         iconCreateFunction: function (cluster) {
-                            const mrks = cluster.getAllChildMarkers();
-                            const n = mrks.length;
-                            const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
+                            const markers = cluster.getAllChildMarkers();
+                            const count = markers.length;
+                            const iconSize = Math.floor(count * 1.1 + 60);
+                            const anchorSize = iconSize / 2;
+                          
                             return L.divIcon({
-                                html: n,
-                                className: "mycluster ua-cluster-places",
-                                iconSize: L.point(clusterIconSize, clusterIconSize),
-                                iconAnchor: [0, 0],
+                              html: count, // TODO revise cluster icon
+                              className: "mycluster",
+                              iconSize: L.point(iconSize, iconSize),
+                              iconAnchor: [anchorSize, anchorSize]
                             });
                         },
                         spiderfyShapePositions: function (count, centerPt) {
@@ -251,14 +232,6 @@ define('core/configuration', function (require) {
         UacanadaMap.mapLayers.addPlaceButton = new addplaceControl();
            
   
-
-
-
-
-
-
-
-
     }
 	
 
@@ -306,8 +279,6 @@ define('core/configuration', function (require) {
     
 
 
-    
-    
     UacanadaMap.api.addMapLayers = () => {
         Object.values(UacanadaMap.mapLayers).forEach(addMapLayer);
     }
@@ -340,10 +311,6 @@ define('core/configuration', function (require) {
 	}
 
 
-
-    
-
-
     function handleContextMenuClick(e) {
         try {
             const { lat, lng } = getLatLng(e);
@@ -351,16 +318,8 @@ define('core/configuration', function (require) {
             if (!lat || !lng) {
                 return console.warn('Location error');
             }
-    
-           
-            $("#ua-latlng-text").val(`${lat},${lng}`);
-    
-           
-            UacanadaMap.api.createMarkerButton(e, false);
-
-           
-    
-            
+     $("#ua-latlng-text").val(`${lat},${lng}`);
+     UacanadaMap.api.createMarkerButton(e, false);
         } catch (error) {
             console.log(error);
         }
@@ -369,7 +328,6 @@ define('core/configuration', function (require) {
     function getLatLng(e) {
         const lat = e.latlng?.lat || e.latlng[0];
         const lng = e.latlng?.lng || e.latlng[1];
-    
         return { lat, lng };
     }
 
