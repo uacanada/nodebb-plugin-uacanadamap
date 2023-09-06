@@ -113,15 +113,7 @@
   .leaflet-bottom.leaflet-right .leaflet-bar{
     box-shadow: none!important;
   }
-  .leaflet-control-zoom-in, .leaflet-control-zoom-out, .leaflet-control-locate a, .leaflet-control-fullscreen{
-    border-radius: 50%!important;
-    margin-bottom: 0.25rem!important;
-    width: 2.5rem!important;
-    height: 2.5rem!important;
-    font-size: 1rem!important;
-    line-height: 2.5rem!important;
-  
-  }
+
 
   .leaflet-control-fullscreen a {
     margin: auto;
@@ -215,9 +207,22 @@ a.leaflet-contextmenu-item button {
 
 
 
+.leaflet-control-fullscreen, .leaflet-control-locate a, .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  border-radius: 50%!important;
+  margin-bottom: .25rem!important;
+  width: 2rem!important;
+  height: 2rem!important;
+  font-size: 1rem!important;
+  line-height: 2.5rem!important;
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+}
 
 .circle-button {
   width: 2rem;
+  padding: 0.25rem;
+  margin: 0;
   height: 2rem;
   border-radius: 50%;
   display: flex;
@@ -225,5 +230,7 @@ a.leaflet-contextmenu-item button {
   justify-content: center;
   .fa{
     font-size: 1rem;
+    text-rendering: geometricPrecision;
   }
+ 
 }

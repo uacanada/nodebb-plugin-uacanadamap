@@ -184,20 +184,22 @@ define('core/configuration', function (require) {
 
            
 
-            UacanadaMap.api.addLeafletButton = ({position, classes, title, icon}) => L.Control.extend({
+            UacanadaMap.api.addLeafletButton = ({position, classes, title, icon, btnclasses}) => L.Control.extend({
                 options: { position },
                 onAdd() {
                 const container = L.DomUtil.create('div', `leaflet-bar leaflet-control ${classes}`);
-                container.innerHTML = `<button title="${title}" class="btn btn-primary circle-button"><i class="${icon}"></i></button>`;
+                container.innerHTML = `<button title="${title}" class="btn circle-button ${btnclasses}"><i class="${icon}"></i></button>`;
                 return container;
                 }
             });
 
-                   UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fas fa-solid fa-map-pin' }));
+                UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fas fa-solid fa-map-pin',btnclasses:'btn-primary' }));
 
             if (app.user.isAdmin) {
-                UacanadaMap.mapLayers.removeCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'removeCards', title: 'Remove Cards', icon: 'fa fas fa-solid fa-xmark'}));
-                UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'expandRightButtons', title: 'Expand Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical'}));
+                UacanadaMap.mapLayers.removeCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'removeCards', title: 'Remove Cards', icon: 'fa fas fa-solid fa-xmark',btnclasses:'btn-primary'}));
+                UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'expandRightButtons', title: 'Expand Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical',btnclasses:'btn-warning'}));
+
+                UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'zoomInCustom', title: 'ZOOM +', icon: 'fa fas fa-plus',btnclasses:'btn-info zoom-plus'}));
             }
 
                     
