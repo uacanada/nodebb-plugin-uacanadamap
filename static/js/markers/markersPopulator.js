@@ -146,6 +146,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       
   
       UacanadaMap.api.cleanUp();
+      //UacanadaMap.allMarkersMixed = [];
       
      
           for (const [index, item] of array.entries()) {
@@ -158,27 +159,24 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             // Add marker to the respective category cluster
             if (UacanadaMap.categoryClusters[item.placeCategory]) {
                 UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
+
+               // UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[item.placeCategory].getLayers());
             }
         }
 
        
-        // Add category clusters to main cluster group
-        UacanadaMap.allMarkersMixed = [];
-        for (const category in UacanadaMap.categoryClusters) {
-          //UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.categoryClusters[category]);
-          UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[category].getLayers());
-        }
+       
 
         try {
-          shiftMarkersWithCloseNeighbors(UacanadaMap.allMarkersMixed, true);
+         // shiftMarkersWithCloseNeighbors(UacanadaMap.allMarkersMixed, true);
+          UacanadaMap.allPlacesArray = Object.values(UacanadaMap.allPlaces);
+          shiftMarkersWithCloseNeighbors(UacanadaMap.allPlacesArray, true);
+
         } catch (error) {
           UacanadaMap.console.log(error)
         }
        
-
-
-       
-
+        
   
       
   
