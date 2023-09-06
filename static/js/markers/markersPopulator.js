@@ -57,15 +57,15 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       let groups = [];
   
       for (let i = 0; i < markers.length; i++) {
-        groups[i] = [markers[i]];
+        groups[i] = [markers[i].marker];
       }
       for (let i = 0; i < markers.length; i++) {
-        const currentMarker = markers[i];
+        const currentMarker = markers[i].marker;
   
         let hasNeighbors = false;
   
         for (let j = i + 1; j < markers.length; j++) {
-          const otherMarker = markers[j];
+          const otherMarker = markers[j].marker;
           if (
             Math.abs(
               currentMarker.getLatLng().lat - otherMarker.getLatLng().lat
