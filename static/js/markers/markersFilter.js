@@ -3,13 +3,13 @@
     
     UacanadaMap.api.removeMarker = (tid) => {
       if(tid && UacanadaMap.allPlaces[tid]?.marker){
-        UacanadaMap.mapLayers.markers.removeLayer(UacanadaMap.allPlaces[tid].marker);
+     //   UacanadaMap.mapLayers.markers.removeLayer(UacanadaMap.allPlaces[tid].marker); TODO revise
       }
     }
 
     UacanadaMap.api.addMarker = (tid) => {
       if(tid && UacanadaMap.allPlaces[tid]?.marker){
-        UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.allPlaces[tid].marker);
+      //  UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.allPlaces[tid].marker); TODO revise
       }
     }
 
@@ -56,7 +56,7 @@
 
     // TODO
     UacanadaMap.api.rewriteTabs = (criteria) => {
-            UacanadaMap.console.log('!!! UacanadaMap.api.rewriteTabs deprecated, we use     UacanadaMap.api.filterMarkers(criteria)   instead')
+           // UacanadaMap.api.rewriteTabs deprecated, new method is    UacanadaMap.api.filterMarkers(criteria)   instead')
             UacanadaMap.api.filterMarkers(criteria)
     }
   
