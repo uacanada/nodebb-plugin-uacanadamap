@@ -224,11 +224,27 @@ define('core/configuration', function (require) {
                  return container;
                 },
             });
+
+            const removeCardsControl = L.Control.extend({
+                options: { position: 'bottomright'},
+            
+                onAdd(map) {
+                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control removeCards');
+                container.innerHTML = '<button title="Remove Cards" class="btn btn-primary rounded-circle p-0"><i class="fa fas fa-solid fa-cancel"></i></button>';
+                 return container;
+                },
+            });
             
             
             
             
         UacanadaMap.mapLayers.addPlaceButton = new addplaceControl();
+
+        if(app.user.isAdmin){
+            // TODO make public after 
+            UacanadaMap.mapLayers.removeCardsButton = new removeCardsControl();
+        }
+        
            
   
     }
