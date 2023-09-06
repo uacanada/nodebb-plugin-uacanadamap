@@ -124,7 +124,7 @@ define('core/configuration', function (require) {
                 UacanadaMap.categoryClusters[category.slug] = L.markerClusterGroup(
                     {
                         disableClusteringAtZoom: 17,
-                        maxClusterRadius: 40,
+                        maxClusterRadius: 90, // TODO move to ACP
                         spiderfyDistanceMultiplier: 1,
                         spiderfyOnMaxZoom: false,
                         showCoverageOnHover: false,
@@ -133,7 +133,7 @@ define('core/configuration', function (require) {
                         iconCreateFunction: function (cluster) {
                             const markers = cluster.getAllChildMarkers();
                             const count = markers.length;
-                            const iconSize = Math.floor(count * 1.1 + 60);
+                            const iconSize = Math.floor(count * 1.4 + 33);
                             const anchorSize = iconSize / 2;
                           
                             return L.divIcon({
