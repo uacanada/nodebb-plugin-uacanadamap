@@ -120,7 +120,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             
             
             // Calculate angle based on index
-            const angle = (2 * Math.PI / groupSize) * idx;
+            //const angle = (2 * Math.PI / groupSize) * idx;
         
             // Calculate new lat and lng based on angle
             // const shiftedLatLng = L.latLng(
@@ -129,7 +129,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             // );
 
             const shiftedLatLng = L.latLng(
-              currentLatLng.lat + smallerShift.lat * index,  // Изменено на smallerShift
+              currentLatLng.lat + smallerShift.lat * index, 
               currentLatLng.lng
           );
         

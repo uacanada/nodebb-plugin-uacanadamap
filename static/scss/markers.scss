@@ -260,7 +260,7 @@ a.ua-popup-link:hover{
   width: 100%;
   height: 100%;
   background-color: $marker-bg;
-  color: $marker-text;
+  color:$marker-icon-color;
   padding: 1%;
   position: relative;
   border-radius: 50%;
@@ -268,7 +268,7 @@ a.ua-popup-link:hover{
   align-items: center;
   justify-content: center;
   .badge-number {
-   
+    color:$marker-icon-color;
       position: absolute;
       line-height: 0.75;
       font-size: 0.75rem;
