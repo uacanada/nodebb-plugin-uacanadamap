@@ -214,11 +214,16 @@ a.leaflet-contextmenu-item button {
 }
 
 
-.me-minus60px{
-  margin-right: -4rem!important;
-}
 
-.pe-60px{
-  padding-right: 3.5rem!important;
-  width: 5rem;
+
+.circle-button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .fa{
+    font-size: 1rem;
+  }
 }

@@ -188,7 +188,7 @@ define('core/configuration', function (require) {
                 options: { position },
                 onAdd() {
                 const container = L.DomUtil.create('div', `leaflet-bar leaflet-control ${classes}`);
-                container.innerHTML = `<button title="${title}" class="btn btn-primary btn-sm rounded-circle"><i class="${icon}"></i></button>`;
+                container.innerHTML = `<button title="${title}" class="btn btn-primary circle-button"><i class="${icon}"></i></button>`;
                 return container;
                 }
             });
