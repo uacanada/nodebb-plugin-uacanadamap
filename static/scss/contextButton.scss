@@ -20,7 +20,8 @@
     overflow: hidden;
 
     .swiper-slide {
-      background: rgba(var(--bs-primary-rgb), 0.7);
+      background: rgba(var(--bs-primary-rgb), 0.2);
+      backdrop-filter: blur(3px);
     }
 
   }
