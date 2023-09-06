@@ -377,27 +377,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     UacanadaMap.api.removeCards();
   };
 
-  UacanadaMap.api.showOnMapOnlyChoosen = ({ category }) => {
-    try {
-      const mrks = UacanadaMap.mapLayers.markers.getLayers();
-      UacanadaMap.mapLayers.markers.removeLayers(mrks);
-      UacanadaMap.api.cleanMarkers();
-    } catch (error) {
-      if (adminsUID) console.log(error);
-    }
-
-    for (const m of UacanadaMap.allPlacesArray) {
-      try {
-        UacanadaMap.mapLayers.markers.addLayer(
-          UacanadaMap.allPlaces[m.tid].marker
-        );
-      } catch (error) {
-        if (adminsUID) console.log(`mapLayers.markers.addLayer error: `, error);
-      }
-    }
-
-    UacanadaMap.mapLayers.markers.addTo(UacanadaMap.map);
-  };
+ 
 
   UacanadaMap.api.setCategoryAndOpenCards = (category) => {
     UacanadaMap.api.rewriteTabsOnCatChange(category);

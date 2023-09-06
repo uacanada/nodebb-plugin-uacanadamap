@@ -136,16 +136,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
   
       UacanadaMap.api.cleanUp();
       
-      // for (const [index, item] of array.entries()) {
-      //   if (!item.placeCategory || !item.latlng[0]) continue;
-      //   const newMarker = UacanadaMap.api.createMarker(index,item)
-      //   UacanadaMap.mapLayers.markers.addLayer(newMarker);
-      // }
-  
-      // UacanadaMap.mapLayers.markers.addTo(UacanadaMap.map);
-
-
-       // Populate category-specific clusters with markers
+     
           for (const [index, item] of array.entries()) {
             if (!item.placeCategory || !item.latlng[0]) continue;
 
@@ -161,27 +152,14 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
 
        
         // Add category clusters to main cluster group
-        let allMarkersMixed = [];
+        UacanadaMap.allMarkersMixed = [];
         for (const category in UacanadaMap.categoryClusters) {
-          UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.categoryClusters[category]);
-         allMarkersMixed = allMarkersMixed.concat(UacanadaMap.categoryClusters[category].getLayers());
-          
-
-          // try {
-          //   shiftMarkersWithCloseNeighbors(
-          //     UacanadaMap.categoryClusters[category].getLayers(),
-          //     true
-          //   );
-          // } catch (error) {
-          //   console.log(error);
-          // }
-          
-
-
+          //UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.categoryClusters[category]);
+          UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[category].getLayers());
         }
 
         try {
-          shiftMarkersWithCloseNeighbors(allMarkersMixed, true);
+          shiftMarkersWithCloseNeighbors(UacanadaMap.allMarkersMixed, true);
         } catch (error) {
           UacanadaMap.console.log(error)
         }
