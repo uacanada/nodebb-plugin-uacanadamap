@@ -164,7 +164,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         let allMarkersMixed = [];
         for (const category in UacanadaMap.categoryClusters) {
           UacanadaMap.mapLayers.markers.addLayer(UacanadaMap.categoryClusters[category]);
-         // allMarkersMixed = allMarkersMixed.concat(UacanadaMap.categoryClusters[category].getLayers());
+         allMarkersMixed = allMarkersMixed.concat(UacanadaMap.categoryClusters[category].getLayers());
           
 
           // try {
@@ -181,7 +181,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         }
 
         try {
-          shiftMarkersWithCloseNeighbors(UacanadaMap.categoryClusters['allMarkersCluster'], true);
+          shiftMarkersWithCloseNeighbors(allMarkersMixed, true);
         } catch (error) {
           UacanadaMap.console.log(error)
         }
