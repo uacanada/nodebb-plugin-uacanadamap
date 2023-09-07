@@ -126,16 +126,16 @@ return async (UacanadaMap) => {
       const { url } = data;
       UacanadaMap.console.log("🔜 Starting AJAX request for URL:", url);
     
-      // Detect the viewport for the map
-      UacanadaMap.api.detectMapViewport();
+     
+     // UacanadaMap.api.detectMapViewport();
     
       // Use optional chaining to safely access nested properties
       const mapRouter = ajaxify.data.UacanadaMapSettings?.mapPageRouter;
       if (!mapRouter) return;
     
       // Improved variable naming for clarity
-      const isPreviousPageMap = app.previousUrl.includes(mapRouter);
-      const isNextPageMapOrMain = !url || '/' + url === mapRouter;
+      const isPreviousPageMap = app.previousUrl.includes(mapRouter) || app.previousUrl === '/'; // TODO: determine if map template not in map page in nodebb settings
+      const isNextPageMapOrMain = !url || '/' + url === mapRouter; // TODO: determine if map template not in map page in nodebb settings
     
       if (isNextPageMapOrMain) {
         UacanadaMap.console.log("User is navigating back to the map page");
