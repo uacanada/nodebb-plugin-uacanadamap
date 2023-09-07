@@ -307,13 +307,14 @@ a.ua-popup-link:hover{
 }
 
 .shifted-marker{
-
+  pointer-events: none;
   .shifted-marker-leg{
     width: 2px;
     background:$marker-bg;
     margin-left: -12px;
     margin-top: -12px;
     position: absolute;
+    pointer-events: none;
   }
 
   .shifted-marker-leg:before {
