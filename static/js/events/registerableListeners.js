@@ -206,7 +206,9 @@ class EventListeners {
 		eventList.forEach((event) => {
 		try {
 
-			const handler = this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]
+			const handlerName = `handle${event.charAt(0).toUpperCase() + event.slice(1)}`
+			const handler = this[handlerName];
+    		console.log(`Handler for ${event}: `, handler);
 			console.log(handler)
 			if (enable) {
 				UacanadaMap.map.on(event,handler);
