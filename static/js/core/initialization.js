@@ -104,6 +104,9 @@ define("core/initialization", [
       UacanadaMap.api.registerHooks()
       UacanadaMap.api.registerBasicListeners()
       UacanadaMap.api.reserveClusterForAdvMarkers()
+
+      UacanadaMap.run.submitPlace()
+
       if (UacanadaMap.eventListenersInstance) {
         UacanadaMap.eventListenersInstance.reload();
       } else {
@@ -136,8 +139,8 @@ define("core/initialization", [
                
                
                if(app.user.isAdmin){
-                   console.log('ADMIN MODE ajaxify')
-                   reload(UacanadaMap)
+                   console.log('ADMIN MODE ajaxify',UacanadaMap)
+                   //reload(UacanadaMap)
                }else{
                   reload(UacanadaMap)
                }
