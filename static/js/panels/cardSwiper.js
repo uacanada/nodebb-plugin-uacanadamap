@@ -446,33 +446,33 @@
   
   UacanadaMap.api.rotateCards = (direction) => { 
    
-    if(!UacanadaMap.swipers.cardsCarousel?.changeDirection)return
+    if(!UacanadaMap.swipers.cardsCarousel?.changeDirection || UacanadaMap.swipers.cardsCarousel.destroyed) return
   
     const crds = $('#cardsSwiperPlaceholder')
    
-    setTimeout(() => {
-      UacanadaMap.swipers.cardsCarousel.update()
-    }, 1000);
+   
   
     if(direction){
       UacanadaMap.swipers.cardsCarousel.changeDirection(direction)
       if(direction==='vertical') crds.addClass('verticalCards')
       else crds.removeClass('verticalCards')
-      console.log('TOGGLE ',direction)
+    
     } else{
       if(crds.hasClass('verticalCards')){
         crds.removeClass('verticalCards')
         UacanadaMap.swipers.cardsCarousel.changeDirection('horizontal')
-        console.log('HORIZONTAL')
+      
     
       }else{
         crds.addClass('verticalCards')
         UacanadaMap.swipers.cardsCarousel.changeDirection('vertical')
-        console.log('VERTICAL')
+      
       }
     }
     
-    
+    setTimeout(() => {
+      UacanadaMap.swipers.cardsCarousel.update()
+    }, 1000);
     UacanadaMap.api.fitElementsPosition()
   
     

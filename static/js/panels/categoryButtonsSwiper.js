@@ -34,10 +34,7 @@ define("panels/categoryButtonsSwiper", [
       const btnDiv = L.DomUtil.get("ua-horizontal-buttons-wrapper");
       setupDomEvents(btnDiv);
 
-      if ($("#ua-place-buttons").hasClass("filled")) {
-        console.log("Swiper only update");
-        return UacanadaMap.swipers.horizontalButtons.update();
-      }
+      if ($("#ua-place-buttons").hasClass("filled") || !UacanadaMap.swipers.horizontalButtons?.destroyed) { return UacanadaMap.swipers.horizontalButtons.update();  }
 
       appendButtonsHtml(buttonsHtml);
 
