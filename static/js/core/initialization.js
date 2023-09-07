@@ -81,12 +81,15 @@ return async (UacanadaMap) => {
       UacanadaMap.api.mapInit();
       UacanadaMap.api.addMapLayers();
       UacanadaMap.api.addMapControls();
-      UacanadaMap.api.initializeSwipers();
-      UacanadaMap.api.createCategoryButtonsSwiper($("#location-category-filter").val() ?? "");
-      UacanadaMap.api.OffCanvasPanelHandler();
+
       UacanadaMap.api.createCategories();
       UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache));
       UacanadaMap.api.populateTabs();
+
+      UacanadaMap.api.initializeSwipers();
+      UacanadaMap.api.createCategoryButtonsSwiper($("#location-category-filter").val() ?? "");
+      UacanadaMap.api.OffCanvasPanelHandler();
+
       UacanadaMap.api.hideElements(false);
       UacanadaMap.api.cleanMarkers(true);
       UacanadaMap.api.cardsOpened(false);
