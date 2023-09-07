@@ -81,7 +81,10 @@ class EventListeners {
 	};
 
 	remove = () => {
-		$(document).off(this.hasPointerEventSupport(), this.touchHandler);
+
+
+		try {
+			$(document).off(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).off('click', this.clickHandler);
 		$("#ua-mainframe").off( this.hasPointerEventSupport(), this.handleMainframeClick );
 		
@@ -107,6 +110,10 @@ class EventListeners {
 			 
 			}
 		}
+		} catch (error) {
+			UacanadaMap.console.log(error)
+		}
+		
   
   
 	};

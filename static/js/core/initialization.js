@@ -76,10 +76,7 @@ return async (UacanadaMap) => {
         UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
       } 
       
-      if(!UacanadaMap.swipers.cardsCarousel.destroyed){
-        // Delete previous
-        UacanadaMap.eventListenersInstance.remove();
-      }
+    
       UacanadaMap.api.configureMapElements();
       UacanadaMap.api.initializeSwipers();
 
