@@ -10,22 +10,22 @@ class EventListeners {
 
 
 	// Define your named event handlers
-  handleZoomEnd() {
+zoomendHandler() {
 	const level = UacanadaMap.map.getZoom();
 	UacanadaMap.api.setClassWithFarawayZoom(level);
   }
   
-  handleEnterFullscreen() {
+  enterFullscreenHandler() {
 	
 	UacanadaMap.isFullscreenMode = true;
   }
   
-  handleExitFullscreen() {
+  exitFullscreenHandler() {
 	
 	UacanadaMap.isFullscreenMode = false;
   }
   
-  handleContextMenu(e) {
+  contextmenuHandler(e) {
 	
 	const L = UacanadaMap.L
 	if (UacanadaMap.currentmarker) {
@@ -41,7 +41,7 @@ class EventListeners {
 	  }) }).addTo(UacanadaMap.map);
   }
   
-  handleMoveStart() {
+  movestartHandler() {
 	try {
 		UacanadaMap.moveIterations = 1;
 	} catch (error) {
@@ -50,7 +50,7 @@ class EventListeners {
 	
   }
   
-  handleMove() {
+  moveHandler() {
 	
 	UacanadaMap.moveIterations++;
 	if (UacanadaMap.moveIterations > 21) {
@@ -59,7 +59,7 @@ class EventListeners {
 	}
   }
   
-  handleMoveEnd() {
+  moveendHandler() {
 	UacanadaMap.moveIterations++;
 	UacanadaMap.api.hideElements(false)
   
@@ -206,10 +206,10 @@ class EventListeners {
 		eventList.forEach((event) => {
 		try {
 
-			const handlerName = `handle${event.charAt(0).toUpperCase() + event.slice(1)}`
-			const handler = this[handlerName];
-    		console.log(`Handler for ${event}: `, handler);
-			console.log(handler)
+			
+			const handler = this[event+'Handler'];
+    		UacanadaMap.console.log(`${enable} Handler for ${event}: `, handler);
+		
 			if (enable) {
 				UacanadaMap.map.on(event,handler);
 			  } else {
