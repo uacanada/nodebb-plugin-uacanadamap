@@ -73,7 +73,7 @@ return async (UacanadaMap) => {
       UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
       if (!UacanadaMap.eventListenersInstance) { 
         UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
-      }else{
+      }else if(!UacanadaMap.swipers.cardsCarousel.destroyed){
         // Delete previous
         UacanadaMap.eventListenersInstance.remove();
       }
