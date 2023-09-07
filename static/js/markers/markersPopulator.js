@@ -38,9 +38,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
     }
   
     function shiftMarkersWithCloseNeighbors(markers, forceShift) {
-
-     
-      const {
+       const {
         virtZoom,
         shiftX,
         shiftY,
@@ -88,33 +86,17 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
   
       const markerGroups = groups.filter((group) => group.length > 1);
       if (forceShift) {
-
         markerGroups.forEach((group) => {
           const groupSize = group.length;
-        
-          group.forEach((marker, index) => {
-
+           group.forEach((marker, index) => {
             if(index>0){
               const m = UacanadaMap.allPlaces[marker.tid];
-              // const realGps = m.marker._latlng || [
-              //     Number(m.gps[0]),
-              //     Number(m.gps[1]),
-              // ];
-  
               m.neighborIndex = index;
               m.neighborsCount = groupSize;
               m.neighbors = group;
-  
-              //const currentLatLng = marker.getLatLng();
-              //const shiftedLatLng = L.latLng(  currentLatLng.lat + smallerShift.lat * index,   currentLatLng.lng  );
-          
               m.shifted = true;
-              //marker.setLatLng(shiftedLatLng);
-  
               const SHIFT_STEP_PX = 50
               const shiftDistance = SHIFT_STEP_PX*index
-              
-  
               const currentIcon = m.marker.getIcon();
               const currentHtml = currentIcon.options.html;
               m.marker.setIcon(L.divIcon({
@@ -127,22 +109,9 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
                 iconAnchor: currentIcon.options.iconAnchor
               }));
             }
-
-            
-            
-
-
-
-
-            // L.polyline([realGps, shiftedLatLng], {  weight: 1,  color: "#ff2424", opacity: 0.5,  dashArray: "5, 5" }).addTo(UacanadaMap.map);
-            // const markerDot = L.divIcon({ className: "ua-marker-dot", html: '<i class="fa fa-regular fa-circle-dot"></i>', iconSize: [10, 10], iconAnchor: [5, 5]});
-            // L.marker(realGps, { icon: markerDot }).addTo(UacanadaMap.map);
           });
         });
-
-       
       }
-  
       return markerGroups;
     }
   
