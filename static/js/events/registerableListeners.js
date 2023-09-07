@@ -42,7 +42,12 @@ class EventListeners {
   }
   
   handleMoveStart() {
-	this.UacanadaMap.moveIterations = 1;
+	try {
+		this.UacanadaMap.moveIterations = 1;
+	} catch (error) {
+		this.UacanadaMap.console.log(error)
+	}
+	
   }
   
   handleMove() {
