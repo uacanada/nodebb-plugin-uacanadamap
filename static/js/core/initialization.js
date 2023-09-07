@@ -65,7 +65,7 @@ define("core/initialization", [
 ) {
   
 return async (UacanadaMap) => {
-    const firstInitTime = Date.now();
+     UacanadaMap.firstInitTime = Date.now();
     const hooks = await app.require("hooks");
     
     const reload = async (UacanadaMap) => {
@@ -79,10 +79,10 @@ return async (UacanadaMap) => {
       UacanadaMap.api.createCategories();
       UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache));
       UacanadaMap.api.populateTabs();
-      UacanadaMap.api.mapReLoad();
+      
       UacanadaMap.api.createСategoryButtonsSwiper($("#location-category-filter").val() ?? "");
       UacanadaMap.api.OffCanvasPanelHandler();
-      UacanadaMap.api.fitElementsPosition();
+   
       UacanadaMap.api.hideElements(false);
       UacanadaMap.api.cleanMarkers(true);
       UacanadaMap.api.cardsOpened(false);
@@ -91,6 +91,8 @@ return async (UacanadaMap) => {
       UacanadaMap.api.registerHooks()
       UacanadaMap.api.reserveClusterForAdvMarkers()
       UacanadaMap.run.submitPlace()
+
+      UacanadaMap.api.mapReLoad();
       UacanadaMap.api.mainFrameShow();
       if (UacanadaMap.eventListenersInstance) {
         UacanadaMap.eventListenersInstance.reload();
@@ -100,11 +102,9 @@ return async (UacanadaMap) => {
       }
 
 
-      UacanadaMap.api.rotateCards("horizontal");
-      UacanadaMap.api.animateCards("close");
+      
 
-      $('#ua-horizontal-buttons-wrapper').removeClass('movedown').removeClass('hidden')
-      $('#geocoderSearchbox').removeClass('show')
+      
 
       if(app.user.isAdmin){
         // Make accessible globally for debugging purposes
@@ -155,7 +155,7 @@ return async (UacanadaMap) => {
     hooks.on('action:ajaxify.end', (data) => {
       if(data.tpl_url === 'map'){
            
-            if(firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
+            if(UacanadaMap.firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
               if(app.user.isAdmin){
                    console.log('ADMIN MODE ajaxify')
                    reload(UacanadaMap)

@@ -11,7 +11,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         });
     };
 
-    UacanadaMap.api.mapReLoad = async (mapLoadCount) => {
+    UacanadaMap.api.mapReLoad = async () => {
         
         UacanadaMap.api.updateCSS();
         UacanadaMap.api.fitElementsPosition();
@@ -32,8 +32,9 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         
         setTimeout(() => {
                UacanadaMap.api.disablePropagationToMap(UacanadaMap.L,null)
+
               
-              if (mapLoadCount > 1) {
+              if (UacanadaMap.firstInitTime < Date.now()-1201) {
                     if (UacanadaMap.map && !window.location.search && $("body").hasClass(UacanadaMap.mapRoomClass)  ) { // TODO Check
                         // if back from topic page and zoom is too big - do zoom out
                         if (
@@ -46,6 +47,13 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
                             }, 500);
                         }
                     }
+
+                    UacanadaMap.api.rotateCards("horizontal");
+                    UacanadaMap.api.animateCards("close");
+                    $('#ua-horizontal-buttons-wrapper').removeClass('movedown').removeClass('hidden')
+                    $('#geocoderSearchbox').removeClass('show')
+
+                    UacanadaMap.console.log(`Reload ${UacanadaMap.firstInitTime}`)
                
                 } else {
                    
