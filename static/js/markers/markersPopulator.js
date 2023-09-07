@@ -94,44 +94,41 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         
           group.forEach((marker, index) => {
 
-            const m = UacanadaMap.allPlaces[marker.tid];
-            // const realGps = m.marker._latlng || [
-            //     Number(m.gps[0]),
-            //     Number(m.gps[1]),
-            // ];
+            if(index>0){
+              const m = UacanadaMap.allPlaces[marker.tid];
+              // const realGps = m.marker._latlng || [
+              //     Number(m.gps[0]),
+              //     Number(m.gps[1]),
+              // ];
+  
+              m.neighborIndex = index;
+              m.neighborsCount = groupSize;
+              m.neighbors = group;
+  
+              //const currentLatLng = marker.getLatLng();
+              //const shiftedLatLng = L.latLng(  currentLatLng.lat + smallerShift.lat * index,   currentLatLng.lng  );
+          
+              m.shifted = true;
+              //marker.setLatLng(shiftedLatLng);
+  
+              const SHIFT_STEP_PX = 50
+              const shiftDistance = SHIFT_STEP_PX*index
+              
+  
+              const currentIcon = m.marker.getIcon();
+              const currentHtml = currentIcon.options.html;
+              m.marker.setIcon(L.divIcon({
+                className: currentIcon.options.className+' shifted-marker',
+                html: `<div class="shifted-marker-wrapper" style=" margin-top: -${shiftDistance+22}px;">
+                  ${currentHtml}
+                  <div class="shifted-marker-leg"></div>
+                </div>`,
+                iconSize: currentIcon.options.iconSize,
+                iconAnchor: currentIcon.options.iconAnchor
+              }));
+            }
 
-            m.neighborIndex = index;
-            m.neighborsCount = groupSize;
-            m.neighbors = group;
-
-            //const currentLatLng = marker.getLatLng();
-            //const shiftedLatLng = L.latLng(  currentLatLng.lat + smallerShift.lat * index,   currentLatLng.lng  );
-        
-            m.shifted = true;
-            //marker.setLatLng(shiftedLatLng);
-
-            const SHIFT_STEP_PX = 50
-            const shiftDistance = SHIFT_STEP_PX*index
-            const startX = 0;
-            const startY = 0;
-            const endX = 0;
-            const endY = shiftDistance
-            const controlX = startX + (endX - startX) / 2;
-            const controlY = startY + (endY - startY) / 2 - shiftDistance;  
-            const svgPath = `M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`;
-
-
-            const currentIcon = m.marker.getIcon();
-            const currentHtml = currentIcon.options.html;
-            m.marker.setIcon(L.divIcon({
-              className: currentIcon.options.className+' shifted-marker',
-              html: `<div class="shifted-marker-wrapper" style=" margin-top: -${shiftDistance}px;">
-                ${currentHtml}
-                <div class="shifted-marker-leg"></div>
-              </div>`,
-              iconSize: currentIcon.options.iconSize,
-              iconAnchor: currentIcon.options.iconAnchor
-            }));
+            
             
 
 
