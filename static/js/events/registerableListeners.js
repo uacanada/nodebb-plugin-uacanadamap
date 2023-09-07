@@ -11,23 +11,23 @@ class EventListeners {
 
 	// Define your named event handlers
   handleZoomEnd() {
-	const level = this.UacanadaMap.map.getZoom();
-	this.UacanadaMap.api.setClassWithFarawayZoom(level);
+	const level = UacanadaMap.map.getZoom();
+	UacanadaMap.api.setClassWithFarawayZoom(level);
   }
   
   handleEnterFullscreen() {
-	this.UacanadaMap.placeCardElement = $(this.UacanadaMap.placeCardDivFullScreen);
-	this.UacanadaMap.isFullscreenMode = true;
+	
+	UacanadaMap.isFullscreenMode = true;
   }
   
   handleExitFullscreen() {
-	this.UacanadaMap.placeCardElement = $(this.UacanadaMap.placeCardDiv);
-	this.UacanadaMap.isFullscreenMode = false;
+	
+	UacanadaMap.isFullscreenMode = false;
   }
   
   handleContextMenu(e) {
-	const { UacanadaMap } = this
-	const L = this.UacanadaMap.L
+	
+	const L = UacanadaMap.L
 	if (UacanadaMap.currentmarker) {
 		UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
 	}
@@ -43,28 +43,28 @@ class EventListeners {
   
   handleMoveStart() {
 	try {
-		this.UacanadaMap.moveIterations = 1;
+		UacanadaMap.moveIterations = 1;
 	} catch (error) {
-		this.UacanadaMap.console.log(error)
+		UacanadaMap.console.log(error)
 	}
 	
   }
   
   handleMove() {
-	console.log(this.UacanadaMap,UacanadaMap)
-	this.UacanadaMap.moveIterations++;
-	if (this.UacanadaMap.moveIterations > 21) {
-		this.UacanadaMap.api.hideElements(true)
+	
+	UacanadaMap.moveIterations++;
+	if (UacanadaMap.moveIterations > 21) {
+		UacanadaMap.api.hideElements(true)
 	 // UacanadaMap.api.expandMap();
 	}
   }
   
   handleMoveEnd() {
-	this.UacanadaMap.moveIterations++;
-	this.UacanadaMap.api.hideElements(false)
+	UacanadaMap.moveIterations++;
+	UacanadaMap.api.hideElements(false)
   
-	if(this.UacanadaMap.api.locationSelection.isVisible){
-		this.UacanadaMap.api.locationSelection.showLatLng()
+	if(UacanadaMap.api.locationSelection.isVisible){
+		UacanadaMap.api.locationSelection.showLatLng()
 	}
    
   }
@@ -72,21 +72,21 @@ class EventListeners {
   handleMarkGeocode(e) {
 	let { lat, lng } = e.geocode.center;
 	let loc = { latlng: { lat, lng } };
-	this.UacanadaMap.api.createMarkerButton(loc, e.geocode);
+	UacanadaMap.api.createMarkerButton(loc, e.geocode);
   }
 
 
 	bottomOffcanvasTriggers = {
 		hide:  () => {
 			const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-			this.UacanadaMap.api.setBottomSheetSize(0);
+			UacanadaMap.api.setBottomSheetSize(0);
 			bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)
 		},
 		
 		show:  () => {
-			this.UacanadaMap.api.setBottomSheetSize(1)
+			UacanadaMap.api.setBottomSheetSize(1)
 			try {
-				this.UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
+				UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
 			} catch (error) {
 				
 			}
@@ -102,7 +102,7 @@ class EventListeners {
 	};
 
 	handleMainframeClick = (e) => {
-		this.UacanadaMap.api.expandMap(`mainframe on click`);
+		UacanadaMap.api.expandMap(`mainframe on click`);
 		$("#ua-mainframe").off(
 			this.hasPointerEventSupport(),
 			this.handleMainframeClick
@@ -115,7 +115,7 @@ class EventListeners {
 	clickHandler = (e) => {
 		// Use the 'click' event to prevent inadvertent triggers when using 'pointerup' event
 		const target = $(e.target);
-		const { UacanadaMap } = this;
+		
 	  
 		const clck = (selector) => {
 		  const realTarget = target.closest(selector);
@@ -145,7 +145,7 @@ class EventListeners {
 
 	touchHandler = (e) => {
 		const target = $(e.target);
-		const { UacanadaMap } = this;
+		//const { UacanadaMap } = this;
 	  
 		const tc = (selector) => {
 		  const realTarget = target.closest(selector);
@@ -218,7 +218,7 @@ class EventListeners {
 	  
 
 	register = () => {
-		const { UacanadaMap } = this;
+		//const { UacanadaMap } = this;
 		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).on('click', this.clickHandler);
 		$("#ua-mainframe").on( this.hasPointerEventSupport(), this.handleMainframeClick);
@@ -306,7 +306,7 @@ class EventListeners {
 	};
 
 	remove = () => {
-		const { UacanadaMap } = this;
+		//const { UacanadaMap } = this;
 		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 		$(document).off(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).off('click', this.clickHandler);
@@ -327,7 +327,7 @@ class EventListeners {
 				try {
 					UacanadaMap.swipers[key].destroy(true, true);
 				} catch (error) {
-					this.UacanadaMap.console.log(error);
+					UacanadaMap.console.log(error);
 				}
 			 
 			}
@@ -363,7 +363,7 @@ class EventListeners {
 					elem.off(trigger);
 				  } 
 				} catch (error) {
-					this.UacanadaMap.console.log(error);
+					UacanadaMap.console.log(error);
 				}
 			  }
 			});
