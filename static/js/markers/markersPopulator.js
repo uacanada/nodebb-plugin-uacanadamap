@@ -116,8 +116,11 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             const currentIcon = m.marker.getIcon();
             const currentHtml = currentIcon.options.html;
             m.marker.setIcon(L.divIcon({
-              className: currentIcon.options.className+' '+shifted-marker,
-              html: `<div class="shifted-marker-wrapper" style=" margin-top: -${shiftDistance}px;">${currentHtml}<div class="shifted-marker-leg" style="height: ${shiftDistance+10};width: 3px;background: linear-gradient(360deg, #ffb2b2, #c40000);margin-left: 10px;border-radius: 3px;"></div></div>`,
+              className: currentIcon.options.className+' shifted-marker',
+              html: `<div class="shifted-marker-wrapper" style=" margin-top: -${shiftDistance}px;">
+                ${currentHtml}
+                <div class="shifted-marker-leg" style="height: ${shiftDistance+10};width: 3px;background: linear-gradient(360deg, #ffb2b2, #c40000);margin-left: 10px;border-radius: 3px;"></div>
+              </div>`,
               iconSize: currentIcon.options.iconSize,
               iconAnchor: currentIcon.options.iconAnchor
             }));
