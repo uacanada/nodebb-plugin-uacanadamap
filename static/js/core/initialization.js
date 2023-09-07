@@ -78,6 +78,8 @@ return async (UacanadaMap) => {
         UacanadaMap.eventListenersInstance.remove();
       }
       UacanadaMap.api.configureMapElements();
+      UacanadaMap.api.initializeSwipers();
+      
       UacanadaMap.api.mapInit();
       UacanadaMap.api.addMapLayers();
       UacanadaMap.api.addMapControls();
@@ -86,7 +88,7 @@ return async (UacanadaMap) => {
       UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache));
       UacanadaMap.api.populateTabs();
 
-      UacanadaMap.api.initializeSwipers();
+      
       UacanadaMap.api.createCategoryButtonsSwiper($("#location-category-filter").val() ?? "");
       UacanadaMap.api.OffCanvasPanelHandler();
 
