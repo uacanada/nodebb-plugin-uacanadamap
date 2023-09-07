@@ -192,7 +192,7 @@ class EventListeners {
 	  };
 
 	  toggleMapEvents = (enable = true) => {
-		const { UacanadaMap } = this;
+		
 		const eventList = [
 		  "zoomend",
 		  "enterFullscreen",
