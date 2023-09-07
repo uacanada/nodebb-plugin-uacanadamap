@@ -28,13 +28,13 @@ define("panels/categoryButtonsSwiper", [
     }
   };
 
-  const initializeСategoryButtonsSwiper = (buttonsHtml) => {
+  const initializeCategoryButtonsSwiper = (buttonsHtml) => {
     const { L, Swiper } = UacanadaMap;
     try {
       const btnDiv = L.DomUtil.get("ua-horizontal-buttons-wrapper");
       setupDomEvents(btnDiv);
 
-      if ($("#ua-place-buttons").hasClass("filled") || !UacanadaMap.swipers.horizontalButtons?.destroyed) { return UacanadaMap.swipers.horizontalButtons.update();  }
+      if ($("#ua-place-buttons").hasClass("filled") && !UacanadaMap.swipers.horizontalButtons?.destroyed) { return UacanadaMap.swipers.horizontalButtons.update();  }
 
       appendButtonsHtml(buttonsHtml);
 
@@ -53,7 +53,7 @@ define("panels/categoryButtonsSwiper", [
     }
   };
 
-  UacanadaMap.api.createСategoryButtonsSwiper = (selected) => {
+  UacanadaMap.api.createCategoryButtonsSwiper = (selected) => {
     let options = "";
     let total = 0;
     let buttonsHtml = "";
@@ -71,6 +71,6 @@ define("panels/categoryButtonsSwiper", [
       '<option value="">All places: ' + total + "</option>" + options;
     $("#location-category-filter").html(catFields);
     
-    initializeСategoryButtonsSwiper(buttonsHtml);
+    initializeCategoryButtonsSwiper(buttonsHtml);
   };
 });
