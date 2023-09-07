@@ -119,9 +119,9 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               const currentHtml = currentIcon.options.html;
               m.marker.setIcon(L.divIcon({
                 className: currentIcon.options.className+' shifted-marker',
-                html: `<div class="shifted-marker-wrapper" style=" margin-top: -${shiftDistance+22}px;">
+                html: `<div class="shifted-marker-wrapper" style="margin-top: -${shiftDistance}px;">
                   ${currentHtml}
-                  <div class="shifted-marker-leg"></div>
+                  <div class="shifted-marker-leg" style="height: ${shiftDistance+22}px;"></div>
                 </div>`,
                 iconSize: currentIcon.options.iconSize,
                 iconAnchor: currentIcon.options.iconAnchor
