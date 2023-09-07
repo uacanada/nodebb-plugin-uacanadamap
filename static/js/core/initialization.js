@@ -122,9 +122,11 @@ return async (UacanadaMap) => {
       UacanadaMap.api.detectMapViewport();
     
       if(data?.url && '/'+data.url !==ajaxify.data.UacanadaMapSettings.mapPageRouter){
-        // User comebacks to the map page
+     
+        UacanadaMap.console.log("User comebacks to the map page");
       }else{
-        // User leaves map page
+       
+        UacanadaMap.console.log("User leaves map page");
         UacanadaMap.eventListenersInstance.remove();
         UacanadaMap.eventListenersInstance.removeEventListenersWithUacanadaNamespace()
         try {
@@ -134,7 +136,7 @@ return async (UacanadaMap) => {
           UacanadaMap.console.log(error)
         }
 
-        UacanadaMap.needReinit = true
+           UacanadaMap.needReinit = true
            document.body.style.overflow = '';
            document.body.removeAttribute('data-bs-overflow');
            $('body')
