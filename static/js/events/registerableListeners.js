@@ -189,6 +189,30 @@ class EventListeners {
 		  }
 		}
 	  };
+
+	  toggleMapEvents = (enable = true) => {
+		const { UacanadaMap } = this;
+		const eventList = [
+		  "zoomend",
+		  "enterFullscreen",
+		  "exitFullscreen",
+		  "contextmenu",
+		  "movestart",
+		  "move",
+		  "moveend",
+		];
+	  
+		eventList.forEach((event) => {
+		  if (enable) {
+			UacanadaMap.map.on(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
+		  } else {
+			UacanadaMap.map.off(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
+		  }
+		});
+	  }
+	  
+	 
+
 	  
 	  
 
@@ -197,13 +221,12 @@ class EventListeners {
 		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).on('click', this.clickHandler);
 		$("#ua-mainframe").on( this.hasPointerEventSupport(), this.handleMainframeClick);
-		UacanadaMap.map.on("zoomend", this.handleZoomEnd);
-		UacanadaMap.map.on("enterFullscreen", this.handleEnterFullscreen);
-		UacanadaMap.map.on("exitFullscreen", this.handleExitFullscreen);
-		UacanadaMap.map.on("contextmenu", this.handleContextMenu);
-		UacanadaMap.map.on("movestart", this.handleMoveStart);
-		UacanadaMap.map.on("move", this.handleMove);
-		UacanadaMap.map.on("moveend", this.handleMoveEnd);
+
+		this.toggleMapEvents(true);
+		
+		
+
+		
 		UacanadaMap.hiddenControls.geocoder.on("markgeocode", this.handleMarkGeocode);
 
 		
@@ -293,13 +316,7 @@ class EventListeners {
 			bottomPanelOffcanvas.off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
 
-		UacanadaMap.map.off("zoomend", this.handleZoomEnd);
-		UacanadaMap.map.off("enterFullscreen", this.handleEnterFullscreen);
-		UacanadaMap.map.off("exitFullscreen", this.handleExitFullscreen);
-		UacanadaMap.map.off("contextmenu", this.handleContextMenu);
-		UacanadaMap.map.off("movestart", this.handleMoveStart);
-		UacanadaMap.map.off("move", this.handleMove);
-		UacanadaMap.map.off("moveend", this.handleMoveEnd);
+		this.toggleMapEvents(false);
 		UacanadaMap.hiddenControls.geocoder.off("markgeocode", this.handleMarkGeocode);
 
 		this.removeAllWithUacanadaNamespace('uacanada')
