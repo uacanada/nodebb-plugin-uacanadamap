@@ -4,9 +4,9 @@ define('events/registerableListeneres',["core/variables" /*   Global object Uaca
 const bottomPanelOffcanvasTriggers = ['hide','show']
 
 class EventListeners {
-	constructor(UacanadaMap) {
-		this.UacanadaMap = UacanadaMap;
-	}
+	// constructor(UacanadaMap) {
+	// 	this.UacanadaMap = UacanadaMap;
+	// }
 
 
 	// Define your named event handlers
@@ -204,11 +204,16 @@ class EventListeners {
 		];
 	  
 		eventList.forEach((event) => {
-		  if (enable) {
-			UacanadaMap.map.on(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
-		  } else {
-			UacanadaMap.map.off(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
-		  }
+		try {
+			if (enable) {
+				UacanadaMap.map.on(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
+			  } else {
+				UacanadaMap.map.off(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
+			  }
+		} catch (error) {
+			console.log(error)
+		}
+		
 		});
 	  }
 	  
