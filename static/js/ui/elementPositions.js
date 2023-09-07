@@ -52,6 +52,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 
 		if (UacanadaMap.map && UacanadaMap.map.invalidateSize) {
 			setTimeout(() => {
+				if(!UacanadaMap.map)return
 				UacanadaMap.map.invalidateSize();
 				UacanadaMap.api.fitElementsPosition();
 			}, 120);
