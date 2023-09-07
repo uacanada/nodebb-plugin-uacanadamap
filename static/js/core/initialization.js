@@ -128,7 +128,6 @@ return async (UacanadaMap) => {
        
         UacanadaMap.console.log("User leaves map page");
         UacanadaMap.eventListenersInstance.remove();
-        UacanadaMap.eventListenersInstance.removeEventListenersWithUacanadaNamespace()
         try {
           UacanadaMap.map.remove()
           UacanadaMap.map = null   
