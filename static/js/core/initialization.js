@@ -79,7 +79,7 @@ return async (UacanadaMap) => {
       }
       UacanadaMap.api.configureMapElements();
       UacanadaMap.api.initializeSwipers();
-      
+
       UacanadaMap.api.mapInit();
       UacanadaMap.api.addMapLayers();
       UacanadaMap.api.addMapControls();
@@ -130,7 +130,8 @@ return async (UacanadaMap) => {
         UacanadaMap.console.log("User comebacks to the map page");
       }else{
        
-        UacanadaMap.console.log("User leaves map page");
+        
+        UacanadaMap.console.log("User leaves map page",data,app);
         UacanadaMap.eventListenersInstance.remove();
         try {
           UacanadaMap.map.remove()
