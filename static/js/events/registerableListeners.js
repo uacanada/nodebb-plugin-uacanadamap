@@ -10,7 +10,7 @@ class EventListeners {
 
 
 	// Define your named event handlers
-handleZoomEnd() {
+  handleZoomEnd() {
 	const level = this.UacanadaMap.map.getZoom();
 	this.UacanadaMap.api.setClassWithFarawayZoom(level);
   }
@@ -288,14 +288,14 @@ handleZoomEnd() {
 			bottomPanelOffcanvas.off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
 
-		UacanadaMap.map.off("zoomend", handleZoomEnd);
-		UacanadaMap.map.off("enterFullscreen", handleEnterFullscreen);
-		UacanadaMap.map.off("exitFullscreen", handleExitFullscreen);
-		UacanadaMap.map.off("contextmenu", handleContextMenu);
-		UacanadaMap.map.off("movestart", handleMoveStart);
-		UacanadaMap.map.off("move", handleMove);
-		UacanadaMap.map.off("moveend", handleMoveEnd);
-		UacanadaMap.hiddenControls.geocoder.off("markgeocode", handleMarkGeocode);
+		UacanadaMap.map.off("zoomend", this.handleZoomEnd);
+		UacanadaMap.map.off("enterFullscreen", this.handleEnterFullscreen);
+		UacanadaMap.map.off("exitFullscreen", this.handleExitFullscreen);
+		UacanadaMap.map.off("contextmenu", this.handleContextMenu);
+		UacanadaMap.map.off("movestart", this.handleMoveStart);
+		UacanadaMap.map.off("move", this.handleMove);
+		UacanadaMap.map.off("moveend", this.handleMoveEnd);
+		UacanadaMap.hiddenControls.geocoder.off("markgeocode", this.handleMarkGeocode);
 
 		this.removeAllWithUacanadaNamespace('uacanada')
 
