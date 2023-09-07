@@ -205,10 +205,13 @@ class EventListeners {
 	  
 		eventList.forEach((event) => {
 		try {
+
+			const handler = this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]
+			console.log(handler)
 			if (enable) {
-				UacanadaMap.map.on(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
+				UacanadaMap.map.on(event,handler);
 			  } else {
-				UacanadaMap.map.off(event, this[`handle${event.charAt(0).toUpperCase() + event.slice(1)}`]);
+				UacanadaMap.map.off(event,handler]);
 			  }
 		} catch (error) {
 			console.log(error)
