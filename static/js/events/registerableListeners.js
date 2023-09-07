@@ -192,14 +192,14 @@ handleZoomEnd() {
 		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).on('click', this.clickHandler);
 		$("#ua-mainframe").on( this.hasPointerEventSupport(), this.handleMainframeClick);
-		UacanadaMap.map.on("zoomend", handleZoomEnd);
-		UacanadaMap.map.on("enterFullscreen", handleEnterFullscreen);
-		UacanadaMap.map.on("exitFullscreen", handleExitFullscreen);
-		UacanadaMap.map.on("contextmenu", handleContextMenu);
-		UacanadaMap.map.on("movestart", handleMoveStart);
-		UacanadaMap.map.on("move", handleMove);
-		UacanadaMap.map.on("moveend", handleMoveEnd);
-		UacanadaMap.hiddenControls.geocoder.on("markgeocode", handleMarkGeocode);
+		UacanadaMap.map.on("zoomend", this.handleZoomEnd);
+		UacanadaMap.map.on("enterFullscreen", this.handleEnterFullscreen);
+		UacanadaMap.map.on("exitFullscreen", this.handleExitFullscreen);
+		UacanadaMap.map.on("contextmenu", this.handleContextMenu);
+		UacanadaMap.map.on("movestart", this.handleMoveStart);
+		UacanadaMap.map.on("move", this.handleMove);
+		UacanadaMap.map.on("moveend", this.handleMoveEnd);
+		UacanadaMap.hiddenControls.geocoder.on("markgeocode", this.handleMarkGeocode);
 
 		
         const bottomPanelOffcanvas = $('#ua-bottom-sheet');
