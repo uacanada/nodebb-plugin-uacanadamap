@@ -122,47 +122,53 @@ return async (UacanadaMap) => {
     await reload(UacanadaMap)
 
     hooks.on("action:ajaxify.start", function (data) {
-      UacanadaMap.console.log("🔜",data);
+      // Improved logging by destructuring the data object
+      const { url } = data;
+      UacanadaMap.console.log("🔜 Starting AJAX request for URL:", url);
+    
+      // Detect the viewport for the map
       UacanadaMap.api.detectMapViewport();
     
-      const mapRouter = ajaxify.data.UacanadaMapSettings?.mapPageRouter
-      if(!mapRouter) return 
-
-      const isPreviousMap = app.previousUrl.includes(mapRouter)
-      const isNextMapOrMain = !data.url || '/'+data.url === mapRouter // TODO if user decided not using main page?
-
-      
-
-      if(isNextMapOrMain){
-     
-        UacanadaMap.console.log("User comebacks to the map page");
-      }else if(isPreviousMap){
-       
-        
-        UacanadaMap.console.log("User leaves map page",data,app);
-        UacanadaMap.eventListenersInstance.remove();
-        try {
-          UacanadaMap.map.remove()
-          UacanadaMap.map = null   
-        } catch (error) {
-          UacanadaMap.console.log(error)
-        }
-
-           UacanadaMap.needReinit = true
-           document.body.style.overflow = '';
-           document.body.removeAttribute('data-bs-overflow');
-           $('body')
-           .removeClass('far-away-zoom')
-           .removeClass('hiddenElements')
-           .removeClass('addPlaceMode')
-           .removeClass('cards-opened');
-
+      // Use optional chaining to safely access nested properties
+      const mapRouter = ajaxify.data.UacanadaMapSettings?.mapPageRouter;
+      if (!mapRouter) return;
+    
+      // Improved variable naming for clarity
+      const isPreviousPageMap = app.previousUrl.includes(mapRouter);
+      const isNextPageMapOrMain = !url || '/' + url === mapRouter;
+    
+      if (isNextPageMapOrMain) {
+        UacanadaMap.console.log("User is navigating back to the map page");
+      } else if (isPreviousPageMap) {
+        UacanadaMap.console.log("User is leaving the map page", data, app);
+    
+        // Encapsulate removal logic into a separate function
+        cleanUpMapAndUI();
+    
       } else {
-        UacanadaMap.console.log("User walks between pages",data,app);
+        UacanadaMap.console.log("User is navigating between pages", data, app);
+      }
+    });
+    
+    // A separate function to handle map and UI removal
+    function cleanUpMapAndUI() {
+      UacanadaMap.eventListenersInstance.remove();
+    
+      try {
+        UacanadaMap.map.remove();
+        UacanadaMap.map = null;
+      } catch (error) {
+        UacanadaMap.console.log(error);
       }
     
+      UacanadaMap.needReinit = true;
+      document.body.style.overflow = '';
+      document.body.removeAttribute('data-bs-overflow');
     
-    });
+      // Chained multiple removeClass calls
+      $('body').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened');
+    }
+    
     
     
     
