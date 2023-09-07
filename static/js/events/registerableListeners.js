@@ -4,12 +4,155 @@ define('events/registerableListeneres',["core/variables" /*   Global object Uaca
 const bottomPanelOffcanvasTriggers = ['hide','show']
 
 class EventListeners {
-	// constructor(UacanadaMap) {
-	// 	this.UacanadaMap = UacanadaMap;
-	// }
+	register = () => {
+		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
+		$(document).on('click', this.clickHandler);
+		$("#ua-mainframe").on( this.hasPointerEventSupport(), this.handleMainframeClick);
+		this.toggleMapEvents(true);
+		UacanadaMap.hiddenControls.geocoder.on("markgeocode", this.handleMarkGeocode);
+		
+		
+
+		function resizeend() {
+			if (new Date() - UacanadaMap.uaResizetime < UacanadaMap.uaDelta) {
+			  setTimeout(resizeend, UacanadaMap.uaDelta);
+			} else {
+			  UacanadaMap.uaResizetimeout = false;
+			  UacanadaMap.api.updateCSS();
+			}
+		  }
+		
+		  $(window).on('resize.uacanadamap', function () {
+			if (UacanadaMap.map) {
+			  UacanadaMap.api.detectMapViewport();
+			  UacanadaMap.uaResizetime = new Date();
+			  if (UacanadaMap.uaResizetimeout === false) {
+				UacanadaMap.uaResizetimeout = true;
+				setTimeout(resizeend, UacanadaMap.uaDelta);
+			  }
+			}
+		  });
+		
+		  $("body").on('classChange.uacanadamap', (el, classes) => {
+			if ($("body").hasClass(UacanadaMap.mapRoomClass)) {
+			  UacanadaMap.api.detectMapViewport();
+			}
+		  });
+		
+		  $(document).on("change.uacanadamap", "#eventSwitcher", function () {
+			if ($(this).is(":checked")) {
+			  $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML);
+			} else {
+			  $("#ua-form-event-holder").html("");
+			}
+		  });
+		  $(document).on("change.uacanadamap", 'input[name="socialtype"]', function () {
+			UacanadaMap.form.socialTypeIconAdjust()
+		  });
+		  $(document).on("change.uacanadamap", "#ua-location-cover-img", function () {
+			var fileReader = new FileReader();
+			fileReader.onload = function () {
+			  var data = fileReader.result;
+			  $("#ua-form-img-holder").html('<img src="' + data + '"/>');
+			};
+			fileReader.readAsDataURL($("input#ua-location-cover-img")[0].files[0]);
+		  });
+		  $(document).on("change.uacanadamap", "#location-category-filter", function () {
+			UacanadaMap.api.setCategoryAndOpenCards($(this).val());
+		  });
+		  $(document).on("change.uacanadamap", "#location-sort", function () {
+			UacanadaMap.api.setCategoryAndOpenCards($("#location-category-filter").val());
+		  });
+	
+	
+	
+		  bottomPanelOffcanvasTriggers.forEach(triggerName => {
+			$('#ua-bottom-sheet').on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
+		  });
+		  $('#sortPlacesOffcanvas').on('hide.bs.offcanvas', this.sortPlacesOffcanvasHide);
+		  $('#sortPlacesOffcanvas').on('show.bs.offcanvas', this.sortPlacesOffcanvasShow);
+		
 
 
-	// Define your named event handlers
+		
+		
+
+
+	};
+
+	remove = () => {
+		$(document).off(this.hasPointerEventSupport(), this.touchHandler);
+		$(document).off('click', this.clickHandler);
+		$("#ua-mainframe").off( this.hasPointerEventSupport(), this.handleMainframeClick );
+		
+		
+		bottomPanelOffcanvasTriggers.forEach(triggerName => { 
+			$('#ua-bottom-sheet').off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
+		});
+		$('#sortPlacesOffcanvas').off('hide.bs.offcanvas', this.sortPlacesOffcanvasHide);
+		$('#sortPlacesOffcanvas').off('show.bs.offcanvas', this.sortPlacesOffcanvasShow);
+
+		this.toggleMapEvents(false);
+		UacanadaMap.hiddenControls.geocoder.off("markgeocode", this.handleMarkGeocode);
+
+		this.removeAllWithUacanadaNamespace('uacanada')
+
+		for (const key in UacanadaMap.swipers) {
+			if (UacanadaMap.swipers[key] instanceof UacanadaMap.Swiper) {
+				try {
+					UacanadaMap.swipers[key].destroy(true, true);
+				} catch (error) {
+					UacanadaMap.console.log(error);
+				}
+			 
+			}
+		}
+  
+  
+	};
+
+
+	removeAllWithUacanadaNamespace = (nameSpace) => {
+		// Select all elements, including window and document
+		const allElements = $('*, window, document');
+		allElements.each(function() {
+		  const elem = $(this);
+		  const events = $._data(this, "events");
+		  if (!events) return;
+		  for (const eventType in events) {
+			const handlers = events[eventType];
+			handlers.forEach(function(handlerObj) {
+			  // Check both namespace and handlerObj.namespace for 'uacanada'
+			  if(handlerObj?.namespace){
+				try {
+				  if (handlerObj.namespace.indexOf(nameSpace) !== -1 || eventType?.indexOf(nameSpace) !== -1) {
+					const trigger = `${eventType}.${handlerObj.namespace}`;
+					elem.off(trigger);
+				  } 
+				} catch (error) {
+					UacanadaMap.console.log(error);
+				}
+			  }
+			});
+		  }
+		});
+	  }
+	  
+
+	  reload = () => {
+		this.remove();
+		this.register();
+	};
+
+
+	sortPlacesOffcanvasHide(){
+		$('#ua-horizontal-buttons-wrapper').removeClass('movedown')
+	}
+	sortPlacesOffcanvasShow(){
+		$('#ua-horizontal-buttons-wrapper').addClass('movedown').removeClass('hidden')
+	}
+
+	
 zoomendHandler() {
 	const level = UacanadaMap.map.getZoom();
 	UacanadaMap.api.setClassWithFarawayZoom(level);
@@ -78,9 +221,9 @@ zoomendHandler() {
 
 	bottomOffcanvasTriggers = {
 		hide:  () => {
-			const bottomPanelOffcanvas = $('#ua-bottom-sheet');
+			
 			UacanadaMap.api.setBottomSheetSize(0);
-			bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)
+			$('#ua-bottom-sheet').css('transform',`translate3d(0,100vh,0)`)
 		},
 		
 		show:  () => {
@@ -224,162 +367,6 @@ zoomendHandler() {
 	  
 	 
 
-	  
-	  
-
-	register = () => {
-		//const { UacanadaMap } = this;
-		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
-		$(document).on('click', this.clickHandler);
-		$("#ua-mainframe").on( this.hasPointerEventSupport(), this.handleMainframeClick);
-
-		this.toggleMapEvents(true);
-		
-		
-
-		
-		UacanadaMap.hiddenControls.geocoder.on("markgeocode", this.handleMarkGeocode);
-
-		
-        const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-		bottomPanelOffcanvasTriggers.forEach(triggerName => {
-			bottomPanelOffcanvas.on(triggerName+".bs.offcanvas.uacanadamap", this.bottomOffcanvasTriggers[triggerName])
-		});
-
-		function resizeend() {
-			if (new Date() - UacanadaMap.uaResizetime < UacanadaMap.uaDelta) {
-			  setTimeout(resizeend, UacanadaMap.uaDelta);
-			} else {
-			  UacanadaMap.uaResizetimeout = false;
-			  UacanadaMap.api.updateCSS();
-			}
-		  }
-		
-		  $(window).on('resize.uacanadamap', function () {
-			if (UacanadaMap.map) {
-			  UacanadaMap.api.detectMapViewport();
-			  UacanadaMap.uaResizetime = new Date();
-			  if (UacanadaMap.uaResizetimeout === false) {
-				UacanadaMap.uaResizetimeout = true;
-				setTimeout(resizeend, UacanadaMap.uaDelta);
-			  }
-			}
-		  });
-		
-		  $("body").on('classChange.uacanadamap', (el, classes) => {
-			if ($("body").hasClass(UacanadaMap.mapRoomClass)) {
-			  UacanadaMap.api.detectMapViewport();
-			}
-		  });
-		
-		  $(document).on("change.uacanadamap", "#eventSwitcher", function () {
-			if ($(this).is(":checked")) {
-			  $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML);
-			} else {
-			  $("#ua-form-event-holder").html("");
-			}
-		  });
-		  $(document).on("change.uacanadamap", 'input[name="socialtype"]', function () {
-			UacanadaMap.form.socialTypeIconAdjust()
-		  });
-		  $(document).on("change.uacanadamap", "#ua-location-cover-img", function () {
-			var fileReader = new FileReader();
-			fileReader.onload = function () {
-			  var data = fileReader.result;
-			  $("#ua-form-img-holder").html('<img src="' + data + '"/>');
-			};
-			fileReader.readAsDataURL($("input#ua-location-cover-img")[0].files[0]);
-		  });
-		  $(document).on("change.uacanadamap", "#location-category-filter", function () {
-			UacanadaMap.api.setCategoryAndOpenCards($(this).val());
-		  });
-		  $(document).on("change.uacanadamap", "#location-sort", function () {
-			UacanadaMap.api.setCategoryAndOpenCards($("#location-category-filter").val());
-		  });
-	
-	
-	
-	
-		  $('#sortPlacesOffcanvas').on('hide.bs.offcanvas.uacanadamap', function (e) {
-			$('#ua-horizontal-buttons-wrapper').removeClass('movedown')
-		  });
-		  $('#sortPlacesOffcanvas').on('show.bs.offcanvas.uacanadamap', function (e) {
-			$('#ua-horizontal-buttons-wrapper').addClass('movedown').removeClass('hidden')
-		  });
-		
-
-
-		
-		
-
-
-	};
-
-	remove = () => {
-		//const { UacanadaMap } = this;
-		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-		$(document).off(this.hasPointerEventSupport(), this.touchHandler);
-		$(document).off('click', this.clickHandler);
-		$("#ua-mainframe").off( this.hasPointerEventSupport(), this.handleMainframeClick );
-		
-		
-		bottomPanelOffcanvasTriggers.forEach(triggerName => { 
-			bottomPanelOffcanvas.off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
-		});
-
-		this.toggleMapEvents(false);
-		UacanadaMap.hiddenControls.geocoder.off("markgeocode", this.handleMarkGeocode);
-
-		this.removeAllWithUacanadaNamespace('uacanada')
-
-		for (const key in UacanadaMap.swipers) {
-			if (UacanadaMap.swipers[key] instanceof UacanadaMap.Swiper) {
-				try {
-					UacanadaMap.swipers[key].destroy(true, true);
-				} catch (error) {
-					UacanadaMap.console.log(error);
-				}
-			 
-			}
-		}
-  
-  
-	};
-
-	reload = () => {
-		this.remove();
-		this.register();
-	};
-
-	
-
-	
-
-	removeAllWithUacanadaNamespace = (nameSpace) => {
-		// Select all elements, including window and document
-		const allElements = $('*, window, document');
-		allElements.each(function() {
-		  const elem = $(this);
-		  const events = $._data(this, "events");
-		  if (!events) return;
-		  for (const eventType in events) {
-			const handlers = events[eventType];
-			handlers.forEach(function(handlerObj) {
-			  // Check both namespace and handlerObj.namespace for 'uacanada'
-			  if(handlerObj?.namespace){
-				try {
-				  if (handlerObj.namespace.indexOf(nameSpace) !== -1 || eventType?.indexOf(nameSpace) !== -1) {
-					const trigger = `${eventType}.${handlerObj.namespace}`;
-					elem.off(trigger);
-				  } 
-				} catch (error) {
-					UacanadaMap.console.log(error);
-				}
-			  }
-			});
-		  }
-		});
-	  }
 	  
 	  
 }

@@ -95,12 +95,8 @@ return async (UacanadaMap) => {
 
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.mainFrameShow();
-      if (UacanadaMap.eventListenersInstance) {
-        UacanadaMap.eventListenersInstance.reload();
-      } else {
-        UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
-        UacanadaMap.eventListenersInstance.register();
-      }
+      if (!UacanadaMap.eventListenersInstance) { UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap); }
+      UacanadaMap.eventListenersInstance.register();
 
 
       
