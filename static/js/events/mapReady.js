@@ -35,7 +35,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
                const {map} = UacanadaMap
 
               
-              if (UacanadaMap.firstInitTime < Date.now()-1201) {
+              if (UacanadaMap.firstInitTime < Date.now() - 1450) {
                     if (map && !window.location.search && $("body").hasClass(UacanadaMap.mapRoomClass)  ) { // TODO Check
                         // if back from topic page and zoom is too big - do zoom out
                         if (
