@@ -133,7 +133,8 @@ define('core/configuration', function (require) {
                         iconCreateFunction: function (cluster) {
                             const markers = cluster.getAllChildMarkers();
                             const count = markers.length;
-                            const iconSize = Math.floor(count * 2 + 44);
+                            const iconSize = Math.min(Math.max(Math.floor((count * 3) + 33), 32), 48);
+
                             const anchorSize = iconSize / 2;
                             return L.divIcon({
                               html:`<div class="cluster-icon">
