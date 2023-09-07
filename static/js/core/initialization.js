@@ -121,7 +121,7 @@ return async (UacanadaMap) => {
       UacanadaMap.console.log("🔜",data);
       UacanadaMap.api.detectMapViewport();
     
-      if(data?.url && '/'+data.url !==ajaxify.data.UacanadaMapSettings.mapPageRouter){
+      if(!data.url || '/'+data.url === ajaxify.data.UacanadaMapSettings?.mapPageRouter){
      
         UacanadaMap.console.log("User comebacks to the map page");
       }else{
