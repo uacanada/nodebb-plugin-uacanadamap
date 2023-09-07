@@ -125,10 +125,18 @@ return async (UacanadaMap) => {
       UacanadaMap.console.log("🔜",data);
       UacanadaMap.api.detectMapViewport();
     
-      if(!data.url || '/'+data.url === ajaxify.data.UacanadaMapSettings?.mapPageRouter){
+      const mapRouter = ajaxify.data.UacanadaMapSettings?.mapPageRouter
+      if(!mapRouter) return 
+
+      const isPreviousMap = app.previousUrl.includes(mapRouter)
+      const isNextMapOrMain = !data.url || '/'+data.url === mapRouter // TODO if user decided not using main page?
+
+      
+
+      if(isNextMapOrMain){
      
         UacanadaMap.console.log("User comebacks to the map page");
-      }else{
+      }else if(isPreviousMap){
        
         
         UacanadaMap.console.log("User leaves map page",data,app);
@@ -149,6 +157,8 @@ return async (UacanadaMap) => {
            .removeClass('addPlaceMode')
            .removeClass('cards-opened');
 
+      } else {
+        UacanadaMap.console.log("User walks between pages",data,app);
       }
     
     
