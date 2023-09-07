@@ -213,7 +213,7 @@ class EventListeners {
 			if (enable) {
 				UacanadaMap.map.on(event,handler);
 			  } else {
-				UacanadaMap.map.off(event,handler]);
+				UacanadaMap.map.off(event,handler);
 			  }
 		} catch (error) {
 			console.log(error)
