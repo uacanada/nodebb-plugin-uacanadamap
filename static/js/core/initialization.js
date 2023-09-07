@@ -71,9 +71,12 @@ return async (UacanadaMap) => {
     const reload = async (UacanadaMap) => {
       let allowLoadOldfromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
       UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
+      
       if (!UacanadaMap.eventListenersInstance) { 
         UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
-      }else if(!UacanadaMap.swipers.cardsCarousel.destroyed){
+      } 
+      
+      if(!UacanadaMap.swipers.cardsCarousel.destroyed){
         // Delete previous
         UacanadaMap.eventListenersInstance.remove();
       }
