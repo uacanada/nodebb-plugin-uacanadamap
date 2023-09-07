@@ -119,7 +119,7 @@ return async (UacanadaMap) => {
 
     await reload(UacanadaMap)
 
-    hooks.on('action:ajaxify.end.uacanadamap', (data) => {
+    hooks.on('action:ajaxify.end', (data) => {
       if(data.tpl_url === 'map'){
            
             if(firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
