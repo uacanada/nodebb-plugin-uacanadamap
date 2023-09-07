@@ -166,13 +166,13 @@ UacanadaMap.api.debounce = (func, delay) => {
 
 
 UacanadaMap.api.openCertainTab = (contextButton) => {
-  let tab = contextButton[0]?.getAttribute('data-ua-tabtarget')
+  let tab = contextButton[0]?.getAttribute("data-ua-tabtarget")
   if(tab){
 
   const slides = UacanadaMap.swipers.buttonsSlider.slides
   let tabIndex = 0
   for (let i = 0; i < slides.length; i++) {
-      if (slides[i].getAttribute('data-ua-butt-cat') == tab) {
+      if (slides[i].getAttribute("data-ua-butt-cat") == tab) {
           tabIndex = i;
           break; 
       }
@@ -195,7 +195,7 @@ UacanadaMap.api.setBottomSheetSize = (i) => {
 
 UacanadaMap.api.OffCanvasPanelHandler = () => {
   
-  const offCanvasPanel =  $('#ua-bottom-sheet');
+    const offCanvasPanel =  $('#ua-bottom-sheet');
     const fullHeight = modes.length - 2
     const bigHeight = modes.length - 3
     let once = true

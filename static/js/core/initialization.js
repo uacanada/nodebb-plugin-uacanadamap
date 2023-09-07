@@ -81,10 +81,7 @@ return async (UacanadaMap) => {
       UacanadaMap.api.populateTabs();
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.createСategoryButtonsSwiper($("#location-category-filter").val() ?? "");
-      UacanadaMap.api.mainFrameShow();
       UacanadaMap.api.OffCanvasPanelHandler();
-      UacanadaMap.api.rotateCards("horizontal");
-      UacanadaMap.api.animateCards("close");
       UacanadaMap.api.fitElementsPosition();
       UacanadaMap.api.hideElements(false);
       UacanadaMap.api.cleanMarkers(true);
@@ -92,16 +89,19 @@ return async (UacanadaMap) => {
       UacanadaMap.api.setCategory("");
       UacanadaMap.api.filterMarkers(false);
       UacanadaMap.api.registerHooks()
-      UacanadaMap.api.registerBasicListeners()
       UacanadaMap.api.reserveClusterForAdvMarkers()
       UacanadaMap.run.submitPlace()
-
+      UacanadaMap.api.mainFrameShow();
       if (UacanadaMap.eventListenersInstance) {
         UacanadaMap.eventListenersInstance.reload();
       } else {
         UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
         UacanadaMap.eventListenersInstance.register();
       }
+
+
+      UacanadaMap.api.rotateCards("horizontal");
+      UacanadaMap.api.animateCards("close");
 
       $('#ua-horizontal-buttons-wrapper').removeClass('movedown').removeClass('hidden')
       $('#geocoderSearchbox').removeClass('show')
