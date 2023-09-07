@@ -71,6 +71,12 @@ return async (UacanadaMap) => {
     const reload = async (UacanadaMap) => {
       let allowLoadOldfromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
       UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
+      if (!UacanadaMap.eventListenersInstance) { 
+        UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
+      }else{
+        // Delete previous
+        UacanadaMap.eventListenersInstance.remove();
+      }
       UacanadaMap.api.configureMapElements();
       UacanadaMap.api.mapInit();
       UacanadaMap.api.addMapLayers();
@@ -81,9 +87,6 @@ return async (UacanadaMap) => {
       UacanadaMap.api.createCategories();
       UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache));
       UacanadaMap.api.populateTabs();
-      
-      
-   
       UacanadaMap.api.hideElements(false);
       UacanadaMap.api.cleanMarkers(true);
       UacanadaMap.api.cardsOpened(false);
@@ -92,11 +95,10 @@ return async (UacanadaMap) => {
       UacanadaMap.api.registerHooks()
       UacanadaMap.api.reserveClusterForAdvMarkers()
       UacanadaMap.run.submitPlace()
-
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.mainFrameShow();
-      if (!UacanadaMap.eventListenersInstance) { UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap); }
       UacanadaMap.eventListenersInstance.register();
+      
 
 
       
