@@ -32,17 +32,18 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         
         setTimeout(() => {
                UacanadaMap.api.disablePropagationToMap(UacanadaMap.L,null)
+               const {map} = UacanadaMap
 
               
               if (UacanadaMap.firstInitTime < Date.now()-1201) {
-                    if (UacanadaMap.map && !window.location.search && $("body").hasClass(UacanadaMap.mapRoomClass)  ) { // TODO Check
+                    if (map && !window.location.search && $("body").hasClass(UacanadaMap.mapRoomClass)  ) { // TODO Check
                         // if back from topic page and zoom is too big - do zoom out
                         if (
-                            UacanadaMap.map.getMaxZoom() === map.getZoom() ||
-                            UacanadaMap.map.getMaxZoom() < map.getZoom() + 2
+                            map.getMaxZoom() === map.getZoom() ||
+                            map.getMaxZoom() < map.getZoom() + 2
                         ) {
                             setTimeout(() => {
-                                UacanadaMap.map.zoomOut(4);
+                                map.zoomOut(4);
                                
                             }, 500);
                         }
@@ -56,7 +57,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
                     UacanadaMap.console.log(`Reload ${UacanadaMap.firstInitTime}`)
                
                 } else {
-                   
+                    UacanadaMap.console.log(`First start ${UacanadaMap.firstInitTime}`)
                 }
             
         }, 1200);
