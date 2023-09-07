@@ -54,10 +54,10 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
                     $('#ua-horizontal-buttons-wrapper').removeClass('movedown').removeClass('hidden')
                     $('#geocoderSearchbox').removeClass('show')
 
-                    UacanadaMap.console.log(`Reload ${UacanadaMap.firstInitTime}`)
+                    UacanadaMap.console.log(`Reload: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
                
                 } else {
-                    UacanadaMap.console.log(`First start ${UacanadaMap.firstInitTime}`)
+                    UacanadaMap.console.log(`Start: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
                 }
             
         }, 1200);
