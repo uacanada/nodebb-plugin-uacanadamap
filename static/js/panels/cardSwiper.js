@@ -425,6 +425,7 @@
         UacanadaMap.api.fitElementsPosition();
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
+        
         $(UacanadaMap.placeCardDiv).html('')
       }, 200);
       

@@ -137,6 +137,7 @@ const UacanadaMap = {
   TEMP: {},
   sheetPanels: {},
   swipers: { cardsCarousel: {} },
+  swipersContext:{},
   routers: {}
 };
 
