@@ -120,9 +120,32 @@ return async (UacanadaMap) => {
     await reload(UacanadaMap)
 
     hooks.on("action:ajaxify.start", function (data) {
-      UacanadaMap.console.log("~~~~start from ", {firstInitTime,diff:(Date.now()-1000-firstInitTime)},data);
+      UacanadaMap.console.log("~ start from ", {firstInitTime,diff:(Date.now()-1000-firstInitTime)},data);
       UacanadaMap.api.detectMapViewport();
     
+      if(data?.url && '/'+data.url !==ajaxify.data.UacanadaMapSettings.mapPageRouter){
+        // User comebacks to the map page
+      }else{
+        // User leaves map page
+        UacanadaMap.eventListenersInstance.remove();
+        UacanadaMap.eventListenersInstance.removeEventListenersWithUacanadaNamespace()
+        try {
+          UacanadaMap.map.remove()
+          UacanadaMap.map = null   
+        } catch (error) {
+          UacanadaMap.console.log(error)
+        }
+
+        UacanadaMap.needReinit = true
+           document.body.style.overflow = '';
+           document.body.removeAttribute('data-bs-overflow');
+           $('body')
+           .removeClass('far-away-zoom')
+           .removeClass('hiddenElements')
+           .removeClass('addPlaceMode')
+           .removeClass('cards-opened');
+
+      }
     
     
     });
@@ -147,9 +170,7 @@ return async (UacanadaMap) => {
    
        }else{
            
-           UacanadaMap.needReinit = true
-           document.body.style.overflow = '';
-           document.body.removeAttribute('data-bs-overflow');
+           
 
 
            if(data.tpl_url === 'post'){
@@ -161,11 +182,11 @@ return async (UacanadaMap) => {
        }
    
       
-       UacanadaMap.console.log("~~~~~end to", data);
+       UacanadaMap.console.log("~ end to", data);
      });
 
      hooks.on("action:ajaxify.coldLoad", function (data) {
-      UacanadaMap.console.log("~~~~~ coldLoad", data);
+      UacanadaMap.console.log("~ coldLoad", data);
     });
 
   };

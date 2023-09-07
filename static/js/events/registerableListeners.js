@@ -279,16 +279,25 @@ class EventListeners {
 		allElements.each(function() {
 		  const elem = $(this);
 		  const events = $._data(this, "events");
+            const name = 'uacanada'
 		  if (!events) return;
 	  
 		  for (const eventType in events) {
 			const handlers = events[eventType];
 			handlers.forEach(function(handlerObj) {
 			  // Check both namespace and handlerObj.namespace for 'uacanada'
-			  if (handlerObj.namespace.indexOf('uacanada') !== -1 || eventType.indexOf('uacanada') !== -1) {
-				elem.off(`${eventType}.${handlerObj.namespace}`);
-			  }
-			});
+               if(handlerObj?.namespace){
+				try {
+					if (handlerObj.namespace.indexOf(name) !== -1 || eventType?.indexOf(name) !== -1) {
+						const trigger = `${eventType}.${handlerObj.namespace}`
+						elem.off(trigger);
+						console.log(trigger,'<<')
+					} 
+				} catch (error) {
+					UacanadaMap.console.log(error)
+				}
+                 
+               }});
 		  }
 		});
 	  }
