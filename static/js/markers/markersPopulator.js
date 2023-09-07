@@ -110,7 +110,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             m.shifted = true;
             //marker.setLatLng(shiftedLatLng);
 
-            const SHIFT_STEP_PX = 30
+            const SHIFT_STEP_PX = 50
             const shiftDistance = SHIFT_STEP_PX*index
             const startX = 0;
             const startY = 0;
@@ -127,9 +127,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               className: currentIcon.options.className+' shifted-marker',
               html: `<div class="shifted-marker-wrapper" style=" margin-top: -${shiftDistance}px;">
                 ${currentHtml}
-                <svg height="200" width="100" style="pointer-events: none;">
-                 <path d="${svgPath}" stroke="#3498db" stroke-width="2" fill="none" />
-                </svg>
+                <div class="shifted-marker-leg"></div>
               </div>`,
               iconSize: currentIcon.options.iconSize,
               iconAnchor: currentIcon.options.iconAnchor
