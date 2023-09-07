@@ -51,6 +51,7 @@ class EventListeners {
   }
   
   handleMove() {
+	console.log(this.UacanadaMap,UacanadaMap)
 	this.UacanadaMap.moveIterations++;
 	if (this.UacanadaMap.moveIterations > 21) {
 		this.UacanadaMap.api.hideElements(true)
