@@ -2,60 +2,67 @@
 define("forms/submitPlace", [
   "core/variables" /*   Global object UacanadaMap  */,
 ], function (UacanadaMap) {
-  let canSendForm = true;
+  
+  
+  UacanadaMap.run.submitPlace = ()=> {
+    let canSendForm = true;
  
-  $("#place-creator-offcanvas").on("hidden.bs.offcanvas", () => {
-    canSendForm = true;
-  });
-
-  $("#place-creator-offcanvas").on("show.bs.offcanvas", () => {
-    $("#ua-form-event-holder").html('');
-    UacanadaMap.api.expandMap(`contextmenuItems`);
-    UacanadaMap.api.hideBrandTitle(true);
-    UacanadaMap.api.locationSelection.cleanMarker()
-  });
-
-
-  document
-    .getElementById("placeForm")
-    .addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const form = event.target;
-
-      if (UacanadaMap.currentmarker) {
-        UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
-      }
-
-      if (!canSendForm) {
-        UacanadaMap.console.log("Already Sent!!!");
-        return;
-      }
-
-      let formIsValid = form.checkValidity();
-      form.classList.add("was-validated");
-
-      if (!formIsValid) {
-        checkFormValidation();
-        UacanadaMap.currentmarker
-          .bindPopup("You need to fix errors before submitting the place!")
-          .openPopup();
-        $("#submit-place-errors").html(
-          "Please check the required fields and try again"
-        );
-      } else {
-        $("#place-creator-offcanvas").offcanvas("hide");
-        await handleSubmit(form);
-      }
+    $("#place-creator-offcanvas").on("hidden.bs.offcanvas", () => {
+      canSendForm = true;
     });
-
-  function checkFormValidation() {
-    const checkAndToggleAccordion = (selector, inputSelector) => {
-      const accordion = $(selector);
-      if (!$(inputSelector).val() && !accordion.hasClass("show")) {
-        accordion.collapse("toggle");
-      }
-    };
+  
+    $("#place-creator-offcanvas").on("show.bs.offcanvas", () => {
+      $("#ua-form-event-holder").html('');
+      UacanadaMap.api.expandMap(`contextmenuItems`);
+      UacanadaMap.api.hideBrandTitle(true);
+      UacanadaMap.api.locationSelection.cleanMarker()
+    });
+  
+  
+    document
+      .getElementById("placeForm")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+  
+        const form = event.target;
+  
+        if (UacanadaMap.currentmarker) {
+          UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
+        }
+  
+        if (!canSendForm) {
+          UacanadaMap.console.log("Already Sent!!!");
+          return;
+        }
+  
+        let formIsValid = form.checkValidity();
+        form.classList.add("was-validated");
+  
+        if (!formIsValid) {
+          checkFormValidation();
+          UacanadaMap.currentmarker
+            .bindPopup("You need to fix errors before submitting the place!")
+            .openPopup();
+          $("#submit-place-errors").html(
+            "Please check the required fields and try again"
+          );
+        } else {
+          $("#place-creator-offcanvas").offcanvas("hide");
+          await handleSubmit(form);
+        }
+      });
+  
+    function checkFormValidation() {
+      const checkAndToggleAccordion = (selector, inputSelector) => {
+        const accordion = $(selector);
+        if (!$(inputSelector).val() && !accordion.hasClass("show")) {
+          accordion.collapse("toggle");
+        }
+      };
+  }
+  
+  
+ 
 
     checkAndToggleAccordion(
       "#address-accordion-collapseOne",
