@@ -119,6 +119,17 @@ return async (UacanadaMap) => {
 
     await reload(UacanadaMap)
 
+    hooks.on("action:ajaxify.start", function (data) {
+      UacanadaMap.console.log("~~~~start from ", {firstInitTime,diff:(Date.now()-1000-firstInitTime)},data);
+      UacanadaMap.api.detectMapViewport();
+    
+    
+    
+    });
+    
+    
+    
+
     hooks.on('action:ajaxify.end', (data) => {
       if(data.tpl_url === 'map'){
            
@@ -152,6 +163,10 @@ return async (UacanadaMap) => {
       
        UacanadaMap.console.log("~~~~~end to", data);
      });
+
+     hooks.on("action:ajaxify.coldLoad", function (data) {
+      UacanadaMap.console.log("~~~~~ coldLoad", data);
+    });
 
   };
 
