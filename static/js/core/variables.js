@@ -94,7 +94,6 @@ const UacanadaMap = {
   isFullscreenMode: false,
   lastPlaceMarker: null,
   htmlBuffer: "",
-  cardsCarousel: {},
   pointerMarker: {},
   previousPlacesArray: [],
   mapTabsCount: 0,
@@ -137,7 +136,7 @@ const UacanadaMap = {
   locationSelectionMarker:null,
   TEMP: {},
   sheetPanels: {},
-  swipers: {},
+  swipers: { cardsCarousel: {} },
   routers: {}
 };
 

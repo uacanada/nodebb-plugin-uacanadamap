@@ -36,12 +36,12 @@ define("panels/categoryButtonsSwiper", [
 
       if ($("#ua-place-buttons").hasClass("filled")) {
         console.log("Swiper only update");
-        return UacanadaMap.horizontalButtons.update();
+        return UacanadaMap.swipers.horizontalButtons.update();
       }
 
       appendButtonsHtml(buttonsHtml);
 
-      UacanadaMap.horizontalButtons = new Swiper("#ua-place-buttons", {
+      UacanadaMap.swipers.horizontalButtons = new Swiper("#ua-place-buttons", {
         slidesPerView: "auto",
         observer: true,
         direction: "horizontal",

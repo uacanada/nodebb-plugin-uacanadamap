@@ -130,7 +130,7 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
           let parentLi = button.closest('li'); 
           let index = parentLi.index();
           button.attr("aria-pressed","true").attr('class',state+' btn-primary '+buttonClassList)
-          UacanadaMap.horizontalButtons.slideTo(index)
+          UacanadaMap.swipers.horizontalButtons.slideTo(index)
         }
       }
     

@@ -56,14 +56,12 @@ define("core/initialization", [
   basicListeners,
   hooks,
   expandMap,
-
   submitPlace,
   editPlace,
   topicPost,
   registerableListeners,
   // Built-in AMD modules:
   module 
-
 ) {
   
 return async (UacanadaMap) => {
@@ -120,7 +118,7 @@ return async (UacanadaMap) => {
     await reload(UacanadaMap)
 
     hooks.on("action:ajaxify.start", function (data) {
-      UacanadaMap.console.log("~ start from ", {firstInitTime,diff:(Date.now()-1000-firstInitTime)},data);
+      UacanadaMap.console.log("🔜",data);
       UacanadaMap.api.detectMapViewport();
     
       if(data?.url && '/'+data.url !==ajaxify.data.UacanadaMapSettings.mapPageRouter){
@@ -182,7 +180,7 @@ return async (UacanadaMap) => {
        }
    
       
-       UacanadaMap.console.log("~ end to", data);
+       UacanadaMap.console.log("🔚", data);
      });
 
      hooks.on("action:ajaxify.coldLoad", function (data) {

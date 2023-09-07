@@ -201,7 +201,7 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
     let once = true
     const debouncedDetectSwipeBehavior = UacanadaMap.api.debounce(detectSwipeBehavior, 10);
     const waitContent = setInterval(() => {
-    if (UacanadaMap.swipers.canActivateVertical) {
+    if (UacanadaMap.swipersContext.canActivateVertical) {
     clearInterval(waitContent);
 
    UacanadaMap.swipers.vertical = new Swiper(".vertical-places-list", {
@@ -362,7 +362,7 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
 
 
 
-UacanadaMap.swipers.createButtonSlide = (tab, index) => {
+UacanadaMap.swipersContext.createButtonSlide = (tab, index) => {
   const { color, icon, slug } = tab;
   const isActive = index === 0 ? "swiper-slide-active" : "";
   return `<div class="swiper-slide ${isActive}" data-ua-butt-cat="${slug}">
@@ -373,7 +373,7 @@ UacanadaMap.swipers.createButtonSlide = (tab, index) => {
 };
 
 
-UacanadaMap.swipers.createContentSlide = (tab, index) => {
+UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
   const { color, description, footer, icon, slug, title } = tab;
   const isActive = index === 0 ? "swiper-slide-active" : "";
   return `<div class="swiper-slide p-0 ${isActive}" data-parent-category="${slug}" style="height:${window.innerHeight}px">

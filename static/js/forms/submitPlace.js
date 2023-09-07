@@ -19,36 +19,37 @@ define("forms/submitPlace", [
     });
   
   
-    document.getElementById("placeForm").addEventListener("submit", async (event) => {
-        event.preventDefault();
-  
-        const form = event.target;
-  
-        if (UacanadaMap.currentmarker) {
-          UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
-        }
-  
-        if (!canSendForm) {
-          UacanadaMap.console.log("Already Sent!!!");
-          return;
-        }
-  
-        let formIsValid = form.checkValidity();
-        form.classList.add("was-validated");
-  
-        if (!formIsValid) {
-          checkFormValidation();
-          UacanadaMap.currentmarker
-            .bindPopup("You need to fix errors before submitting the place!")
-            .openPopup();
-          $("#submit-place-errors").html(
-            "Please check the required fields and try again"
-          );
-        } else {
-          $("#place-creator-offcanvas").offcanvas("hide");
-          await handleSubmit(form);
-        }
-      });
+    $("#placeForm").on("submit.uacanada", async function(event) {
+      event.preventDefault();
+    
+      const form = $(this)[0]; // Native DOM element
+    
+      if (UacanadaMap.currentmarker) {
+        UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
+      }
+    
+      if (!canSendForm) {
+        UacanadaMap.console.log("Already Sent!!!");
+        return;
+      }
+    
+      let formIsValid = form.checkValidity();
+      $(form).addClass("was-validated");
+    
+      if (!formIsValid) {
+        checkFormValidation();
+        UacanadaMap.currentmarker
+          .bindPopup("You need to fix errors before submitting the place!")
+          .openPopup();
+        $("#submit-place-errors").html(
+          "Please check the required fields and try again"
+        );
+      } else {
+        $("#place-creator-offcanvas").offcanvas("hide");
+        await handleSubmit(form);
+      }
+    });
+    
 
   }
 

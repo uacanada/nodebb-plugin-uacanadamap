@@ -297,7 +297,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
           }
         }
 
-        UacanadaMap.swipers.canActivateVertical = true;
+        UacanadaMap.swipersContext.canActivateVertical = true;
       }
       
 
