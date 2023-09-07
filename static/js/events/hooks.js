@@ -8,9 +8,16 @@ UacanadaMap.api.registerHooks = async ()=> {
 
     
 const hooks = await app.require("hooks");
-hooks.on("action:ajaxify.start", function (data) {
+hooks.on("action:ajaxify.start.uacanadamap", function (data) {
   UacanadaMap.console.log("~~~~start from ", data);
-   UacanadaMap.api.detectMapViewport();
+  UacanadaMap.api.detectMapViewport();
+
+
+   hooks.off("action:ajaxify.start.uacanadamap")
+
+
+
+
 });
 
 

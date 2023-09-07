@@ -14,17 +14,13 @@ define('core/configuration', function (require) {
     const dateTime = new Date(Date.now());
     UacanadaMap.L = L
     UacanadaMap.Swiper = Swiper
-  
-
-  
-  
+    
     const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit, bottomRightCorner, topLeftCorner } = ajaxify.data.UacanadaMapSettings;
 
     UacanadaMap.timestampNow = Math.floor(dateTime / 1000);
     UacanadaMap.weekDay = UacanadaMap.weekdays[dateTime.getDay()];
     UacanadaMap.userRegistered = app.user.uid && app.user.uid > 0;
     UacanadaMap.adminsUID = app.user.isAdmin;
-
     UacanadaMap.markerSettings = {
       virtZoom: 16,
       shiftX: 100,
@@ -67,21 +63,25 @@ define('core/configuration', function (require) {
 
         const {L} = UacanadaMap 
 
-        UacanadaMap.BlackWhite = L.tileLayer.provider("Stamen.TonerLite");
-        UacanadaMap.Terrain = L.tileLayer.provider("Stamen.Terrain");
-        UacanadaMap.MinimalMap = L.tileLayer.provider("Esri.WorldGrayCanvas");
-        UacanadaMap.SatMap = L.tileLayer.provider("Esri.WorldImagery");
-        UacanadaMap.Classic = L.tileLayer.provider("Esri.NatGeoWorldMap");
-        UacanadaMap.StreetsMap = L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  );
+        if(UacanadaMap.map){
+            try {
+                UacanadaMap.map.remove()
+            } catch (error) {
+                UacanadaMap.console.log(error)
+            }
+            UacanadaMap.map = null
+        }
+
+        
         UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):UacanadaMap.StreetsMap;
         UacanadaMap.mapProviders = {
             MapBox: UacanadaMap.mapLayers.MapBox,
-            OSM: UacanadaMap.StreetsMap,
-            Minimal: UacanadaMap.MinimalMap,
-            BlackWhite: UacanadaMap.BlackWhite,
-            Terrain: UacanadaMap.Terrain,
-            Satellite: UacanadaMap.SatMap,
-            Classic: UacanadaMap.Classic,
+            OSM:  L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  ),
+            Minimal: L.tileLayer.provider("Esri.WorldGrayCanvas"),
+            BlackWhite: L.tileLayer.provider("Stamen.TonerLite"),
+            Terrain: L.tileLayer.provider("Stamen.Terrain"),
+            Satellite: L.tileLayer.provider("Esri.WorldImagery"),
+            Classic: L.tileLayer.provider("Esri.NatGeoWorldMap"),
         };
 
 
@@ -106,12 +106,6 @@ define('core/configuration', function (require) {
             iconAnchor: [10, 0],
             popupAnchor: [5, 5],
         });
-
-
-
-
-
-
 
             // Initialize the main marker cluster group to hold multiple categories
            // UacanadaMap.mapLayers.markers = L.layerGroup();

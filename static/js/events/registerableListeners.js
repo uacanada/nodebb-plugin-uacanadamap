@@ -1,7 +1,6 @@
 'use strict';
 define('events/registerableListeneres',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-
 const bottomPanelOffcanvasTriggers = ['hide','show']
 
 class EventListeners {
@@ -16,13 +15,9 @@ class EventListeners {
 			const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 			UacanadaMap.api.setBottomSheetSize(0);
 			bottomPanelOffcanvas.css('transform',`translate3d(0,100vh,0)`)
-		
-			UacanadaMap.console.log('hide',bottomPanelOffcanvas.attr('data-ua-size'))
 		},
 		
 		show:  () => {
-			const bottomPanelOffcanvas = $('#ua-bottom-sheet');
-			UacanadaMap.console.log('shown',bottomPanelOffcanvas.attr('data-ua-size'))
 			UacanadaMap.api.setBottomSheetSize(1)
 			try {
 				UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
@@ -34,9 +29,9 @@ class EventListeners {
 
 	hasPointerEventSupport = () => {
 		if (window.PointerEvent && "maxTouchPoints" in navigator) {
-			return "pointerup";
+			return "pointerup.uacanadamap";
 		} else {
-			return "click";
+			return "click.uacanadamap";
 		}
 	};
 
@@ -143,28 +138,79 @@ class EventListeners {
 
 	register = () => {
 		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
-		$(document).on('click', this.clickHandler);
-
-		
-	
-
-
-		$("#ua-mainframe").on(
-			this.hasPointerEventSupport(),
-			this.handleMainframeClick
-		);
+		$(document).on('click.uacanadamap', this.clickHandler);
+		$("#ua-mainframe").on( this.hasPointerEventSupport(), this.handleMainframeClick);
 
 		
 
-		this.throttledScroll = this.throttle("scroll", "optimizedScroll");
-		this.optimizedScrollEvent = new Event("optimizedScroll");
-
-		window.addEventListener("optimizedScroll", this.onOptimizedScroll);
+		// this.throttledScroll = this.throttle("scroll", "optimizedScroll");
+		// this.optimizedScrollEvent = new Event("optimizedScroll");
+        //window.addEventListener("optimizedScroll", this.onOptimizedScroll);
         const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 		bottomPanelOffcanvasTriggers.forEach(triggerName => {
-
-			bottomPanelOffcanvas.on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
+			bottomPanelOffcanvas.on(triggerName+".bs.offcanvas.uacanadamap", this.bottomOffcanvasTriggers[triggerName])
 		});
+
+		function resizeend() {
+			if (new Date() - UacanadaMap.uaResizetime < UacanadaMap.uaDelta) {
+			  setTimeout(resizeend, UacanadaMap.uaDelta);
+			} else {
+			  UacanadaMap.uaResizetimeout = false;
+			  UacanadaMap.api.updateCSS();
+			}
+		  }
+		
+		  $(window).on('resize.uacanadamap', function () {
+			if (UacanadaMap.map) {
+			  UacanadaMap.api.detectMapViewport();
+			  UacanadaMap.uaResizetime = new Date();
+			  if (UacanadaMap.uaResizetimeout === false) {
+				UacanadaMap.uaResizetimeout = true;
+				setTimeout(resizeend, UacanadaMap.uaDelta);
+			  }
+			}
+		  });
+		
+		  $("body").on('classChange.uacanadamap', (el, classes) => {
+			if ($("body").hasClass(UacanadaMap.mapRoomClass)) {
+			  UacanadaMap.api.detectMapViewport();
+			}
+		  });
+		
+		  $(document).on("change.uacanadamap", "#eventSwitcher", function () {
+			if ($(this).is(":checked")) {
+			  $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML);
+			} else {
+			  $("#ua-form-event-holder").html("");
+			}
+		  });
+		  $(document).on("change.uacanadamap", 'input[name="socialtype"]', function () {
+			UacanadaMap.form.socialTypeIconAdjust()
+		  });
+		  $(document).on("change.uacanadamap", "#ua-location-cover-img", function () {
+			var fileReader = new FileReader();
+			fileReader.onload = function () {
+			  var data = fileReader.result;
+			  $("#ua-form-img-holder").html('<img src="' + data + '"/>');
+			};
+			fileReader.readAsDataURL($("input#ua-location-cover-img")[0].files[0]);
+		  });
+		  $(document).on("change.uacanadamap", "#location-category-filter", function () {
+			UacanadaMap.api.setCategoryAndOpenCards($(this).val());
+		  });
+		  $(document).on("change.uacanadamap", "#location-sort", function () {
+			UacanadaMap.api.setCategoryAndOpenCards($("#location-category-filter").val());
+		  });
+	
+	
+	
+	
+		  $('#sortPlacesOffcanvas').on('hide.bs.offcanvas.uacanadamap', function (e) {
+			$('#ua-horizontal-buttons-wrapper').removeClass('movedown')
+		  });
+		  $('#sortPlacesOffcanvas').on('show.bs.offcanvas.uacanadamap', function (e) {
+			$('#ua-horizontal-buttons-wrapper').addClass('movedown').removeClass('hidden')
+		  });
 		
 
 
@@ -178,18 +224,21 @@ class EventListeners {
 		const bottomPanelOffcanvas = $('#ua-bottom-sheet');
 		$(document).off(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).off('click', this.clickHandler);
+
 		$("#ua-mainframe").off(
 			this.hasPointerEventSupport(),
 			this.handleMainframeClick
 		);
 		
 
-		window.removeEventListener("optimizedScroll", this.onOptimizedScroll);
-		window.removeEventListener("scroll", this.throttledScroll);
+		// window.removeEventListener("optimizedScroll", this.onOptimizedScroll);
+		// window.removeEventListener("scroll", this.throttledScroll);
 		
 		bottomPanelOffcanvasTriggers.forEach(triggerName => {
 			bottomPanelOffcanvas.off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
 		});
+
+		$('#sortPlacesOffcanvas').on('hide.bs.offcanvas.uacanadamap')
 	};
 
 	reload = () => {
@@ -224,6 +273,26 @@ class EventListeners {
 		this.UacanadaMap.api.detectMapViewport();
 		this.lastScrollTime = performance.now();
 	};
+
+	removeEventListenersWithUacanadaNamespace = () => {
+		const allElements = $('*');
+		allElements.each(function() {
+		  const elem = $(this);
+		  const events = $._data(this, "events");
+		  if (!events) return;
+	  
+		  for (const eventType in events) {
+			const handlers = events[eventType];
+			handlers.forEach(function(handlerObj) {
+			  // Check both namespace and handlerObj.namespace for 'uacanada'
+			  if (handlerObj.namespace.indexOf('uacanada') !== -1 || eventType.indexOf('uacanada') !== -1) {
+				elem.off(`${eventType}.${handlerObj.namespace}`);
+			  }
+			});
+		  }
+		});
+	  }
+	  
 }
   
   

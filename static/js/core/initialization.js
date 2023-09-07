@@ -10,7 +10,7 @@ define("core/initialization", [
   "population/categoriesCreator",
   "events/mapReady",
   "ui/swipeDetectors",
-   "forms/regionCreator",
+  "forms/regionCreator",
   "markers/markersFetcher",
   "markers/markersPopulator",
   "ui/elementPositions",
@@ -66,20 +66,12 @@ define("core/initialization", [
 
 ) {
   
-  
-
- 
-
-  return async (UacanadaMap) => {
+return async (UacanadaMap) => {
     const firstInitTime = Date.now();
     const hooks = await app.require("hooks");
-
-     
     
     const reload = async (UacanadaMap) => {
       let allowLoadOldfromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
-   
-   
       UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
       UacanadaMap.api.configureMapElements();
       UacanadaMap.api.mapInit();
@@ -104,7 +96,6 @@ define("core/initialization", [
       UacanadaMap.api.registerHooks()
       UacanadaMap.api.registerBasicListeners()
       UacanadaMap.api.reserveClusterForAdvMarkers()
-
       UacanadaMap.run.submitPlace()
 
       if (UacanadaMap.eventListenersInstance) {
@@ -128,19 +119,13 @@ define("core/initialization", [
 
     await reload(UacanadaMap)
 
-   
-    
-    
-    hooks.on('action:ajaxify.end', (data) => {
+    hooks.on('action:ajaxify.end.uacanadamap', (data) => {
       if(data.tpl_url === 'map'){
            
             if(firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
-              UacanadaMap.console.log(` reinit `, data)
-               
-               
-               if(app.user.isAdmin){
-                   console.log('ADMIN MODE ajaxify',UacanadaMap)
-                   //reload(UacanadaMap)
+              if(app.user.isAdmin){
+                   console.log('ADMIN MODE ajaxify')
+                   reload(UacanadaMap)
                }else{
                   reload(UacanadaMap)
                }
