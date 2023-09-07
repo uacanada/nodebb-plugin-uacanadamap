@@ -19,9 +19,7 @@ define("forms/submitPlace", [
     });
   
   
-    document
-      .getElementById("placeForm")
-      .addEventListener("submit", async (event) => {
+    document.getElementById("placeForm").addEventListener("submit", async (event) => {
         event.preventDefault();
   
         const form = event.target;
@@ -51,19 +49,12 @@ define("forms/submitPlace", [
           await handleSubmit(form);
         }
       });
-  
-    function checkFormValidation() {
-      const checkAndToggleAccordion = (selector, inputSelector) => {
-        const accordion = $(selector);
-        if (!$(inputSelector).val() && !accordion.hasClass("show")) {
-          accordion.collapse("toggle");
-        }
-      };
-  }
-  
-  
- 
 
+  }
+
+
+
+  function checkFormValidation() {
     checkAndToggleAccordion(
       "#address-accordion-collapseOne",
       "#ua-newplace-city, #location-province"
@@ -73,6 +64,22 @@ define("forms/submitPlace", [
       $("#desc-eng").click();
     }
   }
+
+
+
+
+  const checkAndToggleAccordion = (selector, inputSelector) => {
+    const accordion = $(selector);
+    if (!$(inputSelector).val() && !accordion.hasClass("show")) {
+      accordion.collapse("toggle");
+    }
+  };
+
+
+
+
+
+
 
   async function handleSubmit(form) {
     canSendForm = false;
