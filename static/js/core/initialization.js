@@ -86,9 +86,28 @@ return async (UacanadaMap) => {
 
       UacanadaMap.api.createCategories();
       
+      try {
+        if (UacanadaMap && UacanadaMap.categoryClusters && UacanadaMap.categoryClusters.allMarkersCluster) {
+          const layers = UacanadaMap.categoryClusters.allMarkersCluster.getLayers();
+          if (layers && layers.length > 0) {
+            UacanadaMap.console.log('Already Populated');
+          } else {
+            const markers = await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache);
+            if (markers) {
+              UacanadaMap.api.populatePlaces(markers);
+              UacanadaMap.api.populateTabs();
+            } else {
+              UacanadaMap.console.log('No markers returned from API');
+            }
+          }
+        } else {
+          UacanadaMap.console.log('UacanadaMap or its properties are not defined');
+        }
+      } catch (error) {
+        UacanadaMap.console.log('An error occurred:', error);
+      }
       
-      UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache));
-      UacanadaMap.api.populateTabs();
+    
 
       
       UacanadaMap.api.createCategoryButtonsSwiper($("#location-category-filter").val() ?? "");

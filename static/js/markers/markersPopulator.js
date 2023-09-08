@@ -117,7 +117,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
   
     UacanadaMap.api.populatePlaces = async (array) => {
   
-      if(UacanadaMap.categoryClusters?.allMarkersCluster?.getLayers()?.length > 0) return UacanadaMap.console.log('Already Populated')
+      
   
       UacanadaMap.api.cleanUp();
       //UacanadaMap.allMarkersMixed = [];
