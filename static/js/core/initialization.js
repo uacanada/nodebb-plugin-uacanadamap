@@ -85,6 +85,8 @@ return async (UacanadaMap) => {
       UacanadaMap.api.addMapControls();
 
       UacanadaMap.api.createCategories();
+      
+      
       UacanadaMap.api.populatePlaces(await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache));
       UacanadaMap.api.populateTabs();
 

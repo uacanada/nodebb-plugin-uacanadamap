@@ -35,6 +35,7 @@ define("panels/categoryButtonsSwiper", [
       setupDomEvents(btnDiv);
 
       if ($("#ua-place-buttons").hasClass("filled") && !UacanadaMap.swipers.horizontalButtons?.destroyed) { return UacanadaMap.swipers.horizontalButtons.update();  }
+     // if ($("#ua-place-buttons").hasClass("filled")) { return UacanadaMap.swipers.horizontalButtons.update();  }
 
       appendButtonsHtml(buttonsHtml);
 
