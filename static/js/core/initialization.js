@@ -98,7 +98,7 @@ return async (UacanadaMap) => {
               UacanadaMap.console.log(markers);
               UacanadaMap.api.populatePlaces(markers);
               UacanadaMap.api.populateTabs();
-              populated = true
+    
             } else {
               UacanadaMap.console.log('No markers returned from API');
             }
