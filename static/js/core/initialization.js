@@ -64,10 +64,12 @@ define("core/initialization", [
   module 
 ) {
   
+let populated = false
+
 return async (UacanadaMap) => {
      UacanadaMap.firstInitTime = Date.now();
     const hooks = await app.require("hooks");
-    
+   
     const reload = async (UacanadaMap) => {
       let allowLoadOldfromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
       UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
@@ -89,7 +91,7 @@ return async (UacanadaMap) => {
       try {
         if (UacanadaMap && UacanadaMap.categoryClusters && UacanadaMap.categoryClusters.allMarkersCluster) {
           const layers = UacanadaMap.categoryClusters.allMarkersCluster.getLayers();
-          if (layers && layers.length > 0) {
+          if (layers && layers.length > 0 || populated) {
             UacanadaMap.console.log('Already Populated');
           } else {
             const markers = await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache);
@@ -97,6 +99,7 @@ return async (UacanadaMap) => {
               UacanadaMap.console.log(markers);
               UacanadaMap.api.populatePlaces(markers);
               UacanadaMap.api.populateTabs();
+              populated = true
             } else {
               UacanadaMap.console.log('No markers returned from API');
             }
