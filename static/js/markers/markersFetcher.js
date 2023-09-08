@@ -25,8 +25,7 @@ define('markers/markerFetcher', ["core/variables" /*   Global object UacanadaMap
       
   
       UacanadaMap.api.fetchMarkers = async (fromCache) => {
-        UacanadaMap.TEMP.eventsArray = []
-        UacanadaMap.TEMP.placesArray = []
+        
          
         try {
           if(fromCache && UacanadaMap.previousPlacesArray){

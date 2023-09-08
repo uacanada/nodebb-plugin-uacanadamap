@@ -40,6 +40,10 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
     
       UacanadaMap.api.cleanUp=()=>{
         UacanadaMap.allPlaces = {};
+        UacanadaMap.allPlacesArray = []
+        UacanadaMap.allMarkersMixed = []
+        UacanadaMap.TEMP.eventsArray = []
+        UacanadaMap.TEMP.placesArray = []
       }
     
       UacanadaMap.api.getCatName=(slug) =>{
