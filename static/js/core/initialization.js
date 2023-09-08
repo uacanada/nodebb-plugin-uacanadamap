@@ -63,8 +63,7 @@ define("core/initialization", [
   // Built-in AMD modules:
   module 
 ) {
-  
-let populated = false
+
 
 return async (UacanadaMap) => {
      UacanadaMap.firstInitTime = Date.now();
@@ -91,7 +90,7 @@ return async (UacanadaMap) => {
       try {
         if (UacanadaMap && UacanadaMap.categoryClusters && UacanadaMap.categoryClusters.allMarkersCluster) {
           const layers = UacanadaMap.categoryClusters.allMarkersCluster.getLayers();
-          if (layers && layers.length > 0 || populated) {
+          if (layers && layers.length > 0 ) {
             UacanadaMap.console.log('Already Populated');
           } else {
             const markers = await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache);

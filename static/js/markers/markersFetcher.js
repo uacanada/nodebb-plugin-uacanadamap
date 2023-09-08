@@ -1,8 +1,7 @@
 'use strict';
 define('markers/markerFetcher', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    UacanadaMap.TEMP.eventsArray = []
-    UacanadaMap.TEMP.placesArray = []
+    
   
       const apiRequest = async () => {
         try {
@@ -26,6 +25,8 @@ define('markers/markerFetcher', ["core/variables" /*   Global object UacanadaMap
       
   
       UacanadaMap.api.fetchMarkers = async (fromCache) => {
+        UacanadaMap.TEMP.eventsArray = []
+        UacanadaMap.TEMP.placesArray = []
          
         try {
           if(fromCache && UacanadaMap.previousPlacesArray){

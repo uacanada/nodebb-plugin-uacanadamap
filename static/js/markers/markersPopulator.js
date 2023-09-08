@@ -122,7 +122,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       UacanadaMap.api.cleanUp();
       //UacanadaMap.allMarkersMixed = [];
 
-      
+      UacanadaMap.map.removeLayer( UacanadaMap.categoryClusters['allMarkersCluster'] )
       
       
      
@@ -132,13 +132,20 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             const newMarker = UacanadaMap.api.createMarker(index,item);// Replace with your custom marker creation code
             const { visibleOnlyWhenChosen } = ajaxify.data.UacanadaMapSettings.subCategories.find(({ slug }) => slug === item.placeCategory) || {};
 
+
+            // Clean old
+            try {
+              
+              UacanadaMap.categoryClusters[item.placeCategory]
+            } catch (error) {
+              
+            }
             
+
             if(!visibleOnlyWhenChosen || visibleOnlyWhenChosen !== 'on'){
               UacanadaMap.categoryClusters['allMarkersCluster'].addLayer(newMarker);
             }
 
-            
-            
             // Add marker to the respective category cluster
             if (UacanadaMap.categoryClusters[item.placeCategory]) {
                 UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
