@@ -40,6 +40,12 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
     
       UacanadaMap.api.cleanUp=()=>{
         UacanadaMap.allPlaces = {};
+        UacanadaMap.allPlacesArray = []
+        UacanadaMap.allMarkersMixed = []
+        UacanadaMap.TEMP.eventsArray = []
+        UacanadaMap.TEMP.placesArray = []
+        UacanadaMap.currentSortedMarkers = []
+        UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
       }
     
       UacanadaMap.api.getCatName=(slug) =>{
@@ -130,7 +136,7 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
           let parentLi = button.closest('li'); 
           let index = parentLi.index();
           button.attr("aria-pressed","true").attr('class',state+' btn-primary '+buttonClassList)
-          UacanadaMap.horizontalButtons.slideTo(index)
+          UacanadaMap.swipers.horizontalButtons.slideTo(index)
         }
       }
     

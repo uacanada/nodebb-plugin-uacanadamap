@@ -113,15 +113,7 @@
   .leaflet-bottom.leaflet-right .leaflet-bar{
     box-shadow: none!important;
   }
-  .leaflet-control-zoom-in, .leaflet-control-zoom-out, .leaflet-control-locate a, .leaflet-control-fullscreen, .leaflet-control-addplace button{
-    border-radius: 50%!important;
-    margin-bottom: 0.25rem!important;
-    width: 2.5rem!important;
-    height: 2.5rem!important;
-    font-size: 1rem!important;
-    line-height: 2.5rem!important;
-  
-  }
+
 
   .leaflet-control-fullscreen a {
     margin: auto;
@@ -130,7 +122,17 @@
 }
   
   
+body.hiddenElements:not(.cards-opened) {
+  #ua-horizontal-buttons-wrapper {
+    transform: translate3d(0, -100%, 0);
+  }
+  .leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen,.leaflet-control-addplace {
+    transform: translate3d(150%, 0, 0);
+  }
 
+ 
+
+}
 
 .leaflet-control-locate a, .leaflet-control-zoom a {
   background: rgba(5, 5, 5, 0.3);
@@ -203,3 +205,59 @@ a.leaflet-contextmenu-item button {
     margin: 5px 0;
 }
 
+
+
+.leaflet-control-fullscreen, .leaflet-control-locate a, .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  border-radius: 50%!important;
+  margin-bottom: .25rem!important;
+  width: 2rem!important;
+  height: 2rem!important;
+  font-size: 1rem!important;
+  line-height: 2.5rem!important;
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-button {
+  width: 2rem;
+  padding: 0.25rem;
+  margin: 0;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .fa{
+    font-size: 1rem;
+    text-rendering: geometricPrecision;
+  }
+ 
+}
+
+.leaflet-control-container{
+  .newLocationOpenMarker{
+    transition: 1s transform ease;
+    transform: translate3d(0, 0, 0);
+  }
+  .removeCards,
+  .rotateCards,
+  .filterPlaces {
+    transition: 1s transform ease;
+    transform: translate3d(0, 100vh, 0);
+  }
+}
+
+body.cards-opened{
+  #ua-context-buttons-wrapper{
+    bottom: -10rem;
+  }
+
+  .leaflet-control-container {
+    .newLocationOpenMarker{ transform: translate3d(0, 100vh, 0);  }
+    .removeCards,
+    .rotateCards,
+    .filterPlaces{  transform: translate3d(0,0,0); }
+   
+  }
+}

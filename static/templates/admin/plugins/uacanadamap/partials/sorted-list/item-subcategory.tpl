@@ -17,6 +17,12 @@
             {{{else}}}
             NEED SET PARENT CATEGORIES!
             {{{end}}}
+
+            <span class="visibleOnlyWhenChosen{visibleOnlyWhenChosen}">OnlyWhenChosen</span>
+
+
+            
+              
         </div>
         <div class="col-3 text-end">
 

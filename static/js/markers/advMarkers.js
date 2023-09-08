@@ -12,18 +12,19 @@
               UacanadaMap.mapLayers.advMarkers = UacanadaMap.L.markerClusterGroup(
                           
                   {
-                      // TODO cluster ICON for ads
-                      iconCreateFunction: function (cluster) {
-                          const mrks = cluster.getAllChildMarkers();
-                          const n = mrks.length;
-                          const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
-                          return UacanadaMap.L.divIcon({
-                              html: n,
-                              className: "mycluster ua-cluster-places",
-                              iconSize: UacanadaMap.L.point(clusterIconSize, clusterIconSize),
-                              iconAnchor: [0, 0],
-                          });
-                      }
+                    iconCreateFunction: function (cluster) { // TODO cluster for ads
+                        const markers = cluster.getAllChildMarkers();
+                        const count = markers.length;
+                        const iconSize = Math.floor(count * 1.1 + 60);
+                        const anchorSize = iconSize / 2;
+                      
+                        return L.divIcon({
+                          html: count,
+                          className: "mycluster",
+                          iconSize: L.point(iconSize, iconSize),
+                          iconAnchor: [anchorSize, anchorSize]
+                        });
+                    },
                       
                   }
               );

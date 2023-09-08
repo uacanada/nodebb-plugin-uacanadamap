@@ -4,7 +4,7 @@
     
   UacanadaMap.api.animateCards = async (state) => {
      if(state==='open'){
-       UacanadaMap.api.rotateCards(UacanadaMap.cardsCarousel.params.direction)
+       UacanadaMap.api.rotateCards(UacanadaMap.swipers.cardsCarousel.params.direction)
       $(UacanadaMap.placeCardDiv).removeClass('slider-closed').addClass('slider-opened')
      } else{
       $(UacanadaMap.placeCardDiv).removeClass('slider-opened').addClass('slider-closed')
@@ -57,7 +57,7 @@
       UacanadaMap.pointerMarker.on('click', (e)=> {    
         
         try {
-          UacanadaMap.cardsCarousel.slideTo(Number(slideId)) 
+          UacanadaMap.swipers.cardsCarousel.slideTo(Number(slideId)) 
           UacanadaMap.map.setView(place.gps,map.getZoom()+1);   
           UacanadaMap.pointerMarker.openPopup(); 
         } catch (error) {
@@ -114,7 +114,7 @@
   
   
   UacanadaMap.api.openCarousel = async (places, autoplay) =>{
-    const {L} = UacanadaMap
+      const {L} = UacanadaMap
       UacanadaMap.api.animateCards('closed')
       const card = $(UacanadaMap.placeCardDiv);
       const cat = $('#location-category-filter').val();
@@ -248,13 +248,13 @@
   
   UacanadaMap.api.openPlacesSwiper = (places,autoplay) => {
   
-    let direction = UacanadaMap.cardsCarousel.params?.direction || (window.innerWidth<1000?"horizontal":"vertical")
+    let direction = UacanadaMap.swipers.cardsCarousel.params?.direction || (window.innerWidth<1000?"horizontal":"vertical")
     let freeMode = {
         enabled: true,
         sticky: true,
       }
 
-    UacanadaMap.cardsCarousel = new Swiper('#ua-cards-slider', {
+    UacanadaMap.swipers.cardsCarousel = new Swiper('#ua-cards-slider', {
         direction,
         freeMode,
         slidesPerView: 'auto',
@@ -351,7 +351,7 @@
         var otherMarkers = [];
     
         for (const markerDist of allMarkers) {
-          if(markerDist.json.placeCategory === UacanadaMap.allPlaces[firstMarker.tid].json.placeCategory && markerDist.json.city === UacanadaMap.allPlaces[firstMarker.tid].json.city){
+          if(markerDist && firstMarker?.tid && markerDist.json.placeCategory === UacanadaMap.allPlaces[firstMarker.tid]?.json.placeCategory && markerDist.json.city === UacanadaMap.allPlaces[firstMarker.tid].json.city){
             sameCatSameCity.push(markerDist)
           } else {
             otherMarkers.push(markerDist)
@@ -365,7 +365,6 @@
           var sort_criteriaA = (a.json.eventStartDate) ? Math.floor(Date.parse(a.json.eventStartDate+' '+(a.json.eventStartTime||''))/1000)+1e5 : a.json.created;
           var sort_criteriaB = (b.json.eventStartDate) ? Math.floor(Date.parse(b.json.eventStartDate+' '+(b.json.eventStartTime||''))/1000)+1e5 : b.json.created;
   
-          console.log({sort_criteriaB,sort_criteriaA})
           return sort_criteriaB-sort_criteriaA;
         
         });
@@ -377,6 +376,11 @@
   
   
   UacanadaMap.api.openCards = async (topic_id,sort_by,autoplay) => {
+
+       if($('body').hasClass('addPlaceMode')){
+        return  UacanadaMap.api.shakeElements([".newLocationCancelButton"],'ua-shake-vert');
+       } 
+
       const offCanvasPanel =  $('#ua-bottom-sheet') 
       let tid = Number(topic_id)
       let thisMarker=null
@@ -397,7 +401,7 @@
         UacanadaMap.api.openMarker(tid)
         thisMarker = UacanadaMap.allPlaces[tid].marker;
       }
-      UacanadaMap.console.log('DEBUG :: ',{ activecard:$('#ua-cards-slider li.is-active .ua-place-card-inner').attr('data-ua-tid'),topic_id,tid,s,sort_by},Number(topic_id)>0,markersTemp.length)
+      // UacanadaMap.console.log('DEBUG :: ',{ activecard:$('#ua-cards-slider li.is-active .ua-place-card-inner').attr('data-ua-tid'),topic_id,tid,s,sort_by},Number(topic_id)>0,markersTemp.length)
     
       UacanadaMap.api.openCarousel(markersTemp,autoplay)
       UacanadaMap.currentSortedMarkers = markersTemp 
@@ -409,22 +413,21 @@
   
   
   UacanadaMap.api.removeCards = async () => { 
-     
+      UacanadaMap.api.contextButtonText({text:'',delay:100,to:0})
       UacanadaMap.api.rotateCards('horizontal');
       UacanadaMap.api.animateCards('close')
-      UacanadaMap.api.fitElementsPosition();
       UacanadaMap.api.hideElements(false)
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
       UacanadaMap.api.cardsOpened(false)
-      UacanadaMap.api.contextButtonText({text:' Reset Categories',delay:300,to:0})
+      
       setTimeout(() => {
-        
-       
+        UacanadaMap.api.fitElementsPosition();
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
         
-      }, 350);
+        $(UacanadaMap.placeCardDiv).html('')
+      }, 200);
       
       
   };
@@ -443,33 +446,33 @@
   
   UacanadaMap.api.rotateCards = (direction) => { 
    
-    if(!UacanadaMap.cardsCarousel?.changeDirection)return
+    if(!UacanadaMap.swipers.cardsCarousel?.changeDirection || UacanadaMap.swipers.cardsCarousel.destroyed) return
   
-    const crds = $('#ua-map-cards-fullscreen')
+    const crds = $('#cardsSwiperPlaceholder')
    
-    setTimeout(() => {
-      UacanadaMap.cardsCarousel.update()
-    }, 1000);
+   
   
     if(direction){
-      UacanadaMap.cardsCarousel.changeDirection(direction)
+      UacanadaMap.swipers.cardsCarousel.changeDirection(direction)
       if(direction==='vertical') crds.addClass('verticalCards')
       else crds.removeClass('verticalCards')
-      console.log('TOGGLE ',direction)
+    
     } else{
       if(crds.hasClass('verticalCards')){
         crds.removeClass('verticalCards')
-        UacanadaMap.cardsCarousel.changeDirection('horizontal')
-        console.log('HORIZONTAL')
+        UacanadaMap.swipers.cardsCarousel.changeDirection('horizontal')
+      
     
       }else{
         crds.addClass('verticalCards')
-        UacanadaMap.cardsCarousel.changeDirection('vertical')
-        console.log('VERTICAL')
+        UacanadaMap.swipers.cardsCarousel.changeDirection('vertical')
+      
       }
     }
     
-    
+    setTimeout(() => {
+      UacanadaMap.swipers.cardsCarousel.update()
+    }, 1000);
     UacanadaMap.api.fitElementsPosition()
   
     
@@ -549,7 +552,7 @@ function handleSlideChange(e, places, UacanadaMap) {
     const tid = places[e.activeIndex] ? places[e.activeIndex].tid : null;
     if (tid) {
         
-        if(UacanadaMap.cardsCarousel.params?.direction==='vertical'){
+        if(UacanadaMap.swipers.cardsCarousel.params?.direction==='vertical'){
 
         }else{
             UacanadaMap.api.openMarker(tid)

@@ -27,11 +27,6 @@ define('utils/mapFeatures', ["core/variables" /*   Global object UacanadaMap  */
     };
 
    
-      
-    //   const swiper = new Swiper('.swiper-container');
-    //   swiper.on('slideChangeTransitionStart', hideElements);
-    //   swiper.on('slideChangeTransitionEnd', showElements);
-      
 
     UacanadaMap.api.fancyHeroText = (() => {
 
