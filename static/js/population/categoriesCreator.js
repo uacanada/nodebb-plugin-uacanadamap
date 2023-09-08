@@ -11,8 +11,8 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 				: [slug];
 		});
 	
-		UacanadaMap.swipers.buttonsSlider.appendSlide(UacanadaMap.swipers.createButtonSlide(tab, index));
-		UacanadaMap.swipers.tabsSlider.appendSlide(UacanadaMap.swipers.createContentSlide(tab, index));
+		UacanadaMap.swipers.buttonsSlider.appendSlide(UacanadaMap.swipersContext.createButtonSlide(tab, index));
+		UacanadaMap.swipers.tabsSlider.appendSlide(UacanadaMap.swipersContext.createContentSlide(tab, index));
 		UacanadaMap.parentCategoriesObject[slug] =  {color, icon, tagCollector}
 	};
 	
@@ -28,11 +28,11 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	
 		const handleSubCategories = (category, index) => {
 			try {
-				const {slug,cid,cidname,parents,name,icon} = category
+				const {slug,cid,cidname,parents,name,icon,visibleOnlyWhenChosen} = category
 				const tabs = UacanadaMap.utils.tagsParseJSON(parents)
 				optionsElements += `<option value="${slug}">${name}</option>`
 
-				UacanadaMap.subCategoryRouterObject[slug] = {tabs,name,cid,icon,cidname,total:0}
+				UacanadaMap.subCategoryRouterObject[slug] = {tabs,name,cid,icon,cidname,visibleOnlyWhenChosen,total:0}
 			} catch (error) {
 				console.error(error);
 			}

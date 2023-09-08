@@ -18,22 +18,16 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
     
 	UacanadaMap.api.updateCSS = () => {
 		const {
-			screenH,
-			navRealH,
-			screenW,
+		
 			rightNav,
 			leftNav,
-			visibleMap,
-			bottomButtonsH,
+			
 		} = UacanadaMap.api.getDivSizes();
-		const thirdScreen = Math.floor(screenH * 0.6);
-		const mapWidth = Math.floor(screenW - rightNav - leftNav);
+		
 		const bodyWithMap = "body." + UacanadaMap.mapRoomClass;
-		const bodyWithMapTouched = bodyWithMap + ".map-touched";
-		const forcedMapHeight = Math.floor(screenH - navRealH);
-		const mapMainFrame = screenW > 990 ? forcedMapHeight : forcedMapHeight;
-		const mapWrapperHeight = forcedMapHeight;
-		const mapHeight = forcedMapHeight;
+		
+		
+	
 		const styles = ` #uacamap-wrapper {
 			  	padding-right: ${rightNav}px !important;
 				padding-left: ${leftNav}px !important;
@@ -58,6 +52,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 
 		if (UacanadaMap.map && UacanadaMap.map.invalidateSize) {
 			setTimeout(() => {
+				if(!UacanadaMap.map)return
 				UacanadaMap.map.invalidateSize();
 				UacanadaMap.api.fitElementsPosition();
 			}, 120);
@@ -93,48 +88,21 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 		
 		setTimeout(() => {
 			
-			const {
-				bottomButtonsH,
-				contextButton,
-				bottomElementsH,
-				screenH,
-				screenW,
-				rightNav,
-                leftNav,
-				navRealH,
-				placeCardH,
-				onePercentH,
-			} = UacanadaMap.api.getDivSizes();
-
-			let zoomControlsPosition = { bottom: `5rem`};
-           
-
-
-			if($(UacanadaMap.placeCardDiv).hasClass('verticalCards') && screenW>700){
+			const { screenW, placeCardH, onePercentH} = UacanadaMap.api.getDivSizes();
+			let zoomControlsPosition = { bottom: `4rem`};
+           	if($(UacanadaMap.placeCardDiv).hasClass('verticalCards') && screenW>700){
 
 			} else {
-
-				
-				zoomControlsPosition = {  bottom: `${Math.floor(navRealH+placeCardH+contextButton)}px`};
-			
+				zoomControlsPosition = {  bottom: `${Math.floor(placeCardH)}px`};
 			}
-
-			
-
 			$(".leaflet-bottom").css(zoomControlsPosition);
-			
-
 			if (latlng) {
 				const markerOffset = placeCardH > Math.floor(onePercentH * 50) ? Math.floor(onePercentH * 30) : -50
-				
-				
-
-						
 				UacanadaMap.api.moveMarkerToTop(latlng, markerOffset);
 			}
 			UacanadaMap.api.detectMapViewport();
 			UacanadaMap.map.invalidateSize();
-		}, 55);
+		}, 150);
 	};
 
 

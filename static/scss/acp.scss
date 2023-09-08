@@ -27,6 +27,15 @@ body.page-admin-uacanadamap{
             font-size: 1.1rem;
         }
     }
+
+    .visibleOnlyWhenChosenoff,
+    .visibleOnlyWhenChosen{
+        display: none;
+    }
+
+    .visibleOnlyWhenChosenon{
+        background-color: brown;
+    }
    
 }
 

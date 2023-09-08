@@ -1,7 +1,7 @@
 'use strict';
 define('population/tabsPopulator', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
+  
 
     const itemClass = "swiper-slide p-3 list-group-item";
     const getBySlug = (arr, slug) => arr.find(item => item.slug === slug);
@@ -297,7 +297,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
           }
         }
 
-        UacanadaMap.swipers.canActivateVertical = true;
+        UacanadaMap.swipersContext.canActivateVertical = true;
       }
       
 
@@ -305,7 +305,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       
       UacanadaMap.api.populateTabs = () => {
 
-
+       // UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
         UacanadaMap.api.sortPlacesForTabs()
 
         processEvents();

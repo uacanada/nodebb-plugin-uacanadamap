@@ -14,17 +14,13 @@ define('core/configuration', function (require) {
     const dateTime = new Date(Date.now());
     UacanadaMap.L = L
     UacanadaMap.Swiper = Swiper
-  
-
-  
-  
+    
     const { mapPageRouter, initialCoordinates, mapBoxApiKey, countryLimit, bottomRightCorner, topLeftCorner } = ajaxify.data.UacanadaMapSettings;
 
     UacanadaMap.timestampNow = Math.floor(dateTime / 1000);
     UacanadaMap.weekDay = UacanadaMap.weekdays[dateTime.getDay()];
     UacanadaMap.userRegistered = app.user.uid && app.user.uid > 0;
     UacanadaMap.adminsUID = app.user.isAdmin;
-
     UacanadaMap.markerSettings = {
       virtZoom: 16,
       shiftX: 100,
@@ -63,43 +59,29 @@ define('core/configuration', function (require) {
       };
       
 
-
-
-   
-
-
-
-
-    
     UacanadaMap.api.configureMapElements = () => {
 
         const {L} = UacanadaMap 
-      
 
+        if(UacanadaMap.map){
+            try {
+                UacanadaMap.map.remove()
+            } catch (error) {
+                UacanadaMap.console.log(error)
+            }
+            UacanadaMap.map = null
+        }
 
-        UacanadaMap.BlackWhite = L.tileLayer.provider("Stamen.TonerLite");
-        UacanadaMap.Terrain = L.tileLayer.provider("Stamen.Terrain");
-        UacanadaMap.MinimalMap = L.tileLayer.provider("Esri.WorldGrayCanvas");
-        UacanadaMap.SatMap = L.tileLayer.provider("Esri.WorldImagery");
-        UacanadaMap.Classic = L.tileLayer.provider("Esri.NatGeoWorldMap");
-        UacanadaMap.StreetsMap = L.tileLayer(
-            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-            { maxZoom: 19 }
-        );
-       
-        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", {
-            id: "mapbox/streets-v11",
-            accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey,
-        }):UacanadaMap.StreetsMap;
-
+        
+        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):UacanadaMap.StreetsMap;
         UacanadaMap.mapProviders = {
             MapBox: UacanadaMap.mapLayers.MapBox,
-            OSM: UacanadaMap.StreetsMap,
-            Minimal: UacanadaMap.MinimalMap,
-            BlackWhite: UacanadaMap.BlackWhite,
-            Terrain: UacanadaMap.Terrain,
-            Satellite: UacanadaMap.SatMap,
-            Classic: UacanadaMap.Classic,
+            OSM:  L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  ),
+            Minimal: L.tileLayer.provider("Esri.WorldGrayCanvas"),
+            BlackWhite: L.tileLayer.provider("Stamen.TonerLite"),
+            Terrain: L.tileLayer.provider("Stamen.Terrain"),
+            Satellite: L.tileLayer.provider("Esri.WorldImagery"),
+            Classic: L.tileLayer.provider("Esri.NatGeoWorldMap"),
         };
 
 
@@ -110,9 +92,6 @@ define('core/configuration', function (require) {
             iconAnchor: [6, 14],
             popupAnchor: [8, -3],
         });
-        
-        
-       
         UacanadaMap.newPlaceMarker = L.divIcon({
             className: "ua-locate-me-marker",
             html: '<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span> </div>', // TODO move to settings
@@ -127,56 +106,119 @@ define('core/configuration', function (require) {
             iconAnchor: [10, 0],
             popupAnchor: [5, 5],
         });
-        UacanadaMap.mapLayers.markers = L.markerClusterGroup(
-            //.layerSupport
-            {
-                disableClusteringAtZoom: 16,
-                maxClusterRadius: 50,
-                spiderfyDistanceMultiplier: 1,
-                spiderfyOnMaxZoom: false,
-                showCoverageOnHover: false,
-                zoomToBoundsOnClick: true,
-                // removeOutsideVisibleBounds:true, // TODO check bugs
-                iconCreateFunction: function (cluster) {
-                    const mrks = cluster.getAllChildMarkers();
-                    const n = mrks.length;
-                    const clusterIconSize = Math.floor(Number(n) * 1.1 + 60);
-                    return L.divIcon({
-                        html: n,
-                        className: "mycluster ua-cluster-places",
-                        iconSize: L.point(clusterIconSize, clusterIconSize),
-                        iconAnchor: [0, 0],
-                    });
-                },
-                spiderfyShapePositions: function (count, centerPt) {
-                    var distanceFromCenter = 33,
-                        markerDistance = 33,
-                        lineLength = markerDistance * (count - 1),
-                        lineStart = centerPt.y - lineLength / 2,
-                        res = [],
-                        i;
 
-                    res.length = count;
+            // Initialize the main marker cluster group to hold multiple categories
+           // UacanadaMap.mapLayers.markers = L.layerGroup();
 
-                    for (i = count - 1; i >= 0; i--) {
-                        res[i] = L.point(
-                            centerPt.x + distanceFromCenter,
-                            lineStart + markerDistance * i
-                        );
+            // Initialize category-specific cluster groups
+            UacanadaMap.categoryClusters = {};
+
+
+            function createCluster(category){
+                UacanadaMap.categoryClusters[category.slug] = L.markerClusterGroup(
+                    {
+                        disableClusteringAtZoom: 17,
+                        maxClusterRadius: 90, // TODO move to ACP
+                        spiderfyDistanceMultiplier: 1,
+                        spiderfyOnMaxZoom: false,
+                        showCoverageOnHover: false,
+                        zoomToBoundsOnClick: true,
+                        // removeOutsideVisibleBounds:true, // TODO check bugs
+                        iconCreateFunction: function (cluster) {
+                            const markers = cluster.getAllChildMarkers();
+                            const count = markers.length;
+                            const iconSize = Math.min(Math.max(Math.floor((count * 3) + 33), 32), 48);
+
+                            const anchorSize = iconSize / 2;
+                            return L.divIcon({
+                              html:`<div class="cluster-icon">
+                              <div class="badge-number">${count}</div>
+                              <div class="icon-wrapper">
+                                <i class="fas fa-home"></i>
+                                <i class="fas fa-cut"></i>
+                                <i class="fas fa-car"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-hospital"></i>
+                              </div>
+                            </div>
+                            ` , // TODO revise cluster icon and move to ACP
+                              className: "ucmpcluster",
+                              iconSize: L.point(iconSize, iconSize),
+                              iconAnchor: [anchorSize, anchorSize]
+                            });
+                        },
+                        spiderfyShapePositions: function (count, centerPt) {
+                            var distanceFromCenter = 33,
+                                markerDistance = 33,
+                                lineLength = markerDistance * (count - 1),
+                                lineStart = centerPt.y - lineLength / 2,
+                                res = [],
+                                i;
+        
+                            res.length = count;
+        
+                            for (i = count - 1; i >= 0; i--) {
+                                res[i] = L.point(
+                                    centerPt.x + distanceFromCenter,
+                                    lineStart + markerDistance * i
+                                );
+                            }
+        
+                            return res;
+                        },
+                        spiderLegPolylineOptions: {
+                            weight: 1,
+                            color: "#000",
+                            opacity: 0.4,
+                            dashArray: "5, 5",
+                        },
                     }
-
-                    return res;
-                },
-                spiderLegPolylineOptions: {
-                    weight: 1,
-                    color: "#000",
-                    opacity: 0.4,
-                    dashArray: "5, 5",
-                },
+                );
             }
-        );
 
-        UacanadaMap.markersOverlay = { All: UacanadaMap.mapLayers.markers };
+            createCluster({slug:'allMarkersCluster'})
+            ajaxify.data.UacanadaMapSettings.subCategories.forEach((category) => {  createCluster(category) });
+            UacanadaMap.markersOverlay = {};
+
+        
+            for (const category in UacanadaMap.categoryClusters) {
+                const clusterGroup = UacanadaMap.categoryClusters[category];
+                UacanadaMap.markersOverlay[category] = clusterGroup
+            }
+              
+
+           
+
+            UacanadaMap.api.addLeafletButton = ({position, classes, title, icon, btnclasses, attributes}) => L.Control.extend({
+                options: { position },
+                onAdd() {
+                const container = L.DomUtil.create('div', `leaflet-bar leaflet-control ${classes}`);
+                container.innerHTML = `<button title="${title}" class="btn circle-button ${btnclasses}" ${attributes}><i class="${icon}"></i></button>`;
+                return container;
+                }
+            });
+
+                UacanadaMap.mapLayers.removeCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'removeCards', title: 'Remove Cards', icon: 'fa fas fa-solid fa-xmark',btnclasses:'btn-danger',attributes:''}));
+                UacanadaMap.mapLayers.rotateCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'rotateCards', title: 'Rotate Cards', icon: 'fa fas fa-solid fa-table-list',btnclasses:'btn-primary',attributes:''}));  
+                UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'filterPlaces', title: 'Filter Places', icon: 'fa fa-fw fa-sliders',btnclasses:'btn-primary',attributes:`data-bs-toggle="offcanvas" data-bs-target="#sortPlacesOffcanvas" aria-controls="sortPlacesOffcanvas"`}));
+
+                UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fas fa-solid fa-map-pin',btnclasses:'btn-primary' ,attributes:''}));
+                
+               
+           
+           
+                if (app.user.isAdmin) {
+                    UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'expandRightButtons', title: 'Expand Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical',btnclasses:'btn-warning',attributes:''}));
+                   
+                 }
+
+                    
+
+
+
+
+
+
 
         UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({
             position: "bottomright",
@@ -205,30 +247,10 @@ define('core/configuration', function (require) {
         });
         UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
             
-            const addplaceControl = L.Control.extend({
-                options: { position: 'bottomright'},
-            
-                onAdd(map) {
-                const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-addplace');
-                container.innerHTML = '<button title="Add New Place" class="newlocation-open-marker btn btn-primary rounded-circle p-0"><i class="fa fas fa-solid fa-map-pin"></i></button>';
-                 return container;
-                },
-            });
-            
-            
-            
-            
-        UacanadaMap.mapLayers.addPlaceButton = new addplaceControl();
+          
+        
            
   
-
-
-
-
-
-
-
-
     }
 	
 
@@ -276,8 +298,6 @@ define('core/configuration', function (require) {
     
 
 
-    
-    
     UacanadaMap.api.addMapLayers = () => {
         Object.values(UacanadaMap.mapLayers).forEach(addMapLayer);
     }
@@ -310,10 +330,6 @@ define('core/configuration', function (require) {
 	}
 
 
-
-    
-
-
     function handleContextMenuClick(e) {
         try {
             const { lat, lng } = getLatLng(e);
@@ -321,16 +337,8 @@ define('core/configuration', function (require) {
             if (!lat || !lng) {
                 return console.warn('Location error');
             }
-    
-           
-            $("#ua-latlng-text").val(`${lat},${lng}`);
-    
-           
-            UacanadaMap.api.createMarkerButton(e, false);
-
-           
-    
-            
+     $("#ua-latlng-text").val(`${lat},${lng}`);
+     UacanadaMap.api.createMarkerButton(e, false);
         } catch (error) {
             console.log(error);
         }
@@ -339,7 +347,6 @@ define('core/configuration', function (require) {
     function getLatLng(e) {
         const lat = e.latlng?.lat || e.latlng[0];
         const lng = e.latlng?.lng || e.latlng[1];
-    
         return { lat, lng };
     }
 

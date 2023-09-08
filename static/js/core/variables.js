@@ -43,7 +43,7 @@ const UacanadaMap = {
     "ua-place-modal",
     "ua-sidepanel",
     "ua-map-cards",
-    "ua-map-cards-fullscreen",
+    "cardsSwiperPlaceholder",
     "ua-short-wrapper",
     "ua-mainframe",
     "ua-welcome-description",
@@ -76,8 +76,8 @@ const UacanadaMap = {
 
   markersClasses: ["no-class"], // TODO: remove
 
-  placeCardDiv: "#ua-map-cards-fullscreen",
-  placeCardDivFullScreen: "#ua-map-cards-fullscreen",
+  placeCardDiv: "#cardsSwiperPlaceholder",
+  placeCardDivFullScreen: "#cardsSwiperPlaceholder",
 
   mapRoomClass: "uacanada-map-page",
   mapLayers: {},
@@ -94,7 +94,6 @@ const UacanadaMap = {
   isFullscreenMode: false,
   lastPlaceMarker: null,
   htmlBuffer: "",
-  cardsCarousel: {},
   pointerMarker: {},
   previousPlacesArray: [],
   mapTabsCount: 0,
@@ -128,7 +127,8 @@ const UacanadaMap = {
   moveIterations: 0,
   horizontalButtons: {},
   api: {},
-modules:{},
+  modules:{},
+  run:{},
   Swiper: null,
   form: {
     tags: [],
@@ -136,7 +136,8 @@ modules:{},
   locationSelectionMarker:null,
   TEMP: {},
   sheetPanels: {},
-  swipers: {},
+  swipers: { cardsCarousel: {} },
+  swipersContext:{},
   routers: {}
 };
 

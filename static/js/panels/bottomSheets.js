@@ -1,13 +1,13 @@
 'use strict';
 define('panels/bottomSheets',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-    const { Swiper, offcanvas: { modes } } = UacanadaMap;
-    const sizes = ajaxify.data.UacanadaMapSettings.bottomSheetOffset.split(',').map(Number);
+const { Swiper, offcanvas: { modes } } = UacanadaMap;
+const sizes = ajaxify.data.UacanadaMapSettings.bottomSheetOffset.split(',').map(Number);
 
 
 // Declare a debounce block that prevents the togglePanel function from running too frequently
 let isDebounceBlocked = false;
-const offCanvasPanel =  $('#ua-bottom-sheet');
+
 
 // Constants definition for thresholds
 const thresholds = {
@@ -26,6 +26,7 @@ const thresholds = {
 
   // This function adjusts the state of the off-canvas panel based on a direction input
 const togglePanel = (direction) => {
+  const offCanvasPanel =  $('#ua-bottom-sheet');
     // Return early if the debounce block is active
     if (isDebounceBlocked) return false;
   
@@ -36,7 +37,7 @@ const togglePanel = (direction) => {
     }, 100);
   
     // Get the current panel mode from its data attribute
-    const currentMode = Number(offCanvasPanel.attr("data-ua-size")) || 0;
+    const currentMode = Number(offCanvasPanel.attr("data-ua-size"));
     // Define an array of available panel modes
     
   
@@ -60,15 +61,17 @@ const togglePanel = (direction) => {
   
     // Update the panel's data attribute and CSS class to reflect the new mode
   
-    modes.forEach(modeClass => {
-      offCanvasPanel.removeClass(modeClass)
-    });
+    // modes.forEach(modeClass => {
+    //   offCanvasPanel.removeClass(modeClass)
+    // });
   
-    offCanvasPanel
-      .attr("data-ua-size", newMode)
-    //  .removeClass(modes[currentMode])
-      .addClass(modes[newMode])
-      .css('transform',`translate3d(0,${sizes[newMode]}vh,0)`)
+    // offCanvasPanel
+    //   .attr("data-ua-size", newMode)
+    // //  .removeClass(modes[currentMode])
+    //  // .addClass(modes[newMode])
+    //   .css('transform',`translate3d(0,${sizes[newMode]}vh,0)`)
+
+      UacanadaMap.api.setBottomSheetSize(newMode)
   
   
      
@@ -99,19 +102,19 @@ const detectSwipeBehavior = (values) => {
 
 const { up, down, t, d } = values;
 if (isDirectionGlitch({up, down}, d)) {
-  console.log('Direction Glitch:', { up, down, t, d });
+  UacanadaMap.console.log('Direction Glitch:', { up, down, t, d });
 } else if (isNormalSwipe(t, d)) {
-  console.log('Normal:', { up, down, t, d });
+  UacanadaMap.console.log('Normal:', { up, down, t, d });
   return togglePanel({up, down, power:d});
  
 } else if (isAbnormalSwipe(t, d)) {
-  console.log('Abnormal!', { up, down, t, d });
+  UacanadaMap.console.log('Abnormal!', { up, down, t, d });
 } else if (isTinySwipe(t, d)) {
-  console.log('Too Tiny Swipes!', { up, down, t, d });
+  UacanadaMap.console.log('Too Tiny Swipes!', { up, down, t, d });
 } else if (isStrangeBehavior(t, d)) {
-  console.log('Strange Behavior - Spending Too Much Time for Tiny Swipe!', { up, down, t, d });
+  UacanadaMap.console.log('Strange Behavior - Spending Too Much Time for Tiny Swipe!', { up, down, t, d });
 } else {
-  console.log('DEBUG:', { up, down, t, d });
+  UacanadaMap.console.log('DEBUG:', { up, down, t, d });
 }
 
 return false
@@ -128,7 +131,7 @@ function addTranslate3dY(value) {
     }
   
     const element = document.getElementById('ua-bottom-sheet'); 
-    const currentTransform = window.getComputedStyle(element).getPropertyValue('transform');
+    //const currentTransform = window.getComputedStyle(element).getPropertyValue('transform');
   
     const style = window.getComputedStyle(element);
     const matrix = new DOMMatrixReadOnly(style.transform);
@@ -163,13 +166,13 @@ UacanadaMap.api.debounce = (func, delay) => {
 
 
 UacanadaMap.api.openCertainTab = (contextButton) => {
-  let tab = contextButton[0]?.getAttribute('data-ua-tabtarget')
+  let tab = contextButton[0]?.getAttribute("data-ua-tabtarget")
   if(tab){
 
   const slides = UacanadaMap.swipers.buttonsSlider.slides
   let tabIndex = 0
   for (let i = 0; i < slides.length; i++) {
-      if (slides[i].getAttribute('data-ua-butt-cat') == tab) {
+      if (slides[i].getAttribute("data-ua-butt-cat") == tab) {
           tabIndex = i;
           break; 
       }
@@ -184,58 +187,21 @@ UacanadaMap.api.openCertainTab = (contextButton) => {
 
 
 UacanadaMap.api.setBottomSheetSize = (i) => {
-  modes.forEach(modeClass => {
-    offCanvasPanel.removeClass(modeClass)
-  });
-  offCanvasPanel.addClass(modes[i]).attr("data-ua-size", String(i)).css('transform',`translate3d(0,${sizes[i]}vh,0)`)
+ 
+  $('#ua-bottom-sheet').attr("data-ua-size", String(i)).css('transform',`translate3d(0,${sizes[i]}vh,0)`)
+  UacanadaMap.console.log(`[UCMP debug]: `,{i,modes,sizes},$('#ua-bottom-sheet').attr("data-ua-size"))
+
 }
 
 UacanadaMap.api.OffCanvasPanelHandler = () => {
   
-  
+    const offCanvasPanel =  $('#ua-bottom-sheet');
     const fullHeight = modes.length - 2
     const bigHeight = modes.length - 3
     let once = true
-
-  
-    offCanvasPanel.on("hide.bs.offcanvas", () => {
-        offCanvasPanel.css('transform',`translate3d(0,100vh,0)`)
-    // $('body').css('overflow', '').removeAttr('data-bs-overflow');
-    });
-
-    offCanvasPanel.on("hidden.bs.offcanvas", () => {
-      UacanadaMap.api.setBottomSheetSize(0)
-        once = true
-    });
-    offCanvasPanel.on("show.bs.offcanvas", () => {
-      UacanadaMap.api.setBottomSheetSize(1)
-       
-        try {
-            UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
-        } catch (error) {
-            
-        }
-    
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-const debouncedDetectSwipeBehavior = UacanadaMap.api.debounce(detectSwipeBehavior, 10);
-
-
-const waitContent = setInterval(() => {
-
-  if (UacanadaMap.swipers.canActivateVertical) {
+    const debouncedDetectSwipeBehavior = UacanadaMap.api.debounce(detectSwipeBehavior, 10);
+    const waitContent = setInterval(() => {
+    if (UacanadaMap.swipersContext.canActivateVertical) {
     clearInterval(waitContent);
 
    UacanadaMap.swipers.vertical = new Swiper(".vertical-places-list", {
@@ -256,6 +222,7 @@ const waitContent = setInterval(() => {
 
    
     function handleSwiperGesture(s) {
+     
       let previousProgress = 0;
       let prevClientY = null;
       let prevClientX = null;
@@ -276,10 +243,10 @@ const waitContent = setInterval(() => {
       };
      
      
-      s.on('reachBeginning', () => console.log('reachBeginning'))
-      s.on('reachEnd', () =>{
+     // s.on('reachBeginning', () => console.log('reachBeginning'))
+      // s.on('reachEnd', () =>{
       
-      } )
+      // } )
    
       s.on('touchStart', (s,e) => { 
         
@@ -294,32 +261,19 @@ const waitContent = setInterval(() => {
       });
       
       s.on('touchMove', (swiperEvent,event) => {
+
         const { clientY , clientX } = event;
         const swiper = UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex] // TODO CHECK AND DEBUG
-
-       
-      
-       
-  
         if (!event.debounceHandled && !event.preventedByNestedSwiper && !handled) {
-
           const deltaX = Math.abs(clientX-prevClientX)
           const deltaY = Math.abs(clientY-prevClientY)
           const isDiagonal = deltaX >= deltaY * 0.8
           const currentTime = new Date().getTime();
           const elapsedTime = currentTime - startTime;
-
-         
           if (prevClientY !== null && !isDiagonal && elapsedTime > 4) {
-
-           
-        
-            
             const swipeUp = clientY < prevClientY
             const swipeDown = clientY > prevClientY
-
             if(!swipeDown && !swipeUp) return
-
             const gestureDown = swiper.progress < previousProgress
             const gestureUp = swiper.progress > previousProgress
             const hasScroll = swiper.virtualSize > swiper.size
@@ -345,32 +299,15 @@ const waitContent = setInterval(() => {
              }  
              
 
-              duration.up += elapsedTime;
+                duration.up += elapsedTime;
                 dstnc.up  += distance;
-
-
-
-                
-                
-
-                
-                
-
                 const releaseScrollUp = (hasScroll && isBottom && !gestureDown ) || !hasScroll ||  !isFH
                 const inTheEnd = isFH&& isBottom && !gestureDown && hasScroll && swiper.progress > 1.013
-
-               // console.log( Number(offCanvasPanel.attr("data-ua-size")) , fullHeight)
-
-               if(inTheEnd) {
+              if(inTheEnd) {
                   return offCanvasPanel.offcanvas('hide')
                }
-               
-
-
-
-                if(releaseScrollUp) {
+               if(releaseScrollUp) {
                //   console.log(` ${gestureUp?'⬆️':gestureDown?'⬇️':'?'}  releaseScrollUp=${releaseScrollUp} clientY=${clientY} prevClientY=${prevClientY}  ${hasScroll?'📜':' '}  ${isBottom?'🔚':''}   ${isTop?'🔝':''}  elapsedTime=${elapsedTime} progress=${swiper.progress} velocity=${swiper.velocity} touchStartTime=${swiper.touchEventsData.touchStartTime}`)
-               
                  handled = debouncedDetectSwipeBehavior({ up:true, down:false, t: duration.up, d: dstnc });
                 } else {
                  // console.log({hasScroll, isTop,isBottom, gestureDown, gestureUp, clientY, prevClientY})
@@ -383,14 +320,8 @@ const waitContent = setInterval(() => {
                 duration.down  += elapsedTime;
 
                 const releaseScrollDown = (hasScroll && !gestureUp && isTop ) || !hasScroll
-
-
-               
-
-                if(releaseScrollDown) {
-            //      console.log(` ${gestureUp?'⬆️':gestureDown?'⬇️':'?'}  releaseScrollDown=${releaseScrollDown} clientY=${clientY} prevClientY=${prevClientY}  ${hasScroll?'📜':' '}  ${isBottom?'🔚':''}   ${isTop?'🔝':''}  elapsedTime=${elapsedTime} progress=${swiper.progress} velocity=${swiper.velocity} touchStartTime=${swiper.touchEventsData.touchStartTime}`)
-               
-                  handled = debouncedDetectSwipeBehavior({ down:true, up:false, t: duration.down , d: dstnc  });
+               if(releaseScrollDown) {
+                   handled = debouncedDetectSwipeBehavior({ down:true, up:false, t: duration.down , d: dstnc  });
 
                 } else{
                  // console.log({hasScroll, isTop,isBottom, gestureDown, gestureUp, clientY, prevClientY})
@@ -431,7 +362,7 @@ const waitContent = setInterval(() => {
 
 
 
-UacanadaMap.swipers.createButtonSlide = (tab, index) => {
+UacanadaMap.swipersContext.createButtonSlide = (tab, index) => {
   const { color, icon, slug } = tab;
   const isActive = index === 0 ? "swiper-slide-active" : "";
   return `<div class="swiper-slide ${isActive}" data-ua-butt-cat="${slug}">
@@ -442,7 +373,7 @@ UacanadaMap.swipers.createButtonSlide = (tab, index) => {
 };
 
 
-UacanadaMap.swipers.createContentSlide = (tab, index) => {
+UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
   const { color, description, footer, icon, slug, title } = tab;
   const isActive = index === 0 ? "swiper-slide-active" : "";
   return `<div class="swiper-slide p-0 ${isActive}" data-parent-category="${slug}" style="height:${window.innerHeight}px">
@@ -458,7 +389,7 @@ UacanadaMap.swipers.createContentSlide = (tab, index) => {
                   </li>
               </ul>
               <div class="swiper-scrollbar"></div>
-              <div class="space-filler w-100 h-100"></div>
+         
               <div class="places-tab-footer">${footer}</div>
           </div>
           </div>

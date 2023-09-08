@@ -2,39 +2,40 @@
 define("forms/submitPlace", [
   "core/variables" /*   Global object UacanadaMap  */,
 ], function (UacanadaMap) {
-  let canSendForm = true;
+  
+  
+  UacanadaMap.run.submitPlace = ()=> {
+    let canSendForm = true;
  
-  $("#place-creator-offcanvas").on("hidden.bs.offcanvas", () => {
-    canSendForm = true;
-  });
-
-  $("#place-creator-offcanvas").on("show.bs.offcanvas", () => {
-    $("#ua-form-event-holder").html('');
-    UacanadaMap.api.expandMap(`contextmenuItems`);
-    UacanadaMap.api.hideBrandTitle(true);
-    UacanadaMap.api.locationSelection.cleanMarker()
-  });
-
-
-  document
-    .getElementById("placeForm")
-    .addEventListener("submit", async (event) => {
+    $("#place-creator-offcanvas").on("hidden.bs.offcanvas", () => {
+      canSendForm = true;
+    });
+  
+    $("#place-creator-offcanvas").on("show.bs.offcanvas", () => {
+      $("#ua-form-event-holder").html('');
+      UacanadaMap.api.expandMap(`contextmenuItems`);
+      UacanadaMap.api.hideBrandTitle(true);
+      UacanadaMap.api.locationSelection.cleanMarker()
+    });
+  
+  
+    $("#placeForm").on("submit.uacanada", async function(event) {
       event.preventDefault();
-
-      const form = event.target;
-
+    
+      const form = $(this)[0]; // Native DOM element
+    
       if (UacanadaMap.currentmarker) {
         UacanadaMap.map.removeLayer(UacanadaMap.currentmarker);
       }
-
+    
       if (!canSendForm) {
         UacanadaMap.console.log("Already Sent!!!");
         return;
       }
-
+    
       let formIsValid = form.checkValidity();
-      form.classList.add("was-validated");
-
+      $(form).addClass("was-validated");
+    
       if (!formIsValid) {
         checkFormValidation();
         UacanadaMap.currentmarker
@@ -48,15 +49,13 @@ define("forms/submitPlace", [
         await handleSubmit(form);
       }
     });
+    
+
+  }
+
+
 
   function checkFormValidation() {
-    const checkAndToggleAccordion = (selector, inputSelector) => {
-      const accordion = $(selector);
-      if (!$(inputSelector).val() && !accordion.hasClass("show")) {
-        accordion.collapse("toggle");
-      }
-    };
-
     checkAndToggleAccordion(
       "#address-accordion-collapseOne",
       "#ua-newplace-city, #location-province"
@@ -66,6 +65,22 @@ define("forms/submitPlace", [
       $("#desc-eng").click();
     }
   }
+
+
+
+
+  const checkAndToggleAccordion = (selector, inputSelector) => {
+    const accordion = $(selector);
+    if (!$(inputSelector).val() && !accordion.hasClass("show")) {
+      accordion.collapse("toggle");
+    }
+  };
+
+
+
+
+
+
 
   async function handleSubmit(form) {
     canSendForm = false;

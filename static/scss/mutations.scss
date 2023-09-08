@@ -1,6 +1,7 @@
 $animationDuration: 1s;
 $animationTiming: ease-out;
 $filterValues: saturate(1) grayscale(1) brightness(1.1) contrast(1.1) opacity(0.7);
+$filterValuesAddPlaceMode: grayscale(0.9);
 
 
 
@@ -44,10 +45,24 @@ $filterValues: saturate(1) grayscale(1) brightness(1.1) contrast(1.1) opacity(0.
     }
 }
 
+#ua-logo-wrapper{
+    transition: transform .2s ease-in;
+    transform: translate3d(-300px,0,0);
+    z-index: 666;
+    span {
+        background: url(/assets/uploads/system/site-logo.png) no-repeat;
+        background-position: center;
+        background-size: contain;
+        backdrop-filter: blur(3px);
+    }
+    i.fa-home{
+        color: transparent;
+    }
+}
+
+
 .brand-container {
     transition: all 0.3s ease-out;
-    z-index: 13;
-   
 }
 
 
@@ -55,7 +70,7 @@ $filterValues: saturate(1) grayscale(1) brightness(1.1) contrast(1.1) opacity(0.
 body.uacanada-map-page {
     .brand-container {
         margin-top: 2rem;
-
+        z-index: 13;
         .border-bottom {
             border-color: transparent !important;
         }
@@ -88,6 +103,13 @@ body.uacanada-map-page.map-touched {
         filter: none;
     }
 
+    
+
+
+    #ua-logo-wrapper{
+        transform: translate3d(0,0,0);
+    }
+
     .brand-container {
         transform: translate3d(0, -400px, 0);
     }
@@ -100,7 +122,7 @@ body.uacanada-map-page.map-touched {
 
 body.uacanada-map-page.map-touched.addPlaceMode {
     img.leaflet-tile {
-        filter: $filterValues;
+        filter: $filterValuesAddPlaceMode;
     }
 
     .leaflet-marker-pane{
@@ -116,29 +138,39 @@ body.uacanada-map-page.map-touched.addPlaceMode {
 
 
 
-.before-map-expand{
-    .ua-markers{
-
+body.before-map-expand:not(.map-touched) {
+    .ua-markers {
         .circle-icon {
             background: #e3e3e3;
         }
-        .circle-icon:after{
+        .circle-icon:after {
             visibility: hidden;
         }
         .badge-text {
             color: gray;
         }
-
-    } 
+    }
 
     .leaflet-marker-icon.mycluster {
-       
         color: transparent;
         filter: drop-shadow(1px 1px 5px black);
-        width: 30px!important;
+        width: 30px !important;
     }
+
    
 }
+
+
+body.addPlaceMode{
+    #targetForNewPlaceWrapper{
+      z-index: 500;
+      background:radial-gradient(transparent, rgba(7, 25, 75, 0.3));
+    }
+    [component="bottombar"]{
+        transform: translate3d(0,100%, 0);
+    }
+}
+
 
 .place-pic{
     transition: .2s width;

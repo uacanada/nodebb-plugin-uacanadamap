@@ -38,7 +38,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
     }
   
     function shiftMarkersWithCloseNeighbors(markers, forceShift) {
-      const {
+       const {
         virtZoom,
         shiftX,
         shiftY,
@@ -46,31 +46,29 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         lngDistanceTtrigger,
       } = UacanadaMap.markerSettings;
       const { L } = UacanadaMap;
-      const shift = calculateDegreesFromPixels(shiftX, shiftY, virtZoom);
-      const treshold = calculateDegreesFromPixels(
-        lngDistanceTtrigger,
-        latDistanceTtrigger,
-        virtZoom
-      );
+
+      const smallerShift = calculateDegreesFromPixels(shiftX / 4, shiftY / 4, virtZoom);
+      const smallerTreshold = calculateDegreesFromPixels(lngDistanceTtrigger / 4, latDistanceTtrigger / 4, virtZoom);
+
       let groups = [];
   
       for (let i = 0; i < markers.length; i++) {
-        groups[i] = [markers[i]];
+        groups[i] = [markers[i].marker];
       }
       for (let i = 0; i < markers.length; i++) {
-        const currentMarker = markers[i];
+        const currentMarker = markers[i].marker;
   
         let hasNeighbors = false;
   
         for (let j = i + 1; j < markers.length; j++) {
-          const otherMarker = markers[j];
+          const otherMarker = markers[j].marker;
           if (
             Math.abs(
               currentMarker.getLatLng().lat - otherMarker.getLatLng().lat
-            ) < treshold.lat &&
+            ) < smallerTreshold.lat &&
             Math.abs(
               currentMarker.getLatLng().lng - otherMarker.getLatLng().lng
-            ) < treshold.lng
+            ) < smallerTreshold.lng
           ) {
             hasNeighbors = true;
   
@@ -82,51 +80,38 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
           }
         }
       }
+
+     
+      
   
       const markerGroups = groups.filter((group) => group.length > 1);
       if (forceShift) {
         markerGroups.forEach((group) => {
-
           const groupSize = group.length;
-  
-          group.forEach((marker, index) => {
-            const m = UacanadaMap.allPlaces[marker.tid];
-            const realGps = m.marker._latlng || [
-              Number(m.gps[0]),
-              Number(m.gps[1]),
-            ];
-            const idx = index + 1;
-  
-            m.neighborIndex = index;
-            m.neighborsCount = groupSize;
-            m.neighbors = group;
-  
-            const currentLatLng = marker.getLatLng();
-            const randomMul = getRandomNumber();
-            const shiftedLatLng = L.latLng(
-              currentLatLng.lat - shift.lat * idx * 0.3,
-              currentLatLng.lng + shift.lng * idx * randomMul
-            );
-  
-            m.shifted = true;
-            marker.setLatLng(shiftedLatLng);
-            L.polyline([realGps, shiftedLatLng], {
-              weight: 1,
-              color: "#ff2424",
-              opacity: 0.6,
-              dashArray: "5, 5",
-            }).addTo(UacanadaMap.map);
-            const markerDot = L.divIcon({
-              className: "ua-marker-dot",
-              html: `📍`,
-              iconSize: [15, 15],
-              iconAnchor: [7, 7],
-            });
-            L.marker(realGps, { icon: markerDot }).addTo(UacanadaMap.map);
+           group.forEach((marker, index) => {
+            if(index>0){
+              const m = UacanadaMap.allPlaces[marker.tid];
+              m.neighborIndex = index;
+              m.neighborsCount = groupSize;
+              m.neighbors = group;
+              m.shifted = true;
+              const SHIFT_STEP_PX = 50
+              const shiftDistance = SHIFT_STEP_PX*index
+              const currentIcon = m.marker.getIcon();
+              const currentHtml = currentIcon.options.html;
+              m.marker.setIcon(L.divIcon({
+                className: currentIcon.options.className+' shifted-marker',
+                html: `<div class="shifted-marker-wrapper" style="margin-top: -${shiftDistance}px;">
+                  ${currentHtml}
+                  <div class="shifted-marker-leg" style="height: ${shiftDistance+22}px;"></div>
+                </div>`,
+                iconSize: currentIcon.options.iconSize,
+                iconAnchor: currentIcon.options.iconAnchor
+              }));
+            }
           });
         });
       }
-  
       return markerGroups;
     }
   
@@ -135,23 +120,42 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       
   
       UacanadaMap.api.cleanUp();
-      const { L } = UacanadaMap;
-      for (const [index, item] of array.entries()) {
-        if (!item.placeCategory || !item.latlng[0]) continue;
-        const newMarker = UacanadaMap.api.createMarker(index,item)
-        UacanadaMap.mapLayers.markers.addLayer(newMarker);
-      }
+      UacanadaMap.map.removeLayer( UacanadaMap.categoryClusters['allMarkersCluster'] )
+      
+      
+     
+          for (const [index, item] of array.entries()) {
+            if (!item.placeCategory || !item.latlng[0]) continue;
+
+            const newMarker = UacanadaMap.api.createMarker(index,item);// Replace with your custom marker creation code
+            const { visibleOnlyWhenChosen } = ajaxify.data.UacanadaMapSettings.subCategories.find(({ slug }) => slug === item.placeCategory) || {};
+            if(!visibleOnlyWhenChosen || visibleOnlyWhenChosen !== 'on'){
+              UacanadaMap.categoryClusters['allMarkersCluster'].addLayer(newMarker);
+            }
+
+            // Add marker to the respective category cluster
+            if (UacanadaMap.categoryClusters[item.placeCategory]) {
+                UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
+
+               // UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[item.placeCategory].getLayers());
+            }
+        }
+
+       
+       
+
+        try {
+         // shiftMarkersWithCloseNeighbors(UacanadaMap.allMarkersMixed, true);
+          UacanadaMap.allPlacesArray = Object.values(UacanadaMap.allPlaces);
+          shiftMarkersWithCloseNeighbors(UacanadaMap.allPlacesArray, true);
+
+        } catch (error) {
+          UacanadaMap.console.log(error)
+        }
+       
+        
   
-      UacanadaMap.mapLayers.markers.addTo(UacanadaMap.map);
-  
-      try {
-        shiftMarkersWithCloseNeighbors(
-          UacanadaMap.mapLayers.markers.getLayers(),
-          true
-        );
-      } catch (error) {
-        console.log(error);
-      }
+      
   
      // UacanadaMap.api.mapReLoaded(UacanadaMap.initUaMapCount);
       return UacanadaMap.initUaMapCount;

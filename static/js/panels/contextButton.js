@@ -8,7 +8,9 @@ define('panels/contextButton',["core/variables" /*   Global object UacanadaMap  
         UacanadaMap.swipers.contextButton.slideTo(UacanadaMap.contextButton.router.text)
          setTimeout(() => {
           
-                 UacanadaMap.swipers.contextButton.slideTo(to)
+                if(!UacanadaMap.swipers.contextButton.destroyed){
+                    UacanadaMap.swipers.contextButton.slideTo(to)
+                } 
                 
              // TODO PREVENT IF CHNAGED
              

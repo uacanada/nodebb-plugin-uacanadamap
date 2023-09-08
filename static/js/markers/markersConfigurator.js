@@ -204,7 +204,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
             index
           };
     
-              UacanadaMap.currentSortedMarkers.push({ tid, lat: latlng[0],  lng: latlng[1], json: item, html: cardHtml});
+            UacanadaMap.currentSortedMarkers.push({ tid, lat: latlng[0],  lng: latlng[1], json: item, html: cardHtml});
            
           if (eventTimestamp > 0) {
               UacanadaMap.TEMP.eventsArray.push({tid, eventTimestamp, everyWeek: eventWeekDay, category: placeCategory, eventcategory:eventCategory, tags: placetags});

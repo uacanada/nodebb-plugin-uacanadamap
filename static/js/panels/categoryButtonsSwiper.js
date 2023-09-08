@@ -28,20 +28,18 @@ define("panels/categoryButtonsSwiper", [
     }
   };
 
-  const initializeСategoryButtonsSwiper = (buttonsHtml) => {
+  const initializeCategoryButtonsSwiper = (buttonsHtml) => {
     const { L, Swiper } = UacanadaMap;
     try {
       const btnDiv = L.DomUtil.get("ua-horizontal-buttons-wrapper");
       setupDomEvents(btnDiv);
 
-      if ($("#ua-place-buttons").hasClass("filled")) {
-        console.log("Swiper only update");
-        return UacanadaMap.horizontalButtons.update();
-      }
+      if ($("#ua-place-buttons").hasClass("filled") && !UacanadaMap.swipers.horizontalButtons?.destroyed) { return UacanadaMap.swipers.horizontalButtons.update();  }
+     // if ($("#ua-place-buttons").hasClass("filled")) { return UacanadaMap.swipers.horizontalButtons.update();  }
 
       appendButtonsHtml(buttonsHtml);
 
-      UacanadaMap.horizontalButtons = new Swiper("#ua-place-buttons", {
+      UacanadaMap.swipers.horizontalButtons = new Swiper("#ua-place-buttons", {
         slidesPerView: "auto",
         observer: true,
         direction: "horizontal",
@@ -56,7 +54,7 @@ define("panels/categoryButtonsSwiper", [
     }
   };
 
-  UacanadaMap.api.createСategoryButtonsSwiper = (selected) => {
+  UacanadaMap.api.createCategoryButtonsSwiper = (selected) => {
     let options = "";
     let total = 0;
     let buttonsHtml = "";
@@ -73,7 +71,7 @@ define("panels/categoryButtonsSwiper", [
     var catFields =
       '<option value="">All places: ' + total + "</option>" + options;
     $("#location-category-filter").html(catFields);
-    if (selected) $("#mapStatusLine").addClass("show");
-    initializeСategoryButtonsSwiper(buttonsHtml);
+    
+    initializeCategoryButtonsSwiper(buttonsHtml);
   };
 });

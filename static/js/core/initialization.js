@@ -10,7 +10,7 @@ define("core/initialization", [
   "population/categoriesCreator",
   "events/mapReady",
   "ui/swipeDetectors",
-   "forms/regionCreator",
+  "forms/regionCreator",
   "markers/markersFetcher",
   "markers/markersPopulator",
   "ui/elementPositions",
@@ -56,87 +56,152 @@ define("core/initialization", [
   basicListeners,
   hooks,
   expandMap,
-
   submitPlace,
   editPlace,
   topicPost,
   registerableListeners,
   // Built-in AMD modules:
   module 
-
 ) {
-  
-  
 
- 
 
-  return async (UacanadaMap) => {
-    const firstInitTime = Date.now();
+return async (UacanadaMap) => {
+     UacanadaMap.firstInitTime = Date.now();
     const hooks = await app.require("hooks");
-
-     
-    
+   
     const reload = async (UacanadaMap) => {
-      let fromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
-   
-   
+      let allowLoadOldfromCache = (UacanadaMap.map?._leaflet_id && UacanadaMap?.allPlaces && Object.keys(UacanadaMap.allPlaces).length > 0)  ? true  : false;
       UacanadaMap.latestLocation = UacanadaMap.api.getLatestLocation();
+      
+      if (!UacanadaMap.eventListenersInstance) { 
+        UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
+      } 
+      
+    
       UacanadaMap.api.configureMapElements();
+      UacanadaMap.api.initializeSwipers();
+
       UacanadaMap.api.mapInit();
       UacanadaMap.api.addMapLayers();
       UacanadaMap.api.addMapControls();
-      UacanadaMap.api.initializeSwipers();
+
       UacanadaMap.api.createCategories();
-  
-      const markersArray = await UacanadaMap.api.fetchMarkers(fromCache);
-      UacanadaMap.api.populatePlaces(markersArray);
-  
-      UacanadaMap.api.populateTabs();
-      UacanadaMap.api.mapReLoad();
-      UacanadaMap.api.createСategoryButtonsSwiper($("#location-category-filter").val() ?? "");
-      UacanadaMap.api.mainFrameShow();
+      
+      try {
+        if (UacanadaMap && UacanadaMap.categoryClusters && UacanadaMap.categoryClusters.allMarkersCluster) {
+          const layers = UacanadaMap.categoryClusters.allMarkersCluster.getLayers();
+          if (layers && layers.length > 0 ) {
+            UacanadaMap.console.log('Already Populated');
+          } else {
+            const markers = await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache);
+            if (markers) {
+              UacanadaMap.console.log(markers);
+              UacanadaMap.api.populatePlaces(markers);
+              UacanadaMap.api.populateTabs();
+    
+            } else {
+              UacanadaMap.console.log('No markers returned from API');
+            }
+          }
+        } else {
+          UacanadaMap.console.log('UacanadaMap or its properties are not defined');
+        }
+      } catch (error) {
+        UacanadaMap.console.log('An error occurred:', error);
+      }
+      
+    
+
+      
+      UacanadaMap.api.createCategoryButtonsSwiper($("#location-category-filter").val() ?? "");
       UacanadaMap.api.OffCanvasPanelHandler();
-      UacanadaMap.api.rotateCards("horizontal");
-      UacanadaMap.api.animateCards("close");
-      UacanadaMap.api.fitElementsPosition();
+
       UacanadaMap.api.hideElements(false);
       UacanadaMap.api.cleanMarkers(true);
       UacanadaMap.api.cardsOpened(false);
       UacanadaMap.api.setCategory("");
       UacanadaMap.api.filterMarkers(false);
       UacanadaMap.api.registerHooks()
-      UacanadaMap.api.registerBasicListeners()
       UacanadaMap.api.reserveClusterForAdvMarkers()
-      if (UacanadaMap.eventListenersInstance) {
-        UacanadaMap.eventListenersInstance.reload();
-      } else {
-        UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
-        UacanadaMap.eventListenersInstance.register();
-      }
+      UacanadaMap.run.submitPlace()
+      UacanadaMap.api.mapReLoad();
+      UacanadaMap.api.mainFrameShow();
+      UacanadaMap.eventListenersInstance.register();
+      
 
-      $('#ua-horizontal-buttons-wrapper').removeClass('movedown').removeClass('hidden')
-      $('#geocoderSearchbox').removeClass('show')
+
+      
+
+      
 
       if(app.user.isAdmin){
         // Make accessible globally for debugging purposes
           window.UacanadaMap = UacanadaMap;
       }
 
+      return UacanadaMap
+
     }
 
-    reload(UacanadaMap)
+    await reload(UacanadaMap)
 
-   
+    hooks.on("action:ajaxify.start", function (data) {
+      // Improved logging by destructuring the data object
+      const { url } = data;
+      UacanadaMap.console.log("🔜 Starting AJAX request for URL:", url);
+    
+     
+     // UacanadaMap.api.detectMapViewport();
+    
+      // Use optional chaining to safely access nested properties
+      const mapRouter = ajaxify.data.UacanadaMapSettings?.mapPageRouter;
+      if (!mapRouter) return;
+    
+      // Improved variable naming for clarity
+      const isPreviousPageMapOrMain = app.previousUrl.includes(mapRouter) || app.previousUrl === '/'; // TODO: determine if map template not in map page in nodebb settings
+      const isNextPageMapOrMain = !url || '/' + url === mapRouter; // TODO: determine if map template not in map page in nodebb settings
+    
+      if (isNextPageMapOrMain) {
+        UacanadaMap.console.log("User is navigating back to the map page");
+      } else if (isPreviousPageMapOrMain) {
+        UacanadaMap.console.log("User is leaving the map page", data, app);
+    
+        // Encapsulate removal logic into a separate function
+        cleanUpMapAndUI();
+    
+      } else {
+        UacanadaMap.console.log("User is navigating between pages", data, app);
+      }
+    });
+    
+    // A separate function to handle map and UI removal
+    function cleanUpMapAndUI() {
+      UacanadaMap.eventListenersInstance.remove();
+    
+      try {
+        UacanadaMap.map.remove();
+        UacanadaMap.map = null;
+      } catch (error) {
+        UacanadaMap.console.log(error);
+      }
+    
+      UacanadaMap.needReinit = true;
+      document.body.style.overflow = '';
+      document.body.removeAttribute('data-bs-overflow');
+    
+      // Chained multiple removeClass calls
+      $('body').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened');
+    }
     
     
+    
+    
+
     hooks.on('action:ajaxify.end', (data) => {
       if(data.tpl_url === 'map'){
            
-            if(firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
-              UacanadaMap.console.log(` reinit `, data)
-               
-               
-               if(app.user.isAdmin){
+            if(UacanadaMap.firstInitTime < Date.now()-1000 || UacanadaMap.needReinit){
+              if(app.user.isAdmin){
                    console.log('ADMIN MODE ajaxify')
                    reload(UacanadaMap)
                }else{
@@ -149,9 +214,7 @@ define("core/initialization", [
    
        }else{
            
-           UacanadaMap.needReinit = true
-           document.body.style.overflow = '';
-           document.body.removeAttribute('data-bs-overflow');
+           
 
 
            if(data.tpl_url === 'post'){
@@ -163,8 +226,12 @@ define("core/initialization", [
        }
    
       
-       UacanadaMap.console.log("~~~~~end to", data);
+       UacanadaMap.console.log("🔚", data);
      });
+
+     hooks.on("action:ajaxify.coldLoad", function (data) {
+      UacanadaMap.console.log("~ coldLoad", data);
+    });
 
   };
 
