@@ -44,6 +44,8 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
         UacanadaMap.allMarkersMixed = []
         UacanadaMap.TEMP.eventsArray = []
         UacanadaMap.TEMP.placesArray = []
+        UacanadaMap.currentSortedMarkers = []
+        UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
       }
     
       UacanadaMap.api.getCatName=(slug) =>{
