@@ -397,6 +397,7 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
 };
 
 UacanadaMap.previousScrollHeight = 0
+const PANEL_SCROLL_HEIGHT = 250
 
 $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
   const $this = $(this);
@@ -408,13 +409,13 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
   }
 
 
-  if(UacanadaMap.previousScrollHeight < current && current < window.innerHeight / 2){
+  if(current > PANEL_SCROLL_HEIGHT && UacanadaMap.previousScrollHeight < current && current < window.innerHeight / 2){
     $this.animate({ scrollTop:  Math.floor(window.innerHeight * 0.8) }, 300, "swing");
   }
 
 
-  UacanadaMap.previousScrollHeight = $this.scrollTop()
-}, 100));
+  UacanadaMap.previousScrollHeight = current
+}, 150));
 
 UacanadaMap.api.scrollableBottomPanel = {
 
@@ -429,7 +430,7 @@ UacanadaMap.api.scrollableBottomPanel = {
       UacanadaMap.setTimeout(() => {  
         panel.removeClass('panel-hidden').addClass('panel-shown')
        
-        panel.animate({ scrollTop: 200 }, 300, "swing");
+        panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
 
       }, 40);
   
@@ -439,9 +440,10 @@ UacanadaMap.api.scrollableBottomPanel = {
   },
 
   close: function closePanel(){
+    let panel = $('#scrollableBottomPanel')
     panel.animate({ scrollTop: 0 }, 100);
     $("body").removeClass("botomPanelOpened")
-    let panel = $('#scrollableBottomPanel')
+    
     panel.removeClass('panel-shown').addClass('panel-hidden');
     
     UacanadaMap.setTimeout(() => {  
