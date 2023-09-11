@@ -488,6 +488,25 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 	}
 
 
+  UacanadaMap.setTimeout = function(callback, delay) {
+    let start = null;
+  
+    function animate(timestamp) {
+      if (!start) start = timestamp;
+  
+      const elapsed = timestamp - start;
+  
+      if (elapsed >= delay) {
+        callback();
+      } else {
+        requestAnimationFrame(animate);
+      }
+    }
+  
+    requestAnimationFrame(animate);
+  };
+
+
  
   return UacanadaMap;
 })

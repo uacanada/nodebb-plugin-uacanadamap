@@ -432,11 +432,11 @@ UacanadaMap.api.scrollableBottomPanel = {
     $("body").removeClass("botomPanelOpened")
     let panel = $('#scrollableBottomPanel')
     panel.removeClass('panel-shown').addClass('panel-hidden');
-    setTimeout(() => {  
+    UacanadaMap.setTimeout(() => {  
       if(panel.hasClass('panel-shown')) return;
       panel.attr('aria-hidden', 'true');
       panel.css('display', 'none'); 
-  }, 2000); 
+    }, 2000); 
 
   }
 
