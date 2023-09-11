@@ -23,7 +23,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();
         $('#place-tag-input').tagsinput({  maxChars: 24, maxTags: 10, tagClass: "badge bg-info", confirmKeys: [13, 44], trimValue: true});
         
-        setTimeout(() => {
+        UacanadaMap.setTimeout(() => {
                
                 UacanadaMap.preventMultiCall = false; // TODO check 
                 UacanadaMap.api.listenSwipes(UacanadaMap.swipeZones);
@@ -31,7 +31,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
                 
         }, 100);
         
-        setTimeout(() => {
+        UacanadaMap.setTimeout(() => {
                UacanadaMap.api.disablePropagationToMap(null)
                const {map} = UacanadaMap
 
@@ -43,7 +43,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
                             map.getMaxZoom() === map.getZoom() ||
                             map.getMaxZoom() < map.getZoom() + 2
                         ) {
-                            setTimeout(() => {
+                            UacanadaMap.setTimeout(() => {
                                 map.zoomOut(4);
                                
                             }, 500);

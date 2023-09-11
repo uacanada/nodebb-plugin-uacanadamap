@@ -32,7 +32,7 @@ const togglePanel = (direction) => {
   
     // Activate the debounce block and set a timer to deactivate it after 20ms
     isDebounceBlocked = true;
-    setTimeout(() => {
+    UacanadaMap.setTimeout(() => {
       isDebounceBlocked = false;
     }, 100);
   
@@ -416,7 +416,7 @@ UacanadaMap.api.scrollableBottomPanel = {
       let panel = $('#scrollableBottomPanel')
       panel.css('display', 'block');
       panel.attr('aria-hidden', 'false');
-      setTimeout(() => {  
+      UacanadaMap.setTimeout(() => {  
         panel.removeClass('panel-hidden').addClass('panel-shown')
        
         panel.animate({ scrollTop: 200 }, 300, "swing");

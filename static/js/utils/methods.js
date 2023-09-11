@@ -28,7 +28,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
      
       $('#geocoderSearchbox').addClass('show')
       $('#ua-horizontal-buttons-wrapper').addClass('hidden')
-      setTimeout(() => {
+      UacanadaMap.setTimeout(() => {
         UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:1200,to:UacanadaMap.contextButton.router.addplace})
       }, 400);
     
@@ -424,7 +424,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     $("body").removeClass("post-with-map").removeClass("linked-location");
     var tid = location.search.split("place=")[1] || "";
     if (UacanadaMap.adminsUID)
-      console.log("detectUrlParam() :: ", location.search);
+      
 
     if (
       map &&
@@ -436,7 +436,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     ) {
       UacanadaMap.api.expandMap(`detectUrlParam`);
       UacanadaMap.api.animateScroll();
-      setTimeout(() => {
+      UacanadaMap.setTimeout(() => {
         var maxZoom = 14;
         map.setView(UacanadaMap.allPlaces[tid].gps, maxZoom);
         $("body").addClass("linked-location");

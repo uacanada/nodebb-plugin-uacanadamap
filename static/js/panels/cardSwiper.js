@@ -425,7 +425,7 @@
       UacanadaMap.api.cardsOpened(false)
 
       
-      setTimeout(() => {
+      UacanadaMap.setTimeout(() => {
         UacanadaMap.api.fitElementsPosition();
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
@@ -474,7 +474,7 @@
       }
     }
     
-    setTimeout(() => {
+    UacanadaMap.setTimeout(() => {
       UacanadaMap.swipers.cardsCarousel.update()
     }, 1000);
     UacanadaMap.api.fitElementsPosition()

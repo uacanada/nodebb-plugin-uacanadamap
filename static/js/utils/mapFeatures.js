@@ -2,7 +2,7 @@
 define('utils/mapFeatures', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     UacanadaMap.api.debouncedShow = utils.debounce(() => { 
-        setTimeout(() => { 
+        UacanadaMap.setTimeout(() => { 
             if($('body').hasClass('cards-opened')){
                 // TODO
             }else{
@@ -70,7 +70,7 @@ define('utils/mapFeatures', ["core/variables" /*   Global object UacanadaMap  */
 				$('#fancy-hero').delay(pauseBetweenSlogans).fadeOut(fadeOutTime, function() {
 					$(this).empty().show();
 					const nextSloganLength = displaySlogan();
-					intervalId = setTimeout(() => {}, nextSloganLength * charDisplayDelay + pauseBetweenSlogans);
+					intervalId = UacanadaMap.setTimeout(() => {}, nextSloganLength * charDisplayDelay + pauseBetweenSlogans);
 				});
 			}, initialSloganLength * charDisplayDelay + pauseBetweenSlogans);
 		};
@@ -98,7 +98,7 @@ define('utils/mapFeatures', ["core/variables" /*   Global object UacanadaMap  */
         );
     
         // Create a new promise that resolves after a certain duration
-        const delay = (duration) => new Promise(resolve => setTimeout(resolve, duration));
+        const delay = (duration) => new Promise(resolve => UacanadaMap.setTimeout(resolve, duration));
     
         // Fly to the new point
         map.flyTo(newCenter, map.getZoom(), {duration: duration});
@@ -171,7 +171,7 @@ UacanadaMap.api.markerIterator = {
                 break;
             }
 
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => UacanadaMap.setTimeout(resolve, 2000));
 
             if(markersInView[i].lat && !markersInView[i].blacklisted){
 

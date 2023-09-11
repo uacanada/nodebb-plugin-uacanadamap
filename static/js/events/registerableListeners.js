@@ -15,7 +15,7 @@ class EventListeners {
 
 		function resizeend() {
 			if (new Date() - UacanadaMap.uaResizetime < UacanadaMap.uaDelta) {
-			  setTimeout(resizeend, UacanadaMap.uaDelta);
+				UacanadaMap.setTimeout(resizeend, UacanadaMap.uaDelta);
 			} else {
 			  UacanadaMap.uaResizetimeout = false;
 			  UacanadaMap.api.updateCSS();
