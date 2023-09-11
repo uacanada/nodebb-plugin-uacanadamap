@@ -45,6 +45,7 @@
     "core/initialization": "static/js/core/initialization.js",
     "core/interactions": "static/js/core/interactions.js",
     "core/configurations": "static/js/core/configurations.js",
+    "core/fragmentManager": "static/js/core/fragmentManager.js",
     "utils/handlers": "static/js/utils/handlers.js",
     "utils/mapFeatures": "static/js/utils/mapFeatures.js",
     "events/mapReady": "static/js/events/mapReady.js",

@@ -4,6 +4,7 @@ define("core/initialization", [
   "utils/extensions",
   "core/interactions",
   "core/configurations",
+  "core/fragmentManager",
   "utils/handlers",
   "utils/mapFeatures",
   "core/swipersCreator",
@@ -34,6 +35,7 @@ define("core/initialization", [
   extensions,
   interactions,
   configurations,
+  fragmentManager,
   handlers,
   mapFeatures,
   mapReady,
@@ -76,6 +78,10 @@ return async (UacanadaMap) => {
       if (!UacanadaMap.eventListenersInstance) { 
         UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
       } 
+
+      if(!UacanadaMap.fragment){
+        UacanadaMap.fragment = new fragmentManager()
+      }
       
     
       UacanadaMap.api.configureMapElements();
