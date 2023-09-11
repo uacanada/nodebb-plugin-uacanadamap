@@ -294,6 +294,8 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
                 <li class="swiper-slide list-group-item slide-tab-last-clearfix p-3 pb-5 pt-5 h-100">Add your own place!</li>
             `;
             el.innerHTML = tabHtmlContent;
+
+            $('#sheet-content-loader').append(tabHtmlContent)
           }
         }
 
@@ -307,10 +309,15 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
 
        // UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
         UacanadaMap.api.sortPlacesForTabs()
+        $('#scrollableBottomPanel').css('display','none')
 
         processEvents();
         processPlaces();
         processTabs();
+
+        UacanadaMap.TEMP.tabPopulatorHtmlObj = null
+
+
         
        
       };
