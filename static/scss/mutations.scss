@@ -171,6 +171,15 @@ body.addPlaceMode{
     }
 }
 
+body.botomPanelOpened{
+    [component="bottombar"]{
+        transform: translate3d(0,100%, 0)!important;
+    }
+    .leaflet-bottom.leaflet-right {
+        transform: translate3d(0, -100%, 0)!important;
+    }
+}
+
 
 .place-pic{
     transition: .2s width;

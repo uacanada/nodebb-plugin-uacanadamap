@@ -190,7 +190,7 @@ return async (UacanadaMap) => {
       document.body.removeAttribute('data-bs-overflow');
     
       // Chained multiple removeClass calls
-      $('body').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened');
+      $('body').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened botomPanelOpened');
     }
     
     

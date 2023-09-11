@@ -401,15 +401,16 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
 
 
 
-UacanadaMap.api.scrollableBottomSheet = {
+UacanadaMap.api.scrollableBottomPanel = {
 
 
   open: function openPanel(){
    
+      $("body").addClass("botomPanelOpened")
       let panel = $('#scrollableBottomPanel')
       panel.css('display', 'block');
       panel.attr('aria-hidden', 'false');
-      setTimeout(() => {  panel.removeClass('panel-hidden').addClass('panel-shown') }, 0);
+      setTimeout(() => {  panel.removeClass('panel-hidden').addClass('panel-shown') }, 55);
   
 
   
@@ -417,6 +418,7 @@ UacanadaMap.api.scrollableBottomSheet = {
   },
 
   close: function closePanel(){
+    $("body").removeClass("botomPanelOpened")
     let panel = $('#scrollableBottomPanel')
     panel.removeClass('panel-shown').addClass('panel-hidden');
     setTimeout(() => {  

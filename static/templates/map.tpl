@@ -16,7 +16,7 @@
             </div>
 
 
-            <div id="scrollableBottomPanel" class="pe-none user-select-none w-100 position-absolute no-propogation top-0 start-0" aria-hidden="true">
+            <div id="scrollableBottomPanel" class="pe-none user-select-none w-100 position-absolute no-propagation top-0 start-0" aria-hidden="true">
                 <div class="sheet-spacer pe-none user-select-none w-100"></div>
                 <div class="sheet-dragger pe-auto text-center w-100 user-select-none" aria-label="Draggable sheet handler">----</div>
                 <div class="sheet-content pe-auto w-100 p-1" role="region" aria-label="Sheet content">
