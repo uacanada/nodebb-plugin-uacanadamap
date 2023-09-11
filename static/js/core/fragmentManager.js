@@ -3,6 +3,30 @@ define("core/fragmentManager", [
   "core/variables" /*   Global object UacanadaMap  */,
 ], function (UacanadaMap) {
 
+  /*
+  // Example Usage
+
+  UacanadaMap.fragment.createFragment('myFragment', '<div class="card">This is a card</div>');
+  
+  // Load the fragment into a target element and execute a callback function
+  UacanadaMap.fragment.loadFragmentToElement('myFragment', 'targetElement', () => {
+    console.log('Fragment has been loaded');
+  });
+  
+  // Manipulate the HTML content within a fragment
+  UacanadaMap.fragment.manipulateFragment('myFragment', (fragment) => {
+    const newElement = document.createElement('div');
+    newElement.innerHTML = 'New Content';
+    fragment.appendChild(newElement);
+  });
+  
+  // Move HTML content from an element into a fragment
+  UacanadaMap.fragment.moveElementContentToFragment('elementToMove', 'myFragment');
+
+  */
+
+  
+
 class FragmentManager {
     constructor() {
       // An object to store fragments, keyed by their IDs.
@@ -83,27 +107,7 @@ class FragmentManager {
       this.fragments[fragmentId] = fragment;
     }
   }
-  
-/*
-  // Example Usage
+  return FragmentManager;
 
-  UacanadaMap.fragment.createFragment('myFragment', '<div class="card">This is a card</div>');
-  
-  // Load the fragment into a target element and execute a callback function
-  UacanadaMap.fragment.loadFragmentToElement('myFragment', 'targetElement', () => {
-    console.log('Fragment has been loaded');
-  });
-  
-  // Manipulate the HTML content within a fragment
-  UacanadaMap.fragment.manipulateFragment('myFragment', (fragment) => {
-    const newElement = document.createElement('div');
-    newElement.innerHTML = 'New Content';
-    fragment.appendChild(newElement);
-  });
-  
-  // Move HTML content from an element into a fragment
-  UacanadaMap.fragment.moveElementContentToFragment('elementToMove', 'myFragment');
-  
-  */
 
 })
