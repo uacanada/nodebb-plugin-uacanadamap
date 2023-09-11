@@ -432,6 +432,7 @@ UacanadaMap.api.scrollableBottomPanel = {
     $("body").removeClass("botomPanelOpened")
     let panel = $('#scrollableBottomPanel')
     panel.removeClass('panel-shown').addClass('panel-hidden');
+    panel.animate({ scrollTop: 0 }, 100);
     UacanadaMap.setTimeout(() => {  
       if(panel.hasClass('panel-shown')) return;
       panel.attr('aria-hidden', 'true');
