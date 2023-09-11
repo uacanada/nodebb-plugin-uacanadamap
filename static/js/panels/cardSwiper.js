@@ -418,10 +418,12 @@
       UacanadaMap.api.contextButtonText({text:'',delay:100,to:0})
       UacanadaMap.api.rotateCards('horizontal');
       UacanadaMap.api.animateCards('close')
+      UacanadaMap.api.scrollableBottomPanel.close()
       UacanadaMap.api.hideElements(false)
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
       UacanadaMap.api.cardsOpened(false)
+
       
       setTimeout(() => {
         UacanadaMap.api.fitElementsPosition();
