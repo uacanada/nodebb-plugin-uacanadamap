@@ -433,9 +433,10 @@ UacanadaMap.api.scrollableBottomPanel = {
     let panel = $('#scrollableBottomPanel')
     panel.removeClass('panel-shown').addClass('panel-hidden');
     setTimeout(() => {  
+      if(panel.hasClass('panel-shown')) return;
       panel.attr('aria-hidden', 'true');
       panel.css('display', 'none'); 
-  }, 1000); 
+  }, 2000); 
 
   }
 

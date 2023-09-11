@@ -322,7 +322,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
   z-index: 600;
   transform-origin: bottom !important;
-  transition: transform 0.3s ease-out;
+  transition: transform 2s ease-out;
   transform: translateY(100%) rotateX(90deg);
 
 
@@ -347,12 +347,13 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   &.panel-hidden {
-    transition: transform 0.8s ease-out;
+    transition: transform 2s ease-out;
     transform: translateY(100%) rotateX(90deg);
 
   }
   
   &.panel-shown {
+    transition: transform .2s ease-out;
     transform: translateY(0%) rotateX(0deg);
   }
 
