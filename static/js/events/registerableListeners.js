@@ -315,6 +315,7 @@ zoomendHandler() {
 		  '#cardsDown': () => UacanadaMap.api.rotateCards('horizontal'),
 		  '.ua-reload-link': () => UacanadaMap.api.reloadMainPage(),
 		  '.rotateCards': () => UacanadaMap.api.rotateCards(),
+		  '.showBottomPanel':()=>UacanadaMap.api.scrollableBottomPanel.open(),
 		  'a.ua-sort': () => {
 			const sortBy = tc('a.ua-sort').attr('data-ua-sortby');
 			if (sortBy) {
