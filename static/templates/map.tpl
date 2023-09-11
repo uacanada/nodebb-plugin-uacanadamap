@@ -16,6 +16,19 @@
             </div>
 
 
+            <div id="scrollableBottomPanel" class="pe-none w-100 h-100 position-absolute top-0 start-0 d-none">
+            
+                <div class="sheet-spacer pe-none user-select-none w-100"></div>
+                <div class="sheet-dragger pe-auto text-center w-100 user-select-none">----</div>
+                <div class="sheet-content pe-auto w-100 p-1">
+                
+                        <div id="sheet-content-loader"></div>
+                
+                </div>
+
+            </div>
+
+
 
             <div class="toast-container">
                 <div id="error-toast" class="toast top-0 start-50 translate-middle-x" role="alert" aria-live="assertive"

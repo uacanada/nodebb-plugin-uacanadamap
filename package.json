@@ -54,6 +54,7 @@
     "leaflet-providers": "^1.13.0",
     "leaflet.locatecontrol": "^0.79.0",
     "leaflet.markercluster": "^1.5.3",
+    "nodebb-plugin-uacanadamap": "^0.1.6",
     "swiper": "^10.2.0"
   }
 }
