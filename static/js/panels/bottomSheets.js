@@ -417,53 +417,43 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
   UacanadaMap.previousScrollHeight = current
 }, 150));
 
+
+
 UacanadaMap.api.scrollableBottomPanel = {
-
- 
-  
-  open: function openPanel(){
-   
-      $("body").addClass("botomPanelOpened")
-      let panel = $('#scrollableBottomPanel')
-      panel.css('display', 'block');
-      panel.attr('aria-hidden', 'false');
-      UacanadaMap.setTimeout(() => {  
-        panel.removeClass('panel-hidden').addClass('panel-shown')
-       
-        panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
-
-      }, 40);
-  
-
-  
-
+  toggleBodyClass: function(isOpened) {
+    $("body").toggleClass("bottomPanelOpened", isOpened);
   },
 
-  close: function closePanel(){
-    let panel = $('#scrollableBottomPanel')
+  getPanel: function() {
+    return $('#scrollableBottomPanel');
+  },
+
+  open: function(content) {
+    UacanadaMap.fragment.loadFragmentToElement(content, '#sheet-content-loader',null,false);
+    this.toggleBodyClass(true);
+    const panel = this.getPanel();
+    panel.show().attr('aria-hidden', 'false');
+    
+    UacanadaMap.setTimeout(() => {
+      panel.removeClass('panel-hidden').addClass('panel-shown');
+      panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
+     
+    }, 40);
+  },
+
+  close: function() {
+    
+    const panel = this.getPanel();
     panel.animate({ scrollTop: 0 }, 100);
-    $("body").removeClass("botomPanelOpened")
-    
-    panel.removeClass('panel-shown').addClass('panel-hidden');
-    
-    UacanadaMap.setTimeout(() => {  
-      if(panel.hasClass('panel-shown')) return;
-      panel.attr('aria-hidden', 'true');
-      panel.css('display', 'none'); 
-    }, 2000); 
+    this.toggleBodyClass(false);
 
+    UacanadaMap.setTimeout(() => {
+      if (panel.hasClass('panel-shown')) return;
+      panel.hide().attr('aria-hidden', 'true');
+      $('#sheet-content-loader').html('...')
+    }, 2000);
   }
-
-
-  
-
-}
-
-
-
-
-
-
+};
 
 
 

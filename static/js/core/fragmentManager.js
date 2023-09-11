@@ -23,6 +23,9 @@ define("core/fragmentManager", [
   // Move HTML content from an element into a fragment
   UacanadaMap.fragment.moveElementContentToFragment('elementToMove', 'myFragment');
 
+  // Show all
+  UacanadaMap.fragment.listAllFragments()
+
   */
 
 

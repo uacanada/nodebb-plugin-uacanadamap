@@ -214,7 +214,8 @@ define('core/configuration', function (require) {
                  }
 
                     
-                 UacanadaMap.mapLayers.bottomPanelControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa fas fa-solid fa-bars',btnclasses:'btn-info',attributes:''}));
+                 UacanadaMap.mapLayers.bottomPanelControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa fas fa-solid fa-people-roof',btnclasses:'btn-info',attributes:`data-ua-content-id="placesFromCategory-all"`}));
+                 UacanadaMap.mapLayers.bottomPanelControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa far fa-regular fa-calendar-check',btnclasses:'btn-info',attributes:`data-ua-content-id="placesWithEvents"`}));
 
 
 

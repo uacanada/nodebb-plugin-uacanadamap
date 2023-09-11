@@ -202,7 +202,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
   
       UacanadaMap.TEMP.tabPopulatorHtmlObj["events"] = eventsHtml;
 
-      UacanadaMap.fragment.createFragment('placesWithEvents-', eventsHtml); // TODO: WIP
+      UacanadaMap.fragment.createFragment('placesWithEvents', eventsHtml); // TODO: WIP
 
   }
   
