@@ -176,7 +176,7 @@ body.botomPanelOpened{
         transform: translate3d(0,100%, 0)!important;
     }
     .leaflet-bottom.leaflet-right {
-        transform: translate3d(0, -100%, 0)!important;
+        transform: translate3d(0, -100vh, 0)!important;
     }
 }
 
