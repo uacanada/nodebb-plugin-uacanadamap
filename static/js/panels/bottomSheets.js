@@ -399,4 +399,44 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
 
 
 
+
+
+UacanadaMap.api.scrollableBottomSheet = {
+
+
+  open: function openPanel(){
+   
+      let panel = $('#scrollableBottomPanel')
+      panel.css('display', 'block');
+      panel.attr('aria-hidden', 'false');
+      setTimeout(() => {  panel.removeClass('panel-hidden').addClass('panel-shown') }, 0);
+  
+
+  
+
+  },
+
+  close: function closePanel(){
+    let panel = $('#scrollableBottomPanel')
+    panel.removeClass('panel-shown').addClass('panel-hidden');
+    setTimeout(() => {  
+      panel.attr('aria-hidden', 'true');
+      panel.css('display', 'none'); 
+  }, 600); 
+
+  }
+
+
+  
+
+}
+
+
+
+
+
+
+
+
+
 })

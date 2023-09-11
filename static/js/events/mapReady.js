@@ -1,7 +1,8 @@
 'use strict';
 define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
     
-    UacanadaMap.api.disablePropagationToMap = (L,className) => {
+    UacanadaMap.api.disablePropagationToMap = (className) => {
+        const {L} = UacanadaMap
         const querySelector = className||'.no-propagation';
         const elements = document.querySelectorAll(querySelector);
         const events = ['click', 'dblclick', 'mousedown', 'mouseup', 'mouseover', 'mouseout', 'mousemove', 'contextmenu','touchstart'];
@@ -31,7 +32,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         }, 100);
         
         setTimeout(() => {
-               UacanadaMap.api.disablePropagationToMap(UacanadaMap.L,null)
+               UacanadaMap.api.disablePropagationToMap(null)
                const {map} = UacanadaMap
 
               

@@ -38,7 +38,7 @@ define('utils/expandMap',["core/variables" /*   Global object UacanadaMap  */], 
         }
     
       
-        UacanadaMap.api.disablePropagationToMap(UacanadaMap.L)
+        UacanadaMap.api.disablePropagationToMap(null)
   
         setTimeout(() => {
           UacanadaMap.api.updateCSS();
