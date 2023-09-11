@@ -429,6 +429,7 @@ UacanadaMap.api.scrollableBottomPanel = {
   },
 
   open: function(content) {
+    console.log(content)
     UacanadaMap.fragment.loadFragmentToElement(content, '#sheet-content-loader',null,false);
     this.toggleBodyClass(true);
     const panel = this.getPanel();
