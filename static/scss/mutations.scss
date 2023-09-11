@@ -133,11 +133,6 @@ body.uacanada-map-page.map-touched.addPlaceMode {
 
 }
 
-
-
-
-
-
 body.before-map-expand:not(.map-touched) {
     .ua-markers {
         .circle-icon {
@@ -175,13 +170,12 @@ body.botomPanelOpened{
     [component="bottombar"]{
         transform: translate3d(0,100%, 0)!important;
     }
+    .leaflet-control-container .filterPlaces, .leaflet-control-container .removeCards, .leaflet-control-container .rotateCards,
     .leaflet-bottom.leaflet-right {
         transform: translate3d(0, -100vh, 0)!important;
     }
 }
 
-
 .place-pic{
     transition: .2s width;
 }
-
