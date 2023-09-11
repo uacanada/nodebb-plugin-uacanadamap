@@ -398,19 +398,30 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
 
 
 
-
-
+$('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
+  const $this = $(this);
+  if ($this.scrollTop() === 0) {
+   
+    UacanadaMap.api.scrollableBottomPanel.close()
+  }
+}, 100));
 
 UacanadaMap.api.scrollableBottomPanel = {
 
-
+ 
+  
   open: function openPanel(){
    
       $("body").addClass("botomPanelOpened")
       let panel = $('#scrollableBottomPanel')
       panel.css('display', 'block');
       panel.attr('aria-hidden', 'false');
-      setTimeout(() => {  panel.removeClass('panel-hidden').addClass('panel-shown') }, 40);
+      setTimeout(() => {  
+        panel.removeClass('panel-hidden').addClass('panel-shown')
+        const pixels = $(window).height() * 60 / 100; 
+        panel.animate({ scrollTop: pixels }, 500, "swing");
+
+      }, 40);
   
 
   
