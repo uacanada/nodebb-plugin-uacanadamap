@@ -318,12 +318,12 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 
 /* New panel */
 #scrollableBottomPanel{
-  display: none;
   height: 100vh;
   overflow-y: scroll;
   z-index: 600;
   transform-origin: bottom !important;
   transition: transform 0.3s ease-out;
+  transform: translateY(100%) rotateX(90deg);
 
 
   .sheet-spacer{
@@ -347,7 +347,6 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   &.panel-hidden {
-    display: none;
     transform: translateY(100%) rotateX(90deg);
 
   }

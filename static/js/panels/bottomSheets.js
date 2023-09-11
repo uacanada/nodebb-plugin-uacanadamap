@@ -419,7 +419,7 @@ UacanadaMap.api.scrollableBottomPanel = {
       setTimeout(() => {  
         panel.removeClass('panel-hidden').addClass('panel-shown')
        
-        panel.animate({ scrollTop: 100 }, 800, "swing");
+        panel.animate({ scrollTop: 200 }, 300, "swing");
 
       }, 40);
   
@@ -435,7 +435,7 @@ UacanadaMap.api.scrollableBottomPanel = {
     setTimeout(() => {  
       panel.attr('aria-hidden', 'true');
       panel.css('display', 'none'); 
-  }, 600); 
+  }, 1000); 
 
   }
 
