@@ -343,7 +343,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 
   .sheet-content{
     background: #c6c6c6;
-    height: 35489px;
+    min-height: 100vh;
   }
 
   &.panel-hidden {

@@ -377,6 +377,8 @@
   
   UacanadaMap.api.openCards = async (topic_id,sort_by,autoplay) => {
 
+    UacanadaMap.api.scrollableBottomPanel.close()
+
        if($('body').hasClass('addPlaceMode')){
         return  UacanadaMap.api.shakeElements([".newLocationCancelButton"],'ua-shake-vert');
        } 
