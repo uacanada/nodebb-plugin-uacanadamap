@@ -428,8 +428,9 @@ UacanadaMap.api.scrollableBottomPanel = {
     return $('#scrollableBottomPanel');
   },
 
-  open: function(content) {
-    console.log(content)
+  open: function(button) {
+ 
+    let content = button.attr('data-ua-content-id')
     UacanadaMap.fragment.loadFragmentToElement(content, '#sheet-content-loader',null,false);
     this.toggleBodyClass(true);
     const panel = this.getPanel();
