@@ -209,12 +209,12 @@ define('core/configuration', function (require) {
            
                 if (app.user.isAdmin) {
                     UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'expandRightButtons', title: 'Expand Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical',btnclasses:'btn-warning',attributes:''}));
-                    UacanadaMap.mapLayers.bottomPanelControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa fas fa-solid fa-bars',btnclasses:'btn-info',attributes:''}));
+                  
                    
                  }
 
                     
-
+                 UacanadaMap.mapLayers.bottomPanelControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa fas fa-solid fa-bars',btnclasses:'btn-info',attributes:''}));
 
 
 
