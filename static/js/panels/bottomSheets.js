@@ -396,14 +396,24 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
       </div>`;
 };
 
-
+UacanadaMap.previousScrollHeight = 0
 
 $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
   const $this = $(this);
-  if ($this.scrollTop() === 0) {
-   
+  let current = $this.scrollTop()
+ 
+  if (current < 10) {
+    $this.animate({ scrollTop: 0 }, 200, "swing");
     UacanadaMap.api.scrollableBottomPanel.close()
   }
+
+
+  if(UacanadaMap.previousScrollHeight < current && current < window.innerHeight / 2){
+    $this.animate({ scrollTop:  Math.floor(window.innerHeight * 0.8) }, 300, "swing");
+  }
+
+
+  UacanadaMap.previousScrollHeight = $this.scrollTop()
 }, 100));
 
 UacanadaMap.api.scrollableBottomPanel = {
@@ -429,10 +439,11 @@ UacanadaMap.api.scrollableBottomPanel = {
   },
 
   close: function closePanel(){
+    panel.animate({ scrollTop: 0 }, 100);
     $("body").removeClass("botomPanelOpened")
     let panel = $('#scrollableBottomPanel')
     panel.removeClass('panel-shown').addClass('panel-hidden');
-    panel.animate({ scrollTop: 0 }, 100);
+    
     UacanadaMap.setTimeout(() => {  
       if(panel.hasClass('panel-shown')) return;
       panel.attr('aria-hidden', 'true');
