@@ -156,7 +156,7 @@ body.before-map-expand:not(.map-touched) {
 }
 
 
-body.addPlaceMode{
+body.uacanada-map-page.addPlaceMode{
     #targetForNewPlaceWrapper{
       z-index: 500;
       background:radial-gradient(transparent, rgba(7, 25, 75, 0.3));
@@ -166,13 +166,13 @@ body.addPlaceMode{
     }
 }
 
-body.botomPanelOpened{
+body.uacanada-map-page.botomPanelOpened{
     [component="bottombar"]{
-        transform: translate3d(0,100%, 0)!important;
+        transform: translate3d(0,100%, 0);
     }
-    .leaflet-control-container .filterPlaces, .leaflet-control-container .removeCards, .leaflet-control-container .rotateCards,
-    .leaflet-bottom.leaflet-right {
-        transform: translate3d(0, -100vh, 0)!important;
+    .leaflet-control-container .filterPlaces, 
+    .leaflet-control-container .rotateCards {
+        transform: translate3d(0, 100vh, 0);
     }
 }
 
