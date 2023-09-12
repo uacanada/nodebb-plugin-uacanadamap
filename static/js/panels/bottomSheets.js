@@ -431,7 +431,7 @@ UacanadaMap.api.scrollableBottomPanel = {
   open: function(button) {
  
     let contentId = button[0]?.getAttribute("data-ua-content-id")
-    UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',true);
+    UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader', null, true);
     this.toggleBodyClass(true);
     const panel = this.getPanel();
     panel.show().attr('aria-hidden', 'false');
