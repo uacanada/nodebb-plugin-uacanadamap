@@ -461,7 +461,7 @@ UacanadaMap.api.scrollableBottomPanel = {
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
         panel.removeClass('panel-hidden').addClass('panel-shown');
         panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
-        $("#bottomPanelCategoryButtons").removeClass("visually-hidden");
+        $("#bottomPanelCategoryButtons .swiper-wrapper").removeClass("visually-hidden");
         
         // if(wasOpenedBefore){
           

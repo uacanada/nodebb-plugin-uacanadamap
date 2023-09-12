@@ -201,6 +201,7 @@ transition: 0.1s ease;
 }
 
 
+#bottomPanelCategoryButtons .swiper-slide,
 #ua-sheet-swiper-buttons .swiper-slide {
 height: 3rem;
 width: 3rem;
@@ -208,6 +209,7 @@ border-radius: 50%;
 margin: 1rem 1rem 1rem 0;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+#bottomPanelCategoryButtons .swiper-slide button,
 #ua-sheet-swiper-buttons .swiper-slide button {
 
   background-color: white;
