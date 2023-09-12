@@ -147,9 +147,9 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
     }
  
 
-    function processFragments(categoryId,html){
-      UacanadaMap.fragment.createFragment(categoryId, html);
-      UacanadaMap.fragment.manipulateFragment(categoryId, (fragment) => {
+    function processFragments(tab,html){
+      UacanadaMap.fragment.createFragment(tab, html);
+      UacanadaMap.fragment.manipulateFragment(tab, (fragment) => {
         const wrapper = document.createElement('ul');
         wrapper.classList.add('placesList', 'p-1');
         
@@ -324,8 +324,8 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
             `;
             el.innerHTML = tabHtmlContent;
             
-            processFragments("placesFromCategory-"+slug,tabHtmlContent)// TODO: WIP
-            $('#sheet-content-loader').append(tabHtmlContent)
+            processFragments("tab-"+slug,tabHtmlContent)// TODO: WIP
+            
           }
         }
 

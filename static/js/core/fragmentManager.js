@@ -64,7 +64,6 @@ class FragmentManager {
     loadFragmentToElement(id, elementId, callback, shouldMove = true) {
       const fragment = this.fragments[id];
       if (!fragment) {
-        console.warn(`Fragment with ID ${id} not found.`);
         return;
       }
       const targetElement = document.getElementById(elementId);

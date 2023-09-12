@@ -365,7 +365,7 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
 UacanadaMap.api.createBotomPanelCategoryButton = (tab, index) => {
   const { color, icon, slug } = tab;
   
-  return `<div class="swiper-slide showBottomPanel" data-ua-content-id="placesFromCategory-${slug}">
+  return `<div class="swiper-slide showBottomPanel" data-ua-content-id="tab-${slug}">
             <button title="Open category: ${slug}" type="button">
                 <i class="fa fa-solid ${icon}" style="color: ${color};"></i>
             </button>
@@ -432,6 +432,33 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
 
 
 
+UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
+  let contentId = triggerButton[0]?.getAttribute("data-ua-content-id")
+ 
+   if(!contentId){
+    $('#sheet-content-loader').html(' <h3><i class="fa-solid fa-eye-slash"></i></h3>')
+    return false
+   }
+
+   if(UacanadaMap.fragment.fragments[contentId]){
+    UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader', () => {
+      UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#sheet-content-loader #bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true,  watchSlidesVisibility: true,  watchSlidesProgress: true, nested: false, }).on("click", (swiper, event) => {
+        UacanadaMap.console.log({swiper, event})
+      });
+     }, true);
+     return true
+   } else {
+    $('#sheet-content-loader').html(' <h3><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</h3><p class="newLocationOpenMarker">Would you like to add your own location to the map?</p>')
+    return false
+   }
+
+
+   
+}
+
+
+
+
 UacanadaMap.api.scrollableBottomPanel = {
   toggleBodyClass: function(isOpened) {
     $("body").toggleClass("bottomPanelOpened", isOpened);
@@ -441,21 +468,13 @@ UacanadaMap.api.scrollableBottomPanel = {
     return $('#scrollableBottomPanel');
   },
 
-  open: function(button) {
- 
-    let contentId = button[0]?.getAttribute("data-ua-content-id")
-    UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader', () => {
-      UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#sheet-content-loader #bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true,  watchSlidesVisibility: true,  watchSlidesProgress: true, nested: false, }).on("click", (swiper, event) => {
-        UacanadaMap.console.log({swiper, event})
-      });
-
+  open: function(triggerButton) {
+      UacanadaMap.api.loadTabToBottomPanel(triggerButton)
       this.toggleBodyClass(true);
-
-    
-
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
-      
+
+
       UacanadaMap.setTimeout(() => {
         //let wasOpenedBefore = panel.hasClass('panel-shown')
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
@@ -471,7 +490,7 @@ UacanadaMap.api.scrollableBottomPanel = {
        
       }, 120);
 
-    }, true);
+   
     
    
   },

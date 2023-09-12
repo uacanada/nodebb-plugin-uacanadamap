@@ -84,6 +84,8 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 			
 			UacanadaMap.tabCollectorTags = {}
 			UacanadaMap.TEMP.bottomPanelCategoryButtons = []
+			
+			
 			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { 
 				handleTabCategories(UacanadaMap, tab, index); 
 				UacanadaMap.TEMP.bottomPanelCategoryButtons.push(UacanadaMap.api.createBotomPanelCategoryButton(tab, index))
