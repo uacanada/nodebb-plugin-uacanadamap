@@ -74,6 +74,23 @@ $filterValuesAddPlaceMode: grayscale(0.9);
 
 }
 
+body.hiddenElements{
+
+    [component="bottombar"]{
+        transform: translate3d(0,100%, 0);
+    }
+    
+    .newLocationCreateButton, #locationSelectionLatLng {
+      opacity: 0;
+      transition: .2s;
+    }
+   
+    #mapattribution{
+        opacity:0;
+    }
+    
+}
+
 body.uacanada-map-page {
     .brand-container {
         margin-top: 2rem;
@@ -173,9 +190,12 @@ body.uacanada-map-page.addPlaceMode {
     }
 }
 
-body.uacanada-map-page.botomPanelOpened {
+body.uacanada-map-page.bottomPanelOpened {
     [component="bottombar"]{
         transform: translate3d(0,100%, 0);
+    }
+    .newLocationCreateButton{
+        transform: translate3d(0, 100vh, 0);
     }
     .leaflet-right{
         .leaflet-control-fullscreen,
