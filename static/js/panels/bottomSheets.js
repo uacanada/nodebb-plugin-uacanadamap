@@ -430,8 +430,8 @@ UacanadaMap.api.scrollableBottomPanel = {
 
   open: function(button) {
  
-    let content = button.attr('data-ua-content-id')
-    UacanadaMap.fragment.loadFragmentToElement(content, '#sheet-content-loader',null,false);
+    let contentId = button[0]?.getAttribute("data-ua-content-id")
+    UacanadaMap.fragment.loadFragmentToElement(contentId, '#sheet-content-loader',null,false);
     this.toggleBodyClass(true);
     const panel = this.getPanel();
     panel.show().attr('aria-hidden', 'false');
@@ -440,7 +440,7 @@ UacanadaMap.api.scrollableBottomPanel = {
       panel.removeClass('panel-hidden').addClass('panel-shown');
       panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
      
-    }, 40);
+    }, 100);
   },
 
   close: function() {
