@@ -402,9 +402,11 @@ const PANEL_SCROLL_HEIGHT = 250
 $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
   const $this = $(this);
   let current = $this.scrollTop()
+
+  UacanadaMap.console.log(`Scrolled: ${current}px`)
  
   if (current < 10) {
-    $this.animate({ scrollTop: 0 }, 200, "swing");
+    $this.animate({ scrollTop: 0 }, 500, "swing");
     UacanadaMap.api.scrollableBottomPanel.close()
   }
 
@@ -415,7 +417,7 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
 
 
   UacanadaMap.previousScrollHeight = current
-}, 150));
+}, 120));
 
 
 
@@ -437,8 +439,14 @@ UacanadaMap.api.scrollableBottomPanel = {
     panel.show().attr('aria-hidden', 'false');
     
     UacanadaMap.setTimeout(() => {
+      let wasOpenedBefore = panel.hasClass('panel-shown')
       panel.removeClass('panel-hidden').addClass('panel-shown');
       panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
+      if(wasOpenedBefore){
+        UacanadaMap.api.shakeElements(   ["#sheet-content-loader"], "accent-animation"  );
+      } else{
+       
+      } 
      
     }, 100);
   },
@@ -448,10 +456,10 @@ UacanadaMap.api.scrollableBottomPanel = {
     const panel = this.getPanel();
     panel.animate({ scrollTop: 0 }, 100);
     this.toggleBodyClass(false);
-
+    panel.removeClass('panel-shown').addClass('panel-hidden').attr('aria-hidden', 'true');
     UacanadaMap.setTimeout(() => {
       if (panel.hasClass('panel-shown')) return;
-      panel.hide().attr('aria-hidden', 'true');
+      panel.hide();
       $('#sheet-content-loader').html('...')
     }, 2000);
   }
