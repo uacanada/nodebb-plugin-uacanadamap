@@ -439,20 +439,20 @@ UacanadaMap.api.scrollableBottomPanel = {
     panel.show().attr('aria-hidden', 'false');
     
     UacanadaMap.setTimeout(() => {
-      let wasOpenedBefore = panel.hasClass('panel-shown')
+      //let wasOpenedBefore = panel.hasClass('panel-shown')
       panel.removeClass('panel-hidden').addClass('panel-shown');
       panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
-      if(wasOpenedBefore){
-        UacanadaMap.api.shakeElements(   ["#sheet-content-loader"], "accent-animation"  );
-      } else{
+      UacanadaMap.api.shakeElements(   ["#sheet-content-loader"], "ua-shake-vert"  );
+      // if(wasOpenedBefore){
+        
+      // } else{
        
-      } 
+      // } 
      
     }, 100);
   },
 
   close: function() {
-    
     const panel = this.getPanel();
     panel.animate({ scrollTop: 0 }, 100);
     this.toggleBodyClass(false);
@@ -460,7 +460,7 @@ UacanadaMap.api.scrollableBottomPanel = {
     UacanadaMap.setTimeout(() => {
       if (panel.hasClass('panel-shown')) return;
       panel.hide();
-      $('#sheet-content-loader').html('...')
+      $('#sheet-content-loader').html('')
     }, 2000);
   }
 };
