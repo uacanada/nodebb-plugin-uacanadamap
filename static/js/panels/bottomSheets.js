@@ -454,14 +454,15 @@ UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
   let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
   $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
   UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true,  watchSlidesVisibility: true,  watchSlidesProgress: true, nested: false, })
+  let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index ?? 0;
 
   if(UacanadaMap.fragment.fragments[contentId]){
      UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',null,true);
-     let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index ?? 0;
+    
      return {buttonIndex,contentId}
   } else {
     $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>')
-    return {buttonIndex:0}
+    return {buttonIndex}
   }   
 }
 
