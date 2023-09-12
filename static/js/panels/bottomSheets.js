@@ -444,35 +444,36 @@ UacanadaMap.api.scrollableBottomPanel = {
   open: function(button) {
  
     let contentId = button[0]?.getAttribute("data-ua-content-id")
-    UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader', null, true);
-    
-    this.toggleBodyClass(true);
+    UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader', () => {
+      UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#sheet-content-loader #bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true,  watchSlidesVisibility: true,  watchSlidesProgress: true, nested: false, }).on("click", (swiper, event) => {
+        UacanadaMap.console.log({swiper, event})
+      });
 
-    UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", {
-      slidesPerView: "auto",
-      freeMode: true,
-      watchSlidesVisibility: true,
-      watchSlidesProgress: true,
-      nested: false,
-    }).on("click", (swiper, event) => {
-      UacanadaMap.console.log({swiper, event})
-    });
+      this.toggleBodyClass(true);
 
-    const panel = this.getPanel();
-    panel.show().attr('aria-hidden', 'false');
     
-    UacanadaMap.setTimeout(() => {
-      //let wasOpenedBefore = panel.hasClass('panel-shown')
-      panel.removeClass('panel-hidden').addClass('panel-shown');
-      panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
-      UacanadaMap.api.shakeElements(   ["#sheet-content-loader"], "ua-shake-vert"  );
-      // if(wasOpenedBefore){
+
+      const panel = this.getPanel();
+      panel.show().attr('aria-hidden', 'false');
+      
+      UacanadaMap.setTimeout(() => {
+        //let wasOpenedBefore = panel.hasClass('panel-shown')
+        UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
+        panel.removeClass('panel-hidden').addClass('panel-shown');
+        panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
+        $("#bottomPanelCategoryButtons").removeClass("visually-hidden");
         
-      // } else{
+        // if(wasOpenedBefore){
+          
+        // } else{
+         
+        // } 
        
-      // } 
-     
-    }, 100);
+      }, 120);
+
+    }, true);
+    
+   
   },
 
   close: function() {
