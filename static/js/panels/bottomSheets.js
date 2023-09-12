@@ -366,10 +366,10 @@ UacanadaMap.api.createBotomPanelCategoryButton = (tab, index) => {
   const { color, icon, slug } = tab;
   
   return `<div class="swiper-slide showBottomPanel" data-ua-content-id="placesFromCategory-${slug}">
-          <button title="Open category: ${slug}" type="button">
-              <i class="fa fa-solid ${icon}" style="color: ${color};"></i>
-          </button>
-      </div>`;
+            <button title="Open category: ${slug}" type="button">
+                <i class="fa fa-solid ${icon}" style="color: ${color};"></i>
+            </button>
+        </div>`;
 };
 
 

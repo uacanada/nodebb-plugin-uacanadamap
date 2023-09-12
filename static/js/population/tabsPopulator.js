@@ -160,10 +160,10 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       
         // Add buttons
         const swiperCategoryButtons = document.createElement('div');
-        swiperCategoryButtons.classList.add('swiper', 'position-fixed', 'bottom-0', 'start-0');
         swiperCategoryButtons.id = 'bottomPanelCategoryButtons';
+        swiperCategoryButtons.classList.add('swiper', 'position-fixed', 'bottom-0', 'start-0');
       
-        const contentFragment = UacanadaMap.fragment.fragments[categoryId];
+        const contentFragment = UacanadaMap.fragment.fragments['bottomPanelCategoryButtons'];
         if (contentFragment) {
           swiperCategoryButtons.appendChild(contentFragment); // Move the fragment's content
         }
