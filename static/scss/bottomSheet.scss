@@ -200,6 +200,11 @@ transition: 0.1s ease;
   margin: 0;
 }
 
+#bottomPanelCategoryButtons{
+  background: var(--bs-body-bg);
+  z-index: 100;
+}
+
 
 #bottomPanelCategoryButtons .swiper-slide,
 #ua-sheet-swiper-buttons .swiper-slide {

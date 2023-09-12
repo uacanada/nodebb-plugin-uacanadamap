@@ -201,6 +201,7 @@ body.uacanada-map-page.bottomPanelOpened {
         .leaflet-control-fullscreen,
         .leaflet-control-locate, 
         .leaflet-control-zoom, 
+        .newLocationOpenMarker,
         .filterPlaces, 
         .rotateCards {
             transform: translate3d(0, 100vh, 0);

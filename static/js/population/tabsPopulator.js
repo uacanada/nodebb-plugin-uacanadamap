@@ -161,7 +161,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         // Add buttons
         const swiperCategoryButtons = document.createElement('div');
         swiperCategoryButtons.id = 'bottomPanelCategoryButtons';
-        swiperCategoryButtons.classList.add('swiper', 'position-fixed', 'w-100', 'bottom-0', 'start-0');
+        swiperCategoryButtons.classList.add('swiper', 'position-sticky', 'w-100', 'bottom-0', 'start-0');
       
         const contentFragment = UacanadaMap.fragment.fragments['bottomPanelCategoryButtons'];
         if (contentFragment) {
