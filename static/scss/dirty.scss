@@ -1381,12 +1381,6 @@ body.map-touched{
   }
 }
 
-[component="bottombar"],.leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen{
-  transition: transform .3s;
-  transform: translate3d(0,0,0);
-
-}
-
 #ua-context-buttons-wrapper{
   transition: bottom .3s;
  

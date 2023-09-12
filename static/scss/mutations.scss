@@ -65,7 +65,14 @@ $filterValuesAddPlaceMode: grayscale(0.9);
     transition: all 0.3s ease-out;
 }
 
+[component="bottombar"],
+.leaflet-control-zoom, 
+.leaflet-control-locate,
+.leaflet-control-fullscreen{
+  transition: transform .3s;
+  transform: translate3d(0,0,0);
 
+}
 
 body.uacanada-map-page {
     .brand-container {
@@ -156,7 +163,7 @@ body.before-map-expand:not(.map-touched) {
 }
 
 
-body.uacanada-map-page.addPlaceMode{
+body.uacanada-map-page.addPlaceMode {
     #targetForNewPlaceWrapper{
       z-index: 500;
       background:radial-gradient(transparent, rgba(7, 25, 75, 0.3));
@@ -166,7 +173,7 @@ body.uacanada-map-page.addPlaceMode{
     }
 }
 
-body.uacanada-map-page.botomPanelOpened{
+body.uacanada-map-page.botomPanelOpened {
     [component="bottombar"]{
         transform: translate3d(0,100%, 0);
     }
