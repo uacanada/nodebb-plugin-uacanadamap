@@ -165,7 +165,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       
         const contentFragment = UacanadaMap.fragment.fragments['bottomPanelCategoryButtons'];
         if (contentFragment) {
-          swiperCategoryButtons.appendChild(contentFragment); // Move the fragment's content
+          swiperCategoryButtons.appendChild(contentFragment.cloneNode(true)); 
         }
       
         fragment.appendChild(wrapper);
