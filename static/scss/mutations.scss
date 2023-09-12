@@ -170,9 +170,14 @@ body.uacanada-map-page.botomPanelOpened{
     [component="bottombar"]{
         transform: translate3d(0,100%, 0);
     }
-    .leaflet-control-container .filterPlaces, 
-    .leaflet-control-container .rotateCards {
-        transform: translate3d(0, 100vh, 0);
+    .leaflet-right{
+        .leaflet-control-fullscreen,
+        .leaflet-control-locate, 
+        .leaflet-control-zoom, 
+        .filterPlaces, 
+        .rotateCards {
+            transform: translate3d(0, 100vh, 0);
+        }
     }
 }
 
