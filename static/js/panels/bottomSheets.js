@@ -482,12 +482,14 @@ UacanadaMap.api.scrollableBottomPanel = {
 
 
       UacanadaMap.setTimeout(() => {
+
+        let buttonsVisibleBefore = $("#bottomPanelCategoryButtons").hasClass("shown")
         
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
         $("#bottomPanelCategoryButtons").addClass("shown");
         panel.removeClass('panel-hidden').addClass('panel-shown');
         panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
-        UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
+       if(!buttonsVisibleBefore) UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex(buttonIndex)
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
       }, 120);
