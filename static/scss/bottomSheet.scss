@@ -201,8 +201,13 @@ transition: 0.1s ease;
 }
 
 #bottomPanelCategoryButtons{
-  background: var(--bs-body-bg);
-  z-index: 100;
+    background: var(--bs-body-bg);
+    z-index: 700;
+    transition: .3s ease;
+    transform: translate3d(0, 100%, 0);
+    &.shown{
+      transform: translate3d(0, 0, 0); 
+    }
 }
 
 

@@ -23,7 +23,7 @@
                     <div id="sheet-content-loader" class="p-0 m-0" aria-busy="true"></div>
                 </div>
             </div>
-            <div id="bottomPanelCategoryButtons" class="position-fixed top-0 start-0 w-100"></div>
+            <div id="bottomPanelCategoryButtons" class="swiper position-fixed bottom-0 start-0 w-100"></div>
 
 
 
