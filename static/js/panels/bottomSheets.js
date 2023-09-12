@@ -362,6 +362,17 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
 
 
 
+UacanadaMap.api.createBotomPanelCategoryButton = (tab, index) => {
+  const { color, icon, slug } = tab;
+  
+  return `<div class="swiper-slide showBottomPanel" data-ua-content-id="placesFromCategory-${slug}">
+          <button title="Open category: ${slug}" type="button">
+              <i class="fa fa-solid ${icon}" style="color: ${color};"></i>
+          </button>
+      </div>`;
+};
+
+
 UacanadaMap.swipersContext.createButtonSlide = (tab, index) => {
   const { color, icon, slug } = tab;
   const isActive = index === 0 ? "swiper-slide-active" : "";
@@ -434,7 +445,19 @@ UacanadaMap.api.scrollableBottomPanel = {
  
     let contentId = button[0]?.getAttribute("data-ua-content-id")
     UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader', null, true);
+    
     this.toggleBodyClass(true);
+
+    UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", {
+      slidesPerView: "auto",
+      freeMode: true,
+      watchSlidesVisibility: true,
+      watchSlidesProgress: true,
+      nested: false,
+    }).on("click", (swiper, event) => {
+      UacanadaMap.console.log({swiper, event})
+    });
+
     const panel = this.getPanel();
     panel.show().attr('aria-hidden', 'false');
     
@@ -460,7 +483,16 @@ UacanadaMap.api.scrollableBottomPanel = {
     UacanadaMap.setTimeout(() => {
       if (panel.hasClass('panel-shown')) return;
       panel.hide();
+      try {
+        UacanadaMap.swipers.bottomPanelCategoryButtons.destroy(true,true)
+      } catch (error) {
+        UacanadaMap.console.log(error)
+      }
+      
+      
+      
       $('#sheet-content-loader').html('')
+      UacanadaMap.swipers.bottomPanelCategoryButtons = null
     }, 2000);
   }
 };

@@ -11,6 +11,9 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 				: [slug];
 		});
 	
+
+		
+
 		UacanadaMap.swipers.buttonsSlider.appendSlide(UacanadaMap.swipersContext.createButtonSlide(tab, index));
 		UacanadaMap.swipers.tabsSlider.appendSlide(UacanadaMap.swipersContext.createContentSlide(tab, index));
 		UacanadaMap.parentCategoriesObject[slug] =  {color, icon, tagCollector}
@@ -80,10 +83,23 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 		try {
 			
 			UacanadaMap.tabCollectorTags = {}
-			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { handleTabCategories(UacanadaMap, tab, index); });
+			UacanadaMap.TEMP.bottomPanelCategoryButtons = []
+			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { 
+				handleTabCategories(UacanadaMap, tab, index); 
+				UacanadaMap.TEMP.bottomPanelCategoryButtons.push(UacanadaMap.api.createBotomPanelCategoryButton(tab, index))
+			});
+
+
+			let innerButtonsHtml = UacanadaMap.TEMP.bottomPanelCategoryButtons.join('');
+			let swipperWrapperButtonsHtml = `<div class="swiper-wrapper">${innerButtonsHtml}</div>`;
+			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', swipperWrapperButtonsHtml);
+			UacanadaMap.TEMP.bottomPanelCategoryButtons = null;
+			innerButtonsHtml = null;
+			swipperWrapperButtonsHtml = null;
+
+
 		} catch (error) {
-			
-			console.error(error);
+			UacanadaMap.console.error(error);
 		}
 	}
 
@@ -96,7 +112,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 		}else if(UacanadaMap.subCategoryRouterObject[cat]){
 			UacanadaMap.subCategoryRouterObject[cat].total = 1;
 		}else{
-			console.log("no category in subCategoryRouterObject")
+			UacanadaMap.console.log("no category in subCategoryRouterObject")
 		}
 	}
 

@@ -78,7 +78,6 @@ const UacanadaMap = {
 
   placeCardDiv: "#cardsSwiperPlaceholder",
   placeCardDivFullScreen: "#cardsSwiperPlaceholder",
-
   mapRoomClass: "uacanada-map-page",
   mapLayers: {},
   hiddenControls: {},

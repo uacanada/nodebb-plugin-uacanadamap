@@ -147,6 +147,32 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
     }
  
 
+    function processFragments(categoryId,html){
+      UacanadaMap.fragment.createFragment(categoryId, html);
+      UacanadaMap.fragment.manipulateFragment(categoryId, (fragment) => {
+        const wrapper = document.createElement('ul');
+        wrapper.classList.add('placesList', 'p-1');
+        
+        // Move all fragment content into the wrapper
+        while (fragment.firstChild) {
+          wrapper.appendChild(fragment.firstChild);
+        }
+      
+        // Add buttons
+        const swiperCategoryButtons = document.createElement('div');
+        swiperCategoryButtons.classList.add('swiper', 'position-fixed', 'bottom-0', 'start-0');
+        swiperCategoryButtons.id = 'bottomPanelCategoryButtons';
+      
+        const contentFragment = UacanadaMap.fragment.fragments[categoryId];
+        if (contentFragment) {
+          swiperCategoryButtons.appendChild(contentFragment); // Move the fragment's content
+        }
+      
+        fragment.appendChild(wrapper);
+        fragment.appendChild(swiperCategoryButtons);
+      });
+    }
+
   
     function processEvents() {
       const { timestampNow } = UacanadaMap;
@@ -202,7 +228,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
   
       UacanadaMap.TEMP.tabPopulatorHtmlObj["events"] = eventsHtml;
 
-      UacanadaMap.fragment.createFragment('placesWithEvents', eventsHtml); // TODO: WIP
+      processFragments("placesWithEvents",eventsHtml)
 
   }
   
@@ -297,7 +323,8 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
                 <li class="swiper-slide list-group-item slide-tab-last-clearfix p-3 pb-5 pt-5 h-100">Add your own place!</li>
             `;
             el.innerHTML = tabHtmlContent;
-            UacanadaMap.fragment.createFragment('placesFromCategory-'+slug, tabHtmlContent); // TODO: WIP
+            
+            processFragments("placesFromCategory-"+slug,tabHtmlContent)// TODO: WIP
             $('#sheet-content-loader').append(tabHtmlContent)
           }
         }
