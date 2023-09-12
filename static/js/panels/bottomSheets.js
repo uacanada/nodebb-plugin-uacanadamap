@@ -499,6 +499,7 @@ UacanadaMap.api.scrollableBottomPanel = {
 
   close: function() {
     const panel = this.getPanel();
+    if(panel.hasClass('panel-hidden')) return;
     panel.animate({ scrollTop: 0 }, 100);
     this.toggleBodyClass(false);
     panel.removeClass('panel-shown').addClass('panel-hidden').attr('aria-hidden', 'true');
