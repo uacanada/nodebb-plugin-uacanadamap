@@ -82,7 +82,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	const createTabs = () => {
 		try {
 			
-			UacanadaMap.tabCollectorTags = {}
+			
 			UacanadaMap.TEMP.bottomPanelCategoryButtons = []
 			
 			
@@ -93,11 +93,11 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 
 
 			let innerButtonsHtml = UacanadaMap.TEMP.bottomPanelCategoryButtons.join('');
-			let swipperWrapperButtonsHtml = `<div class="swiper-wrapper visually-hidden">${innerButtonsHtml}</div>`;
-			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', swipperWrapperButtonsHtml);
-			// UacanadaMap.TEMP.bottomPanelCategoryButtons = null;
-			// innerButtonsHtml = null;
-			// swipperWrapperButtonsHtml = null; TODO: cleanup
+			
+			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', `<div class="swiper-wrapper">${innerButtonsHtml}</div>`);
+			UacanadaMap.TEMP.bottomPanelCategoryButtons = null;
+			innerButtonsHtml = null;
+			
 
 
 		} catch (error) {
@@ -123,6 +123,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	UacanadaMap.api.createCategories = () => {
 		UacanadaMap.parentCategoriesObject = {}
 		UacanadaMap.subCategoryRouterObject = {}
+		UacanadaMap.tabCollectorTags = {}
 
 		createTabs();
 		createSubCategories();

@@ -148,28 +148,28 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
  
 
     function processFragments(tab,html){
+      if(!tab || !html) return;
       UacanadaMap.fragment.createFragment(tab, html);
       UacanadaMap.fragment.manipulateFragment(tab, (fragment) => {
         const wrapper = document.createElement('ul');
-        wrapper.classList.add('placesList', 'p-1');
-        
-        // Move all fragment content into the wrapper
+        wrapper.classList.add('placesList');
         while (fragment.firstChild) {
           wrapper.appendChild(fragment.firstChild);
         }
+        fragment.appendChild(wrapper);
       
         // Add buttons
-        const swiperCategoryButtons = document.createElement('div');
-        swiperCategoryButtons.id = 'bottomPanelCategoryButtons';
-        swiperCategoryButtons.classList.add('swiper', 'position-sticky', 'w-100', 'bottom-0', 'start-0');
+        // const swiperCategoryButtons = document.createElement('div');
+        // swiperCategoryButtons.id = 'bottomPanelCategoryButtons';
+        // swiperCategoryButtons.classList.add('swiper', 'position-sticky', 'w-100', 'bottom-0', 'start-0');
       
-        const contentFragment = UacanadaMap.fragment.fragments['bottomPanelCategoryButtons'];
-        if (contentFragment) {
-          swiperCategoryButtons.appendChild(contentFragment.cloneNode(true)); 
-        }
+        // const contentFragment = UacanadaMap.fragment.fragments['bottomPanelCategoryButtons'];
+        // if (contentFragment) {
+        //   swiperCategoryButtons.appendChild(contentFragment.cloneNode(true)); 
+        // }
       
-        fragment.appendChild(wrapper);
-        fragment.appendChild(swiperCategoryButtons);
+        
+        // fragment.appendChild(swiperCategoryButtons);
       });
     }
 

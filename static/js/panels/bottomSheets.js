@@ -427,40 +427,43 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
 
 
 
+
+UacanadaMap.api.findSwipeIdByContentId = (attr) => {
+   const slides = UacanadaMap.swipers.bottomPanelCategoryButtons?.slides;
+   if(!slides) return
+    let foundSlide = null;
+    let foundIndex = -1;
+    for (let i = 0; i < slides.length; i++) {
+      if (slides[i].getAttribute('data-ua-content-id') === attr) {
+        foundSlide = slides[i];
+        foundIndex = i;
+        break;  
+      }
+    }
+    return { slide: foundSlide, index: foundIndex };
+};
+
+
 UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
   let contentId = triggerButton[0]?.getAttribute("data-ua-content-id")
- 
-   if(!contentId){
+  if(!contentId){
     $('#sheet-content-loader').html(' <h3><i class="fa-solid fa-eye-slash"></i></h3>')
-    return false
-   }
+    return {buttonIndex:0}
+  }
 
-   if(UacanadaMap.fragment.fragments[contentId]){
-    UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader', () => {
-      UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#sheet-content-loader #bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true,  watchSlidesVisibility: true,  watchSlidesProgress: true, nested: false, }).on("click", (swiper, event) => {
-        UacanadaMap.console.log({swiper, event})
-      });
-     }, true);
-     return true
-   } else {
-   
+  let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
+  $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
+  UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true,  watchSlidesVisibility: true,  watchSlidesProgress: true, nested: false, })
 
-
-      let newDiv = $('<div id="bottomPanelCategoryButtons" class="swiper position-sticky bottom-0 start-0 w-100"></div>');
-      let fragmentClone = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
-      newDiv.append(fragmentClone.childNodes);
-      let htmlString = newDiv.prop('outerHTML');
-
-    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>'+htmlString)
-    return false
-   }
-
-
-   
+  if(UacanadaMap.fragment.fragments[contentId]){
+     UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',null,true);
+     let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index ?? 0;
+     return {buttonIndex,contentId}
+  } else {
+    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>')
+    return {buttonIndex:0}
+  }   
 }
-
-
-
 
 UacanadaMap.api.scrollableBottomPanel = {
   toggleBodyClass: function(isOpened) {
@@ -472,25 +475,19 @@ UacanadaMap.api.scrollableBottomPanel = {
   },
 
   open: function(triggerButton) {
-      UacanadaMap.api.loadTabToBottomPanel(triggerButton)
+      let {buttonIndex} = UacanadaMap.api.loadTabToBottomPanel(triggerButton)
       this.toggleBodyClass(true);
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
 
 
       UacanadaMap.setTimeout(() => {
-        //let wasOpenedBefore = panel.hasClass('panel-shown')
+        
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
+        $("#bottomPanelCategoryButtons").addClass("shown");
         panel.removeClass('panel-hidden').addClass('panel-shown');
         panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
-        $("#bottomPanelCategoryButtons .swiper-wrapper").removeClass("visually-hidden");
-        
-        // if(wasOpenedBefore){
-          
-        // } else{
-         
-        // } 
-       
+        UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
       }, 120);
 
    
@@ -503,20 +500,20 @@ UacanadaMap.api.scrollableBottomPanel = {
     panel.animate({ scrollTop: 0 }, 100);
     this.toggleBodyClass(false);
     panel.removeClass('panel-shown').addClass('panel-hidden').attr('aria-hidden', 'true');
+    $("#bottomPanelCategoryButtons").removeClass("shown");
     UacanadaMap.setTimeout(() => {
       if (panel.hasClass('panel-shown')) return;
+
       panel.hide();
       try {
         UacanadaMap.swipers.bottomPanelCategoryButtons.destroy(true,true)
       } catch (error) {
         UacanadaMap.console.log(error)
       }
-      
-      
-      
-      $('#sheet-content-loader').html('')
+     $('#sheet-content-loader').html('')
+     $("#bottomPanelCategoryButtons").html('');
       UacanadaMap.swipers.bottomPanelCategoryButtons = null
-    }, 2000);
+    }, 1500);
   }
 };
 
