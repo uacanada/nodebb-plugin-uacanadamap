@@ -364,12 +364,7 @@ UacanadaMap.api.OffCanvasPanelHandler = () => {
 
 UacanadaMap.api.createBotomPanelCategoryButton = (tab, index) => {
   const { color, icon, slug } = tab;
-  
-  return `<div class="swiper-slide showBottomPanel" data-ua-content-id="tab-${slug}">
-            <button title="Open category: ${slug}" type="button">
-                <i class="fa fa-solid ${icon}" style="color: ${color};"></i>
-            </button>
-        </div>`;
+  return `<div class="swiper-slide showBottomPanel" data-ua-content-id="tab-${slug}"><button title="Open category: ${slug}" type="button"> <i class="fa fa-solid ${icon}" style="color: ${color};"></i></button></div>`;
 };
 
 
@@ -448,7 +443,10 @@ UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
      }, true);
      return true
    } else {
-    $('#sheet-content-loader').html(' <h3><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</h3><p class="newLocationOpenMarker">Would you like to add your own location to the map?</p>')
+   
+
+    const html = $('<div id="bottomPanelCategoryButtons" class="swiper position-sticky bottom-0 start-0 w-100"></div>').append(UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true)).html()
+    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>'+html)
     return false
    }
 
