@@ -445,8 +445,13 @@ UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
    } else {
    
 
-    const html = $('<div id="bottomPanelCategoryButtons" class="swiper position-sticky bottom-0 start-0 w-100"></div>').append(UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true)).html()
-    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>'+html)
+
+      let newDiv = $('<div id="bottomPanelCategoryButtons" class="swiper position-sticky bottom-0 start-0 w-100"></div>');
+      let fragmentClone = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
+      newDiv.append(fragmentClone.childNodes);
+      let htmlString = newDiv.prop('outerHTML');
+
+    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>'+htmlString)
     return false
    }
 
