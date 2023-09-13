@@ -447,19 +447,20 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
   let contentId = triggerButton[0]?.getAttribute("data-ua-content-id")
   if(!contentId){
-    $('#sheet-content-loader').html(' <h3><i class="fa-solid fa-eye-slash"></i></h3>')
     return {buttonIndex:0}
   }
+  
 
-  let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
-  $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
-  UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
+  if(!UacanadaMap.swipers.bottomPanelCategoryButtons){
+    // Create new swiper with category buttons
+    let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
+    $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
+    UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
+  }
   let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index ?? 0;
-
   if(UacanadaMap.fragment.fragments[contentId]){
      UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',null,true);
-    
-     return {buttonIndex,contentId}
+    return {buttonIndex,contentId}
   } else {
     $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>')
     return {buttonIndex}
@@ -493,7 +494,7 @@ UacanadaMap.api.scrollableBottomPanel = {
         if(!buttonsVisibleBefore) UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex(buttonIndex)
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
-      }, 120);
+      }, 100);
 
    
     
