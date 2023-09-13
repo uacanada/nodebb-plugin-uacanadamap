@@ -105,7 +105,7 @@ class EventListeners {
 				try {
 					UacanadaMap.swipers[key].destroy(true, true);
 				} catch (error) {
-					UacanadaMap.console.log(error);
+					// UacanadaMap.console.log(error);
 				}
 			 
 			}
@@ -277,11 +277,12 @@ zoomendHandler() {
 		};
 	  
 		const actions = {
-		  '.place-with-coordinates': () => UacanadaMap.api.openCards(clck(".place-with-coordinates").attr("data-marker-id"), "distance", false),
-		  'a.edit-place': () => UacanadaMap.form.editPlace(clck("a.edit-place").attr("data-topic")),
-		  '.newLocationCreateButton': () => UacanadaMap.api.locationSelection.addPlace(),
-		  '.newLocationCancelButton': () => UacanadaMap.api.locationSelection.cleanMarker(),
-		  '.newLocationOpenMarker': () => UacanadaMap.api.locationSelection.addMarker()
+		  '.edit-place': 				() => UacanadaMap.form.editPlace(clck("a.edit-place").attr("data-topic")),
+		  '.place-with-coordinates': 	() => UacanadaMap.api.openCards(clck(".place-with-coordinates").attr("data-marker-id"), "distance", false),
+		  '.newLocationCreateButton': 	() => UacanadaMap.api.locationSelection.addPlace(),
+		  '.newLocationCancelButton': 	() => UacanadaMap.api.locationSelection.cleanMarker(),
+		  '.newLocationOpenMarker': 	() => UacanadaMap.api.locationSelection.addMarker(),
+		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(tc('[data-ua-content-id]'))
 		};
 	  
 		for (const selector in actions) {
@@ -315,7 +316,7 @@ zoomendHandler() {
 		  '#cardsDown': () => UacanadaMap.api.rotateCards('horizontal'),
 		  '.ua-reload-link': () => UacanadaMap.api.reloadMainPage(),
 		  '.rotateCards': () => UacanadaMap.api.rotateCards(),
-		  '.showBottomPanel':()=>UacanadaMap.api.scrollableBottomPanel.open(tc('[data-ua-content-id]')),
+		
 		  'a.ua-sort': () => {
 			const sortBy = tc('a.ua-sort').attr('data-ua-sortby');
 			if (sortBy) {
@@ -342,7 +343,7 @@ zoomendHandler() {
 		}
 	  };
 
-	  toggleMapEvents = (enable = true) => {
+	toggleMapEvents = (enable = true) => {
 		
 		const eventList = [
 		  "zoomend",
@@ -359,7 +360,7 @@ zoomendHandler() {
 
 			
 			const handler = this[event+'Handler'];
-    		UacanadaMap.console.log(`${enable} Handler for ${event}: `, handler);
+    		
 		
 			if (enable) {
 				UacanadaMap.map.on(event,handler);
@@ -367,7 +368,7 @@ zoomendHandler() {
 				UacanadaMap.map.off(event,handler);
 			  }
 		} catch (error) {
-			console.log(error)
+			UacanadaMap.console.log(error)
 		}
 		
 		});

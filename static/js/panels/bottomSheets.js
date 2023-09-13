@@ -453,7 +453,7 @@ UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
 
   let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
   $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
-  UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true,  watchSlidesVisibility: true,  watchSlidesProgress: true, nested: false, })
+  UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
   let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index ?? 0;
 
   if(UacanadaMap.fragment.fragments[contentId]){
@@ -490,7 +490,7 @@ UacanadaMap.api.scrollableBottomPanel = {
         $("#bottomPanelCategoryButtons").addClass("shown");
         panel.removeClass('panel-hidden').addClass('panel-shown');
         panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
-       if(!buttonsVisibleBefore) UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
+        if(!buttonsVisibleBefore) UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex(buttonIndex)
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
       }, 120);
