@@ -267,7 +267,7 @@ zoomendHandler() {
 		const target = $(e.target);
 		
 	  
-		const clck = (selector) => {
+		const findEl = (selector) => {
 		  const realTarget = target.closest(selector);
 		  if (realTarget.length) {
 			e.preventDefault();
@@ -277,16 +277,16 @@ zoomendHandler() {
 		};
 	  
 		const actions = {
-		  '.edit-place': 				() => UacanadaMap.form.editPlace(clck("a.edit-place").attr("data-topic")),
-		  '.place-with-coordinates': 	() => UacanadaMap.api.openCards(clck(".place-with-coordinates").attr("data-marker-id"), "distance", false),
+		  '.edit-place': 				() => UacanadaMap.form.editPlace(findEl("a.edit-place").attr("data-topic")),
+		  '.place-with-coordinates': 	() => UacanadaMap.api.openCards(findEl(".place-with-coordinates").attr("data-marker-id"), "distance", false),
 		  '.newLocationCreateButton': 	() => UacanadaMap.api.locationSelection.addPlace(),
 		  '.newLocationCancelButton': 	() => UacanadaMap.api.locationSelection.cleanMarker(),
 		  '.newLocationOpenMarker': 	() => UacanadaMap.api.locationSelection.addMarker(),
-		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(tc('[data-ua-content-id]'))
+		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(findEl('[data-ua-content-id]'))
 		};
 	  
 		for (const selector in actions) {
-		  if (clck(selector)) {
+		  if (findEl(selector)) {
 			actions[selector]();
 			return;
 		  }
@@ -296,35 +296,32 @@ zoomendHandler() {
 
 	touchHandler = (e) => {
 		const target = $(e.target);
-		//const { UacanadaMap } = this;
-	  
-		const tc = (selector) => {
-		  const realTarget = target.closest(selector);
-		  if (realTarget.length) {
-			e.preventDefault();
-			return realTarget;
-		  }
-		  return false;
-		};
+		const findEl = (selector) => {
+			const realTarget = target.closest(selector);
+			if (realTarget.length) {
+			  e.preventDefault();
+			  return realTarget;
+			}
+			return false;
+		  };
 	  
 		const actions = {
-		  '[data-ua-tabtarget]': () => UacanadaMap.api.openCertainTab(tc('[data-ua-tabtarget]')),
-		  '#leave-as-loc': () => $("#ua-form-event-holder").html("<p>Ok</p>"),
-		  '#ua-conv-to-event': () => $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML),
-		  '.try-locate-me': () => UacanadaMap.api.tryLocate({ fornewplace: false }),
-		  '#ua-locate-me': () => UacanadaMap.api.addNewPlace(),
-		  '#cardsDown': () => UacanadaMap.api.rotateCards('horizontal'),
-		  '.ua-reload-link': () => UacanadaMap.api.reloadMainPage(),
-		  '.rotateCards': () => UacanadaMap.api.rotateCards(),
-		
-		  'a.ua-sort': () => {
-			const sortBy = tc('a.ua-sort').attr('data-ua-sortby');
+		  '#leave-as-loc': 			() => $("#ua-form-event-holder").html(""),
+		  '#ua-conv-to-event': 		() => $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML),
+		  '[data-ua-tabtarget]': 	() => UacanadaMap.api.openCertainTab(findEl('[data-ua-tabtarget]')),
+		  '.try-locate-me': 		() => UacanadaMap.api.tryLocate({ fornewplace: false }),
+		  '#ua-locate-me': 			() => UacanadaMap.api.addNewPlace(),
+		  '#cardsDown': 			() => UacanadaMap.api.rotateCards('horizontal'),
+		  '.ua-reload-link': 		() => UacanadaMap.api.reloadMainPage(),
+		  '.rotateCards': 			() => UacanadaMap.api.rotateCards(),
+		  '.ua-sort': 				() => {
+			const sortBy = findEl('a.ua-sort').attr('data-ua-sortby');
 			if (sortBy) {
 			  UacanadaMap.api.openCards(0, sortBy, false);
 			  $('#sortby-label').text(sortBy);
 			}
 		  },
-		  '.removeCards': () => {
+		  '.removeCards': 			() => {
 			e.preventDefault();
 			UacanadaMap.api.removeCards();
 			UacanadaMap.api.contextButtonText({
@@ -336,7 +333,7 @@ zoomendHandler() {
 		};
 	  
 		for (const selector in actions) {
-		  if (tc(selector)) {
+		  if (findEl(selector)) {
 			actions[selector]();
 			return;
 		  }
