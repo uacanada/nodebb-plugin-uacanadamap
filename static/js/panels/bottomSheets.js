@@ -488,7 +488,7 @@ UacanadaMap.api.scrollableBottomPanel = {
       UacanadaMap.setTimeout(() => {
 
         let buttonsVisibleBefore = $("#bottomPanelCategoryButtons").hasClass("shown")
-        
+        //UacanadaMap.api.disablePropagationToMap(null)
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
         $("#bottomPanelCategoryButtons").addClass("shown");
         panel.removeClass('panel-hidden').addClass('panel-shown');
