@@ -438,7 +438,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
   
   $('.showBottomPanel').removeClass('active-tab-button');
-  $(`#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id="${contentId}"]`).addClass("active-tab-button");
+  $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+contentId+']').addClass("active-tab-button");
 
   let buttons = UacanadaMap.swipers.bottomPanelCategoryButtons
 
