@@ -456,15 +456,19 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 
 
 UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
+
+ 
   let contentId = triggerButton[0]?.getAttribute("data-ua-content-id")
-  
+  console.log(triggerButton,contentId)
   
   if(!contentId){
     return {buttonIndex:0}
   }
+
+
   
   $('.showBottomPanel').removeClass('active-tab-button');
-  triggerButton.addClass("active-tab-button");
+  $(`#bottomPanelCategoryButtons .swiper-slide [data-ua-content-id="${contentId}"]`).addClass("active-tab-button");
 
   let buttons = UacanadaMap.swipers.bottomPanelCategoryButtons
 
