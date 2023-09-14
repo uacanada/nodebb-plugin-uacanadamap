@@ -412,6 +412,7 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(() => {
   const $panel = $('#scrollableBottomPanel');
   const currentScrollTop = $panel.scrollTop();
   
+  
   // Condition to close the scrollable bottom panel
   if (currentScrollTop < 25) {
     UacanadaMap.api.scrollableBottomPanel.close();
@@ -419,10 +420,11 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(() => {
     return;
   }
 
-  const isScrollingDown = UacanadaMap.previousScrollHeight < currentScrollTop + 10;
+  const isScrollingDown = UacanadaMap.previousScrollHeight < currentScrollTop - 10;
   const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
 
   // Condition to animate scrolling based on scroll direction and position
+  
   if (currentScrollTop > PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
     const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
     $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
