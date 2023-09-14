@@ -458,6 +458,9 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
   }   
 }
 
+
+
+const PANEL_SCROLL_HEIGHT = 250; // TODO: move magic numbers to ACP
 UacanadaMap.api.scrollableBottomPanel = {
   toggleBodyClass: function(isOpened) {
     $("body").toggleClass("bottomPanelOpened", isOpened);
