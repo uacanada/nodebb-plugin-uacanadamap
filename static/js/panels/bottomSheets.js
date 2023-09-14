@@ -411,14 +411,14 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
 
   UacanadaMap.console.log(`Scrolled: ${current}px`)
  
-  if (current < 10) {
-    $this.animate({ scrollTop: 0 }, 500, "swing");
+  if (current < 25) {
+    //$this.animate({ scrollTop: 0 }, 500, "swing");
     UacanadaMap.api.scrollableBottomPanel.close()
   }
 
 
-  if(current > PANEL_SCROLL_HEIGHT && UacanadaMap.previousScrollHeight < current && current < window.innerHeight / 2){
-    $this.animate({ scrollTop:  Math.floor(window.innerHeight * 0.8) }, 300, "swing");
+  if(current > PANEL_SCROLL_HEIGHT && UacanadaMap.previousScrollHeight < current+10 && current <  Math.floor(window.innerHeight / 2)){
+    $this.animate({ scrollTop:  Math.floor(window.innerHeight * 0.9) }, 300, "swing");
   }
 
 
@@ -444,7 +444,7 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 };
 
 
-UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
+UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
   let contentId = triggerButton[0]?.getAttribute("data-ua-content-id")
   
   
@@ -455,7 +455,9 @@ UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
   $('.showBottomPanel').removeClass('active-tab-button');
   triggerButton.addClass("active-tab-button");
 
-  if(!UacanadaMap.swipers.bottomPanelCategoryButtons){
+  let buttons = UacanadaMap.swipers.bottomPanelCategoryButtons
+
+  if(!buttons || buttons.destroyed || $("#bottomPanelCategoryButtons").html()){
     // Create new swiper with category buttons
     let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
@@ -480,16 +482,15 @@ UacanadaMap.api.scrollableBottomPanel = {
     return $('#scrollableBottomPanel');
   },
 
-  open: function(triggerButton) {
-      let {buttonIndex} = UacanadaMap.api.loadTabToBottomPanel(triggerButton)
+  open: async function(triggerButton) {
+      let {buttonIndex} = await UacanadaMap.api.loadTabToBottomPanel(triggerButton)
       this.toggleBodyClass(true);
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
 
 
       UacanadaMap.setTimeout(() => {
-
-        let buttonsVisibleBefore = $("#bottomPanelCategoryButtons").hasClass("shown")
+       let buttonsVisibleBefore = $("#bottomPanelCategoryButtons").hasClass("shown")
         //UacanadaMap.api.disablePropagationToMap(null)
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
         $("#bottomPanelCategoryButtons").addClass("shown");
