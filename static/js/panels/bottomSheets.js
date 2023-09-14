@@ -442,7 +442,8 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
   let buttons = UacanadaMap.swipers.bottomPanelCategoryButtons
 
-  if(!buttons || buttons.destroyed || $("#bottomPanelCategoryButtons").html()){
+  if(!buttons || buttons.destroyed || !$("#bottomPanelCategoryButtons").html()){
+    
     // Create new swiper with category buttons
     let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
