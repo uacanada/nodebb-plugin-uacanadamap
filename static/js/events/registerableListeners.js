@@ -306,7 +306,7 @@ zoomendHandler() {
 		  '.newLocationCancelButton': 	() => UacanadaMap.api.locationSelection.cleanMarker(),
 		  '.newLocationOpenMarker': 	() => UacanadaMap.api.locationSelection.addMarker(),
 		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(findEl('[data-ua-content-id]')),
-		  '#uacamap':					() => UacanadaMap.api.scrollableBottomPanel.close() 
+		  '.leaflet-map-pane':					() => UacanadaMap.api.scrollableBottomPanel.close() 
 		};
 	  
 		for (const selector in actions) {
