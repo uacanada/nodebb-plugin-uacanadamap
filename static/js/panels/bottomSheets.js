@@ -430,7 +430,7 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
 
 UacanadaMap.api.findSwipeIdByContentId = (attr) => {
    const slides = UacanadaMap.swipers.bottomPanelCategoryButtons?.slides;
-   if(!slides) return
+   if(!slides) return { slide: null, index: 0 };
     let foundSlide = null;
     let foundIndex = -1;
     for (let i = 0; i < slides.length; i++) {
@@ -446,12 +446,14 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 
 UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
   let contentId = triggerButton[0]?.getAttribute("data-ua-content-id")
-  $('.showBottomPanel').removeClass('active-tab-button');
-  triggerButton.addClass("active-tab-button");
+  
+  
   if(!contentId){
     return {buttonIndex:0}
   }
   
+  $('.showBottomPanel').removeClass('active-tab-button');
+  triggerButton.addClass("active-tab-button");
 
   if(!UacanadaMap.swipers.bottomPanelCategoryButtons){
     // Create new swiper with category buttons
@@ -459,7 +461,7 @@ UacanadaMap.api.loadTabToBottomPanel = (triggerButton) => {
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
     UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
   }
-  let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index ?? 0;
+  let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index;
   if(UacanadaMap.fragment.fragments[contentId]){
      UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',null,true);
     return {buttonIndex,contentId}

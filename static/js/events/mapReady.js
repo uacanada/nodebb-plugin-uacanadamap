@@ -18,7 +18,9 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         UacanadaMap.api.fitElementsPosition();
         UacanadaMap.api.detectUrlParam();
         UacanadaMap.api.fancyHeroText.start();
-        $('body').addClass('before-map-expand').removeClass('addPlaceMode')
+        $('body').addClass('before-map-expand').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened botomPanelOpened');
+        $('#bottomPanelCategoryButtons').removeClass('shown')
+        $('#scrollableBottomPanel').removeClass('panel-shown')
         UacanadaMap.isFullscreenMode = false;
         UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();
         $('#place-tag-input').tagsinput({  maxChars: 24, maxTags: 10, tagClass: "badge bg-info", confirmKeys: [13, 44], trimValue: true});
