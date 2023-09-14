@@ -402,28 +402,37 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
       </div>`;
 };
 
-UacanadaMap.previousScrollHeight = 0
-const PANEL_SCROLL_HEIGHT = 250
+// Initialize previousScrollHeight to 0 for UacanadaMap object
+UacanadaMap.previousScrollHeight = 0;
+const PANEL_SCROLL_HEIGHT = 250;
 
-$('#scrollableBottomPanel').on('scroll', utils.debounce(function () {
-  const $this = $(this);
-  let current = $this.scrollTop()
-
-  UacanadaMap.console.log(`Scrolled: ${current}px`)
- 
-  if (current < 25) {
-    //$this.animate({ scrollTop: 0 }, 500, "swing");
-    UacanadaMap.api.scrollableBottomPanel.close()
+// Attach a debounced scroll event to the '#scrollableBottomPanel' element
+$('#scrollableBottomPanel').on('scroll', utils.debounce(() => {
+  // Cache jQuery object
+  const $panel = $('#scrollableBottomPanel');
+  const currentScrollTop = $panel.scrollTop();
+  
+  // Condition to close the scrollable bottom panel
+  if (currentScrollTop < 25) {
+    UacanadaMap.api.scrollableBottomPanel.close();
+    UacanadaMap.previousScrollHeight = 0;
+    return;
   }
 
+  const isScrollingDown = UacanadaMap.previousScrollHeight < currentScrollTop + 10;
+  const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
 
-  if(current > PANEL_SCROLL_HEIGHT && UacanadaMap.previousScrollHeight < current+10 && current <  Math.floor(window.innerHeight / 2)){
-    $this.animate({ scrollTop:  Math.floor(window.innerHeight * 0.9) }, 300, "swing");
+  // Condition to animate scrolling based on scroll direction and position
+  if (currentScrollTop > PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
+    const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
+    $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
+    UacanadaMap.previousScrollHeight = updatedScrollHeight;
+  } else {
+    UacanadaMap.previousScrollHeight = currentScrollTop;
   }
+  
+}, 100));
 
-
-  UacanadaMap.previousScrollHeight = current
-}, 120));
 
 
 
