@@ -4,13 +4,6 @@ define('events/registerableListeneres',["core/variables" /*   Global object Uaca
 const bottomPanelOffcanvasTriggers = ['hide','show']
 
 class EventListeners {
-
-
-	constructor() {
-		this.previousScrollHeight = 0;
-		this.PANEL_SCROLL_HEIGHT = 250;
-	  }
-
 	register = () => {
 		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).on('click', this.clickHandler);
@@ -274,19 +267,19 @@ zoomendHandler() {
 	
 		if (currentScrollTop < 25) {
 		  this.scrollableBottomPanel.close();
-		  this.previousScrollHeight = 0;
+		  UacanadaMap.previousScrollHeight = 0;
 		  return;
 		}
 	
-		const isScrollingDown = this.previousScrollHeight < currentScrollTop - 10;
+		const isScrollingDown = UacanadaMap.previousScrollHeight < currentScrollTop - 10;
 		const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
 	
-		if (currentScrollTop > this.PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
+		if (currentScrollTop > UacanadaMap.PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
 		  const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
 		  $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
-		  this.previousScrollHeight = updatedScrollHeight;
+		  UacanadaMap.previousScrollHeight = updatedScrollHeight;
 		} else {
-		  this.previousScrollHeight = currentScrollTop;
+			UacanadaMap.previousScrollHeight = currentScrollTop;
 		}
 	  }, 100);
 	
