@@ -432,13 +432,13 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
   console.log(triggerButton,contentId)
   
   if(!contentId){
-    return {buttonIndex:0}
+    return {buttonIndex:0,contentId:null}
   }
 
 
   
   $('.showBottomPanel').removeClass('active-tab-button');
-  $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+contentId+']').addClass("active-tab-button");
+ 
 
   let buttons = UacanadaMap.swipers.bottomPanelCategoryButtons
 
@@ -448,13 +448,15 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
     UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
   }
+
+  
   let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index;
   if(UacanadaMap.fragment.fragments[contentId]){
      UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',null,true);
     return {buttonIndex,contentId}
   } else {
     $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>')
-    return {buttonIndex}
+    return {buttonIndex,contentId}
   }   
 }
 
@@ -471,7 +473,7 @@ UacanadaMap.api.scrollableBottomPanel = {
   },
 
   open: async function(triggerButton) {
-      let {buttonIndex} = await UacanadaMap.api.loadTabToBottomPanel(triggerButton)
+      let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(triggerButton)
       this.toggleBodyClass(true);
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
@@ -485,6 +487,7 @@ UacanadaMap.api.scrollableBottomPanel = {
         panel.removeClass('panel-hidden').addClass('panel-shown');
         panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
         if(!buttonsVisibleBefore) UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
+        $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+contentId+']').addClass("active-tab-button");
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex(buttonIndex)
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
       }, 100);
