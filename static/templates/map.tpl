@@ -18,7 +18,7 @@
 
             <div id="scrollableBottomPanel" class="pe-none user-select-none w-100 position-absolute no-propagation top-0 start-0" aria-hidden="true">
                
-                <div class="container">
+                <div class="container p-0">
                     <div class="sheet-spacer pe-none user-select-none w-100"></div>
                     <div class="sheet-dragger pe-auto text-center w-100 user-select-none" aria-label="Draggable sheet handler"><i class="fa-solid fa-minus"></i></div>
                     <div class="sheet-content pe-auto w-100 p-1" role="region" aria-label="Sheet content">

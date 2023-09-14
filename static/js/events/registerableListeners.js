@@ -161,6 +161,7 @@ class EventListeners {
 	}
 
 	
+
 zoomendHandler() {
 	const level = UacanadaMap.map.getZoom();
 	UacanadaMap.api.setClassWithFarawayZoom(level);
@@ -304,7 +305,8 @@ zoomendHandler() {
 		  '.newLocationCreateButton': 	() => UacanadaMap.api.locationSelection.addPlace(),
 		  '.newLocationCancelButton': 	() => UacanadaMap.api.locationSelection.cleanMarker(),
 		  '.newLocationOpenMarker': 	() => UacanadaMap.api.locationSelection.addMarker(),
-		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(findEl('[data-ua-content-id]'))
+		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(findEl('[data-ua-content-id]')),
+		  '#uacamap':					() => UacanadaMap.api.scrollableBottomPanel.close() 
 		};
 	  
 		for (const selector in actions) {
@@ -371,7 +373,7 @@ zoomendHandler() {
 		  "contextmenu",
 		  "movestart",
 		  "move",
-		  "moveend",
+		  "moveend"
 		];
 	  
 		eventList.forEach((event) => {
