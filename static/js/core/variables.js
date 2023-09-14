@@ -127,6 +127,7 @@ const UacanadaMap = {
   moveIterations: 0,
   horizontalButtons: {},
   api: {},
+  is:{},
   modules:{},
   run:{},
   Swiper: null,

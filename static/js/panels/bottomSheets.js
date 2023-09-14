@@ -442,12 +442,14 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
   let buttons = UacanadaMap.swipers.bottomPanelCategoryButtons
 
-  if(!buttons || buttons.destroyed || !$("#bottomPanelCategoryButtons").html()){
+  if(!buttons || buttons.destroyed || !UacanadaMap.api.scrollableBottomPanel.openedButtons){
     
     // Create new swiper with category buttons
     let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
     UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
+    let hasSlides = UacanadaMap.swipers.bottomPanelCategoryButtons.slides.length > 0
+    UacanadaMap.api.scrollableBottomPanel.setPanelState( { openedButtons: hasSlides, hidingButtons: hasSlides});
   }
 
   
@@ -465,6 +467,13 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
 const PANEL_SCROLL_HEIGHT = 250; // TODO: move magic numbers to ACP
 UacanadaMap.api.scrollableBottomPanel = {
+
+  setPanelState: function(state) {
+    for (const [key, value] of Object.entries(state)) {
+      UacanadaMap.api.scrollableBottomPanel[key] = value;
+    }
+  },
+
   toggleBodyClass: function(isOpened) {
     $("body").toggleClass("bottomPanelOpened", isOpened);
   },
@@ -475,14 +484,13 @@ UacanadaMap.api.scrollableBottomPanel = {
 
   open: async function(triggerButton) {
       let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(triggerButton)
-      this.toggleBodyClass(true);
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
-
-
+      this.toggleBodyClass(true);
+      this.setPanelState( { opened: true, hiding: false });
       UacanadaMap.setTimeout(() => {
-       let buttonsVisibleBefore = $("#bottomPanelCategoryButtons").hasClass("shown")
-        //UacanadaMap.api.disablePropagationToMap(null)
+        let buttonsVisibleBefore = UacanadaMap.api.scrollableBottomPanel.openedButtons || !UacanadaMap.api.scrollableBottomPanel.hidingButtons 
+        this.setPanelState( { openedButtons: true, hiding: false, hidingButtons: false });
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
         $("#bottomPanelCategoryButtons").addClass("shown");
         panel.removeClass('panel-hidden').addClass('panel-shown');
@@ -491,23 +499,23 @@ UacanadaMap.api.scrollableBottomPanel = {
         $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+contentId+']').addClass("active-tab-button");
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex(buttonIndex)
         UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
-      }, 100);
-
-   
-    
-   
+      }, 100);   
   },
 
   close: function() {
-    const panel = this.getPanel();
-    if(panel.hasClass('panel-hidden') || !$("#bottomPanelCategoryButtons").html() ) return;
-    panel.animate({ scrollTop: 0 }, 100);
-    this.toggleBodyClass(false);
-    panel.removeClass('panel-shown').addClass('panel-hidden').attr('aria-hidden', 'true');
-    $("#bottomPanelCategoryButtons").removeClass("shown");
-    UacanadaMap.setTimeout(() => {
-      if (panel.hasClass('panel-shown')) return;
+    
+    if(!UacanadaMap.api.scrollableBottomPanel.opened || !UacanadaMap.api.scrollableBottomPanel.openedButtons ) return;
 
+    const panel = this.getPanel();
+    panel.animate({ scrollTop: 0 }, 100);
+    panel.removeClass('panel-shown').addClass('panel-hidden').attr('aria-hidden', 'true');
+    this.toggleBodyClass(false);
+    this.setPanelState( { openedButtons: false, opened: false, hiding: true, hidingButtons: true });
+    $("#bottomPanelCategoryButtons").removeClass("shown");
+
+    UacanadaMap.setTimeout(() => {
+      if (!UacanadaMap.api.scrollableBottomPanel.hiding) return;
+        
       panel.hide();
       try {
         UacanadaMap.swipers.bottomPanelCategoryButtons.destroy(true,true)
@@ -516,7 +524,10 @@ UacanadaMap.api.scrollableBottomPanel = {
       }
      $('#sheet-content-loader').html('')
      $("#bottomPanelCategoryButtons").html('');
-      UacanadaMap.swipers.bottomPanelCategoryButtons = null
+
+     this.setPanelState( { openedButtons: false, opened: false, hiding: false, hidingButtons: false });
+     
+     UacanadaMap.swipers.bottomPanelCategoryButtons = null
     }, 1500);
   }
 };
