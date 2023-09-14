@@ -447,7 +447,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
     // Create new swiper with category buttons
     let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
-    UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
+    UacanadaMap.swipers.bottomPanelCategoryButtons = new Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true, centeredSlides:true })
   }
 
   

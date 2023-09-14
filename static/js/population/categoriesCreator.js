@@ -94,7 +94,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 
 			let innerButtonsHtml = UacanadaMap.TEMP.bottomPanelCategoryButtons.join('');
 			
-			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', `<div class="swiper-wrapper">${innerButtonsHtml}</div>`);
+			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', `<div class="swiper-wrapper container mx-auto p-1">${innerButtonsHtml}</div>`);
 			UacanadaMap.TEMP.bottomPanelCategoryButtons = null;
 			innerButtonsHtml = null;
 			

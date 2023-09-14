@@ -327,11 +327,12 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   transform-origin: bottom !important;
   transition: transform 2s ease-out;
   transform: translateY(100%) rotateX(90deg);
+  background: linear-gradient(0deg,rgba(5,17,32,.2),transparent);
 
 
   .sheet-spacer{
-    height: 90vh;
-    background: linear-gradient(0deg, rgba(5, 17, 32, 0.2), transparent);
+    height: 85vh;
+    
   }
 
   .sheet-dragger{
