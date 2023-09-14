@@ -402,18 +402,15 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
       </div>`;
 };
 
-// Initialize previousScrollHeight to 0 for UacanadaMap object
+
 UacanadaMap.previousScrollHeight = 0;
 const PANEL_SCROLL_HEIGHT = 250;
 
-// Attach a debounced scroll event to the '#scrollableBottomPanel' element
-$('#scrollableBottomPanel').on('scroll', utils.debounce(() => {
-  // Cache jQuery object
+UacanadaMap.api.bottomPanelScrollHandler = utils.debounce(() => {
+
   const $panel = $('#scrollableBottomPanel');
   const currentScrollTop = $panel.scrollTop();
-  
-  
-  // Condition to close the scrollable bottom panel
+
   if (currentScrollTop < 25) {
     UacanadaMap.api.scrollableBottomPanel.close();
     UacanadaMap.previousScrollHeight = 0;
@@ -423,8 +420,6 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(() => {
   const isScrollingDown = UacanadaMap.previousScrollHeight < currentScrollTop - 10;
   const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
 
-  // Condition to animate scrolling based on scroll direction and position
-  
   if (currentScrollTop > PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
     const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
     $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
@@ -432,8 +427,8 @@ $('#scrollableBottomPanel').on('scroll', utils.debounce(() => {
   } else {
     UacanadaMap.previousScrollHeight = currentScrollTop;
   }
-  
-}, 100));
+
+}, 100);
 
 
 

@@ -74,7 +74,8 @@ class EventListeners {
 		
 
 
-		
+		  $('#scrollableBottomPanel').on('scroll', UacanadaMap.api.bottomPanelScrollHandler);
+		 
 		
 
 
@@ -113,7 +114,7 @@ class EventListeners {
 		} catch (error) {
 			UacanadaMap.console.log(error)
 		}
-		
+		$('#scrollableBottomPanel').off('scroll', UacanadaMap.api.bottomPanelScrollHandler);
   
   
 	};
