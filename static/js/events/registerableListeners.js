@@ -4,6 +4,13 @@ define('events/registerableListeneres',["core/variables" /*   Global object Uaca
 const bottomPanelOffcanvasTriggers = ['hide','show']
 
 class EventListeners {
+
+
+	constructor() {
+		this.previousScrollHeight = 0;
+		this.PANEL_SCROLL_HEIGHT = 250;
+	  }
+
 	register = () => {
 		$(document).on(this.hasPointerEventSupport(), this.touchHandler);
 		$(document).on('click', this.clickHandler);
@@ -74,7 +81,7 @@ class EventListeners {
 		
 
 
-		  $('#scrollableBottomPanel').on('scroll', UacanadaMap.api.bottomPanelScrollHandler);
+		  $('#scrollableBottomPanel').on('scroll', this.bottomPanelScrollHandler);
 		 
 		
 
@@ -114,7 +121,7 @@ class EventListeners {
 		} catch (error) {
 			UacanadaMap.console.log(error)
 		}
-		$('#scrollableBottomPanel').off('scroll', UacanadaMap.api.bottomPanelScrollHandler);
+		$('#scrollableBottomPanel').off('scroll',this.bottomPanelScrollHandler);
   
   
 	};
@@ -261,6 +268,27 @@ zoomendHandler() {
 	};
 
 
+	bottomPanelScrollHandler = utils.debounce(() => {
+		const $panel = $('#scrollableBottomPanel');
+		const currentScrollTop = $panel.scrollTop();
+	
+		if (currentScrollTop < 25) {
+		  this.scrollableBottomPanel.close();
+		  this.previousScrollHeight = 0;
+		  return;
+		}
+	
+		const isScrollingDown = this.previousScrollHeight < currentScrollTop - 10;
+		const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
+	
+		if (currentScrollTop > this.PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
+		  const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
+		  $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
+		  this.previousScrollHeight = updatedScrollHeight;
+		} else {
+		  this.previousScrollHeight = currentScrollTop;
+		}
+	  }, 100);
 	
 
 	clickHandler = (e) => {

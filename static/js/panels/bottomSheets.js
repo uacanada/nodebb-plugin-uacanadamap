@@ -403,32 +403,7 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
 };
 
 
-UacanadaMap.previousScrollHeight = 0;
-const PANEL_SCROLL_HEIGHT = 250;
 
-UacanadaMap.api.bottomPanelScrollHandler = utils.debounce(() => {
-
-  const $panel = $('#scrollableBottomPanel');
-  const currentScrollTop = $panel.scrollTop();
-
-  if (currentScrollTop < 25) {
-    UacanadaMap.api.scrollableBottomPanel.close();
-    UacanadaMap.previousScrollHeight = 0;
-    return;
-  }
-
-  const isScrollingDown = UacanadaMap.previousScrollHeight < currentScrollTop - 10;
-  const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
-
-  if (currentScrollTop > PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
-    const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
-    $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
-    UacanadaMap.previousScrollHeight = updatedScrollHeight;
-  } else {
-    UacanadaMap.previousScrollHeight = currentScrollTop;
-  }
-
-}, 100);
 
 
 
