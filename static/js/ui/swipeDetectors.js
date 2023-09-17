@@ -3,9 +3,10 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
     UacanadaMap.api.swipeDetectorZones = {
         '#cardsSwiperPlaceholder': cardCarousel,
-        '#ua-place-modal .modal-body': postOffcanvas,
+        '#ua-place-modal .offcanvas-body': postOffcanvas,
+        '[component="bottombar"]': bottomNav
       };
-      
+
   UacanadaMap.api.swipeZonesRegister = () => {
         UacanadaMap.api.swipeDetectorListeners = [];
     
@@ -41,6 +42,13 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
   function postOffcanvas(direction, element) {
     if(direction==='down'){
         $("#ua-place-modal").offcanvas("hide");
+    }
+    
+  }
+
+  function bottomNav (direction, element) {
+    if(direction==='up'){
+        UacanadaMap.api.scrollableBottomPanel.open()
     }
     
   }

@@ -427,9 +427,13 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 
 UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
+  if(!triggerButton){
+    return {buttonIndex:0,contentId:null}
+  }
+
  
   let contentId = triggerButton[0]?.getAttribute("data-ua-content-id")
-  console.log(triggerButton,contentId)
+ 
   
   if(!contentId){
     return {buttonIndex:0,contentId:null}
