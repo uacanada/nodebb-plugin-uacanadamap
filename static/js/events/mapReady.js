@@ -28,7 +28,6 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         UacanadaMap.setTimeout(() => {
                
                 UacanadaMap.preventMultiCall = false; // TODO check 
-                UacanadaMap.api.listenSwipes(UacanadaMap.swipeZones);
                 UacanadaMap.api.addAtrribution("#uacamap");
                 
         }, 100);
@@ -60,7 +59,10 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
                     UacanadaMap.console.log(`Reload: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
                
                 } else {
+
+                    
                     UacanadaMap.console.log(`Start: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
+                    
                 }
             
         }, 1200);

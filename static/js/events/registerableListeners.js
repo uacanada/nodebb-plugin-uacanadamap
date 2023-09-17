@@ -75,6 +75,9 @@ class EventListeners {
 
 
 		  $('#scrollableBottomPanel').on('scroll', this.bottomPanelScrollHandler);
+
+		  UacanadaMap.api.swipeZonesRegister()
+                    
 		 
 		
 
@@ -115,6 +118,7 @@ class EventListeners {
 			UacanadaMap.console.log(error)
 		}
 		$('#scrollableBottomPanel').off('scroll',this.bottomPanelScrollHandler);
+		UacanadaMap.api.swipeZonesUnregister()
   
   
 	};
@@ -306,7 +310,7 @@ zoomendHandler() {
 		  '.newLocationCancelButton': 	() => UacanadaMap.api.locationSelection.cleanMarker(),
 		  '.newLocationOpenMarker': 	() => UacanadaMap.api.locationSelection.addMarker(),
 		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(findEl('[data-ua-content-id]')),
-		  '.leaflet-map-pane':					() => UacanadaMap.api.scrollableBottomPanel.close() 
+		 // '.leaflet-map-pane':		    () => UacanadaMap.api.scrollableBottomPanel.close() 
 		};
 	  
 		for (const selector in actions) {
