@@ -88,7 +88,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 				UacanadaMap.TEMP.bottomPanelCategoryButtons.push(UacanadaMap.api.createBotomPanelCategoryButton(tab, index+1))
 			});
 			let innerButtonsHtml = UacanadaMap.TEMP.bottomPanelCategoryButtons.join('');
-			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', `<div class="swiper-wrapper container mx-auto p-0">${innerButtonsHtml}</div>`);
+			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', `<div class="swiper-wrapper">${innerButtonsHtml}</div>`);
 			UacanadaMap.TEMP.bottomPanelCategoryButtons = null;
 			innerButtonsHtml = null;
 		} catch (error) {

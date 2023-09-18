@@ -381,12 +381,10 @@ UacanadaMap.swipersContext.createButtonSlide = (tab, index) => {
 
 UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
   const { color, description, footer, icon, slug, title } = tab;
-  const isActive = index === 0 ? "swiper-slide-active" : "";
-  return `<div class="swiper-slide p-0 ${isActive}" data-parent-category="${slug}" style="height:${window.innerHeight}px">
-          <div class="places-inner-tab p-0 w-100">
-          <div class="swiper vertical-places-list" style="height:${window.innerHeight}px">
-              <ul data-ua-tab-cat="${slug}" class="list-group list-group-flush swiper-wrapper">
-                  <li class="swiper-slide list-group-item slide-tab-header">
+  return `
+          
+              <ul data-ua-tab-cat="${slug}" class="list-group list-group-flush">
+                  <li class="list-group-item slide-tab-header">
                   <div class="p-3">
                       <h2 style="color: ${color};">${title}</h2>
                       <p>${description}</p>
@@ -394,12 +392,11 @@ UacanadaMap.swipersContext.createContentSlide = (tab, index) => {
                   </div>
                   </li>
               </ul>
-              <div class="swiper-scrollbar"></div>
+              
          
               <div class="places-tab-footer">${footer}</div>
           </div>
-          </div>
-      </div>`;
+        `;
 };
 
 

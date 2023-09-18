@@ -201,15 +201,23 @@ transition: 0.1s ease;
 }
 
 #bottomPanelCategoryButtons{
-    background: var(--bs-body-bg)!important;
-    z-index: 700;
-    transition: .3s ease;
-    transform: translate3d(0, 100%, 0);
-    overflow: hidden;
-    &.shown{
-      transform: translate3d(0, 0, 0); 
-    }
+  background: var(--bs-body-bg)!important;
+  z-index: 700;
+  transition: .2s ease;
+  transform: translate3d(-50%, 100%, 0);
+  overflow: hidden;
+  scrollbar-width: none;  // Firefox
+  -ms-overflow-style: none;  // IE and Edge
+
+  &.shown{
+    transform: translate3d(-50%, 0, 0); 
+  }
+
+  &::-webkit-scrollbar {  // Chrome, Safari, Opera
+      display: none;
+  }
 }
+
 
 
 #bottomPanelCategoryButtons .swiper-slide,
@@ -231,7 +239,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   line-height: 1rem;
   font-size: 1rem;
   text-rendering: geometricPrecision;
-  transition: .6s ease;
+  transition: .2s ease;
 }
 #bottomPanelCategoryButtons .active-tab-button button,
 #ua-sheet-swiper-buttons .active-tab button {
