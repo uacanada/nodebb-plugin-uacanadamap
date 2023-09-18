@@ -12,7 +12,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 	UacanadaMap.api.shakeElements=(elems,animationClass)=>{
 		for (const elem of elems) {
 			$(elem).removeClass(animationClass);  
-			setTimeout(() => { $(elem).addClass(animationClass) }, 10)
+			UacanadaMap.setTimeout(() => { $(elem).addClass(animationClass) }, 10)
 		}
 	}
     
@@ -51,7 +51,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 		}
 
 		if (UacanadaMap.map && UacanadaMap.map.invalidateSize) {
-			setTimeout(() => {
+			UacanadaMap.setTimeout(() => {
 				if(!UacanadaMap.map)return
 				UacanadaMap.map.invalidateSize();
 				UacanadaMap.api.fitElementsPosition();
@@ -86,7 +86,7 @@ define('ui/elementPositions', ["core/variables" /*   Global object UacanadaMap  
 
     UacanadaMap.api.fitElementsPosition = (latlng) => {
 		
-		setTimeout(() => {
+		UacanadaMap.setTimeout(() => {
 			
 			const { screenW, placeCardH, onePercentH} = UacanadaMap.api.getDivSizes();
 			let zoomControlsPosition = { bottom: `4rem`};

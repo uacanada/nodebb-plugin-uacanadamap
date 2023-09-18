@@ -4,6 +4,7 @@ define("core/initialization", [
   "utils/extensions",
   "core/interactions",
   "core/configurations",
+  "core/fragmentManager",
   "utils/handlers",
   "utils/mapFeatures",
   "core/swipersCreator",
@@ -34,6 +35,7 @@ define("core/initialization", [
   extensions,
   interactions,
   configurations,
+  fragmentManager,
   handlers,
   mapFeatures,
   mapReady,
@@ -76,6 +78,10 @@ return async (UacanadaMap) => {
       if (!UacanadaMap.eventListenersInstance) { 
         UacanadaMap.eventListenersInstance = new registerableListeners(UacanadaMap);
       } 
+
+      if(!UacanadaMap.fragment){
+        UacanadaMap.fragment = new fragmentManager()
+      }
       
     
       UacanadaMap.api.configureMapElements();
@@ -114,8 +120,6 @@ return async (UacanadaMap) => {
 
       
       UacanadaMap.api.createCategoryButtonsSwiper($("#location-category-filter").val() ?? "");
-      UacanadaMap.api.OffCanvasPanelHandler();
-
       UacanadaMap.api.hideElements(false);
       UacanadaMap.api.cleanMarkers(true);
       UacanadaMap.api.cardsOpened(false);
@@ -126,6 +130,7 @@ return async (UacanadaMap) => {
       UacanadaMap.run.submitPlace()
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.mainFrameShow();
+      UacanadaMap.api.saveWidgetsToFragment();
       UacanadaMap.eventListenersInstance.register();
       
 
@@ -190,7 +195,7 @@ return async (UacanadaMap) => {
       document.body.removeAttribute('data-bs-overflow');
     
       // Chained multiple removeClass calls
-      $('body').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened');
+      $('body').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened bottomPanelOpened');
     }
     
     

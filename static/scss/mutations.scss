@@ -65,7 +65,31 @@ $filterValuesAddPlaceMode: grayscale(0.9);
     transition: all 0.3s ease-out;
 }
 
+[component="bottombar"],
+.leaflet-control-zoom, 
+.leaflet-control-locate,
+.leaflet-control-fullscreen{
+  transition: transform .3s;
+  transform: translate3d(0,0,0);
 
+}
+
+body.hiddenElements{
+
+    [component="bottombar"]{
+        transform: translate3d(0,100%, 0);
+    }
+    
+    .newLocationCreateButton, #locationSelectionLatLng {
+      opacity: 0;
+      transition: .2s;
+    }
+   
+    #mapattribution{
+        opacity:0;
+    }
+    
+}
 
 body.uacanada-map-page {
     .brand-container {
@@ -133,11 +157,6 @@ body.uacanada-map-page.map-touched.addPlaceMode {
 
 }
 
-
-
-
-
-
 body.before-map-expand:not(.map-touched) {
     .ua-markers {
         .circle-icon {
@@ -161,7 +180,7 @@ body.before-map-expand:not(.map-touched) {
 }
 
 
-body.addPlaceMode{
+body.uacanada-map-page.addPlaceMode {
     #targetForNewPlaceWrapper{
       z-index: 500;
       background:radial-gradient(transparent, rgba(7, 25, 75, 0.3));
@@ -171,8 +190,25 @@ body.addPlaceMode{
     }
 }
 
+body.uacanada-map-page.bottomPanelOpened {
+    [component="bottombar"]{
+        transform: translate3d(0,100%, 0);
+    }
+    .newLocationCreateButton{
+        transform: translate3d(0, 100vh, 0);
+    }
+    .leaflet-right{
+        .leaflet-control-fullscreen,
+        .leaflet-control-locate, 
+        .leaflet-control-zoom, 
+        .newLocationOpenMarker,
+        .filterPlaces, 
+        .rotateCards {
+            transform: translate3d(0, 100vh, 0);
+        }
+    }
+}
 
 .place-pic{
     transition: .2s width;
 }
-

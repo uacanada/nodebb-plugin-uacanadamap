@@ -6,7 +6,7 @@ define('panels/contextButton',["core/variables" /*   Global object UacanadaMap  
         $('#text-info-button').text(text) 
         
         UacanadaMap.swipers.contextButton.slideTo(UacanadaMap.contextButton.router.text)
-         setTimeout(() => {
+        UacanadaMap.setTimeout(() => {
           
                 if(!UacanadaMap.swipers.contextButton.destroyed){
                     UacanadaMap.swipers.contextButton.slideTo(to)
