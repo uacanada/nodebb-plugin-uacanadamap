@@ -234,7 +234,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 
 
-	UacanadaMap.setTimeout(() => {
+	setTimeout(() => {
 		$('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) }) 
 	}, 2000);
 
