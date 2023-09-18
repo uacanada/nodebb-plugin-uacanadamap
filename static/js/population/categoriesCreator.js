@@ -82,7 +82,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	const createTabs = () => {
 		try {
 			
-			UacanadaMap.TEMP.bottomPanelCategoryButtons = [UacanadaMap.api.createBotomPanelCategoryButton({ color:'#01d61d', icon:'fa-info', slug:'widgets' }, 0)]
+			UacanadaMap.TEMP.bottomPanelCategoryButtons = [UacanadaMap.api.createBotomPanelCategoryButton({ color:'#01d61d', icon:'fa-info', slug:'widgetsHtml' }, 0)]
 			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { 
 				handleTabCategories(UacanadaMap, tab, index+1); 
 				UacanadaMap.TEMP.bottomPanelCategoryButtons.push(UacanadaMap.api.createBotomPanelCategoryButton(tab, index+1))
