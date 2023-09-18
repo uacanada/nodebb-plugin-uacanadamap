@@ -7,48 +7,37 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
   const LOCATION_MARKER_OFFSET_X = 92;
   const LOCATION_MARKER_OFFSET_Y = 48;
-  const ANIMATION_DURATION = 600;
+  const ANIMATION_DURATION = 300;
   const FADE_OUT_DURATION = 200;
   
   UacanadaMap.api.locationSelection = {
     isVisible: false,  // Changed from 'visible' to 'isVisible' for clarity
+    isAnimating: false,
   
     toggleVisibility: function(state) {
       this.isVisible = state;
     },
   
     addMarker: function() {
-     
+      if (this.isAnimating) return;
       if (this.isVisible) return this.cleanMarker();  // Exit if the marker is already visible
+      this.toggleVisibility(true); 
+      this.isAnimating = true;
       $('body').addClass('addPlaceMode')
-     
+      $('#geocoderSearchbox').addClass('show')
+      $('#ua-horizontal-buttons-wrapper').addClass('hidden')
+      
       if($('body').hasClass('cards-opened')){
         UacanadaMap.api.removeCards()
       }
      
-      $('#geocoderSearchbox').addClass('show')
-      $('#ua-horizontal-buttons-wrapper').addClass('hidden')
-      UacanadaMap.setTimeout(() => {
-        UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:1200,to:UacanadaMap.contextButton.router.addplace})
-      }, 400);
-    
       const mapContainer = $('#uacamap');
       const targetDiv = $('#targetForNewPlace');
       const wrapper =  $('#targetForNewPlaceWrapper');
-      const mapCenter = {
-        x: mapContainer.width() / 2,
-        y: mapContainer.height() / 2
-      };
-  
-      this.toggleVisibility(true);
-  
-      const targetPosition = {
-        left: mapCenter.x - LOCATION_MARKER_OFFSET_X,
-        top: mapCenter.y - LOCATION_MARKER_OFFSET_Y
-      };
-  
-     
-
+      const mapCenter = {  x: mapContainer.width() / 2,  y: mapContainer.height() / 2  };
+      const targetPosition = {  left: mapCenter.x - LOCATION_MARKER_OFFSET_X,  top: mapCenter.y - LOCATION_MARKER_OFFSET_Y  };
+      wrapper.removeClass('d-none')
+      $('#targetForNewPlace i.fa-compass').addClass('fa-spin')
       targetDiv.css({
         position: 'absolute',
         left: `${targetPosition.left}px`,
@@ -56,28 +45,23 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
         opacity: 0,
         'z-index': 1000
       });
-      wrapper.removeClass('d-none')
-  
+     
+     
       targetDiv.animate({
         left: `${targetPosition.left}px`,
         top: `${targetPosition.top}px`,
         opacity: 1
-      }, ANIMATION_DURATION);
-
-
-      $('#targetForNewPlace i.fa-compass').addClass('fa-spin')
-
+      }, ANIMATION_DURATION, () => {
+        UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:600,to:UacanadaMap.contextButton.router.addplace})
+        this.isAnimating = false; // Reset the state once animation is complete
+      });
     },
 
-    addPlace: function(){
-      
-      UacanadaMap.api.createMarkerButton({latlng: UacanadaMap.map.getCenter()}, false); // cleanMarker also inside
-      
-
-
-    },
   
     cleanMarker: function() {
+      if (this.isAnimating) return; // Exit if an animation is already running
+          this.isAnimating = true; // Set the state to indicate that an animation is in progress
+
       $('body').removeClass('addPlaceMode')
       $('#geocoderSearchbox').removeClass('show')
       $('#ua-horizontal-buttons-wrapper').removeClass('hidden')
@@ -85,9 +69,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       UacanadaMap.api.removeCards()
       UacanadaMap.api.contextButtonText({text:'',delay:0,to:UacanadaMap.contextButton.router.main})
       
-      if (!this.isVisible) return;  // Exit if the marker is already hidden
-  
-      this.toggleVisibility(false);
+      
   
       const targetDiv = $('#targetForNewPlace');
       const wrapper =  $('#targetForNewPlaceWrapper');
@@ -98,12 +80,19 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
        
         targetDiv.css({ left:0,top:0});
         wrapper.addClass('d-none')
+        this.isAnimating = false;
       });
+
+      if (!this.isVisible) return;  // Exit if the marker is already hidden
+  
+      this.toggleVisibility(false);
+
+    },
+
+    addPlace: function(){
+      UacanadaMap.api.createMarkerButton({latlng: UacanadaMap.map.getCenter()}, false); // cleanMarker also inside
     },
   
-    getMarker: function() {
-      console.log(UacanadaMap.map.getCenter());
-    },
 
     showLatLng: function() {
       try {
