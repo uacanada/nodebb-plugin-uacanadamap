@@ -36,10 +36,10 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
             <div>
                 <div class="location-title fw-bold">${placeTitle ?? mainUsername}</div>
                 <div>
-                    <div class="location-geo small">${city ?? ""}, ${province ?? ""}</div>
-                    <div class="location-category small">Category: ${categoryName ?? "main"}</div>
-                    <div class="location-hashtag small">Hashtag: #${placeCategory}</div>
-                    <div class="location-username small">Username: @${mainUsername}</div>
+                    <div class="location-username small">@${mainUsername} ${city ?? ""}, ${province ?? ""}</div>
+                    <div class="location-category small">${categoryName ?? "main"} #${placeCategory}</div>
+                    
+                   
                 </div>
             </div>
         </div>
