@@ -483,7 +483,7 @@ UacanadaMap.api.saveWidgetsToFragment = ()=> {
   ajaxify.data.widgets['ucm-pull-up-panel'].forEach((widget)=> {
         widgetsHtml+=widget.html
    })
-  UacanadaMap.fragment.createFragment('widgetsHtml',widgetsHtml)
+  UacanadaMap.fragment.createFragment('tab-widgets',widgetsHtml)
   widgetsHtml = null
 }
 
