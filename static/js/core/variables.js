@@ -78,7 +78,6 @@ const UacanadaMap = {
 
   placeCardDiv: "#cardsSwiperPlaceholder",
   placeCardDivFullScreen: "#cardsSwiperPlaceholder",
-
   mapRoomClass: "uacanada-map-page",
   mapLayers: {},
   hiddenControls: {},
@@ -117,7 +116,8 @@ const UacanadaMap = {
   blockFlood: false,
   mapExpanded: false,
   blockFloodInterval: null,
-
+  PANEL_SCROLL_HEIGHT:255,
+  previousScrollHeight:0,
   countx: 0,
   scrolListenerExist: undefined,
   uaResizetime: undefined,
@@ -127,6 +127,7 @@ const UacanadaMap = {
   moveIterations: 0,
   horizontalButtons: {},
   api: {},
+  is:{},
   modules:{},
   run:{},
   Swiper: null,

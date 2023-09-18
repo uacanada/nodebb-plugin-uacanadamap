@@ -11,8 +11,6 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 				: [slug];
 		});
 	
-		UacanadaMap.swipers.buttonsSlider.appendSlide(UacanadaMap.swipersContext.createButtonSlide(tab, index));
-		UacanadaMap.swipers.tabsSlider.appendSlide(UacanadaMap.swipersContext.createContentSlide(tab, index));
 		UacanadaMap.parentCategoriesObject[slug] =  {color, icon, tagCollector}
 	};
 	
@@ -79,11 +77,17 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	const createTabs = () => {
 		try {
 			
-			UacanadaMap.tabCollectorTags = {}
-			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { handleTabCategories(UacanadaMap, tab, index); });
+			UacanadaMap.TEMP.bottomPanelCategoryButtons = [UacanadaMap.api.createBotomPanelCategoryButton({ color:'#01d61d', icon:'fa-info', slug:'widgets' }, 0)]
+			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { 
+				handleTabCategories(UacanadaMap, tab, index+1); 
+				UacanadaMap.TEMP.bottomPanelCategoryButtons.push(UacanadaMap.api.createBotomPanelCategoryButton(tab, index+1))
+			});
+			let innerButtonsHtml = UacanadaMap.TEMP.bottomPanelCategoryButtons.join('');
+			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', `<div class="swiper-wrapper">${innerButtonsHtml}</div>`);
+			UacanadaMap.TEMP.bottomPanelCategoryButtons = null;
+			innerButtonsHtml = null;
 		} catch (error) {
-			
-			console.error(error);
+			UacanadaMap.console.error(error);
 		}
 	}
 
@@ -96,7 +100,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 		}else if(UacanadaMap.subCategoryRouterObject[cat]){
 			UacanadaMap.subCategoryRouterObject[cat].total = 1;
 		}else{
-			console.log("no category in subCategoryRouterObject")
+			UacanadaMap.console.log("no category in subCategoryRouterObject")
 		}
 	}
 
@@ -105,6 +109,7 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	UacanadaMap.api.createCategories = () => {
 		UacanadaMap.parentCategoriesObject = {}
 		UacanadaMap.subCategoryRouterObject = {}
+		UacanadaMap.tabCollectorTags = {}
 
 		createTabs();
 		createSubCategories();

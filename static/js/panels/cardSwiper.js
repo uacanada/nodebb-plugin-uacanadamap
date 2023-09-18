@@ -377,11 +377,13 @@
   
   UacanadaMap.api.openCards = async (topic_id,sort_by,autoplay) => {
 
+    UacanadaMap.api.scrollableBottomPanel.close()
+
        if($('body').hasClass('addPlaceMode')){
         return  UacanadaMap.api.shakeElements([".newLocationCancelButton"],'ua-shake-vert');
        } 
 
-      const offCanvasPanel =  $('#ua-bottom-sheet') 
+
       let tid = Number(topic_id)
       let thisMarker=null
       let markersTemp=null
@@ -389,7 +391,7 @@
   
       if(tid > 0){
         UacanadaMap.api.openMarker(tid)
-        offCanvasPanel.offcanvas('hide');
+
         thisMarker = UacanadaMap.allPlaces[tid].marker
         if(!thisMarker) return console.log(`no marker ${tid}`)
         markersTemp = UacanadaMap.api.sortMarkers(thisMarker,'distance',null); // If open cards for certain marker - sort others only by distance
@@ -416,12 +418,14 @@
       UacanadaMap.api.contextButtonText({text:'',delay:100,to:0})
       UacanadaMap.api.rotateCards('horizontal');
       UacanadaMap.api.animateCards('close')
+      UacanadaMap.api.scrollableBottomPanel.close()
       UacanadaMap.api.hideElements(false)
       UacanadaMap.api.cleanMarkers(true)
       UacanadaMap.api.animateScroll()
       UacanadaMap.api.cardsOpened(false)
+
       
-      setTimeout(() => {
+      UacanadaMap.setTimeout(() => {
         UacanadaMap.api.fitElementsPosition();
         UacanadaMap.api.setCategory('');
         UacanadaMap.api.filterMarkers(false)
@@ -470,7 +474,7 @@
       }
     }
     
-    setTimeout(() => {
+    UacanadaMap.setTimeout(() => {
       UacanadaMap.swipers.cardsCarousel.update()
     }, 1000);
     UacanadaMap.api.fitElementsPosition()

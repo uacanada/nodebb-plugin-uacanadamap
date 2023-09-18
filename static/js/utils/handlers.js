@@ -17,14 +17,14 @@ define('utils/handlers',["core/variables" /*   Global object UacanadaMap  */], f
   UacanadaMap.api.onMapFirstLaunch=()=>{
      
       
-        setTimeout(() => {
+    UacanadaMap.setTimeout(() => {
           if(!localStorage.getItem("uamaplocation"))  ctxButton({show:true,reason:'setLocation'})
         }, 21000);
       
       }
     
       UacanadaMap.api.isFloodedCall=()=>{
-        if(UacanadaMap.blockFlood){   UacanadaMap.blockFloodInterval = setTimeout(() => {  UacanadaMap.blockFlood = false;  clearTimeout(UacanadaMap.blockFloodInterval); }, 1000); 
+        if(UacanadaMap.blockFlood){   UacanadaMap.blockFloodInterval = UacanadaMap.setTimeout(() => {  UacanadaMap.blockFlood = false;  clearTimeout(UacanadaMap.blockFloodInterval); }, 1000); 
           return true;  }else{  UacanadaMap.blockFlood=true; return false; }
     };
     

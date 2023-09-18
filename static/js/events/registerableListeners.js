@@ -15,7 +15,7 @@ class EventListeners {
 
 		function resizeend() {
 			if (new Date() - UacanadaMap.uaResizetime < UacanadaMap.uaDelta) {
-			  setTimeout(resizeend, UacanadaMap.uaDelta);
+				UacanadaMap.setTimeout(resizeend, UacanadaMap.uaDelta);
 			} else {
 			  UacanadaMap.uaResizetimeout = false;
 			  UacanadaMap.api.updateCSS();
@@ -66,15 +66,17 @@ class EventListeners {
 	
 	
 	
-		  bottomPanelOffcanvasTriggers.forEach(triggerName => {
-			$('#ua-bottom-sheet').on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
-		  });
+		
 		  $('#sortPlacesOffcanvas').on('hide.bs.offcanvas', this.sortPlacesOffcanvasHide);
 		  $('#sortPlacesOffcanvas').on('show.bs.offcanvas', this.sortPlacesOffcanvasShow);
 		
 
 
-		
+		  $('#scrollableBottomPanel').on('scroll', this.bottomPanelScrollHandler);
+
+		  UacanadaMap.api.swipeZonesRegister()
+                    
+		 
 		
 
 
@@ -89,9 +91,7 @@ class EventListeners {
 		$("#ua-mainframe").off( this.hasPointerEventSupport(), this.handleMainframeClick );
 		
 		
-		bottomPanelOffcanvasTriggers.forEach(triggerName => { 
-			$('#ua-bottom-sheet').off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
-		});
+		
 		$('#sortPlacesOffcanvas').off('hide.bs.offcanvas', this.sortPlacesOffcanvasHide);
 		$('#sortPlacesOffcanvas').off('show.bs.offcanvas', this.sortPlacesOffcanvasShow);
 
@@ -105,7 +105,7 @@ class EventListeners {
 				try {
 					UacanadaMap.swipers[key].destroy(true, true);
 				} catch (error) {
-					UacanadaMap.console.log(error);
+					// UacanadaMap.console.log(error);
 				}
 			 
 			}
@@ -113,7 +113,8 @@ class EventListeners {
 		} catch (error) {
 			UacanadaMap.console.log(error)
 		}
-		
+		$('#scrollableBottomPanel').off('scroll',this.bottomPanelScrollHandler);
+		UacanadaMap.api.swipeZonesUnregister()
   
   
 	};
@@ -160,6 +161,7 @@ class EventListeners {
 	}
 
 	
+
 zoomendHandler() {
 	const level = UacanadaMap.map.getZoom();
 	UacanadaMap.api.setClassWithFarawayZoom(level);
@@ -226,23 +228,6 @@ zoomendHandler() {
   }
 
 
-	bottomOffcanvasTriggers = {
-		hide:  () => {
-			
-			UacanadaMap.api.setBottomSheetSize(0);
-			$('#ua-bottom-sheet').css('transform',`translate3d(0,100vh,0)`)
-		},
-		
-		show:  () => {
-			UacanadaMap.api.setBottomSheetSize(1)
-			try {
-				UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
-			} catch (error) {
-				
-			}
-		}
-	}
-
 	hasPointerEventSupport = () => {
 		if (window.PointerEvent && "maxTouchPoints" in navigator) {
 			return "pointerup.uacanadamap";
@@ -260,6 +245,27 @@ zoomendHandler() {
 	};
 
 
+	bottomPanelScrollHandler = utils.debounce(() => {
+		const $panel = $('#scrollableBottomPanel');
+		const currentScrollTop = $panel.scrollTop();
+	
+		if (currentScrollTop < 25) {
+		  UacanadaMap.api.scrollableBottomPanel.close();
+		  UacanadaMap.previousScrollHeight = 0;
+		  return;
+		}
+	
+		const isScrollingDown = UacanadaMap.previousScrollHeight < currentScrollTop - 10;
+		const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
+	
+		if (currentScrollTop > UacanadaMap.PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
+		  const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
+		  $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
+		  UacanadaMap.previousScrollHeight = updatedScrollHeight;
+		} else {
+			UacanadaMap.previousScrollHeight = currentScrollTop;
+		}
+	  }, 100);
 	
 
 	clickHandler = (e) => {
@@ -267,7 +273,7 @@ zoomendHandler() {
 		const target = $(e.target);
 		
 	  
-		const clck = (selector) => {
+		const findEl = (selector) => {
 		  const realTarget = target.closest(selector);
 		  if (realTarget.length) {
 			e.preventDefault();
@@ -277,15 +283,17 @@ zoomendHandler() {
 		};
 	  
 		const actions = {
-		  '.place-with-coordinates': () => UacanadaMap.api.openCards(clck(".place-with-coordinates").attr("data-marker-id"), "distance", false),
-		  'a.edit-place': () => UacanadaMap.form.editPlace(clck("a.edit-place").attr("data-topic")),
-		  '.newLocationCreateButton': () => UacanadaMap.api.locationSelection.addPlace(),
-		  '.newLocationCancelButton': () => UacanadaMap.api.locationSelection.cleanMarker(),
-		  '.newLocationOpenMarker': () => UacanadaMap.api.locationSelection.addMarker()
+		  '.edit-place': 				() => UacanadaMap.form.editPlace(findEl("a.edit-place").attr("data-topic")),
+		  '.place-with-coordinates': 	() => UacanadaMap.api.openCards(findEl(".place-with-coordinates").attr("data-marker-id"), "distance", false),
+		  '.newLocationCreateButton': 	() => UacanadaMap.api.locationSelection.addPlace(),
+		  '.newLocationCancelButton': 	() => UacanadaMap.api.locationSelection.cleanMarker(),
+		  '.newLocationOpenMarker': 	() => UacanadaMap.api.locationSelection.addMarker(),
+		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(findEl('[data-ua-content-id]')),
+		 // '.leaflet-map-pane':		    () => UacanadaMap.api.scrollableBottomPanel.close() 
 		};
 	  
 		for (const selector in actions) {
-		  if (clck(selector)) {
+		  if (findEl(selector)) {
 			actions[selector]();
 			return;
 		  }
@@ -295,34 +303,31 @@ zoomendHandler() {
 
 	touchHandler = (e) => {
 		const target = $(e.target);
-		//const { UacanadaMap } = this;
-	  
-		const tc = (selector) => {
-		  const realTarget = target.closest(selector);
-		  if (realTarget.length) {
-			e.preventDefault();
-			return realTarget;
-		  }
-		  return false;
-		};
+		const findEl = (selector) => {
+			const realTarget = target.closest(selector);
+			if (realTarget.length) {
+			  e.preventDefault();
+			  return realTarget;
+			}
+			return false;
+		  };
 	  
 		const actions = {
-		  '[data-ua-tabtarget]': () => UacanadaMap.api.openCertainTab(tc('[data-ua-tabtarget]')),
-		  '#leave-as-loc': () => $("#ua-form-event-holder").html("<p>Ok</p>"),
-		  '#ua-conv-to-event': () => $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML),
-		  '.try-locate-me': () => UacanadaMap.api.tryLocate({ fornewplace: false }),
-		  '#ua-locate-me': () => UacanadaMap.api.addNewPlace(),
-		  '#cardsDown': () => UacanadaMap.api.rotateCards('horizontal'),
-		  '.ua-reload-link': () => UacanadaMap.api.reloadMainPage(),
-		  '.rotateCards': () => UacanadaMap.api.rotateCards(),
-		  'a.ua-sort': () => {
-			const sortBy = tc('a.ua-sort').attr('data-ua-sortby');
+		  '#leave-as-loc': 			() => $("#ua-form-event-holder").html(""),
+		  '#ua-conv-to-event': 		() => $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML),
+		  '.try-locate-me': 		() => UacanadaMap.api.tryLocate({ fornewplace: false }),
+		  '#ua-locate-me': 			() => UacanadaMap.api.addNewPlace(),
+		  '#cardsDown': 			() => UacanadaMap.api.rotateCards('horizontal'),
+		  '.ua-reload-link': 		() => UacanadaMap.api.reloadMainPage(),
+		  '.rotateCards': 			() => UacanadaMap.api.rotateCards(),
+		  '.ua-sort': 				() => {
+			const sortBy = findEl('a.ua-sort').attr('data-ua-sortby');
 			if (sortBy) {
 			  UacanadaMap.api.openCards(0, sortBy, false);
 			  $('#sortby-label').text(sortBy);
 			}
 		  },
-		  '.removeCards': () => {
+		  '.removeCards': 			() => {
 			e.preventDefault();
 			UacanadaMap.api.removeCards();
 			UacanadaMap.api.contextButtonText({
@@ -334,14 +339,14 @@ zoomendHandler() {
 		};
 	  
 		for (const selector in actions) {
-		  if (tc(selector)) {
+		  if (findEl(selector)) {
 			actions[selector]();
 			return;
 		  }
 		}
 	  };
 
-	  toggleMapEvents = (enable = true) => {
+	toggleMapEvents = (enable = true) => {
 		
 		const eventList = [
 		  "zoomend",
@@ -350,7 +355,7 @@ zoomendHandler() {
 		  "contextmenu",
 		  "movestart",
 		  "move",
-		  "moveend",
+		  "moveend"
 		];
 	  
 		eventList.forEach((event) => {
@@ -358,7 +363,7 @@ zoomendHandler() {
 
 			
 			const handler = this[event+'Handler'];
-    		UacanadaMap.console.log(`${enable} Handler for ${event}: `, handler);
+    		
 		
 			if (enable) {
 				UacanadaMap.map.on(event,handler);
@@ -366,7 +371,7 @@ zoomendHandler() {
 				UacanadaMap.map.off(event,handler);
 			  }
 		} catch (error) {
-			console.log(error)
+			UacanadaMap.console.log(error)
 		}
 		
 		});

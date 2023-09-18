@@ -1381,12 +1381,6 @@ body.map-touched{
   }
 }
 
-[component="bottombar"],.leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen{
-  transition: transform .3s;
-  transform: translate3d(0,0,0);
-
-}
-
 #ua-context-buttons-wrapper{
   transition: bottom .3s;
  
@@ -1415,22 +1409,7 @@ body.map-touched{
 
 
 
-body.hiddenElements{
 
-  [component="bottombar"]{
-      transform: translate3d(0,100%, 0);
-  }
-  
-  .newLocationCreateButton, #locationSelectionLatLng {
-    opacity: 0;
-    transition: .2s;
-}
- 
-  #mapattribution{
-      opacity:0;
-  }
-  
-}
 
 
 button#cardsDown {

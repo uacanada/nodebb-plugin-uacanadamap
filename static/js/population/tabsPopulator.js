@@ -1,9 +1,7 @@
 'use strict';
 define('population/tabsPopulator', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-  
-
-    const itemClass = "swiper-slide p-3 list-group-item";
+    const itemClass = "list-group-item";
     const getBySlug = (arr, slug) => arr.find(item => item.slug === slug);
     
     function getMatchedSlugs(placetags) {
@@ -29,21 +27,20 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         img
     }) {
         return `<li class="${itemClass}">
-            <div class="location-item place-with-coordinates" data-marker-id="${tid}">
-                ${
-                 img
-                    ? `<img src="${img}" alt="${mainUsername} profile image" class="profile-image">`
-                    : ""
-                }
+        <div class="location-item place-with-coordinates d-flex align-items-start" data-marker-id="${tid}">
+            <div class="me-3">
+                ${ img ? `<img src="${img}" alt="${mainUsername} profile image" class="rounded-circle" style="width: 50px; height: 50px;">`  : ""  }
+            </div>
+            <div>
+                <div class="location-title fw-bold">${placeTitle ?? mainUsername}</div>
                 <div>
-                    <div class="location-title">${placeTitle ?? mainUsername}</div>
-                    <div class="location-geo">${city ?? ""}, ${province ?? ""}</div>
-                    <div class="location-category">Category: ${categoryName ?? "main"}</div>
-                    <div class="location-hashtag">Hashtag: #${placeCategory}</div>
-                    <div class="location-username">Username: @${mainUsername}</div>
+                    <div class="location-username small">@${mainUsername} ${city ?? ""}, ${province ?? ""}</div>
+                    <div class="location-category small">${categoryName ?? "main"} #${placeCategory}</div>
                 </div>
             </div>
-        </li>`;
+        </div>
+    </li>
+    `;
     }
 
     const eventCardHtml = ({ 
@@ -147,6 +144,19 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
     }
  
 
+    function processFragments(tab,html){
+      if(!tab || !html) return;
+      UacanadaMap.fragment.createFragment(tab, html);
+      UacanadaMap.fragment.manipulateFragment(tab, (fragment) => {
+        const wrapper = document.createElement('ul');
+        wrapper.classList.add('placesList','p-0', 'm-0');
+        while (fragment.firstChild) {
+          wrapper.appendChild(fragment.firstChild);
+        }
+        fragment.appendChild(wrapper);
+      });
+    }
+
   
     function processEvents() {
       const { timestampNow } = UacanadaMap;
@@ -201,6 +211,9 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       ].filter(Boolean).join("");
   
       UacanadaMap.TEMP.tabPopulatorHtmlObj["events"] = eventsHtml;
+
+      processFragments("tab-events",eventsHtml)
+
   }
   
       
@@ -266,53 +279,28 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       function processTabs() {
         for (const tabSlug in UacanadaMap.TEMP.tabPopulatorHtmlObj) {
           if (Object.hasOwnProperty.call(UacanadaMap.TEMP.tabPopulatorHtmlObj, tabSlug)) {
-
-          
-            const slug = tabSlug || 'all'
-            const html = UacanadaMap.TEMP.tabPopulatorHtmlObj[slug];
-            const el = document.querySelector(`ul[data-ua-tab-cat="${slug}"]`);
-      
-            if (!el) continue; 
-
-           const tabInfo = getBySlug(ajaxify.data.UacanadaMapSettings.tabCategories, slug);
-      
-            if (!tabInfo) continue; 
-      
-            const {color, title, description, footer} = tabInfo;
-      
-            const tabHtmlContent = `
-                <li class="swiper-slide list-group-item slide-tab-header">
-                    <div class="p-3">
-                        <h2 style="color: ${color};">${title}</h2>
-                        <p>${description}</p>
-                    </div>
-                </li>
-                ${html}
-                ${footer ? `<li class="swiper-slide list-group-item">
-                                <div class="p-3 slide-tab-footer">${footer}</div>
-                            </li>` : ""}
-                <li class="swiper-slide list-group-item slide-tab-last-clearfix p-3 pb-5 pt-5 h-100">Add your own place!</li>
-            `;
-            el.innerHTML = tabHtmlContent;
+          const slug = tabSlug || 'all'
+          const html = UacanadaMap.TEMP.tabPopulatorHtmlObj[slug];
+          const tabInfo = getBySlug(ajaxify.data.UacanadaMapSettings.tabCategories, slug);
+          if (!tabInfo) continue; 
+          const {color, title, description, footer} = tabInfo;
+          const tabHtmlContent = `<li class="list-group-item"><div class="p-3"><h2 style="color:${color};">${title}</h2><p>${description}</p></div></li>${html}${footer?`<li class="list-group-item"><div class="p-3 tab-footer">${footer}</div> </li>`: ""}<li class="list-group-item tab-last-clearfix">Add your own place!</li> `;
+          processFragments("tab-"+slug,tabHtmlContent)// TODO: WIP
           }
         }
-
-        UacanadaMap.swipersContext.canActivateVertical = true;
       }
       
 
-
-      
       UacanadaMap.api.populateTabs = () => {
-
-       // UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
         UacanadaMap.api.sortPlacesForTabs()
+        
+        $('#scrollableBottomPanel').css('display','none')
 
         processEvents();
         processPlaces();
         processTabs();
-        
-       
+
+       // UacanadaMap.TEMP.tabPopulatorHtmlObj = null
       };
       
 })

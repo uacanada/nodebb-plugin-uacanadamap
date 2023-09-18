@@ -1,11 +1,4 @@
-#ua-bottom-sheet.offcanvas-bottom {
-  height: 100vh;
-  overflow: hidden;
-  background-color: transparent;
-  border: none;
-  max-width: 800px;
-  margin: 0 auto;
-}
+
 
 #tabs-body {
 transition: 0.1s ease;
@@ -13,11 +6,6 @@ transition: 0.1s ease;
 
 
 
-#ua-bottom-sheet.offcanvas.show:not(.hiding), 
-#ua-bottom-sheet.offcanvas.showing {
-  //transform: none;
-  transform: translate3d(0, 40vh, 0);
-}
 
 
 .vertical-places-list {
@@ -69,62 +57,6 @@ transition: 0.1s ease;
 }
 
 
-#ua-bottom-sheet.offcanvas-bottom.show:not(.hiding)[data-ua-size="4"] {
- 
-  transform: none;
-
-}
-
-#ua-bottom-sheet.offcanvas-bottom.show:not(.hiding)[data-ua-size="3"] {
- // transform: translateY(0vh);
-  transform: translate3d(0, 0vh, 0);
-}
-
-#ua-bottom-sheet.offcanvas-bottom.show:not(.hiding)[data-ua-size="2"] {
- // transform: translateY(30vh);
-  transform: translate3d(0, 10vh, 0);
-}
-
-#ua-bottom-sheet.offcanvas-bottom.show:not(.hiding)[data-ua-size="1"] {
- // transform: translateY(66vh);
-  transform: translate3d(0, 40vh, 0);
-}
-
-#ua-bottom-sheet.offcanvas-bottom.show:not(.hiding)[data-ua-size="0"] {
- // transform: translateY(100vh);
-  transform: translate3d(0, 100vh, 0);
-}
-
-
-
-
-
-
-#ua-bottom-sheet.offcanvas-bottom.show:not(.hiding)[data-ua-size="4"], 
-#ua-bottom-sheet.offcanvas-bottom.show:not(.hiding)[data-ua-size="3"]{
-
-  #ua-sheet-swiper-buttons {
-    background: rgba(255, 255, 255, 0.2);
-    position: relative;
-    backdrop-filter: blur(3px);
-  }
-
-  #tabs-body{
-    background: var(--bs-body-bg);
-  }
-  .vertical-places-list .slide-tab-header{
-  border-radius: 0;
-  }
- 
-  .vertical-places-list .swiper-scrollbar-vertical {
-    right: 0;
-    top: var(--swiper-scrollbar-sides-offset,1%);
-    width: 2px;
-    overflow: auto;
-    opacity: 1;
-  }
-
-}
 
 
 .location-item {
@@ -200,7 +132,22 @@ transition: 0.1s ease;
   margin: 0;
 }
 
+#bottomPanelCategoryButtons{
+  background: var(--bs-body-bg)!important;
+  z-index: 700;
+  transition: .2s ease;
+  transform: translate3d(-50%, 100%, 0);
+  overflow: hidden;
+   &.shown{
+    transform: translate3d(-50%, 0, 0); 
+  }
 
+ 
+}
+
+
+
+#bottomPanelCategoryButtons .swiper-slide,
 #ua-sheet-swiper-buttons .swiper-slide {
 height: 3rem;
 width: 3rem;
@@ -208,25 +155,26 @@ border-radius: 50%;
 margin: 1rem 1rem 1rem 0;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+#bottomPanelCategoryButtons .swiper-slide button,
 #ua-sheet-swiper-buttons .swiper-slide button {
-
-  background-color: white;
+  background: var(--bs-body-bg)!important;
   border: none;
- width: 100%;
- height: 100%;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-
-
   padding: 1rem;
   line-height: 1rem;
   font-size: 1rem;
   text-rendering: geometricPrecision;
-  transition: .3s ease;
+  transition: .2s ease;
 }
-
+#bottomPanelCategoryButtons .active-tab-button button,
 #ua-sheet-swiper-buttons .active-tab button {
-  background: #3d3d3d;
-  box-shadow: inset -1px -3px 6px -3px rgba(0, 0, 0, 0.5);
+  background: var(--bs-primary)!important;
+  box-shadow: inset -1px -3px 6px -3px rgba(0, 0, 0, 0.2);
+  i.fa{
+    color: var(--bs-secondary)!important;
+  }
 }
 
 // #ua-sheet-swiper-buttons .active-tab {
@@ -304,3 +252,59 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   border-radius: 1rem 1rem 0 0;
 }
+
+
+
+/* New panel */
+#scrollableBottomPanel{
+  height: 100vh;
+ 
+  z-index: 600;
+  transform-origin: bottom !important;
+  transition: transform 2s ease-out;
+  transform: translateY(100%) rotateX(90deg);
+  background: linear-gradient(0deg,rgba(5,17,32,.2),transparent);
+  scrollbar-width: none;  // Firefox
+  -ms-overflow-style: none;  // IE and Edge
+  &::-webkit-scrollbar {  // Chrome, Safari, Opera
+    display: none;
+  }
+
+  .sheet-spacer{
+    height: 85vh;
+    
+  }
+
+  .sheet-dragger{
+    font-size: 2rem;
+    height: 3rem;
+    margin-top: -2rem;
+    border-radius: 2rem 2rem 0 0;
+    text-align: center;
+    background: var(--bs-body-bg);
+    box-shadow: 0px -4px 7px 4px rgba(10, 54, 89, 0.28), 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+  
+  }
+
+  .sheet-content{
+    background: var(--bs-body-bg);
+    min-height: 100vh;
+  }
+
+  &.panel-hidden {
+    transition: transform 2s ease-out;
+    transform: translateY(100%) rotateX(90deg);
+    overflow: hidden;
+
+  }
+  
+  &.panel-shown {
+    transition: transform .2s ease-out;
+    transform: translateY(0%) rotateX(0deg);
+    overflow-y: scroll;
+  }
+
+  
+
+}
+
