@@ -38,8 +38,6 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
                 <div>
                     <div class="location-username small">@${mainUsername} ${city ?? ""}, ${province ?? ""}</div>
                     <div class="location-category small">${categoryName ?? "main"} #${placeCategory}</div>
-                    
-                   
                 </div>
             </div>
         </div>
@@ -229,7 +227,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
   
       UacanadaMap.TEMP.tabPopulatorHtmlObj["events"] = eventsHtml;
 
-      processFragments("placesWithEvents",eventsHtml)
+      processFragments("tab-events",eventsHtml)
 
   }
   
@@ -337,8 +335,6 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
 
       
       UacanadaMap.api.populateTabs = () => {
-
-       // UacanadaMap.TEMP.tabPopulatorHtmlObj = {}
         UacanadaMap.api.sortPlacesForTabs()
         $('#scrollableBottomPanel').css('display','none')
 
@@ -346,11 +342,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         processPlaces();
         processTabs();
 
-        UacanadaMap.TEMP.tabPopulatorHtmlObj = null
-
-
-        
-       
+       // UacanadaMap.TEMP.tabPopulatorHtmlObj = null
       };
       
 })
