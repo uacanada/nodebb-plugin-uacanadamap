@@ -383,7 +383,7 @@
         return  UacanadaMap.api.shakeElements([".newLocationCancelButton"],'ua-shake-vert');
        } 
 
-      const offCanvasPanel =  $('#ua-bottom-sheet') 
+
       let tid = Number(topic_id)
       let thisMarker=null
       let markersTemp=null
@@ -391,7 +391,7 @@
   
       if(tid > 0){
         UacanadaMap.api.openMarker(tid)
-        offCanvasPanel.offcanvas('hide');
+
         thisMarker = UacanadaMap.allPlaces[tid].marker
         if(!thisMarker) return console.log(`no marker ${tid}`)
         markersTemp = UacanadaMap.api.sortMarkers(thisMarker,'distance',null); // If open cards for certain marker - sort others only by distance
