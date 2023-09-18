@@ -26,7 +26,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       $('body').addClass('addPlaceMode')
       $('#geocoderSearchbox').addClass('show')
       $('#ua-horizontal-buttons-wrapper').addClass('hidden')
-      
+
       if($('body').hasClass('cards-opened')){
         UacanadaMap.api.removeCards()
       }
@@ -45,14 +45,14 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
         opacity: 0,
         'z-index': 1000
       });
-     
+      UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:ANIMATION_DURATION,to:UacanadaMap.contextButton.router.addplace})
      
       targetDiv.animate({
         left: `${targetPosition.left}px`,
         top: `${targetPosition.top}px`,
         opacity: 1
       }, ANIMATION_DURATION, () => {
-        UacanadaMap.api.contextButtonText({text:'Drag map to refine spot',delay:600,to:UacanadaMap.contextButton.router.addplace})
+        
         this.isAnimating = false; // Reset the state once animation is complete
       });
     },
