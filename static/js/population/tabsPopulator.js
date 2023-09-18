@@ -152,7 +152,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       UacanadaMap.fragment.createFragment(tab, html);
       UacanadaMap.fragment.manipulateFragment(tab, (fragment) => {
         const wrapper = document.createElement('ul');
-        wrapper.classList.add('placesList');
+        wrapper.classList.add('placesList p-0 m-0');
         while (fragment.firstChild) {
           wrapper.appendChild(fragment.firstChild);
         }
