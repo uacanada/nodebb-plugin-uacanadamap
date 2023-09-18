@@ -120,8 +120,6 @@ return async (UacanadaMap) => {
 
       
       UacanadaMap.api.createCategoryButtonsSwiper($("#location-category-filter").val() ?? "");
-      UacanadaMap.api.OffCanvasPanelHandler();
-
       UacanadaMap.api.hideElements(false);
       UacanadaMap.api.cleanMarkers(true);
       UacanadaMap.api.cardsOpened(false);

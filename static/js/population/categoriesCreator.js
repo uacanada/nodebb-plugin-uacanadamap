@@ -11,11 +11,6 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 				: [slug];
 		});
 	
-
-		
-
-		UacanadaMap.swipers.buttonsSlider.appendSlide(UacanadaMap.swipersContext.createButtonSlide(tab, index));
-		UacanadaMap.swipers.tabsSlider.appendSlide(UacanadaMap.swipersContext.createContentSlide(tab, index));
 		UacanadaMap.parentCategoriesObject[slug] =  {color, icon, tagCollector}
 	};
 	

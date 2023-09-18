@@ -3,7 +3,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
 
   
 
-    const itemClass = "swiper-slide p-3 list-group-item";
+    const itemClass = "list-group-item";
     const getBySlug = (arr, slug) => arr.find(item => item.slug === slug);
     
     function getMatchedSlugs(placetags) {
@@ -311,17 +311,17 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
             const {color, title, description, footer} = tabInfo;
       
             const tabHtmlContent = `
-                <li class="swiper-slide list-group-item slide-tab-header">
+                <li class="list-group-item">
                     <div class="p-3">
                         <h2 style="color: ${color};">${title}</h2>
                         <p>${description}</p>
                     </div>
                 </li>
                 ${html}
-                ${footer ? `<li class="swiper-slide list-group-item">
-                                <div class="p-3 slide-tab-footer">${footer}</div>
+                ${footer ? `<li class="list-group-item">
+                                <div class="p-3 tab-footer">${footer}</div>
                             </li>` : ""}
-                <li class="swiper-slide list-group-item slide-tab-last-clearfix p-3 pb-5 pt-5 h-100">Add your own place!</li>
+                <li class="list-group-item tab-last-clearfix">Add your own place!</li>
             `;
             el.innerHTML = tabHtmlContent;
             
@@ -330,7 +330,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
           }
         }
 
-        UacanadaMap.swipersContext.canActivateVertical = true;
+        
       }
       
 

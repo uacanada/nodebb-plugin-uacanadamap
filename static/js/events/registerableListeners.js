@@ -66,9 +66,7 @@ class EventListeners {
 	
 	
 	
-		  bottomPanelOffcanvasTriggers.forEach(triggerName => {
-			$('#ua-bottom-sheet').on(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
-		  });
+		
 		  $('#sortPlacesOffcanvas').on('hide.bs.offcanvas', this.sortPlacesOffcanvasHide);
 		  $('#sortPlacesOffcanvas').on('show.bs.offcanvas', this.sortPlacesOffcanvasShow);
 		
@@ -93,9 +91,7 @@ class EventListeners {
 		$("#ua-mainframe").off( this.hasPointerEventSupport(), this.handleMainframeClick );
 		
 		
-		bottomPanelOffcanvasTriggers.forEach(triggerName => { 
-			$('#ua-bottom-sheet').off(triggerName+".bs.offcanvas", this.bottomOffcanvasTriggers[triggerName])
-		});
+		
 		$('#sortPlacesOffcanvas').off('hide.bs.offcanvas', this.sortPlacesOffcanvasHide);
 		$('#sortPlacesOffcanvas').off('show.bs.offcanvas', this.sortPlacesOffcanvasShow);
 
@@ -232,23 +228,6 @@ zoomendHandler() {
   }
 
 
-	bottomOffcanvasTriggers = {
-		hide:  () => {
-			
-			UacanadaMap.api.setBottomSheetSize(0);
-			$('#ua-bottom-sheet').css('transform',`translate3d(0,100vh,0)`)
-		},
-		
-		show:  () => {
-			UacanadaMap.api.setBottomSheetSize(1)
-			try {
-				UacanadaMap.swipers.vertical[UacanadaMap.swipers.tabsSlider.activeIndex].slideTo(0)
-			} catch (error) {
-				
-			}
-		}
-	}
-
 	hasPointerEventSupport = () => {
 		if (window.PointerEvent && "maxTouchPoints" in navigator) {
 			return "pointerup.uacanadamap";
@@ -336,7 +315,6 @@ zoomendHandler() {
 		const actions = {
 		  '#leave-as-loc': 			() => $("#ua-form-event-holder").html(""),
 		  '#ua-conv-to-event': 		() => $("#ua-form-event-holder").html(UacanadaMap.uaEventPartFormHTML),
-		  '[data-ua-tabtarget]': 	() => UacanadaMap.api.openCertainTab(findEl('[data-ua-tabtarget]')),
 		  '.try-locate-me': 		() => UacanadaMap.api.tryLocate({ fornewplace: false }),
 		  '#ua-locate-me': 			() => UacanadaMap.api.addNewPlace(),
 		  '#cardsDown': 			() => UacanadaMap.api.rotateCards('horizontal'),
