@@ -132,6 +132,7 @@ return async (UacanadaMap) => {
       UacanadaMap.run.submitPlace()
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.mainFrameShow();
+      UacanadaMap.api.saveWidgetsToFragment();
       UacanadaMap.eventListenersInstance.register();
       
 

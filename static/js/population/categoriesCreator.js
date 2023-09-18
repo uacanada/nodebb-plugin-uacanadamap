@@ -82,24 +82,15 @@ define('population/swipeDetectors',["core/variables" /*   Global object Uacanada
 	const createTabs = () => {
 		try {
 			
-			
-			UacanadaMap.TEMP.bottomPanelCategoryButtons = []
-			
-			
+			UacanadaMap.TEMP.bottomPanelCategoryButtons = [UacanadaMap.api.createBotomPanelCategoryButton({ color:'#01d61d', icon:'fa-info', slug:'widgets' }, 0)]
 			ajaxify.data.UacanadaMapSettings.tabCategories.forEach((tab, index) => { 
-				handleTabCategories(UacanadaMap, tab, index); 
-				UacanadaMap.TEMP.bottomPanelCategoryButtons.push(UacanadaMap.api.createBotomPanelCategoryButton(tab, index))
+				handleTabCategories(UacanadaMap, tab, index+1); 
+				UacanadaMap.TEMP.bottomPanelCategoryButtons.push(UacanadaMap.api.createBotomPanelCategoryButton(tab, index+1))
 			});
-
-
 			let innerButtonsHtml = UacanadaMap.TEMP.bottomPanelCategoryButtons.join('');
-			
 			UacanadaMap.fragment.createFragment('bottomPanelCategoryButtons', `<div class="swiper-wrapper container mx-auto p-0">${innerButtonsHtml}</div>`);
 			UacanadaMap.TEMP.bottomPanelCategoryButtons = null;
 			innerButtonsHtml = null;
-			
-
-
 		} catch (error) {
 			UacanadaMap.console.error(error);
 		}
