@@ -28,15 +28,20 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
 
   function cardCarousel(direction, element) {
-    if (direction==='up') {
+
+    let isVertical = UacanadaMap.swipers.cardsCarousel.isVertical()
+    let verticalInBeginning = isVertical && UacanadaMap.swipers.cardsCarousel.isBeginning
+
+    if (direction==='up' && !isVertical) {
         UacanadaMap.api.openPlaceModal()
-    } else if (direction==='down') {
+    }  
+
+    
+   if (direction==='down' && (!isVertical || verticalInBeginning)) {
         $("body").removeClass("ua-noscroll");
         $("#ua-place-modal").offcanvas("hide");
         UacanadaMap.api.removeCards()
-    } else {
-        return
-    }
+    } 
   }
   
   function postOffcanvas(direction, element) {
