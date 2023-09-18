@@ -29,21 +29,22 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         img
     }) {
         return `<li class="${itemClass}">
-            <div class="location-item place-with-coordinates" data-marker-id="${tid}">
-                ${
-                 img
-                    ? `<img src="${img}" alt="${mainUsername} profile image" class="profile-image">`
-                    : ""
-                }
+        <div class="location-item place-with-coordinates d-flex align-items-start" data-marker-id="${tid}">
+            <div class="me-3">
+                ${ img ? `<img src="${img}" alt="${mainUsername} profile image" class="rounded-circle" style="width: 50px; height: 50px;">`  : ""  }
+            </div>
+            <div>
+                <div class="location-title fw-bold">${placeTitle ?? mainUsername}</div>
                 <div>
-                    <div class="location-title">${placeTitle ?? mainUsername}</div>
-                    <div class="location-geo">${city ?? ""}, ${province ?? ""}</div>
-                    <div class="location-category">Category: ${categoryName ?? "main"}</div>
-                    <div class="location-hashtag">Hashtag: #${placeCategory}</div>
-                    <div class="location-username">Username: @${mainUsername}</div>
+                    <div class="location-geo small">${city ?? ""}, ${province ?? ""}</div>
+                    <div class="location-category small">Category: ${categoryName ?? "main"}</div>
+                    <div class="location-hashtag small">Hashtag: #${placeCategory}</div>
+                    <div class="location-username small">Username: @${mainUsername}</div>
                 </div>
             </div>
-        </li>`;
+        </div>
+    </li>
+    `;
     }
 
     const eventCardHtml = ({ 
