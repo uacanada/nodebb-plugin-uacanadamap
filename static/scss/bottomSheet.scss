@@ -201,14 +201,13 @@ transition: 0.1s ease;
 }
 
 #bottomPanelCategoryButtons{
+    background: var(--bs-body-bg)!important;
     z-index: 700;
     transition: .3s ease;
     transform: translate3d(0, 100%, 0);
+    overflow: hidden;
     &.shown{
       transform: translate3d(0, 0, 0); 
-    }
-    .swiper-wrapper{
-      background: var(--bs-body-bg);
     }
 }
 

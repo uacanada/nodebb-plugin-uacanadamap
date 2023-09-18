@@ -27,7 +27,7 @@
                 </div>
 
             </div>
-            <div id="bottomPanelCategoryButtons" class="swiper no-propagation position-fixed bottom-0 start-0 w-100"></div>
+            <div id="bottomPanelCategoryButtons" class="swiper no-propagation position-fixed bottom-0 start-50 translate-middle-x container"></div>
 
 
 
