@@ -546,6 +546,7 @@ UacanadaMap.api.scrollableBottomPanel = {
       this.toggleBodyClass(true);
       this.setPanelState( { opened: true, hiding: false });
       UacanadaMap.setTimeout(() => {
+        UacanadaMap.api.addCategoryButtons(buttonIndex,contentId) 
         this.setPanelState( { openedButtons: true, hiding: false, hidingButtons: false });
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
         panel.removeClass('panel-hidden').addClass('panel-shown');
