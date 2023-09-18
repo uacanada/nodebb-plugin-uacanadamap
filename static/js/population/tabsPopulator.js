@@ -1,8 +1,6 @@
 'use strict';
 define('population/tabsPopulator', ["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
-  
-
     const itemClass = "list-group-item";
     const getBySlug = (arr, slug) => arr.find(item => item.slug === slug);
     
@@ -156,19 +154,6 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
           wrapper.appendChild(fragment.firstChild);
         }
         fragment.appendChild(wrapper);
-      
-        // Add buttons
-        // const swiperCategoryButtons = document.createElement('div');
-        // swiperCategoryButtons.id = 'bottomPanelCategoryButtons';
-        // swiperCategoryButtons.classList.add('swiper', 'position-sticky', 'w-100', 'bottom-0', 'start-0');
-      
-        // const contentFragment = UacanadaMap.fragment.fragments['bottomPanelCategoryButtons'];
-        // if (contentFragment) {
-        //   swiperCategoryButtons.appendChild(contentFragment.cloneNode(true)); 
-        // }
-      
-        
-        // fragment.appendChild(swiperCategoryButtons);
       });
     }
 
@@ -294,48 +279,21 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
       function processTabs() {
         for (const tabSlug in UacanadaMap.TEMP.tabPopulatorHtmlObj) {
           if (Object.hasOwnProperty.call(UacanadaMap.TEMP.tabPopulatorHtmlObj, tabSlug)) {
-
-          
-            const slug = tabSlug || 'all'
-            const html = UacanadaMap.TEMP.tabPopulatorHtmlObj[slug];
-            const el = document.querySelector(`ul[data-ua-tab-cat="${slug}"]`);
-      
-            if (!el) continue; 
-
-           const tabInfo = getBySlug(ajaxify.data.UacanadaMapSettings.tabCategories, slug);
-      
-            if (!tabInfo) continue; 
-      
-            const {color, title, description, footer} = tabInfo;
-      
-            const tabHtmlContent = `
-                <li class="list-group-item">
-                    <div class="p-3">
-                        <h2 style="color: ${color};">${title}</h2>
-                        <p>${description}</p>
-                    </div>
-                </li>
-                ${html}
-                ${footer ? `<li class="list-group-item">
-                                <div class="p-3 tab-footer">${footer}</div>
-                            </li>` : ""}
-                <li class="list-group-item tab-last-clearfix">Add your own place!</li>
-            `;
-            el.innerHTML = tabHtmlContent;
-            
-            processFragments("tab-"+slug,tabHtmlContent)// TODO: WIP
-            
+          const slug = tabSlug || 'all'
+          const html = UacanadaMap.TEMP.tabPopulatorHtmlObj[slug];
+          const tabInfo = getBySlug(ajaxify.data.UacanadaMapSettings.tabCategories, slug);
+          if (!tabInfo) continue; 
+          const {color, title, description, footer} = tabInfo;
+          const tabHtmlContent = `<li class="list-group-item"><div class="p-3"><h2 style="color:${color};">${title}</h2><p>${description}</p></div></li>${html}${footer?`<li class="list-group-item"><div class="p-3 tab-footer">${footer}</div> </li>`: ""}<li class="list-group-item tab-last-clearfix">Add your own place!</li> `;
+          processFragments("tab-"+slug,tabHtmlContent)// TODO: WIP
           }
         }
-
-        
       }
       
 
-
-      
       UacanadaMap.api.populateTabs = () => {
         UacanadaMap.api.sortPlacesForTabs()
+        
         $('#scrollableBottomPanel').css('display','none')
 
         processEvents();
