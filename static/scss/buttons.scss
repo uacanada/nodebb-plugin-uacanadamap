@@ -241,8 +241,7 @@ a.leaflet-contextmenu-item button {
     transform: translate3d(0, 0, 0);
   }
   .removeCards,
-  .rotateCards,
-  .filterPlaces {
+  .rotateCards {
     transition: 1s transform ease;
     transform: translate3d(0, 100vh, 0);
   }

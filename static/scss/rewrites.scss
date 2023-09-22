@@ -147,6 +147,8 @@ body,
 
 .filterPlaces{
   .dropdown-menu {
+    width: 13rem;
+    max-width: 90vw;
     border-radius: 0.5rem;
     backdrop-filter: blur(4px);
     background: transparent;
@@ -154,6 +156,12 @@ body,
       width: auto;
       padding: 0.25rem 1rem;
       background: transparent;
+    }
+    #location-category-filter {
+      padding: .25rem;
+      margin: 0.75rem;
+      background: transparent;
+      max-width: 90%;
     }
   }
 } 
