@@ -230,8 +230,16 @@ define('core/configuration', function (require) {
                     aria-label="category"></select>
             </div></div>` }));
 
+           
+
 
                 UacanadaMap.mapLayers.addPlaceButton =     new (UacanadaMap.api.addLeafletButton({classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fa-solid fa-map-pin',btnclasses:'btn-primary'}));
+
+                UacanadaMap.mapLayers.tileChooser = new (UacanadaMap.api.addLeafletButton({  classes: "tileChooser btn-group dropstart",  title: "Filter Places",  icon: "fa fa-solid fa-layer-group",  btnclasses: "btn btn-secondary dropdown-toggle", 
+                attributes:`data-bs-toggle="dropdown" aria-expanded="false"`,
+                 extendedhtml:`<div class="dropdown-menu"><div id="tile-chooser"></div></div>` }));
+                
+
                 
                 
            

@@ -55,7 +55,7 @@
         <div class="offcanvas-body overflow-auto">
            
 
-        <div id="tile-chooser"></div>
+        
 
         </div>
 
