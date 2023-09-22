@@ -192,7 +192,7 @@ define('core/configuration', function (require) {
             UacanadaMap.api.addLeafletButton = ({position='bottomright', classes, title, icon, btnclasses, attributes='', extendedhtml=''}) => L.Control.extend({
                 options: { position },
                 onAdd() {
-                const container = L.DomUtil.create('div', `leaflet-bar leaflet-control ${classes}`);
+                const container = L.DomUtil.create('div', `leaflet-control ${classes}`);
                 container.innerHTML = `<button type="button" title="${title}" class="btn circle-button ${btnclasses}" ${attributes}><i class="${icon}"></i></button>${extendedhtml}`;
                 return container;
                 }
