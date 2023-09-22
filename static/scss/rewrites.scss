@@ -145,8 +145,10 @@ body,
 
 
 
-.filterPlaces{
+.leaflet-control.btn-group.dropstart{
   .dropdown-menu {
+    -webkit-animation: map-buttons-dropdown-animation 0.2s both;
+    animation: map-buttons-dropdown-animation 0.2s both;
     width: 13rem;
     max-width: 90vw;
     border-radius: 0.5rem;
