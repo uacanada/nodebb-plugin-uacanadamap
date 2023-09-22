@@ -21,8 +21,8 @@
 
 @keyframes map-buttons-dropdown-animation{
   0% {
-    opacity: 0.1;
-    transform: scale(0.5) translate3d(0, -200%, 0) rotate3d(1, 0, 0, 90deg);
+    opacity: 0;
+    transform: scale(0) translate3d(0, -100%, 0) rotate3d(1, 0, 0, 180deg);
     filter: blur(15px);
     
     
