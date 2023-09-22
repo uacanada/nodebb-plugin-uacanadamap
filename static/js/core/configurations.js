@@ -198,11 +198,49 @@ define('core/configuration', function (require) {
                 }
             });
 
+
+            // <div class="btn-group dropstart">
+            // <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            //     Dropstart
+            // </button>
+            // <ul class="dropdown-menu">
+            //     <!-- Dropdown menu links -->
+            // </ul>
+            // </div>
+
                 UacanadaMap.mapLayers.removeCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'removeCards', title: 'Remove Cards', icon: 'fa fa-solid fa-xmark',btnclasses:'btn-danger'}));
                 UacanadaMap.mapLayers.rotateCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'rotateCards', title: 'Rotate Cards', icon: 'fa fa-solid fa-table-list',btnclasses:'btn-primary'}));  
                 //UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({classes: 'filterPlaces', title: 'Filter Places', icon: 'fa fa-fw fa-sliders',btnclasses:'btn-primary',attributes:`data-bs-toggle="offcanvas" data-bs-target="#sortPlacesOffcanvas" aria-controls="sortPlacesOffcanvas"`}));
-                UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({  classes: "filterPlaces",  title: "Filter Places",  icon: "fa fa-fw fa-sliders",  btnclasses: "btn-primary",attributes:`data-ua-run="placesOrderByMenu"` }));
-                
+               // UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({  classes: "filterPlaces",  title: "Filter Places",  icon: "fa fa-fw fa-sliders",  btnclasses: "btn-primary",attributes:`data-ua-run="placesOrderByMenu"` }));
+               
+               UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({  classes: "filterPlaces btn-group dropstart",  title: "Filter Places",  icon: "fa fa-fw fa-sliders",  btnclasses: "btn btn-secondary dropdown-toggle", 
+               attributes:`data-bs-toggle="dropdown" aria-expanded="false"`,
+                extendedhtml:`<div class="dropdown-menu">  <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
+                data-ua-sortby="distance" href="#">
+                <i class="fas fa-road me-2"></i> Distance
+            </a>
+            <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
+                data-ua-sortby="latest" href="#">
+                <i class="fas fa-hourglass-start me-2"></i> Latest
+            </a>
+            <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
+                data-ua-sortby="oldest" href="#">
+                <i class="fas fa-hourglass-end me-2"></i> Oldest
+            </a>
+            <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
+                data-ua-sortby="events" href="#">
+                <i class="fas fa-calendar-alt me-2"></i> Event Date
+            </a>
+            <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
+                data-ua-sortby="category" href="#">
+                <i class="fas fa-folder me-2"></i> Category
+            </a>
+            <div class="list-group-item border-bottom mt-5 py-2">
+                <select id="location-category-filter" name="categoryfilter" class="form-select w-100 rounded-pill"
+                    aria-label="category"></select>
+            </div></div>` }));
+
+
                 UacanadaMap.mapLayers.addPlaceButton =     new (UacanadaMap.api.addLeafletButton({classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fa-solid fa-map-pin',btnclasses:'btn-primary'}));
                 
                 

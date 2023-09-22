@@ -214,16 +214,19 @@ body.uacanada-map-page.bottomPanelOpened {
 }
 
 
+
+
 #placesOrderByMenu {
-    position: fixed;
+    position: absolute;
     width: 13rem;
+    max-width: 90%;
     font-size: 1rem;
-    right: 0.1rem;
+    right: 0.25rem;
     bottom: 5rem;
-    background: white;
+    background: #fff;
     border-radius: 1rem;
     transition: .2s ease;
-    transform: translate3d(0, 0, 0);
-    padding: 1rem 0.25rem;
-    z-index: 900;
+    transform: translate3d(0,0,0);
+    padding: 1rem .25rem;
+    z-index: 2000;
 }
