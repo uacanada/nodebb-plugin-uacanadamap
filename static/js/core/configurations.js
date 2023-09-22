@@ -272,7 +272,7 @@ define('core/configuration', function (require) {
        
     
         UacanadaMap.map = UacanadaMap.L.map("uacamap", {
-            zoomSnap: 0.15,
+            zoomSnap: 1, // TODO: move to ACP
             wheelDebounceTime: 120,
             wheelPxPerZoomLevel: 200,
             attributionControl: true,
