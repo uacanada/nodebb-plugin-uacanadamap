@@ -21,15 +21,16 @@
 
 @keyframes fancy-appearance-animation{
   0% {
-    opacity: 1;
-    transform: scale(1) translate3d(0,0,0) rotate3d(1, 0, 0, 0deg);
-    filter: blur(0px);
-    
-  }
-  100% {
     opacity: 0;
     transform: scale(0.8) translate3d(0, -200%, 0) rotate3d(1, 0, 0, 90deg);
     filter: blur(5px);
+    
+    
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate3d(0,0,0) rotate3d(1, 0, 0, 0deg);
+    filter: blur(0px);
     
   }
 }
