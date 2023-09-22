@@ -189,7 +189,7 @@ define('core/configuration', function (require) {
 
            
 
-            UacanadaMap.api.addLeafletButton = ({position, classes, title, icon, btnclasses, attributes}) => L.Control.extend({
+            UacanadaMap.api.addLeafletButton = ({position='bottomright', classes, title, icon, btnclasses, attributes=''}) => L.Control.extend({
                 options: { position },
                 onAdd() {
                 const container = L.DomUtil.create('div', `leaflet-bar leaflet-control ${classes}`);
@@ -198,24 +198,25 @@ define('core/configuration', function (require) {
                 }
             });
 
-                UacanadaMap.mapLayers.removeCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'removeCards', title: 'Remove Cards', icon: 'fa fas fa-solid fa-xmark',btnclasses:'btn-danger',attributes:''}));
-                UacanadaMap.mapLayers.rotateCardsButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'rotateCards', title: 'Rotate Cards', icon: 'fa fas fa-solid fa-table-list',btnclasses:'btn-primary',attributes:''}));  
-                UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'filterPlaces', title: 'Filter Places', icon: 'fa fa-fw fa-sliders',btnclasses:'btn-primary',attributes:`data-bs-toggle="offcanvas" data-bs-target="#sortPlacesOffcanvas" aria-controls="sortPlacesOffcanvas"`}));
-
-                UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fas fa-solid fa-map-pin',btnclasses:'btn-primary' ,attributes:''}));
-                
+                UacanadaMap.mapLayers.removeCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'removeCards', title: 'Remove Cards', icon: 'fa fa-solid fa-xmark',btnclasses:'btn-danger'}));
+                UacanadaMap.mapLayers.rotateCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'rotateCards', title: 'Rotate Cards', icon: 'fa fa-solid fa-table-list',btnclasses:'btn-primary'}));  
+                //UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({classes: 'filterPlaces', title: 'Filter Places', icon: 'fa fa-fw fa-sliders',btnclasses:'btn-primary',attributes:`data-bs-toggle="offcanvas" data-bs-target="#sortPlacesOffcanvas" aria-controls="sortPlacesOffcanvas"`}));
+                UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({classes: 'filterPlaces', title: 'Filter Places', icon: 'fa fa-fw fa-sliders',btnclasses:'btn-primary',attributes:`data-bs-container="body" data-bs-toggle="popover" data-bs-title="Order and Filter" data-bs-placement="left"  data-bs-custom-class="place-ordering-popover" data-bs-content="order by"`}));
                
-           
+                UacanadaMap.mapLayers.addPlaceButton =     new (UacanadaMap.api.addLeafletButton({classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fa-solid fa-map-pin',btnclasses:'btn-primary'}));
+                
+                
            
                 if (app.user.isAdmin) {
-                    UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'expandRightButtons', title: 'Expand Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical',btnclasses:'btn-warning',attributes:''}));
+                   // UacanadaMap.mapLayers.menuControlButton = new (UacanadaMap.api.addLeafletButton({classes: 'expandRightButtons', title: 'Expand Menu', icon: 'fa fas fa-solid fa-ellipsis-vertical',btnclasses:'btn-warning'}));
+                   //UacanadaMap.mapLayers.bottomPanelControlAll = new (UacanadaMap.api.addLeafletButton(   {classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa fas fa-solid fa-people-roof',     btnclasses:'btn-info',attributes:`data-ua-content-id="tab-all"`}));
+                  // UacanadaMap.mapLayers.bottomPanelControlEvents = new (UacanadaMap.api.addLeafletButton({classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa far fa-regular fa-calendar-check',btnclasses:'btn-info',attributes:`data-ua-content-id="tab-events"`}));
                   
                    
                  }
 
                     
-                 UacanadaMap.mapLayers.bottomPanelControlAll = new (UacanadaMap.api.addLeafletButton(   {position:'bottomright', classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa fas fa-solid fa-people-roof',     btnclasses:'btn-info',attributes:`data-ua-content-id="tab-all"`}));
-                 UacanadaMap.mapLayers.bottomPanelControlEvents = new (UacanadaMap.api.addLeafletButton({position:'bottomright', classes: 'showBottomPanel', title: 'Show Bottom Panel', icon: 'fa far fa-regular fa-calendar-check',btnclasses:'btn-info',attributes:`data-ua-content-id="tab-events"`}));
+                
 
 
 
@@ -273,7 +274,7 @@ define('core/configuration', function (require) {
     
         UacanadaMap.map = UacanadaMap.L.map("uacamap", {
             zoomSnap: 1, // TODO: move to ACP
-            wheelDebounceTime: 120,
+            wheelDebounceTime: 200,
             wheelPxPerZoomLevel: 200,
             attributionControl: true,
             zoom: UacanadaMap.DEFAULT_ZOOM,
