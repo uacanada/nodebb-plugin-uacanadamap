@@ -142,3 +142,16 @@ body,
   padding: 1rem;
   border-radius: 1rem;
 }
+
+
+.leaflet-bar .dropdown-menu a {
+  width: auto;
+  padding: 0.25rem 1rem;
+  background: transparent;
+}
+
+.filterPlaces .dropdown-menu {
+  border-radius: 0.5rem;
+  backdrop-filter: blur(4px);
+  background: transparent;
+}

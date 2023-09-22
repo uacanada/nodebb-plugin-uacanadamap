@@ -198,16 +198,6 @@ define('core/configuration', function (require) {
                 }
             });
 
-
-            // <div class="btn-group dropstart">
-            // <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            //     Dropstart
-            // </button>
-            // <ul class="dropdown-menu">
-            //     <!-- Dropdown menu links -->
-            // </ul>
-            // </div>
-
                 UacanadaMap.mapLayers.removeCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'removeCards', title: 'Remove Cards', icon: 'fa fa-solid fa-xmark',btnclasses:'btn-danger'}));
                 UacanadaMap.mapLayers.rotateCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'rotateCards', title: 'Rotate Cards', icon: 'fa fa-solid fa-table-list',btnclasses:'btn-primary'}));  
                 //UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({classes: 'filterPlaces', title: 'Filter Places', icon: 'fa fa-fw fa-sliders',btnclasses:'btn-primary',attributes:`data-bs-toggle="offcanvas" data-bs-target="#sortPlacesOffcanvas" aria-controls="sortPlacesOffcanvas"`}));
@@ -235,7 +225,7 @@ define('core/configuration', function (require) {
                 data-ua-sortby="category" href="#">
                 <i class="fas fa-folder me-2"></i> Category
             </a>
-            <div class="list-group-item border-bottom mt-5 py-2">
+            <div class="list-group-item">
                 <select id="location-category-filter" name="categoryfilter" class="form-select w-100 rounded-pill"
                     aria-label="category"></select>
             </div></div>` }));
