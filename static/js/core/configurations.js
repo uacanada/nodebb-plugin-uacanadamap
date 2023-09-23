@@ -224,24 +224,13 @@ define('core/configuration', function (require) {
             </div></div>` }));
 
          
-        UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({
-            position: "bottomright",
-            flyTo: true,
-            maxZoom: 14,
-            strings: { title: "Show me where I am, yo!" },
-        });
-
+        UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({  position: "bottomright",  flyTo: true,  maxZoom: 14,  strings: { title: "Show me where I am" },});
         UacanadaMap.mapLayers.zoomControl = UacanadaMap.L.control.zoom({ position: "bottomright" });
-
-        UacanadaMap.mapControlsUnused.layerControl = L.control.layers(
-            UacanadaMap.mapProviders,
-            UacanadaMap.markersOverlay,
-            { position: "topright" }
-        );
+        UacanadaMap.mapControlsUnused.layerControl = L.control.layers(  UacanadaMap.mapProviders,  UacanadaMap.markersOverlay,  { position: "topright" }  );
 
         
 
-        UacanadaMap.mapLayers.tileChooser = new (UacanadaMap.api.addLeafletButton({  classes: "tileChooser btn-group dropstart",  title: "Tile Providers",  icon: "fa fa-solid fa-layer-group",  btnclasses: "btn btn-blur dropdown-toggle", attributes:`data-bs-toggle="dropdown" aria-expanded="false"`, extendedhtml:`<div class="dropdown-menu"><div id="tile-chooser"></div></div>` }));
+        UacanadaMap.mapLayers.tileChooser = new (UacanadaMap.api.addLeafletButton({  position: "topright", classes: "tileChooser btn-group dropstart",  title: "Tile Providers",  icon: "fa fa-solid fa-layer-group",  btnclasses: "btn btn-blur dropdown-toggle", attributes:`data-bs-toggle="dropdown" aria-expanded="false"`, extendedhtml:`<div class="dropdown-menu"><div id="tile-chooser"></div></div>` }));
         
         const myFullscreen = UacanadaMap.L.Control.Fullscreen.extend({ options: {  pseudoFullscreenClass: "fa fa-expand" }  });
         UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
