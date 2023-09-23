@@ -19,17 +19,18 @@
 @keyframes map-dropdown-menus{
   0% {
     opacity: 0;
-    bottom: -20rem!important;
     filter: blur(15px);
-    
-    
-  }
-  100% {
+    line-height: 0rem;
+    border-radius: 5rem;
+    margin-bottom: -40rem;
+}
+100% {
     opacity: 1;
-    bottom: 1rem;
-    filter: blur(0px);
-    
-  }
+    filter: blur(0);
+    line-height: 1rem;
+    border-radius: 0rem;
+    margin-bottom: 0;
+}
 }
 
 
