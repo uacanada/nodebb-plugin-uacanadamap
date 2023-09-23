@@ -19,14 +19,14 @@
 @keyframes map-dropdown-menus{
   0% {
     opacity: 0;
-  
+    bottom: -20rem;
     filter: blur(15px);
     
     
   }
   100% {
     opacity: 1;
-  
+    bottom: 1rem;
     filter: blur(0px);
     
   }
