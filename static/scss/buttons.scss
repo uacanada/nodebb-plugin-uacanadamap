@@ -108,7 +108,10 @@
   
 body.hiddenElements:not(.cards-opened) {
   
-  .leaflet-control-locate,.leaflet-control-fullscreen,.leaflet-control-addplace, .tileChooser,.filterPlaces {
+  .leaflet-control-fullscreen,
+  .leaflet-control-addplace, 
+  .tileChooser,
+  .filterPlaces {
     transform: translate3d(150%, 0, 0);
   }
 

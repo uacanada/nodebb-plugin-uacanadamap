@@ -76,9 +76,7 @@ $filterValuesAddPlaceMode: grayscale(0.9);
 
 body.hiddenElements{
 
-    [component="bottombar"]{
-        transform: translate3d(0,100%, 0);
-    }
+   
     
     .newLocationCreateButton, #locationSelectionLatLng {
       opacity: 0;
@@ -86,7 +84,7 @@ body.hiddenElements{
     }
    
     #mapattribution{
-        opacity:0;
+        opacity:0;transform: translate3d(-100%,0, 0);
     }
     
 }
