@@ -120,7 +120,7 @@
       const cat = $('#location-category-filter').val();
       const { isDesktop } = UacanadaMap.api.getDivSizes();
       const onlyOneItem = places.length <= 1;
-      let html = `<button id="cardsDown" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></button> <div id="ua-cards-slider" class="swiper pb-3 desktop-${isDesktop}${onlyOneItem ? ' only-one-item pe-1' : ' ps-2'}"> <div class="swiper-wrapper">`;
+      let html = `<button id="cardsDown" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></button> <div id="ua-cards-slider" class="swiper px-3 pt-2 desktop-${isDesktop}${onlyOneItem ? ' only-one-item pe-1' : ' ps-2'}"> <div class="swiper-wrapper">`;
     
       places.forEach((placedata, index) => {
         html += `<div data-slide-index="${index}" data-slide-tid="${placedata.tid}" class="swiper-slide${onlyOneItem ? ' p-2' : ' me-3'}">${placedata.html}</div>`;

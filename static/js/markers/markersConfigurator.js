@@ -150,7 +150,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
                 </a>`);
     
           const cardPlacePic = profileIcon
-            ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:2rem" class="place-pic me-2 mb-1 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
+            ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:4rem" class="place-pic me-2 mb-1 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
             : "";
             
             var cardHtml = '<div class="ua-place-card-inner ms-0 me-0 p-3 position-relative" data-ua-tid=' + tid + '>' +

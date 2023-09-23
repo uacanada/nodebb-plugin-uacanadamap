@@ -397,7 +397,7 @@ input#ua-location-cover-img:before {
 }
 
 .ua-place-card-inner .card-text{  
-  height: 3.8rem; 
+  min-height: 6rem;
   overflow: hidden;
   position: relative;
 }
@@ -1430,7 +1430,7 @@ button#cardsDown {
 
 #cardsSwiperPlaceholder{
   transition: all .2s;
-  bottom: 0.5rem;
+  bottom: -5px;
 }
 
 #cardsSwiperPlaceholder.verticalCards{
@@ -1465,6 +1465,7 @@ button#cardsDown {
     height: auto;
     margin-bottom: 1rem;
     max-height: 15rem;
+    min-height: 4rem;
   }
 }
 @media (orientation: portrait), (max-width: 767px) {
@@ -1474,9 +1475,9 @@ button#cardsDown {
      max-height: 12rem;
    }
    .ua-place-card-inner .card-text {
-  
+    min-height: 2rem;
     display: inline-block;
-    height: 3.5rem;
+   
 }
 #ua-cards-slider .swiper-slide {
  
