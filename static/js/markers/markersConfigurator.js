@@ -153,7 +153,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
             ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:4rem" class="place-pic me-2 mb-1 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
             : "";
             
-            var cardHtml = '<div class="ua-place-card-inner ms-0 me-0 p-3 position-relative" data-ua-tid=' + tid + '>' +
+            var cardHtmlOld = '<div class="ua-place-card-inner ms-0 me-0 p-3 position-relative" data-ua-tid=' + tid + '>' +
             '<div class="card-body">' +
               '<a title="topic/' + tid + '" class="float-end ua-topic-link" href="/topic/' + tid + '/1">' + cardPlacePic + '</a>' +
               '<div class="d-flex justify-content-between align-items-start text-truncate">' +
@@ -174,6 +174,26 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
               editLink +
            '</div>' +
          '</div>';
+
+
+        const cardHtml = `<div class="ua-place-card-inner card ms-0 me-0 p-3 position-relative" data-ua-tid="${tid}">
+          <div class="row g-0">
+            <div class="col-md-4">
+              ${cardPlacePic}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${cardTitleWithLinkAndIcon}</h5>
+                <p class="card-text"><span class="badge rounded-pill text-bg-fancy">${categoryName}</span>
+                ${eventNameHtml}
+                ${eventHtml}
+                ${bodyText}
+                </p>
+                <p class="card-text"><small class="text-muted">'<span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small></p>
+              </div>
+            </div>
+          </div>
+        </div>`
     
     
     
