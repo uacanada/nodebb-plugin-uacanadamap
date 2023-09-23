@@ -107,10 +107,8 @@
   
   
 body.hiddenElements:not(.cards-opened) {
-  #ua-horizontal-buttons-wrapper {
-    transform: translate3d(0, -100%, 0);
-  }
-  .leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen,.leaflet-control-addplace {
+  
+  .leaflet-control-locate,.leaflet-control-fullscreen,.leaflet-control-addplace, .tileChooser,.filterPlaces {
     transform: translate3d(150%, 0, 0);
   }
 
@@ -219,6 +217,13 @@ a.leaflet-contextmenu-item button {
  
 }
 
+.btn-blur {
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.25);
+  color: white;
+}
+
+
 .leaflet-control-container{
   .newLocationOpenMarker{
     transition: 1s transform ease;
@@ -239,8 +244,11 @@ body.cards-opened{
   .leaflet-control-container {
     .newLocationOpenMarker{ transform: translate3d(0, 100vh, 0);  }
     .removeCards,
+    .filterPlacesm,
+    .tileChooser,
     .rotateCards,
     .filterPlaces{  transform: translate3d(0,0,0); }
    
   }
 }
+
