@@ -153,34 +153,12 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
             ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:3.5rem" class="place-pic me-2 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
             : "";
             
-            var cardHtmlOld = '<div class="ua-place-card-inner ms-0 me-0 p-3 position-relative" data-ua-tid=' + tid + '>' +
-            '<div class="card-body">' +
-              '<a title="topic/' + tid + '" class="float-end ua-topic-link" href="/topic/' + tid + '/1">' + cardPlacePic + '</a>' +
-              '<div class="d-flex justify-content-between align-items-start text-truncate">' +
-                '<a title="Topic link" class="ua-topic-link" href="/topic/' + tid + '/1">' +
-                  '<h6 style="color: ' + parentTabColor + ';" title="Topic link" class="text-primary card-title mb-2">' + cardTitleWithLinkAndIcon + '</h6>' +
-                '</a>' +
-              '</div>' +
-              '<div class="d-flex align-items-start justify-content-between">' +
-                '<ul class="list-unstyled mb-1">' +
-                  '<li class="mb-1">' +
-                    '<span class="ua-mini-username text-primary username-' + socialtype + '">' +
-                      socialIcon + ' ' + mainUsername +
-                    '</span>' +
-                  '</li>' +
-                '</ul>' +
-              '</div>' +
-              '<p class="card-text mb-0"> <span class="badge rounded-pill text-bg-fancy">' + categoryName + '</span>  ' + eventNameHtml + eventHtml + bodyText + '</p>' +
-              editLink +
-           '</div>' +
-         '</div>';
-
-
+           
         const cardHtml = `<div class="ua-place-card-inner card mx-0 px-0 pt-3 position-relative" data-ua-tid="${tid}">
           <div class="row no-gutters align-items-start">
             <div class="col flex-grow-1">
               <div class="card-body py-1 h-100">
-                <h5 class="card-title mb-1">${cardTitleWithLinkAndIcon}</h5>
+                <h6 class="card-title mb-1" style="color:${parentTabColor};">${cardTitleWithLinkAndIcon}</h6>
                 <small class="text-muted">'<span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
               </div>
             </div>
