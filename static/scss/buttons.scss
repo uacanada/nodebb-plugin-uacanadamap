@@ -232,8 +232,12 @@ a.leaflet-contextmenu-item button {
     transition: 1s transform ease;
     transform: translate3d(0, 0, 0);
   }
+
   .filterPlaces,
-  .tileChooser,
+  .tileChooser{
+    transition: 1s transform ease;
+  }
+ 
   .removeCards,
   .rotateCards {
     transition: 1s transform ease;
