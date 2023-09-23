@@ -150,7 +150,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
                 </a>`);
     
           const cardPlacePic = profileIcon
-            ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:4rem" class="place-pic me-2 mb-1 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
+            ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:3.5rem" class="place-pic me-2 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
             : "";
             
             var cardHtmlOld = '<div class="ua-place-card-inner ms-0 me-0 p-3 position-relative" data-ua-tid=' + tid + '>' +
@@ -176,11 +176,11 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
          '</div>';
 
 
-        const cardHtml = `<div class="ua-place-card-inner card ms-0 me-0 p-3 position-relative" data-ua-tid="${tid}">
+        const cardHtml = `<div class="ua-place-card-inner card mx-0 px-0 pt-3 position-relative" data-ua-tid="${tid}">
           <div class="row no-gutters align-items-start">
             <div class="col flex-grow-1">
-              <div class="card-body h-100">
-                <h5 class="card-title mb-0">${cardTitleWithLinkAndIcon}</h5>
+              <div class="card-body py-1 h-100">
+                <h5 class="card-title mb-1">${cardTitleWithLinkAndIcon}</h5>
                 <small class="text-muted">'<span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
               </div>
             </div>
