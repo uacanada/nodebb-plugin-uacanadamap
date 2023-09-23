@@ -196,7 +196,7 @@ define('core/configuration', function (require) {
             UacanadaMap.mapLayers.removeCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'removeCards mb-5', title: 'Remove Cards', icon: 'fa fa-solid fa-xmark',btnclasses:'btn-danger'}));
             UacanadaMap.mapLayers.rotateCardsButton =  new (UacanadaMap.api.addLeafletButton({classes: 'rotateCards', title: 'Rotate Cards', icon: 'fa fa-solid fa-table-list',btnclasses:'btn-primary'})); 
                
-            UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({  classes: "filterPlaces btn-group dropstart",  title: "Filter Places",  icon: "fa fa-fw fa-sliders",  btnclasses: "btn btn-secondary dropdown-toggle", 
+            UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({  classes: "filterPlaces btn-group dropstart",  title: "Filter Places",  icon: "fa fa-fw fa-sliders",  btnclasses: "btn btn-blur dropdown-toggle", 
                attributes:`data-bs-toggle="dropdown" aria-expanded="false"`,
                 extendedhtml:`<div class="dropdown-menu">  <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
                 data-ua-sortby="distance" href="#">
@@ -262,7 +262,7 @@ define('core/configuration', function (require) {
 
         
 
-        UacanadaMap.mapLayers.tileChooser = new (UacanadaMap.api.addLeafletButton({  classes: "tileChooser btn-group dropstart",  title: "Filter Places",  icon: "fa fa-solid fa-layer-group",  btnclasses: "btn btn-secondary dropdown-toggle", attributes:`data-bs-toggle="dropdown" aria-expanded="false"`, extendedhtml:`<div class="dropdown-menu"><div id="tile-chooser"></div></div>` }));
+        UacanadaMap.mapLayers.tileChooser = new (UacanadaMap.api.addLeafletButton({  classes: "tileChooser btn-group dropstart",  title: "Filter Places",  icon: "fa fa-solid fa-layer-group",  btnclasses: "btn btn-blur dropdown-toggle", attributes:`data-bs-toggle="dropdown" aria-expanded="false"`, extendedhtml:`<div class="dropdown-menu"><div id="tile-chooser"></div></div>` }));
         
         const myFullscreen = UacanadaMap.L.Control.Fullscreen.extend({ options: {  pseudoFullscreenClass: "fa fa-expand" }  });
         UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
