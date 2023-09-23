@@ -1417,14 +1417,16 @@ button#cardsDown {
   display: block;
   transform: translate3d(0,100%,0);
   border: none;
+  height: 0;
   margin: 0 auto;
   font-size: 2rem;
   line-height: 0;
   color: #ffffff;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   text-align: center;
   width: 100%;
   background: transparent;
+  overflow: hidden;
 }
 
 
@@ -1452,6 +1454,8 @@ button#cardsDown {
   
   button#cardsDown {
     transform: translate3d(0,0,0);
+    padding-bottom: 1rem;
+    height: 2rem;
    
   }
 
