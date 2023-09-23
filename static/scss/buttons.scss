@@ -232,6 +232,8 @@ a.leaflet-contextmenu-item button {
     transition: 1s transform ease;
     transform: translate3d(0, 0, 0);
   }
+  .filterPlaces,
+  .tileChooser,
   .removeCards,
   .rotateCards {
     transition: 1s transform ease;
@@ -247,11 +249,10 @@ body.cards-opened{
   .leaflet-control-container {
     .newLocationOpenMarker{ transform: translate3d(0, 100vh, 0);  }
     .removeCards,
-    .filterPlacesm,
+    .filterPlaces,
     .tileChooser,
     .rotateCards,
     .filterPlaces{  transform: translate3d(0,0,0); }
    
   }
 }
-

@@ -117,6 +117,11 @@ body.uacanada-map-page {
         display: none;
     }
 
+    .bottombar .dropdown-menu{
+        -webkit-animation: map-dropdown-menus 0.2s both;
+        animation: map-dropdown-menus 0.2s both;
+      }
+
     
 }
 
