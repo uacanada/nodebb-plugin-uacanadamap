@@ -387,8 +387,23 @@ input#ua-location-cover-img:before {
   transition: .2 all;
   overflow: hidden;
   height: 12.5rem;
+
+  .row > div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-body {
+    flex: 1;
+  }
+  
+  .card-body.h-100 {
+    height: 4rem; 
+  }
  
 }
+
+
 
 
 

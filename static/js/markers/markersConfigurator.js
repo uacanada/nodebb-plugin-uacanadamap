@@ -177,24 +177,31 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
 
 
         const cardHtml = `<div class="ua-place-card-inner card ms-0 me-0 p-3 position-relative" data-ua-tid="${tid}">
-          <div class="row g-0">
-            <div class="col-md-4">
-              ${cardPlacePic}
+          <div class="row no-gutters align-items-start">
+            <div class="col flex-grow-1">
+              <div class="card-body h-100">
+                <h5 class="card-title mb-0">${cardTitleWithLinkAndIcon}</h5>
+                <small class="text-muted">'<span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
+              </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-auto">
+              <div class="d-flex align-items-start justify-content-end h-100">
+              ${cardPlacePic}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
               <div class="card-body">
-                <h5 class="card-title">${cardTitleWithLinkAndIcon}</h5>
-                <p class="card-text"><span class="badge rounded-pill text-bg-fancy">${categoryName}</span>
-                ${eventNameHtml}
-                ${eventHtml}
-                ${bodyText}
-                </p>
-                <p class="card-text"><small class="text-muted">'<span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small></p>
+              <p class="card-text"><span class="badge rounded-pill text-bg-fancy">${categoryName}</span>
+              ${eventNameHtml}
+              ${eventHtml}
+              ${bodyText}
+              </p>
               </div>
             </div>
           </div>
         </div>`
-    
     
     
           const eventDate = eventStartDate ? new Date(`${eventStartDate} ${eventStartTime}`):0;
