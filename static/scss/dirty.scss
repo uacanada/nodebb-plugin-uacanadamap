@@ -384,9 +384,9 @@ input#ua-location-cover-img:before {
   font-size: 0.75rem;
   box-shadow:0 0rem 1rem -0.5rem rgba(0, 0, 0, 0.7);
   border-radius: 5px;
-  transition: 200ms all;
+  transition: .2 all;
   overflow: hidden;
-  max-height: 9.5rem;
+  height: 12.5rem;
  
 }
 
@@ -708,6 +708,7 @@ form#placeForm .form-text {
   width: 94%;
   font-size: 0.8rem;
   margin: 0;
+  
 
 } 
 .mini-latlng-inpost {
@@ -1468,8 +1469,8 @@ button#cardsDown {
   #ua-cards-slider .swiper-slide {
     height: auto;
     margin-bottom: 1rem;
-    max-height: 15rem;
-    min-height: 4rem;
+    max-height: 12.5rem;
+    min-height: 3rem;
   }
 }
 @media (orientation: portrait), (max-width: 767px) {
