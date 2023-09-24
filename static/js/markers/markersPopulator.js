@@ -44,6 +44,24 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       UacanadaMap.L.polyline([startLatLng, endLatLng], { weight: 1, color: 'red', }).addTo(UacanadaMap.map);
     }
     
+    function addPCurve(startLatLng, heightInPixels, widthInPixels=2, virtualZoom = 18) {
+      const {L,map} = UacanadaMap
+      const startPoint = map.project(startLatLng, virtualZoom);
+      const leftPoint = L.point(startPoint.x - widthInPixels, startPoint.y);
+      const bottomPoint = L.point(startPoint.x - widthInPixels, startPoint.y - heightInPixels);
+      const rightPoint = L.point(startPoint.x, startPoint.y - heightInPixels);
+      const startLatLngUnprojected = map.unproject(startPoint, virtualZoom);
+      const leftLatLng = map.unproject(leftPoint, virtualZoom);
+      const bottomLatLng = map.unproject(bottomPoint, virtualZoom);
+      const rightLatLng = map.unproject(rightPoint, virtualZoom);
+      const pCurve = L.polyline([startLatLngUnprojected, leftLatLng, bottomLatLng, rightLatLng], {  color: 'red', weight: 2   })
+      return pCurve;
+  }
+  
+ 
+  
+
+  
    
     
 
@@ -111,7 +129,9 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               const shiftDistance = SHIFT_STEP_PX*index
               const currentIcon = m.marker.getIcon();
               const currentHtml = currentIcon.options.html;
-              addVerticalStripe( m.gps, shiftDistance);
+             
+              m.shiftLeg = addPCurve( m.gps, shiftDistance);
+              
               let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance];
 
 
@@ -149,6 +169,8 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             // Add marker to the respective category cluster
             if (UacanadaMap.categoryClusters[item.placeCategory]) {
                 UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
+
+                console.log({item})
 
                // UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[item.placeCategory].getLayers());
             }
