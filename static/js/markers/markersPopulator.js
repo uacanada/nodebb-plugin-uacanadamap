@@ -111,8 +111,8 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               const shiftDistance = SHIFT_STEP_PX*index
               const currentIcon = m.marker.getIcon();
               const currentHtml = currentIcon.options.html;
-              addVerticalStripe( m.gps, shiftDistance+22);
-              let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] - shiftDistance];
+              addVerticalStripe( m.gps, shiftDistance);
+              let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance];
 
 
               m.marker.setIcon(L.divIcon({
