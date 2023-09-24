@@ -144,7 +144,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               
               m.marker.setIcon(L.divIcon({
                 className:  currentIcon.options.className+' non-shifted-marker',
-                html: currentHtml,
+                html: currentHtml+'<small class="groupSize">'+groupSize+'</small>',
                 iconSize: currentIcon.options.iconSize,
                 iconAnchor:currentIcon.options.iconAnchor
               }));
