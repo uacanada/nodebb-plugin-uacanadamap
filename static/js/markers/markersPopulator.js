@@ -141,7 +141,13 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
                 iconAnchor:newIconAnchor
               }));
             } else {
-              m.marker.setIcon(L.divIcon({className: currentIcon.options.className+' non-shifted-marker'}));
+              
+              m.marker.setIcon(L.divIcon({
+                className:  currentIcon.options.className+' non-shifted-marker',
+                html: currentHtml,
+                iconSize: currentIcon.options.iconSize,
+                iconAnchor:currentIcon.options.iconAnchor
+              }));
             }
           });
         });
