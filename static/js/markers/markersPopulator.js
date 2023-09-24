@@ -36,6 +36,17 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
   
       groups[group2] = [];
     }
+
+    function addVerticalStripe(startLatLng, heightInPixels) {
+      const startPoint = UacanadaMap.map.latLngToLayerPoint(startLatLng);
+      const endPoint = UacanadaMap.L.point(startPoint.x, startPoint.y - heightInPixels);
+      const endLatLng = UacanadaMap.map.layerPointToLatLng(endPoint);
+      UacanadaMap.L.polyline([startLatLng, endLatLng], {  color: 'red', }).addTo(UacanadaMap.map);
+    }
+    
+   
+    
+
   
     function shiftMarkersWithCloseNeighbors(markers, forceShift) {
        const {
@@ -82,6 +93,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       }
 
      
+
       
   
       const markerGroups = groups.filter((group) => group.length > 1);
@@ -99,12 +111,10 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               const shiftDistance = SHIFT_STEP_PX*index
               const currentIcon = m.marker.getIcon();
               const currentHtml = currentIcon.options.html;
+              addVerticalStripe( m.gps, shiftDistance+22);
               m.marker.setIcon(L.divIcon({
                 className: currentIcon.options.className+' shifted-marker',
-                html: `<div class="shifted-marker-wrapper" style="margin-top: -${shiftDistance}px;">
-                  ${currentHtml}
-                  <div class="shifted-marker-leg" style="height: ${shiftDistance+22}px;"></div>
-                </div>`,
+                html: `<div class="shifted-marker-wrapper" style="margin-top: -${shiftDistance}px;"> ${currentHtml} </div>`,
                 iconSize: currentIcon.options.iconSize,
                 iconAnchor: currentIcon.options.iconAnchor
               }));
