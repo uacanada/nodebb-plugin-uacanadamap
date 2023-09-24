@@ -37,13 +37,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       groups[group2] = [];
     }
 
-    function addVerticalStripe(startLatLng, heightInPixels, virtualZoom=18) {
-      const startPoint = UacanadaMap.map.project(startLatLng, virtualZoom);
-      const endPoint = UacanadaMap.L.point(startPoint.x, startPoint.y - heightInPixels);
-      const endLatLng = UacanadaMap.map.unproject(endPoint, virtualZoom);
-      UacanadaMap.L.polyline([startLatLng, endLatLng], { weight: 1, color: 'red', }).addTo(UacanadaMap.map);
-    }
-    
+      
     function addPCurve(startLatLng, heightInPixels, widthInPixels=2, virtualZoom = 18) {
       const {L,map} = UacanadaMap
       const startPoint = map.project(startLatLng, virtualZoom);
@@ -131,6 +125,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               const currentHtml = currentIcon.options.html;
              
               m.shiftLeg = addPCurve( m.gps, shiftDistance);
+              m.shiftLeg.addTo(UacanadaMap.map)
               
               let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance];
 
@@ -170,9 +165,9 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             if (UacanadaMap.categoryClusters[item.placeCategory]) {
                 UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
 
-                if(UacanadaMap.allPlaces[item.tid] && UacanadaMap.allPlaces[item.tid].shiftLeg){
-                  UacanadaMap.categoryClusters[item.placeCategory].addLayer(UacanadaMap.allPlaces[item.tid].shiftLeg)
-                }
+                // if(UacanadaMap.allPlaces[item.tid] && UacanadaMap.allPlaces[item.tid].shiftLeg){
+                //   UacanadaMap.categoryClusters[item.placeCategory].addLayer(UacanadaMap.allPlaces[item.tid].shiftLeg)
+                // }
 
                // UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[item.placeCategory].getLayers());
             }
