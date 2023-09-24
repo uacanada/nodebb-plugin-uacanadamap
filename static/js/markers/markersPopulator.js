@@ -38,8 +38,9 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
     }
 
       
-    function addPCurve(startLatLng, heightInPixels, widthInPixels=30, virtualZoom = 18) {
+    function addPCurve(startLatLng, heightInPixels, widthInPixels=22) {
       const {L,map} = UacanadaMap
+      const virtualZoom = map.getMaxZoom()
       const startPoint = map.project(startLatLng, virtualZoom);
       const leftPoint = L.point(startPoint.x - widthInPixels, startPoint.y);
       const bottomPoint = L.point(startPoint.x - widthInPixels, startPoint.y - heightInPixels);
@@ -48,7 +49,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       const leftLatLng = map.unproject(leftPoint, virtualZoom);
       const bottomLatLng = map.unproject(bottomPoint, virtualZoom);
       const rightLatLng = map.unproject(rightPoint, virtualZoom);
-      const pCurve = L.polyline([startLatLngUnprojected, leftLatLng, bottomLatLng, rightLatLng], {  color: 'red', weight: 2   })
+      const pCurve = L.polyline([startLatLngUnprojected, leftLatLng, bottomLatLng, rightLatLng], {  color: 'red', weight: 1  })
       return pCurve;
   }
   
@@ -127,7 +128,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               m.shiftLeg = addPCurve( m.gps, shiftDistance);
               m.shiftLeg.addTo(UacanadaMap.map)
               
-              let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance+22];
+              let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance];
 
 
               m.marker.setIcon(L.divIcon({
