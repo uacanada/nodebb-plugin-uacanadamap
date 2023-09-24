@@ -418,33 +418,11 @@ input#ua-location-cover-img:before {
     font-size: 0.8rem;
   }
 
-  &:before {
-    content: '';
-    height: 0.25rem;
-    border-radius: 10px;
-    width: 4%;
-    background: #c6d4e0;
-    display: block;
-    position: absolute;
-    text-align: center;
-    left: 46%;
-    top: 0.5rem;
-  }
+ 
 
 }
 
-@media (orientation: landscape) and (min-width: 768px) {
-  .ua-place-card-inner{
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    .card-text{
-      height: 3.5rem;
-    }
-    &:before {
-      content:none;
-    }
-  }
-}
+
 
 
 .next-placecard {
@@ -1447,6 +1425,34 @@ button#cardsDown {
   bottom: -5px;
 }
 
+@media (orientation: landscape) and (min-width: 768px) {
+  .ua-place-card-inner{
+    margin-bottom: 1rem;
+    .card-text{
+      height: 3.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+@media (orientation: portrait), (max-width: 600px) {
+ 
+  .ua-place-card-inner {
+     max-height: 12rem;
+     &:before {
+      content: '';
+      height: 0.25rem;
+      border-radius: 10px;
+      width: 4%;
+      background: #c6d4e0;
+      display: block;
+      position: absolute;
+      text-align: center;
+      left: 46%;
+      top: 0.5rem;
+    }
+   }
+}
+
 #cardsSwiperPlaceholder.verticalCards{
 
     max-width: 500px;
@@ -1472,34 +1478,27 @@ button#cardsDown {
   }
 
 
+  
+ 
 
 @media (orientation: landscape) and (min-width: 768px) {
   height: 90vh;
-  .ua-place-card-inner,
-  .ua-place-card-inner .card-text,
+  
   #ua-cards-slider .swiper-slide {
     height: auto;
     margin-bottom: 1rem;
     max-height: 12.5rem;
-    min-height: 3rem;
+    min-height: 3rem; 
   }
 }
 @media (orientation: portrait), (max-width: 767px) {
- 
-  .ua-place-card-inner {
-    font-size: .8rem;
-     max-height: 12rem;
-   }
    .ua-place-card-inner .card-text {
     min-height: 2rem;
     display: inline-block;
-   
-}
+   }
 #ua-cards-slider .swiper-slide {
- 
   height: auto;
- 
-  margin-bottom: 0.75rem;
+ margin-bottom: 0.75rem;
 }
 
 }
