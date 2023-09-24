@@ -150,7 +150,10 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
                 </a>`);
     
           const cardPlacePic = profileIcon
-            ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:3.5rem" class="place-pic me-2 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
+            ? ` <div class="col-auto">
+            <div class="d-flex align-items-start justify-content-end h-100">
+            <div style="background:url(${profileIcon}) center center;background-size:cover;width:3rem" class="place-pic me-2 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div> </div>
+            </div>`
             : "";
             
            
@@ -158,15 +161,13 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
           <div class="row no-gutters align-items-start">
             <div class="col flex-grow-1">
               <div class="card-body py-1 h-100">
-                <h5 class="card-title mb-1" style="color:${parentTabColor};">${cardTitleWithLinkAndIcon}</h5>
+                <h6 class="card-title mb-1" style="color:${parentTabColor};">${cardTitleWithLinkAndIcon}</h6>
                 <small class="text-muted"><span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
               </div>
             </div>
-            <div class="col-auto">
-              <div class="d-flex align-items-start justify-content-end h-100">
+          
               ${cardPlacePic}
-              </div>
-            </div>
+             
           </div>
           <div class="row">
             <div class="col-12">
