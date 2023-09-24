@@ -38,7 +38,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
     }
 
       
-    function addPCurve(startLatLng, heightInPixels, widthInPixels=2, virtualZoom = 18) {
+    function addPCurve(startLatLng, heightInPixels, widthInPixels=30, virtualZoom = 17) {
       const {L,map} = UacanadaMap
       const startPoint = map.project(startLatLng, virtualZoom);
       const leftPoint = L.point(startPoint.x - widthInPixels, startPoint.y);
