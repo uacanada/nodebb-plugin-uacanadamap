@@ -170,7 +170,9 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             if (UacanadaMap.categoryClusters[item.placeCategory]) {
                 UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
 
-                console.log({item})
+                if(UacanadaMap.allPlaces[item.tid] && UacanadaMap.allPlaces[item.tid].shiftLeg){
+                  UacanadaMap.categoryClusters[item.placeCategory].addLayer(UacanadaMap.allPlaces[item.tid].shiftLeg)
+                }
 
                // UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[item.placeCategory].getLayers());
             }

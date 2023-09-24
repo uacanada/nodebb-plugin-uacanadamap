@@ -101,7 +101,7 @@ return async (UacanadaMap) => {
           } else {
             const markers = await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache);
             if (markers) {
-              UacanadaMap.console.log(markers);
+              
               UacanadaMap.api.populatePlaces(markers);
               UacanadaMap.api.populateTabs();
     
