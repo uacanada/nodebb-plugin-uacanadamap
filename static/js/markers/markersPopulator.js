@@ -37,11 +37,11 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       groups[group2] = [];
     }
 
-    function addVerticalStripe(startLatLng, heightInPixels) {
-      const startPoint = UacanadaMap.map.latLngToLayerPoint(startLatLng);
+    function addVerticalStripe(startLatLng, heightInPixels, virtualZoom=18) {
+      const startPoint = UacanadaMap.map.project(startLatLng, virtualZoom);
       const endPoint = UacanadaMap.L.point(startPoint.x, startPoint.y - heightInPixels);
-      const endLatLng = UacanadaMap.map.layerPointToLatLng(endPoint);
-      UacanadaMap.L.polyline([startLatLng, endLatLng], {  color: 'red', }).addTo(UacanadaMap.map);
+      const endLatLng = UacanadaMap.map.unproject(endPoint, virtualZoom);
+      UacanadaMap.L.polyline([startLatLng, endLatLng], { weight: 1, color: 'red', }).addTo(UacanadaMap.map);
     }
     
    
