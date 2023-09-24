@@ -37,11 +37,17 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
     }  
 
     
-   if (direction==='down' && (!isVertical || verticalInBeginning)) {
+   if (direction==='down' && !isVertical) {
         $("body").removeClass("ua-noscroll");
         $("#ua-place-modal").offcanvas("hide");
         UacanadaMap.api.removeCards()
     } 
+
+
+    if (direction==='down' && verticalInBeginning) {
+      UacanadaMap.api.rotateCards("horizontal");
+    } 
+
   }
   
   function postOffcanvas(direction, element) {

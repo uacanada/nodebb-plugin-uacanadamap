@@ -158,8 +158,8 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
           <div class="row no-gutters align-items-start">
             <div class="col flex-grow-1">
               <div class="card-body py-1 h-100">
-                <h6 class="card-title mb-1" style="color:${parentTabColor};">${cardTitleWithLinkAndIcon}</h6>
-                <small class="text-muted">'<span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
+                <h5 class="card-title mb-1" style="color:${parentTabColor};">${cardTitleWithLinkAndIcon}</h5>
+                <small class="text-muted"><span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
               </div>
             </div>
             <div class="col-auto">
