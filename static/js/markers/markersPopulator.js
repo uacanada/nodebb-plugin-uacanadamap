@@ -112,11 +112,14 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
               const currentIcon = m.marker.getIcon();
               const currentHtml = currentIcon.options.html;
               addVerticalStripe( m.gps, shiftDistance+22);
+              let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] - shiftDistance];
+
+
               m.marker.setIcon(L.divIcon({
                 className: currentIcon.options.className+' shifted-marker',
-                html: `<div class="shifted-marker-wrapper" style="margin-top: -${shiftDistance}px;"> ${currentHtml} </div>`,
+                html: currentHtml,
                 iconSize: currentIcon.options.iconSize,
-                iconAnchor: currentIcon.options.iconAnchor
+                iconAnchor:newIconAnchor
               }));
             }
           });
