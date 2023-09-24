@@ -114,16 +114,19 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         markerGroups.forEach((group) => {
           const groupSize = group.length;
            group.forEach((marker, index) => {
-            if(index>0){
-              const m = UacanadaMap.allPlaces[marker.tid];
+
+            const m = UacanadaMap.allPlaces[marker.tid];
+            const currentIcon = m.marker.getIcon();
+            const currentHtml = currentIcon.options.html;
+             if(index>0){
+              
               m.neighborIndex = index;
               m.neighborsCount = groupSize;
               m.neighbors = group;
               m.shifted = true;
               const SHIFT_STEP_PX = 50
               const shiftDistance = SHIFT_STEP_PX*index
-              const currentIcon = m.marker.getIcon();
-              const currentHtml = currentIcon.options.html;
+              
              
               m.shiftLeg = addPCurve( m.gps, shiftDistance);
               m.shiftLeg.addTo(UacanadaMap.map)
@@ -137,6 +140,8 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
                 iconSize: currentIcon.options.iconSize,
                 iconAnchor:newIconAnchor
               }));
+            } else {
+              m.marker.setIcon(L.divIcon({className: currentIcon.options.className+' non-shifted-marker'}));
             }
           });
         });
