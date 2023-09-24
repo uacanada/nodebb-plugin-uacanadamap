@@ -118,33 +118,28 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             const m = UacanadaMap.allPlaces[marker.tid];
             const currentIcon = m.marker.getIcon();
             const currentHtml = currentIcon.options.html;
+            const SHIFT_STEP_PX = 50
+
              if(index>0){
+
+              const shiftDistance = SHIFT_STEP_PX*index
               
               m.neighborIndex = index;
               m.neighborsCount = groupSize;
               m.neighbors = group;
               m.shifted = true;
-              const SHIFT_STEP_PX = 50
-              const shiftDistance = SHIFT_STEP_PX*index
-              
-             
               m.shiftLeg = addPCurve( m.gps, shiftDistance);
               m.shiftLeg.addTo(UacanadaMap.map)
-              
-              let newIconAnchor = [currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance];
-
-
               m.marker.setIcon(L.divIcon({
                 className: currentIcon.options.className+' shifted-marker',
                 html: currentHtml,
                 iconSize: currentIcon.options.iconSize,
-                iconAnchor:newIconAnchor
+                iconAnchor:[currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance]
               }));
             } else {
-              
               m.marker.setIcon(L.divIcon({
                 className:  currentIcon.options.className+' non-shifted-marker',
-                html: currentHtml+'<small class="groupSize">'+groupSize+'</small>',
+                html: currentHtml+'<small class="groupSize"><i class="fa-solid fa-circle me-1"></i>'+groupSize+'</small>',
                 iconSize: currentIcon.options.iconSize,
                 iconAnchor:currentIcon.options.iconAnchor
               }));
