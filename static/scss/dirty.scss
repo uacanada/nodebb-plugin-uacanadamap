@@ -1442,14 +1442,16 @@ button#cardsDown {
       content: '';
       height: 0.25rem;
       border-radius: 10px;
-      width: 4%;
+      width: 3rem;
       background: #c6d4e0;
       display: block;
       position: absolute;
       text-align: center;
-      left: 46%;
+      left: 50%; 
       top: 0.5rem;
+      transform: translateX(-50%); 
     }
+    
    }
 }
 
@@ -1476,6 +1478,11 @@ button#cardsDown {
     height: 2rem;
    
   }
+  .ua-place-card-inner {
+  &:before {
+    content: none;
+  }
+}
 
 
   
