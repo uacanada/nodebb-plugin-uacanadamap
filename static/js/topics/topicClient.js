@@ -1,9 +1,7 @@
 "use strict";
 
     function setPlaceMap(L, place, ajaxed) {
-        console.log("leaflet.js loaded ", { L, place, ajaxed });
-    
-        if(place.latlng?.length === 2){
+       if(place.latlng?.length === 2){
             var latlng = place.latlng;
             var accessToken = ajaxify.data?.UacanadaMapSettings?.mapBoxApiKey|| '';
             var pinMarkerIcon = L.divIcon({
