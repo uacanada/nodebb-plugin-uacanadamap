@@ -96,15 +96,22 @@
   filter: drop-shadow(-1px 4px 5px rgba(43, 43, 43, 0.2));
 }
 
-.far-away-zoom .pro-m-marker.ua-marker-d:after{
-  content: '';
-  display: none;
+.far-away-zoom{
+   .pro-m-marker.ua-marker-d:after{
+      content: '';
+      display: none;
+   }
+   .ua-markers .badge-text {
+    opacity: .5;
+    transform: scale(.7) translateX(-1rem);
+  }
+
+  .advMarker .badge-text {
+   display: none;
+  }
+
 }
 
-.far-away-zoom .ua-markers .badge-text {
-  opacity: .5;
-  transform: scale(.7) translateX(-1rem);
-}
 .ua-opened-marker {
   opacity: 0!important;
 }

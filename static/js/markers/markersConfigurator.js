@@ -2,10 +2,7 @@
 define('markers/markersConfigurator',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     UacanadaMap.api.createMarker = (index,item) => {
-
-        
-
-        const {
+          const {
             tid,
             placeCategory,
             placethumb = "",
@@ -164,11 +161,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
                 <h6 class="card-title mb-1" style="color:${parentTabColor};">${cardTitleWithLinkAndIcon}</h6>
                 <small class="text-muted"><span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
               </div>
-            </div>
-          
-              ${cardPlacePic}
-             
-          </div>
+            </div>${cardPlacePic}</div>
           <div class="row">
             <div class="col-12">
               <div class="card-body">
