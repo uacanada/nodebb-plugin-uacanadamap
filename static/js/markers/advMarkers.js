@@ -15,7 +15,7 @@
                     iconCreateFunction: function (cluster) { // TODO cluster for ads
                         const markers = cluster.getAllChildMarkers();
                         const count = markers.length;
-                        const iconSize = Math.floor(count * 1.1 + 60);
+                        const iconSize = Math.floor(count * 1.1 + 48);
                         const anchorSize = iconSize / 2;
                       
                         return L.divIcon({
@@ -46,7 +46,7 @@
                                 <div class="circle-icon rounded-circle shadow d-flex align-items-center justify-content-center" style="color:${m.color}"> <i class="fa fas ${m.icon}"></i> </div>
                                 <span class="ms-2 badge-text" style=" line-height: 1; font-size:0.7rem; bold; color: ${m.color}; ">${m.title}</span> 
                               </div>`,
-                        iconSize: [180, 24],
+                        iconSize: [24, 24],
                         iconAnchor: [12, 12],
                         popupAnchor: [0, -20],
                       }) })

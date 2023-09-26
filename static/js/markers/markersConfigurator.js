@@ -58,9 +58,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
           
           const faIcon = `<i class="'fa fa-fw fas fa-solid ${faIconClass}"></i>`; 
     
-          let markerClassName = `ua-marker-d ua-social-${
-            socialtype
-          } ua-topic-${tid} cat-${placeCategory} marker-${
+          let markerClassName = `ua-marker-d ua-social-${socialtype} ua-topic-${tid} cat-${placeCategory} marker-${
             UacanadaMap.markersClasses[1] // TODO
           }${classesFromAdmin ? ` ${classesFromAdmin}` : ""}`;
           if (eventCategory) {
@@ -126,7 +124,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
                     </div>
                     <span class="ms-1 badge-text">${markerTitleFormated}</span> 
                   </div>`,
-            iconSize: [150, 24],
+            iconSize: [24, 24],
             iconAnchor: [11, 35],
             popupAnchor: [0, 0],
           });
