@@ -41,7 +41,7 @@
        UacanadaMap.api.cleanMarkers()
       if(!tid)return false  
       const markerImg = UacanadaMap.api.getProfileImage(place.json)
-      const pointerMarkerIcon = L.divIcon({className: 'pointer-marker', html: `<div class="pointer-marker-icon rounded-circle" style="background: url(${markerImg}) center center / cover no-repeat white; animation:ua-shake-element 400ms ease-in-out both"></div>`, iconSize: [64, 64], iconAnchor: [32, 48],  popupAnchor:  [2, -50]});
+      const pointerMarkerIcon = L.divIcon({className: 'pointer-marker', html: `<div class="pointer-marker-icon rounded-circle" style="background: url(${markerImg}) center center / cover no-repeat white; animation:ua-shake-element 400ms ease-in-out both"></div>`, iconSize: [64, 64], iconAnchor: [32, 48],  popupAnchor:  [1, -50]});
       UacanadaMap.pointerMarker = L.marker(place.gps, {icon: pointerMarkerIcon});
       UacanadaMap.pointerMarker.bindPopup(place.marker._popup._content);
       UacanadaMap.pointerMarker.setZIndexOffset(88888);
