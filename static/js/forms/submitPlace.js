@@ -2,7 +2,7 @@
 define("forms/submitPlace", [
   "core/variables" /*   Global object UacanadaMap  */,
 ], function (UacanadaMap) {
-  
+  let canSendForm;
   
   UacanadaMap.form.submitPlace = ()=> {
     let canSendForm = true;
