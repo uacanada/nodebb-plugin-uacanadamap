@@ -65,6 +65,7 @@
              </div>
 
              <div id="geocoderSearchbox"></div>
+
         </div>
     </div>
 </div>

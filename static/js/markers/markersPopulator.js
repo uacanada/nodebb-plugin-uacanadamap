@@ -36,6 +36,30 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
   
       groups[group2] = [];
     }
+
+      
+    function addPCurve(startLatLng, heightInPixels, widthInPixels=22) {
+      const {L,map} = UacanadaMap
+      const virtualZoom = map.getMaxZoom()
+      const startPoint = map.project(startLatLng, virtualZoom);
+      const leftPoint = L.point(startPoint.x - widthInPixels, startPoint.y);
+      const bottomPoint = L.point(startPoint.x - widthInPixels, startPoint.y - heightInPixels);
+      const rightPoint = L.point(startPoint.x, startPoint.y - heightInPixels);
+      const startLatLngUnprojected = map.unproject(startPoint, virtualZoom);
+      const leftLatLng = map.unproject(leftPoint, virtualZoom);
+      const bottomLatLng = map.unproject(bottomPoint, virtualZoom);
+      const rightLatLng = map.unproject(rightPoint, virtualZoom);
+      const pCurve = L.polyline([startLatLngUnprojected, leftLatLng, bottomLatLng, rightLatLng], {  color: 'red', weight: 1  })
+      return pCurve;
+  }
+  
+ 
+  
+
+  
+   
+    
+
   
     function shiftMarkersWithCloseNeighbors(markers, forceShift) {
        const {
@@ -82,6 +106,7 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
       }
 
      
+
       
   
       const markerGroups = groups.filter((group) => group.length > 1);
@@ -89,24 +114,34 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
         markerGroups.forEach((group) => {
           const groupSize = group.length;
            group.forEach((marker, index) => {
-            if(index>0){
-              const m = UacanadaMap.allPlaces[marker.tid];
+
+            const m = UacanadaMap.allPlaces[marker.tid];
+            const currentIcon = m.marker.getIcon();
+            const currentHtml = currentIcon.options.html;
+            const SHIFT_STEP_PX = 50
+
+             if(index>0){
+
+              const shiftDistance = SHIFT_STEP_PX*index
+              
               m.neighborIndex = index;
               m.neighborsCount = groupSize;
               m.neighbors = group;
               m.shifted = true;
-              const SHIFT_STEP_PX = 50
-              const shiftDistance = SHIFT_STEP_PX*index
-              const currentIcon = m.marker.getIcon();
-              const currentHtml = currentIcon.options.html;
+              m.shiftLeg = addPCurve( m.gps, shiftDistance);
+              m.shiftLeg.addTo(UacanadaMap.map)
               m.marker.setIcon(L.divIcon({
                 className: currentIcon.options.className+' shifted-marker',
-                html: `<div class="shifted-marker-wrapper" style="margin-top: -${shiftDistance}px;">
-                  ${currentHtml}
-                  <div class="shifted-marker-leg" style="height: ${shiftDistance+22}px;"></div>
-                </div>`,
+                html: currentHtml,
                 iconSize: currentIcon.options.iconSize,
-                iconAnchor: currentIcon.options.iconAnchor
+                iconAnchor:[currentIcon.options.iconAnchor[0], currentIcon.options.iconAnchor[1] + shiftDistance]
+              }));
+            } else {
+              m.marker.setIcon(L.divIcon({
+                className:  currentIcon.options.className+' non-shifted-marker',
+                html: currentHtml+'<small class="groupSize"><i class="fa-solid fa-circle me-1"></i>'+groupSize+'</small>',
+                iconSize: currentIcon.options.iconSize,
+                iconAnchor:currentIcon.options.iconAnchor
               }));
             }
           });
@@ -136,6 +171,10 @@ define('markers/markerPopulator',["core/variables" /*   Global object UacanadaMa
             // Add marker to the respective category cluster
             if (UacanadaMap.categoryClusters[item.placeCategory]) {
                 UacanadaMap.categoryClusters[item.placeCategory].addLayer(newMarker);
+
+                // if(UacanadaMap.allPlaces[item.tid] && UacanadaMap.allPlaces[item.tid].shiftLeg){
+                //   UacanadaMap.categoryClusters[item.placeCategory].addLayer(UacanadaMap.allPlaces[item.tid].shiftLeg)
+                // }
 
                // UacanadaMap.allMarkersMixed = UacanadaMap.allMarkersMixed.concat(UacanadaMap.categoryClusters[item.placeCategory].getLayers());
             }

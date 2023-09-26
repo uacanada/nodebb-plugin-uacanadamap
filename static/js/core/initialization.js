@@ -101,7 +101,7 @@ return async (UacanadaMap) => {
           } else {
             const markers = await UacanadaMap.api.fetchMarkers(allowLoadOldfromCache);
             if (markers) {
-              UacanadaMap.console.log(markers);
+              
               UacanadaMap.api.populatePlaces(markers);
               UacanadaMap.api.populateTabs();
     
@@ -127,10 +127,13 @@ return async (UacanadaMap) => {
       UacanadaMap.api.filterMarkers(false);
       UacanadaMap.api.registerHooks()
       UacanadaMap.api.reserveClusterForAdvMarkers()
-      UacanadaMap.run.submitPlace()
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.mainFrameShow();
       UacanadaMap.api.saveWidgetsToFragment();
+      UacanadaMap.form.createGeoEntities();
+      UacanadaMap.form.submitPlace()
+      
+
       UacanadaMap.eventListenersInstance.register();
       
 

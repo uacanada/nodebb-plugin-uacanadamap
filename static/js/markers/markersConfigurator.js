@@ -2,10 +2,7 @@
 define('markers/markersConfigurator',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     UacanadaMap.api.createMarker = (index,item) => {
-
-        
-
-        const {
+          const {
             tid,
             placeCategory,
             placethumb = "",
@@ -61,9 +58,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
           
           const faIcon = `<i class="'fa fa-fw fas fa-solid ${faIconClass}"></i>`; 
     
-          let markerClassName = `ua-marker-d ua-social-${
-            socialtype
-          } ua-topic-${tid} cat-${placeCategory} marker-${
+          let markerClassName = `ua-marker-d ua-social-${socialtype} ua-topic-${tid} cat-${placeCategory} marker-${
             UacanadaMap.markersClasses[1] // TODO
           }${classesFromAdmin ? ` ${classesFromAdmin}` : ""}`;
           if (eventCategory) {
@@ -129,7 +124,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
                     </div>
                     <span class="ms-1 badge-text">${markerTitleFormated}</span> 
                   </div>`,
-            iconSize: [150, 24],
+            iconSize: [24, 24],
             iconAnchor: [11, 35],
             popupAnchor: [0, 0],
           });
@@ -150,31 +145,33 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
                 </a>`);
     
           const cardPlacePic = profileIcon
-            ? `<div style="background:url(${profileIcon}) center center;background-size:cover;width:2rem" class="place-pic me-2 mb-1 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div>`
+            ? ` <div class="col-auto">
+            <div class="d-flex align-items-start justify-content-end h-100">
+            <div style="background:url(${profileIcon}) center center;background-size:cover;width:3rem" class="place-pic me-2 ratio ratio-1x1 rounded-circle uac-inset-shadow"></div> </div>
+            </div>`
             : "";
             
-            var cardHtml = '<div class="ua-place-card-inner ms-0 me-0 p-3 position-relative" data-ua-tid=' + tid + '>' +
-            '<div class="card-body">' +
-              '<a title="topic/' + tid + '" class="float-end ua-topic-link" href="/topic/' + tid + '/1">' + cardPlacePic + '</a>' +
-              '<div class="d-flex justify-content-between align-items-start text-truncate">' +
-                '<a title="Topic link" class="ua-topic-link" href="/topic/' + tid + '/1">' +
-                  '<h6 style="color: ' + parentTabColor + ';" title="Topic link" class="text-primary card-title mb-2">' + cardTitleWithLinkAndIcon + '</h6>' +
-                '</a>' +
-              '</div>' +
-              '<div class="d-flex align-items-start justify-content-between">' +
-                '<ul class="list-unstyled mb-1">' +
-                  '<li class="mb-1">' +
-                    '<span class="ua-mini-username text-primary username-' + socialtype + '">' +
-                      socialIcon + ' ' + mainUsername +
-                    '</span>' +
-                  '</li>' +
-                '</ul>' +
-              '</div>' +
-              '<p class="card-text mb-0"> <span class="badge rounded-pill text-bg-fancy">' + categoryName + '</span>  ' + eventNameHtml + eventHtml + bodyText + '</p>' +
-              editLink +
-           '</div>' +
-         '</div>';
-    
+           
+        const cardHtml = `<div class="ua-place-card-inner card mx-0 px-0 pt-3 position-relative" data-ua-tid="${tid}">
+          <div class="row no-gutters align-items-start">
+            <div class="col flex-grow-1">
+              <div class="card-body py-1 h-100">
+                <h6 class="card-title mb-1" style="color:${parentTabColor};">${cardTitleWithLinkAndIcon}</h6>
+                <small class="text-muted"><span class="ua-mini-username text-primary username-${socialtype}">${socialIcon} ${mainUsername}</span></small>
+              </div>
+            </div>${cardPlacePic}</div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card-body">
+              <p class="card-text"><span class="badge rounded-pill text-bg-fancy">${categoryName}</span>
+              ${eventNameHtml}
+              ${eventHtml}
+              ${bodyText}
+              </p>
+              </div>
+            </div>
+          </div>
+        </div>`
     
     
           const eventDate = eventStartDate ? new Date(`${eventStartDate} ${eventStartTime}`):0;

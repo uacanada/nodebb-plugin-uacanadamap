@@ -384,33 +384,48 @@ input#ua-location-cover-img:before {
   font-size: 0.75rem;
   box-shadow:0 0rem 1rem -0.5rem rgba(0, 0, 0, 0.7);
   border-radius: 5px;
-  transition: 200ms all;
+  transition: .2s all;
   overflow: hidden;
-  max-height: 9.5rem;
+  height: 12.5rem;
+
+  .row > div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-body {
+    flex: 1;
+  }
+  
+  .card-body.h-100 {
+    height: 4rem; 
+  }
+  .card-text{  
+    min-height: 6rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .card-text:after {
+    content: '';
+    width: 100%;
+    display: block;
+    height: 100%;
+    background: linear-gradient(0deg,var(--bs-body-bg), rgba(255, 255, 255, 0.15));
+    position: absolute;
+    bottom: 0;
+  }
+  .card-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .card-title{
+    word-break: break-all;
+  }
+
  
+
 }
 
-
-
-#cardsSwiperPlaceholder .card-subtitle {
-  font-size: 0.8rem;
-}
-
-.ua-place-card-inner .card-text{  
-  height: 3.8rem; 
-  overflow: hidden;
-  position: relative;
-}
-
-.ua-place-card-inner .card-text:after {
-  content: '';
-  width: 100%;
-  display: block;
-  height: 100%;
-  background: linear-gradient(0deg,var(--bs-body-bg), rgba(255, 255, 255, 0.15));
-  position: absolute;
-  bottom: 0;
-}
 
 
 
@@ -423,18 +438,6 @@ input#ua-location-cover-img:before {
   margin: 0.5rem;
   padding: 0.5rem;
 }
-
-
-
-/* 
-#ua-cards-slider.desktop-true {
-  max-width: 650px!important;
-} 
-#ua-cards-slider .swiper-slide-active{
-
-  width: 500px!important;
-} 
-*/
 
 
 
@@ -700,16 +703,7 @@ form#placeForm .form-text {
   
 }
 
-#ua-minimap-wrapper .ua-place-card-inner {
-  background:var(--bs-body-bg);
-  box-shadow: 0 0 8px 1px rgb(21 51 95 / 57%);
-  bottom: 33px;
-  left: 3%;
-  width: 94%;
-  font-size: 0.8rem;
-  margin: 0;
 
-} 
 .mini-latlng-inpost {
   color: #3d8aff;
   width: 150px;
@@ -1417,28 +1411,60 @@ button#cardsDown {
   display: block;
   transform: translate3d(0,100%,0);
   border: none;
+  height: 0;
   margin: 0 auto;
   font-size: 2rem;
   line-height: 0;
   color: #ffffff;
-  padding-bottom: 1rem;
+  padding-bottom: 0;
   text-align: center;
   width: 100%;
   background: transparent;
+  overflow: hidden;
 }
 
 
 #cardsSwiperPlaceholder{
   transition: all .2s;
-  bottom: 0.5rem;
+  bottom: -5px;
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+  .ua-place-card-inner{
+    margin-bottom: 1rem;
+    .card-text{
+      height: 3.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+@media (orientation: portrait), (max-width: 580px) {
+ 
+  .ua-place-card-inner {
+     max-height: 12rem;
+     &:before {
+      content: '';
+      height: 0.25rem;
+      border-radius: 10px;
+      width: 3rem;
+      background: #c6d4e0;
+      display: block;
+      position: absolute;
+      text-align: center;
+      left: 50%; 
+      top: 0.5rem;
+      transform: translateX(-50%); 
+    }
+    
+   }
 }
 
 #cardsSwiperPlaceholder.verticalCards{
 
     max-width: 500px;
     height: 60vh;
-    backdrop-filter: blur(3px);
-    background: rgba(255, 255, 255, 0.315);
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 2rem 2rem 0 0;
     bottom: 0;
     #ua-cards-slider{
@@ -1452,37 +1478,38 @@ button#cardsDown {
   
   button#cardsDown {
     transform: translate3d(0,0,0);
+    padding-bottom: 1rem;
+    height: 2rem;
    
   }
+  .ua-place-card-inner {
+  &:before {
+    content: none;
+  }
+}
 
 
+  
+ 
 
 @media (orientation: landscape) and (min-width: 768px) {
   height: 90vh;
-  .ua-place-card-inner,
-  .ua-place-card-inner .card-text,
+  
   #ua-cards-slider .swiper-slide {
     height: auto;
     margin-bottom: 1rem;
-    max-height: 15rem;
+    max-height: 12.5rem;
+    min-height: 3rem; 
   }
 }
 @media (orientation: portrait), (max-width: 767px) {
- 
-  .ua-place-card-inner {
-    font-size: .8rem;
-     max-height: 12rem;
-   }
    .ua-place-card-inner .card-text {
-  
+    min-height: 2rem;
     display: inline-block;
-    height: 3.5rem;
-}
+   }
 #ua-cards-slider .swiper-slide {
- 
   height: auto;
- 
-  margin-bottom: 0.75rem;
+ margin-bottom: 0.75rem;
 }
 
 }
