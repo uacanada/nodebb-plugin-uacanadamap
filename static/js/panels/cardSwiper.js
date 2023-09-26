@@ -41,7 +41,7 @@
        UacanadaMap.api.cleanMarkers()
       if(!tid)return false  
       const markerImg = UacanadaMap.api.getProfileImage(place.json)
-      const pointerMarkerIcon = L.divIcon({className: 'pointer-marker', html: `<div class="pointer-marker-icon rounded-circle" style="background: url(${markerImg}) center center / cover no-repeat white; animation:ua-shake-element 600ms ease-in-out both"></div>`, iconSize: [64, 64], iconAnchor: [32, 32],  popupAnchor:  [0, -33]});
+      const pointerMarkerIcon = L.divIcon({className: 'pointer-marker', html: `<div class="pointer-marker-icon rounded-circle" style="background: url(${markerImg}) center center / cover no-repeat white; animation:ua-shake-element 400ms ease-in-out both"></div>`, iconSize: [64, 64], iconAnchor: [32, 48],  popupAnchor:  [1, -50]});
       UacanadaMap.pointerMarker = L.marker(place.gps, {icon: pointerMarkerIcon});
       UacanadaMap.pointerMarker.bindPopup(place.marker._popup._content);
       UacanadaMap.pointerMarker.setZIndexOffset(88888);
@@ -120,10 +120,10 @@
       const cat = $('#location-category-filter').val();
       const { isDesktop } = UacanadaMap.api.getDivSizes();
       const onlyOneItem = places.length <= 1;
-      let html = `<button id="cardsDown" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></button> <div id="ua-cards-slider" class="swiper pb-3 desktop-${isDesktop}${onlyOneItem ? ' only-one-item pe-1' : ' ps-2'}"> <div class="swiper-wrapper">`;
+      let html = `<button id="cardsDown" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></button> <div id="ua-cards-slider" class="swiper px-1 pt-2 desktop-${isDesktop}${onlyOneItem ? ' only-one-item pe-1' : ' ps-2'}"> <div class="swiper-wrapper">`;
     
       places.forEach((placedata, index) => {
-        html += `<div data-slide-index="${index}" data-slide-tid="${placedata.tid}" class="swiper-slide${onlyOneItem ? ' p-2' : ' me-3'}">${placedata.html}</div>`;
+        html += `<div data-slide-index="${index}" data-slide-tid="${placedata.tid}" class="swiper-slide${onlyOneItem ? ' px-1' : ' me-2'}">${placedata.html}</div>`;
       });
   
       const slideTreshold = $(window).innerWidth() > 480 ? Math.floor($(window).innerWidth() / 650) + 1 : 1;

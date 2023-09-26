@@ -12,6 +12,39 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         });
     };
 
+
+    UacanadaMap.api.afterMapReloadFirstTime = () => {
+        UacanadaMap.console.log(`Start: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
+
+    }
+
+    UacanadaMap.api.afterMapReloadNotFirstTime = () => {
+        UacanadaMap.console.log(`Reload: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
+        const {map} = UacanadaMap
+        
+        if (map && !window.location.search && $("body").hasClass(UacanadaMap.mapRoomClass)  ) { // TODO Check
+            // if back from topic page and zoom is too big - do zoom out
+            if (map.getMaxZoom() === map.getZoom() ||  map.getMaxZoom() < map.getZoom() + 2) {
+                map.zoomOut(4);
+            }
+        }
+
+        UacanadaMap.api.disablePropagationToMap(null)
+        UacanadaMap.api.rotateCards("horizontal");
+        UacanadaMap.api.animateCards("close");
+        UacanadaMap.api.addAtrribution("#uacamap"); 
+
+        $('#ua-horizontal-buttons-wrapper').removeClass('movedown hidden')
+        $('#geocoderSearchbox').removeClass('show')
+
+        UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html(); // TODO: move to fragments
+        $('#place-tag-input').tagsinput({  maxChars: 24, maxTags: 10, tagClass: "badge bg-info", confirmKeys: [13, 44], trimValue: true}); // INIT later
+        
+
+        
+    }
+
+
     UacanadaMap.api.mapReLoad = async () => {
         
         UacanadaMap.api.updateCSS();
@@ -22,50 +55,14 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         $('#bottomPanelCategoryButtons').removeClass('shown')
         $('#scrollableBottomPanel').removeClass('panel-shown')
         UacanadaMap.isFullscreenMode = false;
-        UacanadaMap.uaEventPartFormHTML = $("#ua-form-event-holder").html();
-        $('#place-tag-input').tagsinput({  maxChars: 24, maxTags: 10, tagClass: "badge bg-info", confirmKeys: [13, 44], trimValue: true});
         
         UacanadaMap.setTimeout(() => {
-               
-                UacanadaMap.preventMultiCall = false; // TODO check 
-                UacanadaMap.api.addAtrribution("#uacamap");
-                
-        }, 100);
-        
-        UacanadaMap.setTimeout(() => {
-               UacanadaMap.api.disablePropagationToMap(null)
-               const {map} = UacanadaMap
-
-              
-              if (UacanadaMap.firstInitTime < Date.now() - 2000) {
-                    if (map && !window.location.search && $("body").hasClass(UacanadaMap.mapRoomClass)  ) { // TODO Check
-                        // if back from topic page and zoom is too big - do zoom out
-                        if (
-                            map.getMaxZoom() === map.getZoom() ||
-                            map.getMaxZoom() < map.getZoom() + 2
-                        ) {
-                            UacanadaMap.setTimeout(() => {
-                                map.zoomOut(4);
-                               
-                            }, 500);
-                        }
-                    }
-
-                    UacanadaMap.api.rotateCards("horizontal");
-                    UacanadaMap.api.animateCards("close");
-                    $('#ua-horizontal-buttons-wrapper').removeClass('movedown').removeClass('hidden')
-                    $('#geocoderSearchbox').removeClass('show')
-
-                    UacanadaMap.console.log(`Reload: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
-               
-                } else {
-
-                    
-                    UacanadaMap.console.log(`Start: ${UacanadaMap.firstInitTime}   Now: ${Date.now()}`)
-                    
-                }
-            
-        }, 1200);
+          if (UacanadaMap.firstInitTime < Date.now() - 1000) {
+            UacanadaMap.api.afterMapReloadNotFirstTime();
+          } else {
+            UacanadaMap.api.afterMapReloadFirstTime();
+          }
+        }, 1000);
         
 
             

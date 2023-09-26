@@ -44,8 +44,6 @@
     background: #ff6666!important;
   }
 
-  
-
 
   #mapattribution {
     font-size: 16px;
@@ -63,20 +61,6 @@
     transition: all .5s;
     bottom: 11rem!important;
   }
-
-
-#tile-chooser button {
-    border: none;
-    background: #f3f3f3;
-    padding: 0.25rem 1rem;
-    margin: 0.25rem;
-    border-radius: 5px;
-    color: #676767;
-  }
-  
-  
-  
-
 .ua-btn{
     background-color: $ua-btn-bg;
     color: $ua-btn-text;
@@ -123,10 +107,11 @@
   
   
 body.hiddenElements:not(.cards-opened) {
-  #ua-horizontal-buttons-wrapper {
-    transform: translate3d(0, -100%, 0);
-  }
-  .leaflet-control-zoom, .leaflet-control-locate,.leaflet-control-fullscreen,.leaflet-control-addplace {
+  
+  .leaflet-control-fullscreen,
+  .leaflet-control-addplace, 
+  .tileChooser,
+  .filterPlaces {
     transform: translate3d(150%, 0, 0);
   }
 
@@ -235,20 +220,37 @@ a.leaflet-contextmenu-item button {
  
 }
 
+.btn-blur {
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.25);
+  color: white;
+}
+
+
 .leaflet-control-container{
   .newLocationOpenMarker{
     transition: 1s transform ease;
     transform: translate3d(0, 0, 0);
   }
+
+  .filterPlaces,
+  .tileChooser{
+    transition: 1s transform ease;
+  }
+ 
   .removeCards,
-  .rotateCards,
-  .filterPlaces {
+  .rotateCards {
     transition: 1s transform ease;
     transform: translate3d(0, 100vh, 0);
   }
 }
 
 body.cards-opened{
+
+  [component="bottombar"] {
+    transform: translate3d(0, 100%, 0) scale(0.5);
+  }
+
   #ua-context-buttons-wrapper{
     bottom: -10rem;
   }
@@ -256,6 +258,8 @@ body.cards-opened{
   .leaflet-control-container {
     .newLocationOpenMarker{ transform: translate3d(0, 100vh, 0);  }
     .removeCards,
+    .filterPlaces,
+    .tileChooser,
     .rotateCards,
     .filterPlaces{  transform: translate3d(0,0,0); }
    

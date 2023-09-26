@@ -86,6 +86,7 @@
 
 .ua-markers .badge-text {
   color:$marker-text;
+  
   transition: .3s ease;
   letter-spacing: -.4px;
   text-shadow: .1px .1px .5px rgba(27,31,54,.5),1px -1px 2px #fff;
@@ -96,15 +97,29 @@
   filter: drop-shadow(-1px 4px 5px rgba(43, 43, 43, 0.2));
 }
 
-.far-away-zoom .pro-m-marker.ua-marker-d:after{
-  content: '';
-  display: none;
+.ua-markers .badge-text,
+.advMarker .badge-text{
+  white-space: nowrap!important;
+  position: absolute;
+  left: 24px;
 }
 
-.far-away-zoom .ua-markers .badge-text {
-  opacity: .5;
-  transform: scale(.7) translateX(-1rem);
+.far-away-zoom{
+   .pro-m-marker.ua-marker-d:after{
+      content: '';
+      display: none;
+   }
+   .ua-markers .badge-text {
+    opacity: .5;
+    transform: scale(.7) translateX(-1rem);
+  }
+
+  .advMarker .badge-text {
+   display: none;
+  }
+
 }
+
 .ua-opened-marker {
   opacity: 0!important;
 }
@@ -342,4 +357,11 @@ a.ua-popup-link:hover{
   }
 
   
+}
+
+
+small.groupSize {
+  color: red;
+  font-size: 10px;
+  padding: 7px;
 }
