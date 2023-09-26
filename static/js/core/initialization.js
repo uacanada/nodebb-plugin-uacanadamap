@@ -127,10 +127,13 @@ return async (UacanadaMap) => {
       UacanadaMap.api.filterMarkers(false);
       UacanadaMap.api.registerHooks()
       UacanadaMap.api.reserveClusterForAdvMarkers()
-      UacanadaMap.run.submitPlace()
       UacanadaMap.api.mapReLoad();
       UacanadaMap.api.mainFrameShow();
       UacanadaMap.api.saveWidgetsToFragment();
+      UacanadaMap.form.createGeoEntities();
+      UacanadaMap.form.submitPlace()
+      
+
       UacanadaMap.eventListenersInstance.register();
       
 

@@ -4,7 +4,7 @@ define("forms/submitPlace", [
 ], function (UacanadaMap) {
   
   
-  UacanadaMap.run.submitPlace = ()=> {
+  UacanadaMap.form.submitPlace = ()=> {
     let canSendForm = true;
  
     $("#place-creator-offcanvas").on("hidden.bs.offcanvas", () => {
