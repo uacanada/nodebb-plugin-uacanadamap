@@ -557,7 +557,7 @@ ul#ua-peoples-target-2 li:first-child h6 ,ul#ua-peoples-target-2 li:first-child 
   flex-direction: column;
   align-items: center;
   justify-content: center;
- 
+  white-space: normal;
 }
 
 .calendar-day {
@@ -566,7 +566,7 @@ ul#ua-peoples-target-2 li:first-child h6 ,ul#ua-peoples-target-2 li:first-child 
 }
 
 .calendar-month {
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   font-weight: bold;
   text-transform: uppercase;
 }
