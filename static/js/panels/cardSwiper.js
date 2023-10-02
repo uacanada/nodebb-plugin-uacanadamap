@@ -217,11 +217,8 @@
 
         function generateFirstPost(comment) {
           const avatar = generateAvatar(comment);
-          return `<div class="first-post white-space-pre-line">${comment.content}</div> <div class="comment-block">
+          return `<div class="first-post">${comment.content}</div> <div class="comment-block">
           <div class="comment-content d-flex align-items-start">
-              <a class="flex-shrink-0 me-3" href="/user/${comment.user.userslug}">
-                  ${avatar}
-              </a>
               <div class="flex-grow-1">
                   ${comment.content}
                   <a class="float-end" href="/post/${comment.pid}">
@@ -231,7 +228,7 @@
           </div>
           <div class="user-bio mt-3">
               <a href="/user/${comment.user.userslug}" class="text-decoration-none">
-                  <strong>${comment.user.displayname || comment.user.username}</strong>
+              ${avatar} <strong>${comment.user.displayname || comment.user.username}</strong>
               </a>
               ${comment.user.lastonlineISO}
           </div>
@@ -239,6 +236,7 @@
         }
 
         function generateRemainingPosts(posts) {
+          if(!posts[0]) return '';
           let comments = `<ul id="recent_posts" class="mt-5 list-group" data-numposts="${posts.length}">`;
       
           posts.forEach((comment) => {
