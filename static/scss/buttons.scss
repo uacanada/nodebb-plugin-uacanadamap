@@ -266,13 +266,22 @@ body.cards-opened{
   }
 }
 
-.placeTopicNav{
+#placeTopicNav{
   .nav.nav-pills,
   .nav.nav-pills li {
     list-style: none!important;
     padding: 0!important;
     margin: 0!important;
   }
+
+  button{
+    transition: 1s ease;
+    opacity: 0.8;
+    &.active{
+      opacity: 1;
+    }
+  }
+  
 
 }
 
