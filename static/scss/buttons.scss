@@ -285,3 +285,10 @@ body.cards-opened{
 
 }
 
+.placeTopicMetaWrapper {
+  background: linear-gradient(var(--bs-primary-bg-subtle), transparent);
+  .list-group-item{
+    background-color: transparent!important;
+  }
+}
+
