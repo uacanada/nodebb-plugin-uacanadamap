@@ -187,8 +187,71 @@
         if(!tid){
           tid = Number($('.swiper-slide-active .ua-place-card-inner').attr('data-ua-tid'))
         }
+
+
+        async function getTopicData(tid) {
+          try {
+              const topicFromApi = await fetch(`/api/topic/${tid}/1/1`);
+              const topic = await topicFromApi.json();
+              if(!topic || !topic.posts[0]) return {error:'Topic is empty: '+tid}
+              return topic;
+          } catch (error) {
+            UacanadaMap.console.log(error);
+            return {error:`Fail fetch tid: ${tid}`}
+          }
+        }
+
+        function generateAvatar(comment) {
+          return comment.user.picture ?
+              `<img alt="${comment.user.fullname}" title="${comment.user.fullname}" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" src="${comment.user.picture}" style="width:3rem" onerror="this.remove();" itemprop="image">` :
+              `<span alt="${comment.user.fullname}" title="${comment.user.fullname}" data-uid="${comment.user.userslug}" loading="lazy" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/icon" style="--avatar-size: 24px; background-color: #009688;">UA</span>`;
+        }
+
+        function generateFirstPost(post) {
+          const avatar = generateAvatar(post);
+      
+          return `
+              <div class="first-post">
+                  <a href="/user/${post.user.userslug}">${avatar}</a>
+                  ${post.content}
+              </div>
+          `;
+        }
+
+        function generateRemainingPosts(posts) {
+          let comments = `<ul id="recent_posts" class="mt-5 list-group" data-numposts="${posts.length}">`;
+      
+          posts.forEach((comment) => {
+              const avatar = generateAvatar(comment);
+      
+              comments += `
+                <li  class="list-group-item" data-pid="${comment.pid}">
+                    <a class="text-decoration-none float-start me-3 mb-3" href="/user/${comment.user.userslug}">  ${avatar} </a>
+                    ${comment.content} <a class="float-end" href="/post/${comment.pid}">  <i class="fa-regular fa-comment-dots"></i>  </a>
+                </li>
+              `;
+          });
+      
+          comments += `</ul>`;
+          return comments;
+      }
+
+      async function renderComments(tid) {
+        const topic = await getTopicData(tid);
+    
+        if (topic.error){
+          UacanadaMap.console.log(topic);
+          return;
+        }
+    
+        const firstPost = generateFirstPost(topic.posts[0]);
+        const remainingPosts = generateRemainingPosts(topic.posts.slice(1));
+    
+        $("#place-modal-comments").html(firstPost + remainingPosts);
+      }
+      
   
-        const p = UacanadaMap.allPlaces[tid].json
+       const p = UacanadaMap.allPlaces[tid].json
         const fa_icon = UacanadaMap.allPlaces[tid].marker?.icon
         const placeModal = document.getElementById('ua-place-modal')
         const modalTitle = placeModal.querySelector('#modal-place-title')
@@ -200,46 +263,11 @@
         <div class="white-space-pre-line">
         ${p.placeDescription}  ${p.placeDescriptionAlt?`<p class="w-100 d-flex justify-content-center"><i class="fa-solid fa-language"></i><p>${p.placeDescriptionAlt}`:''}
         </div>
-  
-        <ul class="list-group mt-3">
-        ${p.mainUsername ? `<li class="list-group-item">${fa_icon} ${p.mainUsername}</li>` : ''}
-        ${p.placeExternalUrl ? `<li class="list-group-item">🔗 ${p.placeExternalUrl}</li>` : ''}
-        ${p.categoryName ? `<li class="list-group-item">🔖 ${p.categoryName}</li>` : ''}
-        ${p.city && p.province ? `<li class="list-group-item">🌆 ${p.city}, ${p.province}</li>` : ''}
-        ${p.streetAddress ? `<li class="list-group-item">📮 ${p.streetAddress}</li>` : ''}
-        ${p.subaddress ? `<li class="list-group-item">${p.subaddress}</li>` : ''}
-        <li class="list-group-item text-truncate"><i class="fa-brands fa-google"></i> <a title="google map" href="https://maps.google.com/?q=${latlngSrting}">${latlngSrting}</a></li>
-        </ul>
-      <div id="place-modal-comments"></div>
-      `
+       
+        🔖 ${p.categoryName}
+        <div id="place-modal-comments"></div>`
+        renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
-  
-        const topicFromApi = await fetch(`/api/topic/${tid}`); // TODO add /1 in settings for comment sorting
-        const topic = await topicFromApi.json();
-        if(!topic || !topic.posts[0]) return
-  
-        let comments = `<ul id="recent_posts" class="mt-5 list-group" data-numposts="${topic.posts.length}" data-cid="${topic.cid}">`; // TODO chnage id="recent_posts" to anothe because this id loads comments from widget 
-        topic.posts.forEach((comment) => {
-          
-        const avatar = comment.user.picture? 
-        `<img alt="${comment.user.fullname}" title="${comment.user.fullname}" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" src="${comment.user.picture}" style="width:3rem" onerror="this.remove();" itemprop="image">`: 
-        `<span alt="${comment.user.fullname}" title="${comment.user.fullname}" data-uid="${comment.user.userslug}" loading="lazy" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/icon" style="--avatar-size: 24px; background-color: #009688;">UA</span>`;
-        
-  
-        comments += `
-          <li  class="list-group-item" data-pid="${comment.pid}">
-          
-              <a class="text-decoration-none float-start me-3 mb-3" href="/user/${comment.user.userslug}">  ${avatar} </a>
-              ${comment.content} <a class="float-end" href="/post/${comment.pid}">  <i class="fa-regular fa-comment-dots"></i>  </a>
-            
-            
-          </li>
-        `;
-      });
-  
-      comments += `</ul> <p class="w-100 d-flex justify-content-center"> <a id="modal-place-link" href="/topic/${tid}"> read more </a> </p>`;
-  
-      $("#place-modal-comments").html(comments)
   
   
   }
