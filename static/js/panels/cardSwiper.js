@@ -188,6 +188,14 @@
           tid = Number($('.swiper-slide-active .ua-place-card-inner').attr('data-ua-tid'))
         }
 
+        const p = UacanadaMap.allPlaces[tid].json
+        const fa_icon = UacanadaMap.allPlaces[tid].marker?.icon
+        const placeModal = document.getElementById('ua-place-modal')
+        const modalTitle = placeModal.querySelector('#modal-place-title')
+        const modalBodyInput = placeModal.querySelector('#ua-place-modal .dyn-content')
+        modalTitle.innerHTML = `${fa_icon} ${p.placeTitle}`
+        const img = UacanadaMap.api.getProfileImage(p)
+        const latlngSrting = p.latlng.join(',')
 
         async function getTopicData(tid) {
           try {
@@ -209,13 +217,25 @@
 
         function generateFirstPost(post) {
           const avatar = generateAvatar(post);
-      
-          return `
-              <div class="first-post">
-                  <a href="/user/${post.user.userslug}">${avatar}</a>
-                  ${post.content}
+          return `<div class="first-post white-space-pre-line">${post.content}</div> <div class="comment-block">
+          <div class="comment-content d-flex align-items-start">
+              <a class="flex-shrink-0 me-3" href="/user/${comment.user.userslug}">
+                  ${avatar}
+              </a>
+              <div class="flex-grow-1">
+                  ${comment.content}
+                  <a class="float-end" href="/post/${comment.pid}">
+                      <i class="fa-regular fa-comment-dots"></i>
+                  </a>
               </div>
-          `;
+          </div>
+          <div class="user-bio mt-3">
+              <a href="/user/${comment.user.userslug}" class="text-decoration-none">
+                  <strong>${comment.user.displayname || comment.user.username}</strong>
+              </a>
+              ${comment.user.lastonlineISO}
+          </div>
+      </div>`;
         }
 
         function generateRemainingPosts(posts) {
@@ -225,10 +245,18 @@
               const avatar = generateAvatar(comment);
       
               comments += `
-                <li  class="list-group-item" data-pid="${comment.pid}">
-                    <a class="text-decoration-none float-start me-3 mb-3" href="/user/${comment.user.userslug}">  ${avatar} </a>
-                    ${comment.content} <a class="float-end" href="/post/${comment.pid}">  <i class="fa-regular fa-comment-dots"></i>  </a>
-                </li>
+              <li class="list-group-item d-flex align-items-start" data-pid="${comment.pid}">
+              <a class="flex-shrink-0 me-3" href="/user/${comment.user.userslug}">
+                  ${avatar}
+              </a>
+              <div class="flex-grow-1">
+                  ${comment.content}
+                  <a class="float-end" href="/post/${comment.pid}">
+                      <i class="fa-regular fa-comment-dots"></i>
+                  </a>
+              </div>
+             </li>
+          
               `;
           });
       
@@ -251,21 +279,8 @@
       }
       
   
-       const p = UacanadaMap.allPlaces[tid].json
-        const fa_icon = UacanadaMap.allPlaces[tid].marker?.icon
-        const placeModal = document.getElementById('ua-place-modal')
-        const modalTitle = placeModal.querySelector('#modal-place-title')
-        const modalBodyInput = placeModal.querySelector('#ua-place-modal .dyn-content')
-        modalTitle.innerHTML = `${fa_icon} ${p.placeTitle}`
-        const img = UacanadaMap.api.getProfileImage(p)
-        const latlngSrting = p.latlng.join(',')
-        modalBodyInput.innerHTML = `<div style="background:url(${img}) center center;background-size:cover;width:5rem" class="me-2 mb-1 ratio ratio-1x1 rounded-circle"></div>
-        <div class="white-space-pre-line">
-        ${p.placeDescription}  ${p.placeDescriptionAlt?`<p class="w-100 d-flex justify-content-center"><i class="fa-solid fa-language"></i><p>${p.placeDescriptionAlt}`:''}
-        </div>
-       
-        🔖 ${p.categoryName}
-        <div id="place-modal-comments"></div>`
+        
+        modalBodyInput.innerHTML = `<div style="background:url(${img}) center center;background-size:cover;width:5rem" class="me-2 mb-1 ratio ratio-1x1 rounded-circle"></div> 🔖 ${p.categoryName}<div id="place-modal-comments"></div>`
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
   
