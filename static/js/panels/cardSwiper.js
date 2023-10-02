@@ -192,7 +192,7 @@
         const fa_icon = UacanadaMap.allPlaces[tid].marker?.icon
         const placeModal = document.getElementById('ua-place-modal')
         const modalTitle = placeModal.querySelector('#modal-place-title')
-        const modalBodyInput = placeModal.querySelector('#ua-place-modal')
+        const modalBodyInput = placeModal.querySelector('#placeLoader')
         modalTitle.innerHTML = `${fa_icon} ${p.placeTitle}`
         const img = UacanadaMap.api.getProfileImage(p)
         const latlngSrting = p.latlng.join(',')
