@@ -217,7 +217,7 @@
 
         function generateFirstPost(comment) {
           const avatar = generateAvatar(comment);
-          return `<div class="first-post">${comment.content}</div> <div class="comment-block">
+          return `<div class="comment-block">
           <div class="comment-content d-flex align-items-start">
               <div class="flex-grow-1">
                   ${comment.content}
