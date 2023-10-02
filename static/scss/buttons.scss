@@ -266,7 +266,10 @@ body.cards-opened{
   }
 }
 
-#placeTopicNav{
+
+
+.placeTopicMetaWrapper {
+  background: linear-gradient(var(--bs-primary-bg-subtle), transparent);
   .nav.nav-pills,
   .nav.nav-pills li {
     list-style: none!important;
@@ -281,12 +284,6 @@ body.cards-opened{
       opacity: 1;
     }
   }
-  
-
-}
-
-.placeTopicMetaWrapper {
-  background: linear-gradient(var(--bs-primary-bg-subtle), transparent);
   .list-group-item{
     background-color: transparent!important;
   }
