@@ -215,9 +215,9 @@
               `<span alt="${comment.user.fullname}" title="${comment.user.fullname}" data-uid="${comment.user.userslug}" loading="lazy" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/icon" style="--avatar-size: 24px; background-color: #009688;">UA</span>`;
         }
 
-        function generateFirstPost(post) {
-          const avatar = generateAvatar(post);
-          return `<div class="first-post white-space-pre-line">${post.content}</div> <div class="comment-block">
+        function generateFirstPost(comment) {
+          const avatar = generateAvatar(comment);
+          return `<div class="first-post white-space-pre-line">${comment.content}</div> <div class="comment-block">
           <div class="comment-content d-flex align-items-start">
               <a class="flex-shrink-0 me-3" href="/user/${comment.user.userslug}">
                   ${avatar}
