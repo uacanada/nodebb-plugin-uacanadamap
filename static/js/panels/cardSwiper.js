@@ -278,7 +278,7 @@
       
   
         
-        modalBodyInput.innerHTML = `<div style="width:5rem mx-auto"><span style="background:url(${img}) center center;background-size:cover;width:5rem" class="m-0 my-2 ratio ratio-1x1 rounded-circle"></span></div><div id="place-modal-comments"></div>`
+        modalBodyInput.innerHTML = `<div style="width:5rem;height:5rem" class="mx-auto"><div style="background:url(${img}) center center;background-size:cover;width:5rem" class="m-0 my-2 ratio ratio-1x1 rounded-circle"></div></div><div id="place-modal-comments"></div>`
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
   
