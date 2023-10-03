@@ -269,12 +269,15 @@ body.cards-opened{
 
 
 .placeTopicMetaWrapper {
-  background: linear-gradient(rgba(37, 161, 255, 0.1),transparent);
+
   .nav.nav-pills,
   .nav.nav-pills li {
     list-style: none!important;
-   
-    margin: 0!important;
+  }
+
+  ul.list-unstyled .list-group-item {
+    padding-left: 0!important;
+    padding-right: 0!important;
   }
 
   button{
