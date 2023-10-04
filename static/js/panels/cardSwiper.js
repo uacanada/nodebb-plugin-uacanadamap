@@ -276,7 +276,7 @@
         $("#place-modal-comments").html(firstPost + remainingPosts);
       }
       
-      const eventCategoryBadge = m.eventCategory ? `<span class="badge text-bg-info me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
+      const eventCategoryBadge = p.eventCategory ? `<span class="badge text-bg-info me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
       const placeCategoryBadge = `<span class="badge text-bg-info">${(p.categoryName && p.categoryName !== 'undefined') ? p.categoryName : p.placeCategory}</span>`
       modalBodyInput.innerHTML = `<div class="d-flex"><img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"><div class="ms-3"><h5 class="font-weight-bold mb-1">${fa_icon} ${p.placeTitle}</h5>${eventCategoryBadge+placeCategoryBadge}</div></div><div id="place-modal-comments"></div>`
         renderComments(tid)
