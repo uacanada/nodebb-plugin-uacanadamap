@@ -293,6 +293,7 @@
         const remainingPosts = generateRemainingPosts(topic.posts.slice(1));
     
         $("#place-modal-comments").html(firstPost + remainingPosts);
+        setTitle()
        
       }
       
@@ -302,7 +303,7 @@
       <div id="place-modal-comments"><div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>`
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
-        setTitle()
+        
   
   
   }
