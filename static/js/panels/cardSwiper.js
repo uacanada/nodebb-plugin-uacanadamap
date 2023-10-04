@@ -220,7 +220,7 @@
               const topicFromApi = await fetch(`/api/topic/${tid}/1/1`);
               const topic = await topicFromApi.json();
               if(!topic || !topic.posts[0]) return {error:'Topic is empty: '+tid}
-              setTitle()
+              
               return topic;
           } catch (error) {
             UacanadaMap.console.log(error);
@@ -293,6 +293,7 @@
         const remainingPosts = generateRemainingPosts(topic.posts.slice(1));
     
         $("#place-modal-comments").html(firstPost + remainingPosts);
+       
       }
       
       const eventCategoryBadge = p.eventCategory ? `<span class="badge text-bg-primary rounded-pill me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
@@ -301,6 +302,7 @@
       <div id="place-modal-comments"><div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>`
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
+        setTitle()
   
   
   }
