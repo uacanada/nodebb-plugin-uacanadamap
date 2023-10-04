@@ -274,6 +274,10 @@ body.cards-opened{
   .nav.nav-pills li {
     list-style: none!important;
   }
+  #top-meta-tab a.active {
+    border-bottom: 2px solid;
+    padding-bottom: 5px;
+  }
 
   ul.list-unstyled .list-group-item {
     padding-left: 0!important;
