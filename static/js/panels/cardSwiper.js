@@ -193,11 +193,22 @@
         const placeModal = document.getElementById('ua-place-modal')
         const modalTitle = placeModal.querySelector('#modal-place-title')
         const modalBodyInput = placeModal.querySelector('#placeLoader')
-        const author = { color: $('#metaTab').data('authorcolor'), avatar: $('#metaTab').data('authoravatar'), name: $('#metaTab').data('authorname'), letter: $('#metaTab').data('authorletter') };
-        const avatar = author.avatar? `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem;" onerror="this.remove();" itemprop="image"></img>`:
-        `<div class="float-start rounded-circle me-1" style="width:1rem;height: 1rem;line-height: 0.7rem;padding: 0.25rem;font-size: 0.75rem;color:white;background-color:${author.color}">${author.letter}</div>`
-        
-        modalTitle.innerHTML = `<span style="color:${author.color}">${avatar+author.name}</span>`
+
+
+        const metaTab = $('#metaTab');
+
+        const author = {
+            color: metaTab.data('authorcolor'),
+            avatar: metaTab.data('authoravatar'),
+            name: metaTab.data('authorname'),
+            letter: metaTab.data('authorletter')
+        };
+
+        const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
+        const avatarDiv = `<div class="float-start rounded-circle me-1" style="width:1rem;height: 1rem;line-height: 0.7rem;padding: 0.25rem;font-size: 0.75rem;color:white;background-color:${author.color}">${author.letter}</div>`;
+        const avatar = author.avatar ? avatarImage : avatarDiv;
+
+        modalTitle.innerHTML = `<span style="color:${author.color}">${avatar}${author.name}</span>`;
         const img = UacanadaMap.api.getProfileImage(p)
         const latlngSrting = p.latlng.join(',')
 
@@ -280,9 +291,9 @@
         $("#place-modal-comments").html(firstPost + remainingPosts);
       }
       
-      const eventCategoryBadge = p.eventCategory ? `<span class="badge text-bg-info me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
-      const placeCategoryBadge = `<span class="badge text-bg-info">${(p.categoryName && p.categoryName !== 'undefined') ? p.categoryName : p.placeCategory}</span>`
-      modalBodyInput.innerHTML = `<div class="d-flex"><img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"><div class="ms-3"><h5 class="font-weight-bold mb-1">${fa_icon} ${p.placeTitle}</h5>${eventCategoryBadge+placeCategoryBadge}</div></div>
+      const eventCategoryBadge = p.eventCategory ? `<span class="badge text-bg-primary rounded-pill me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
+      const placeCategoryBadge = `<span class="badge text-bg-primary rounded-pill">${(p.categoryName && p.categoryName !== 'undefined') ? p.categoryName : p.placeCategory}</span>`
+      modalBodyInput.innerHTML = `<div class="d-flex mb-5"><img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"><div class="ms-3"><h5 class="font-weight-bold mb-1">${fa_icon} ${p.placeTitle}</h5>${eventCategoryBadge+placeCategoryBadge}</div></div>
       <div id="place-modal-comments"><div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>`
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
