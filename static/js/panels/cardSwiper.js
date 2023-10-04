@@ -241,16 +241,11 @@
               <div class="flex-grow-1">
                   ${comment.content}
                   <a class="float-end" href="/post/${comment.pid}">
-                      <i class="fa-regular fa-comment-dots"></i>
+                      <i class="fa-regular fa-comment-dots fs-3"></i>
                   </a>
               </div>
           </div>
-          <div class="user-bio mt-3">
-              <a href="/user/${comment.user.userslug}" class="text-decoration-none">
-              ${avatar} <strong>${comment.user.displayname || comment.user.username}</strong>
-              </a>
-              ${comment.user.lastonlineISO}
-          </div>
+          
       </div>`;
         }
 
