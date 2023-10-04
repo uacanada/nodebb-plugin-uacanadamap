@@ -195,21 +195,21 @@
         const modalBodyInput = placeModal.querySelector('#placeLoader')
 
 
-        function setTitle(){
-          const metaTab = $('#metaTab');
+        function setTitle(el){
+          
 
           const author = {
-              color: metaTab.data('authorcolor'),
-              avatar: metaTab.data('authoravatar'),
-              name: metaTab.data('authorname'),
-              letter: metaTab.data('authorletter')
+              color: el.data('authorcolor'),
+              avatar: el.data('authoravatar'),
+              name: el.data('authorname'),
+              letter: el.data('authorletter')
           };
 
-          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
+          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded me-2" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
           const avatarDiv = `<div class="float-start rounded-circle me-1" style="width:1rem;height: 1rem;line-height: 0.7rem;padding: 0.25rem;font-size: 0.75rem;color:white;background-color:${author.color}">${author.letter}</div>`;
           const avatar = author.avatar ? avatarImage : avatarDiv;
 
-          modalTitle.innerHTML = `<span style="color:${author.color}">${avatar}${author.name}</span>`;
+          modalTitle.innerHTML = `<span style="color:${author.color};text-transform: none;">${avatar}${author.name}</span>`;
         }
 
         const img = UacanadaMap.api.getProfileImage(p)
@@ -293,7 +293,9 @@
         const remainingPosts = generateRemainingPosts(topic.posts.slice(1));
     
         $("#place-modal-comments").html(firstPost + remainingPosts);
-        setTitle()
+
+        
+        setTitle($(firstPost).find('#metaTab'))
        
       }
       
