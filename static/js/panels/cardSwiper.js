@@ -193,7 +193,7 @@
         const placeModal = document.getElementById('ua-place-modal')
         const modalTitle = placeModal.querySelector('#modal-place-title')
         const modalBodyInput = placeModal.querySelector('#placeLoader')
-        modalTitle.innerHTML = `${fa_icon} ${p.placeTitle}`
+        modalTitle.innerHTML = `<div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div>`
         const img = UacanadaMap.api.getProfileImage(p)
         const latlngSrting = p.latlng.join(',')
 
@@ -276,9 +276,9 @@
         $("#place-modal-comments").html(firstPost + remainingPosts);
       }
       
-  
-        
-        modalBodyInput.innerHTML = `<div style="width:5rem;height:5rem" class="mx-auto mb-5"><div style="background:url(${img}) center center;background-size:cover;width:5rem" class="m-0 my-2 ratio ratio-1x1 rounded-circle"></div></div><div id="place-modal-comments"></div>`
+      const eventCategoryBadge = m.eventCategory ? `<span class="badge text-bg-info me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
+      const placeCategoryBadge = `<span class="badge text-bg-info">${(p.categoryName && p.categoryName !== 'undefined') ? p.categoryName : p.placeCategory}</span>`
+      modalBodyInput.innerHTML = `<div class="d-flex"><img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"><div class="ms-3"><h5 class="font-weight-bold mb-1">${fa_icon} ${p.placeTitle}</h5>${eventCategoryBadge+placeCategoryBadge}</div></div><div id="place-modal-comments"></div>`
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
   
