@@ -195,20 +195,23 @@
         const modalBodyInput = placeModal.querySelector('#placeLoader')
 
 
-        const metaTab = $('#metaTab');
+        function setTitle(){
+          const metaTab = $('#metaTab');
 
-        const author = {
-            color: metaTab.data('authorcolor'),
-            avatar: metaTab.data('authoravatar'),
-            name: metaTab.data('authorname'),
-            letter: metaTab.data('authorletter')
-        };
+          const author = {
+              color: metaTab.data('authorcolor'),
+              avatar: metaTab.data('authoravatar'),
+              name: metaTab.data('authorname'),
+              letter: metaTab.data('authorletter')
+          };
 
-        const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
-        const avatarDiv = `<div class="float-start rounded-circle me-1" style="width:1rem;height: 1rem;line-height: 0.7rem;padding: 0.25rem;font-size: 0.75rem;color:white;background-color:${author.color}">${author.letter}</div>`;
-        const avatar = author.avatar ? avatarImage : avatarDiv;
+          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
+          const avatarDiv = `<div class="float-start rounded-circle me-1" style="width:1rem;height: 1rem;line-height: 0.7rem;padding: 0.25rem;font-size: 0.75rem;color:white;background-color:${author.color}">${author.letter}</div>`;
+          const avatar = author.avatar ? avatarImage : avatarDiv;
 
-        modalTitle.innerHTML = `<span style="color:${author.color}">${avatar}${author.name}</span>`;
+          modalTitle.innerHTML = `<span style="color:${author.color}">${avatar}${author.name}</span>`;
+        }
+
         const img = UacanadaMap.api.getProfileImage(p)
         const latlngSrting = p.latlng.join(',')
 
@@ -217,6 +220,7 @@
               const topicFromApi = await fetch(`/api/topic/${tid}/1/1`);
               const topic = await topicFromApi.json();
               if(!topic || !topic.posts[0]) return {error:'Topic is empty: '+tid}
+              setTitle()
               return topic;
           } catch (error) {
             UacanadaMap.console.log(error);
