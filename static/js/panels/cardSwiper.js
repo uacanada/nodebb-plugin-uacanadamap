@@ -189,12 +189,7 @@
         }
 
 
-       try {
-        const markerOffset = Math.floor($(window).innerHeight() / 2) - 100
-				UacanadaMap.api.moveMarkerToTop(p.latlng, markerOffset);
-       } catch (error) {
-        
-       }
+       
         
 
         const p = UacanadaMap.allPlaces[tid].json
@@ -202,6 +197,7 @@
         const placeModal = document.getElementById('ua-place-modal')
         const modalTitle = placeModal.querySelector('#modal-place-title')
         const modalBodyInput = placeModal.querySelector('#placeLoader')
+
 
 
         function setTitle(el){
@@ -224,7 +220,7 @@
         }
 
         const img = UacanadaMap.api.getProfileImage(p)
-        const latlngSrting = p.latlng.join(',')
+
 
         async function getTopicData(tid) {
           try {
@@ -307,6 +303,13 @@
         setTitle($(firstPost).find('#metaTab'))
        
       }
+
+      try {
+        const markerOffset = Math.floor($(window).innerHeight() / 2) - 100
+				UacanadaMap.api.moveMarkerToTop(p.latlng, markerOffset);
+       } catch (error) {
+        UacanadaMap.console.log(error)
+       }
       
       const eventCategoryBadge = p.eventCategory ? `<span class="badge text-bg-primary rounded-pill me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
       const placeCategoryBadge = `<span class="badge text-bg-primary rounded-pill">${(p.categoryName && p.categoryName !== 'undefined') ? p.categoryName : p.placeCategory}</span>`
