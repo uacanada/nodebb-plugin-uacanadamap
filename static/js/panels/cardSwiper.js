@@ -301,9 +301,11 @@
       modalBodyInput.innerHTML = `<div class="d-flex mb-5 w-100 align-items-start">
         <div class="me-auto">
         <h5 class="mb-1">${fa_icon} ${p.placeTitle}</h5>
-          ${eventCategoryBadge+placeCategoryBadge}</div>
+          ${eventCategoryBadge+placeCategoryBadge}
+          </div>
+          <img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"/>
         </div>
-      <img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"/>
+     
       <div id="place-modal-comments"><div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>`
 
 
