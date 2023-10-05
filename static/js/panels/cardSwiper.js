@@ -183,6 +183,7 @@
   }
   
   UacanadaMap.api.openPlaceModal = async (tid) => {
+        UacanadaMap.api.shakeElements(['#cardsSwiperPlaceholder'],'ua-shake-vert')
   
         if(!tid){
           tid = Number($('.swiper-slide-active .ua-place-card-inner').attr('data-ua-tid'))
