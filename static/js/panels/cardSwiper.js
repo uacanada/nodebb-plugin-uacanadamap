@@ -205,8 +205,10 @@
               letter: el.data('authorletter')
           };
 
-          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded me-2" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
-          const avatarDiv = `<div class="float-start rounded-circle me-1" style="width:1rem;height: 1rem;line-height: 0.7rem;padding: 0.25rem;font-size: 0.75rem;color:white;background-color:${author.color}">${author.letter}</div>`;
+         
+          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded me-2" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem; border-radius: 50%; width: 1rem; height: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
+          const avatarDiv = `<div class="float-start p-0 m-0 avatar avatar-rounded me-2" style="border-radius: 50%; width: 1rem; height: 1rem; line-height: 1rem; padding: 0.25rem; font-size: 0.75rem; color:white; background-color:${author.color}; text-align: center;">${author.letter}</div>`;
+
           const avatar = author.avatar ? avatarImage : avatarDiv;
 
           modalTitle.innerHTML = `<span style="color:${author.color};text-transform: none;">${avatar}${author.name}</span>`;
@@ -231,7 +233,7 @@
         function generateAvatar(comment) {
           return comment.user.picture ?
               `<img alt="${comment.user.fullname}" title="${comment.user.fullname}" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" src="${comment.user.picture}" style="width:3rem" onerror="this.remove();" itemprop="image">` :
-              `<span alt="${comment.user.fullname}" title="${comment.user.fullname}" data-uid="${comment.user.userslug}" loading="lazy" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/icon" style="--avatar-size: 24px; background-color: #009688;">UA</span>`;
+              `<span style="width:3rem"></span>`;
         }
 
         function generateFirstPost(comment) {
@@ -296,8 +298,17 @@
       
       const eventCategoryBadge = p.eventCategory ? `<span class="badge text-bg-primary rounded-pill me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
       const placeCategoryBadge = `<span class="badge text-bg-primary rounded-pill">${(p.categoryName && p.categoryName !== 'undefined') ? p.categoryName : p.placeCategory}</span>`
-      modalBodyInput.innerHTML = `<div class="d-flex mb-5"><img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"><div class="ms-3"><h5 class="font-weight-bold mb-1">${fa_icon} ${p.placeTitle}</h5>${eventCategoryBadge+placeCategoryBadge}</div></div>
+      modalBodyInput.innerHTML = `<div class="d-flex mb-5 w-100 align-items-start">
+        <div class="me-auto">
+        <h5 class="mb-1">${fa_icon} ${p.placeTitle}</h5>
+          ${eventCategoryBadge+placeCategoryBadge}</div>
+        </div>
+      <img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"/>
       <div id="place-modal-comments"><div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>`
+
+
+
+
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
         
