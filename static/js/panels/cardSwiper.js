@@ -206,12 +206,12 @@
           };
 
          
-          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded me-2" component="user/picture" src="${author.avatar}" style="--avatar-size: 1rem; border-radius: 50%; width: 1rem; height: 1rem;" onerror="this.remove();" itemprop="image"></img>`;
-          const avatarDiv = `<div class="avatar avatar-tooltip not-responsive avatar-rounded d-flex  align-items-center justify-content-center" component="avatar/picture" style="width:1rem; height:1rem; background-color:${author.color};" aria-label="${author.name}" data-bs-original-title="${author.name}">${author.name[0]}</div>`
+          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded me-2" component="user/picture" src="${author.avatar}" style="--avatar-size: 2rem; border-radius: 50%; width: 2rem; height: 2rem;" onerror="this.remove();" itemprop="image"></img>`;
+          const avatarDiv = `<div class="me-2 avatar avatar-tooltip not-responsive avatar-rounded d-flex  align-items-center justify-content-center" component="avatar/picture" style="width:2rem; height:2rem; background-color:${author.color};" aria-label="${author.name}" data-bs-original-title="${author.name}"><b>${author.name[0]}</b></div>`
             
           const avatar = author.avatar ? avatarImage : avatarDiv;
 
-          modalTitle.innerHTML = `<span style="color:${author.color};text-transform: none;">${avatar}${author.name}</span>`;
+          modalTitle.innerHTML = `<div class="d-flex" style="line-height: 2rem;color:${author.color};text-transform: none;">${avatar}${author.name}</div>`;
         }
 
         const img = UacanadaMap.api.getProfileImage(p)
