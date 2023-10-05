@@ -1433,6 +1433,9 @@ button#cardsDown {
   max-width: 800px;
   margin: 0 auto;
   border-radius: 1rem 1rem 0 0;
+  #recent_posts li {
+    padding-bottom: 2rem;
+  }
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
@@ -1566,5 +1569,4 @@ body.uacanada-map-page #ua-mainframe {
     padding-bottom: 5rem;
     background: rgba(0, 88, 255, 0.03);
 }
-
 
