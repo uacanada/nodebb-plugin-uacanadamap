@@ -395,8 +395,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   UacanadaMap.api.moveMarkerToTop = (c, markerOffset) => {
     const { map, showOnlyArea, L } = UacanadaMap;
     if (showOnlyArea) {
-      console.log(`Marker not move cause showOnlyArea=true`);
-      // TODO
       return;
     }
     var latlng = c.lat ? c : { lat: c[0], lng: c[1] };

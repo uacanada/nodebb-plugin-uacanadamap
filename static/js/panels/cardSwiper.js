@@ -188,6 +188,15 @@
           tid = Number($('.swiper-slide-active .ua-place-card-inner').attr('data-ua-tid'))
         }
 
+
+       try {
+        const markerOffset = Math.floor($(window).innerHeight() / 2) - 100
+				UacanadaMap.api.moveMarkerToTop(p.latlng, markerOffset);
+       } catch (error) {
+        
+       }
+        
+
         const p = UacanadaMap.allPlaces[tid].json
         const fa_icon = UacanadaMap.allPlaces[tid].marker?.icon
         const placeModal = document.getElementById('ua-place-modal')
