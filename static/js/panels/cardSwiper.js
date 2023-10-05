@@ -233,7 +233,12 @@
         function generateAvatar(comment) {
           return comment.user.picture ?
               `<img alt="${comment.user.fullname}" title="${comment.user.fullname}" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" src="${comment.user.picture}" style="width:3rem" onerror="this.remove();" itemprop="image">` :
-              `<span style="width:3rem"></span>`;
+              `<a class="flex-shrink-0 me-3" href="/user/t753171736">
+              <div class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" style="width:3rem; height:3rem; display: flex; align-items: center; justify-content: center; background-color:${comment.user["icon:bgColor"]};" aria-label="${comment.user.fullname}" data-bs-original-title="${comment.user.fullname}">
+              ${comment.user["icon:text"]}
+              </div>
+              </a>
+          `;       
         }
 
         function generateFirstPost(comment) {
