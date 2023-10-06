@@ -264,11 +264,8 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 2s ease-out;
   transform: translateY(100%) rotateX(90deg);
   background: linear-gradient(0deg,rgba(5,17,32,.2),transparent);
-  scrollbar-width: none;  // Firefox
-  -ms-overflow-style: none;  // IE and Edge
-  &::-webkit-scrollbar {  // Chrome, Safari, Opera
-    display: none;
-  }
+  scrollbar-width: none; 
+  -webkit-overflow-scrolling: auto;
 
   .sheet-spacer{
     height: 85vh;
