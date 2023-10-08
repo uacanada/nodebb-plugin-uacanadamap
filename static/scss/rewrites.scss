@@ -146,13 +146,11 @@ body,
 
 
 .dropdown-menu.custom-ua-dropdown{
-    background-color: rgba(var(--bs-body-bg-rgb),0.2);
+    background-color: rgba(var(--bs-body-bg-rgb),0.5);
     color: rgba(var(--bs-body-color-rgb),1);
-    width: 16rem;
     max-width: 90vw;
     border-radius: 0.5rem;
     backdrop-filter: blur(3px);
-    background: transparent;
     transition: all ease-in 0.2s;
     a {
       width: auto;
