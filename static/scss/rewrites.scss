@@ -147,8 +147,8 @@ body,
 
 .dropdown-menu.custom-ua-dropdown{
  
-    color: #000000;
-    width: 14rem;
+    color: rgba(var(--bs-body-color-rgb),1);
+    width: 16rem;
     max-width: 90vw;
     border-radius: 0.5rem;
     backdrop-filter: blur(3px);
@@ -157,9 +157,13 @@ body,
       width: auto;
       padding: 0.25rem 1rem;
       background: transparent;
-      color: #000000;
+      color: rgba(var(--bs-body-color-rgb),1);
     }
-    &:not(.shown) {
+    .list-group-item{
+      background-color: transparent;
+      color: rgba(var(--bs-body-color-rgb),1);
+    }
+    &:not(.show) {
       -webkit-animation: map-buttons-dropdown-animation 0.3s both;
       animation: map-buttons-dropdown-animation 0.3s both;
     }
