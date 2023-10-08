@@ -146,8 +146,7 @@ body,
 
 
 .dropdown-menu.custom-ua-dropdown{
-  -webkit-animation: map-buttons-dropdown-animation 0.2s both;
-    animation: map-buttons-dropdown-animation 0.2s both;
+ 
     color: #000000;
     width: 14rem;
     max-width: 90vw;
@@ -159,6 +158,10 @@ body,
       padding: 0.25rem 1rem;
       background: transparent;
       color: #000000;
+    }
+    &:not(.shown) {
+      -webkit-animation: map-buttons-dropdown-animation 0.3s both;
+      animation: map-buttons-dropdown-animation 0.3s both;
     }
 }
 
