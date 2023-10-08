@@ -252,6 +252,8 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 
 
 .place-ctx-buttons {
+  display: flex;
+    justify-content: flex-end;
   width: 100%;
     text-align: right;
   .place-ctx-buttons-wrapper{
