@@ -146,7 +146,7 @@ body,
 
 
 .dropdown-menu.custom-ua-dropdown{
- 
+    background-color: rgba(var(--bs-body-bg-rgb),0.2);
     color: rgba(var(--bs-body-color-rgb),1);
     width: 16rem;
     max-width: 90vw;
@@ -172,8 +172,8 @@ body,
 
 
 .leaflet-control.btn-group.dropup{
-  .dropdown-menu {
-    
+  .dropdown-menu.custom-ua-dropdown {
+    padding-right: 2.5rem;
     #tile-chooser button,
     #location-category-filter {
       padding: .25rem;
