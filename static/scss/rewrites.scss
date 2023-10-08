@@ -153,6 +153,7 @@ body,
     border-radius: 0.5rem;
     backdrop-filter: blur(3px);
     background: transparent;
+    transition: all ease-in 0.3s;
     a {
       width: auto;
       padding: 0.25rem 1rem;
