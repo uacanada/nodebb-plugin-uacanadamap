@@ -275,8 +275,8 @@ body.cards-opened{
     list-style: none!important;
   }
   #top-meta-tab a.active {
-    border-bottom: 2px solid;
-    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(var(--bs-link-hover-color),0.5);
+    padding-bottom: 0.25rem;
   }
 
   ul.list-unstyled .list-group-item {
