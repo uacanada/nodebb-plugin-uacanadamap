@@ -20,7 +20,7 @@ UacanadaMap.api.switchBottomTab = {
 
 function switchTab(direction) {
   let swiper = UacanadaMap.swipers.bottomPanelCategoryButtons;
-  let slidesCount = swiper.slides.length;
+  let slidesCount = swiper.slides.length - 1;
   let currentIndex = swiper.activeIndex;
   
   let nextIndex;
