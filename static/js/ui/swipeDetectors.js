@@ -2,7 +2,7 @@
 define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     UacanadaMap.api.swipeDetectorZones = {
-        '#cardsSwiperPlaceholder': {handle:cardCarousel,swipeResistance:70},
+        '#cardsSwiperPlaceholder': {handle:cardCarousel,swipeResistance:50},
         '#ua-place-modal .offcanvas-body': {handle:postOffcanvas},
         '[component="bottombar"]':{handle: bottomNav},
         '#innerScrollPanel': {handle:bottomScrollablePanel}
@@ -32,7 +32,7 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
     UacanadaMap.console.log({direction})
  
-    if(direction==='down' && $('#innerScrollPanel').scrollTop() < 0) {
+    if(direction==='down' && $('#innerScrollPanel').scrollTop() < 1) {
        UacanadaMap.api.scrollableBottomPanel.close() 
     } 
 
