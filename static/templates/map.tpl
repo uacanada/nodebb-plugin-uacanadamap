@@ -16,13 +16,13 @@
             </div>
 
 
-            <div id="scrollableBottomPanel" class="pe-none user-select-none w-100 position-sticky no-propagation top-0 start-0" aria-hidden="true">
+            <div id="scrollableBottomPanel" class="user-select-none w-100 position-sticky no-propagation top-0 start-0" aria-hidden="true">
                
                 <div class="inner-scrollable-wrapper container p-0 w-100 h-100">
                   <div class="inner-scrollable-content position-relative">
-                    <div class="sheet-spacer pe-none user-select-none w-100"></div>
-                    <div class="sheet-dragger pe-auto text-center w-100 user-select-none" aria-label="Draggable sheet handler"><i class="fa-solid fa-minus"></i></div>
-                    <div class="sheet-content pe-auto w-100 p-0 m-0" role="region" aria-label="Sheet content">
+                    <div class="sheet-spacer user-select-none w-100"></div>
+                    <div class="sheet-dragger text-center w-100 user-select-none" aria-label="Draggable sheet handler"><i class="fa-solid fa-minus"></i></div>
+                    <div class="sheet-content w-100 p-0 m-0" role="region" aria-label="Sheet content">
                         <div id="sheet-content-loader" class="p-3 m-0" aria-busy="true"></div>
                     </div>
                   </div>
