@@ -41,10 +41,14 @@ function switchTab(direction) {
 
   $('.showBottomPanel').removeClass('active-tab-button')
   let fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id');
+  UacanadaMap.api.scrollableBottomPanel.open({fragment_id})
+
+  UacanadaMap.setTimeout(() => {
+    UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
+    UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
+  })
+
  
-  UacanadaMap.api.scrollableBottomPanel.open({fragment_id});
-  UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
-  UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
 }
 
 
@@ -101,7 +105,8 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
   } else {
     $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>') // TODO: move to ACP
     return {buttonIndex,contentId}
-  }   
+  }
+
 }
 
 
