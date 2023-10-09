@@ -2,18 +2,18 @@
 define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     UacanadaMap.api.swipeDetectorZones = {
-        '#cardsSwiperPlaceholder': cardCarousel,
-        '#ua-place-modal .offcanvas-body': postOffcanvas,
-        '[component="bottombar"]': bottomNav,
-        '#innerScrollPanel': bottomScrollablePanel
+        '#cardsSwiperPlaceholder': {handle:cardCarousel,swipeResistance:70},
+        '#ua-place-modal .offcanvas-body': {handle:postOffcanvas},
+        '[component="bottombar"]':{handle: bottomNav},
+        '#innerScrollPanel': {handle:bottomScrollablePanel}
       };
 
   UacanadaMap.api.swipeZonesRegister = () => {
         UacanadaMap.api.swipeDetectorListeners = [];
     
         // Register
-        Object.entries(UacanadaMap.api.swipeDetectorZones).forEach(([selector, handle]) => {
-          const registration = UacanadaMap.api.listenSwipes(selector, handle);
+        Object.entries(UacanadaMap.api.swipeDetectorZones).forEach(([selector, prop]) => {
+          const registration = UacanadaMap.api.listenSwipes(selector, prop.handle, prop.swipeResistance);
           registration.register();
           UacanadaMap.api.swipeDetectorListeners.push(registration);
         });
@@ -32,7 +32,7 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
     UacanadaMap.console.log({direction})
  
-    if(direction==='down' && $('#innerScrollPanel').scrollTop() < 5) {
+    if(direction==='down' && $('#innerScrollPanel').scrollTop() < 0) {
        UacanadaMap.api.scrollableBottomPanel.close() 
     } 
 
