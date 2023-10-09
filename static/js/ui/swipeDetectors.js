@@ -4,7 +4,8 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
     UacanadaMap.api.swipeDetectorZones = {
         '#cardsSwiperPlaceholder': cardCarousel,
         '#ua-place-modal .offcanvas-body': postOffcanvas,
-        '[component="bottombar"]': bottomNav
+        '[component="bottombar"]': bottomNav,
+        '#innerScrollPanel': bottomScrollablePanel
       };
 
   UacanadaMap.api.swipeZonesRegister = () => {
@@ -26,6 +27,23 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
     }
 
 
+
+  function bottomScrollablePanel(direction, element){
+    if(direction==='down' && $(element).scrollTop < 5) {
+       UacanadaMap.api.scrollableBottomPanel.close() 
+    } 
+
+    if(direction==='right') {
+      UacanadaMap.api.switchBottomTab.next()
+    } 
+
+    if(direction==='left') {
+      UacanadaMap.api.switchBottomTab.prev()
+    } 
+
+
+  }
+  
 
   function cardCarousel(direction, element) {
 
@@ -59,7 +77,7 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
   function bottomNav (direction, element) {
     if(direction==='up'){
-        UacanadaMap.api.scrollableBottomPanel.open()
+        UacanadaMap.api.scrollableBottomPanel.open() // TODO: add default content when swipe on nav bar
     }
     
   }
