@@ -193,6 +193,7 @@ UacanadaMap.api.scrollableBottomPanel = {
 
   open: async function(reason,slideIndex) {
       let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(reason,slideIndex)
+      UacanadaMap.console.log('OPEN:::',{buttonIndex,contentId})
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
       this.toggleBodyClass(true);
