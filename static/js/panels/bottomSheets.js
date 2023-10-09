@@ -173,7 +173,7 @@ UacanadaMap.api.saveWidgetsToFragment = ()=> {
  * 
  */
 
-const PANEL_SCROLL_HEIGHT = 250; // TODO: move magic numbers to ACP
+const PANEL_SCROLL_HEIGHT = Math.floor(window.innerHeight / 2); // TODO: move magic numbers to ACP
 UacanadaMap.api.scrollableBottomPanel = {
 
   setPanelState: function(state) {
