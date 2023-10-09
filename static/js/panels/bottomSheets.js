@@ -203,7 +203,7 @@ UacanadaMap.api.scrollableBottomPanel = {
         this.setPanelState( { openedButtons: true, hiding: false, hidingButtons: false });
         UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert");
         panel.removeClass('panel-hidden').addClass('panel-shown');
-        panel.animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
+        $("#innerScrollPanel").animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
       }, 100);   
   },
 
@@ -212,7 +212,7 @@ UacanadaMap.api.scrollableBottomPanel = {
     if(!UacanadaMap.api.scrollableBottomPanel.opened || !UacanadaMap.api.scrollableBottomPanel.openedButtons ) return;
 
     const panel = this.getPanel();
-    panel.animate({ scrollTop: 0 }, 100);
+    $("#innerScrollPanel").animate({ scrollTop: 0 }, 300);
     panel.removeClass('panel-shown').addClass('panel-hidden').attr('aria-hidden', 'true');
     this.toggleBodyClass(false);
     this.setPanelState( { openedButtons: false, opened: false, hiding: true, hidingButtons: true });
