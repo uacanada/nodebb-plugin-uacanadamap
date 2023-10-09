@@ -18,7 +18,7 @@ UacanadaMap.api.switchBottomTab = {
   }
 };
 
-function switchTab(direction) {
+async function switchTab(direction) {
   let swiper = UacanadaMap.swipers.bottomPanelCategoryButtons;
   let slidesCount = swiper.slides.length;
   let currentIndex = swiper.activeIndex;
@@ -41,7 +41,7 @@ function switchTab(direction) {
 
   $('.showBottomPanel').removeClass('active-tab-button')
   let fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id');
-  UacanadaMap.api.scrollableBottomPanel.open({fragment_id})
+  await UacanadaMap.api.scrollableBottomPanel.open({fragment_id})
   
   UacanadaMap.setTimeout(() => {
     UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
@@ -86,10 +86,10 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
   }
 
  
-  let contentId =  triggerButton[0]?.getAttribute("data-ua-content-id")
+  let contentId =  triggerButton[0]?.getAttribute("data-ua-content-id") || triggerButton.fragment_id
   if(!contentId){
     showEmtyTab()
-    return {buttonIndex:0,contentId:null}
+    return {buttonIndex:0,contentId:triggerButton.fragment_id}
   }
 
   $('.showBottomPanel').removeClass('active-tab-button');
