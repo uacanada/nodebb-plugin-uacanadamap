@@ -69,12 +69,12 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 };
 
 
-UacanadaMap.api.loadTabToBottomPanel = async (triggerButton,slideIndex) => {
+UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
   function showEmtyTab(){
     $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>') // TODO: move to ACP
    }
-   UacanadaMap.console.log({slideIndex,triggerButton})
+  
   
   if(!triggerButton){
     return {buttonIndex:0,contentId:null}
@@ -191,8 +191,8 @@ UacanadaMap.api.scrollableBottomPanel = {
     return $('#scrollableBottomPanel');
   },
 
-  open: async function(reason,slideIndex) {
-      let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(reason,slideIndex)
+  open: async function(reason) {
+      let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(reason)
       UacanadaMap.console.log('OPEN:::',{buttonIndex,contentId})
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
