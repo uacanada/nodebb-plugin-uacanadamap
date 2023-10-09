@@ -72,7 +72,7 @@ class EventListeners {
 		
 
 
-		  $('#scrollableBottomPanel').on('scroll', this.bottomPanelScrollHandler);
+		  $('#innerScrollPanel').on('scroll', this.bottomPanelScrollHandler);
 
 		  UacanadaMap.api.swipeZonesRegister()
                     
