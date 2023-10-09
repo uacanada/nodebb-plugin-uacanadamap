@@ -80,16 +80,20 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
     return {buttonIndex:0,contentId:null}
   }
 
-  if(triggerButton.fragment_id && UacanadaMap.fragment.fragments[triggerButton.fragment_id]){
+
+  
+  const hasFragmentContent = triggerButton.fragment_id && UacanadaMap.fragment.fragments[triggerButton.fragment_id]
+  const fragmentWithoutContent = triggerButton.fragment_id && !hasFragmentContent
+
+  if(hasFragmentContent){
     UacanadaMap.fragment.loadFragmentToElement(triggerButton.fragment_id, 'sheet-content-loader',null,true);
     return {buttonIndex:0,contentId:triggerButton.fragment_id, fragment:true}
   }
 
  
   let contentId =  triggerButton[0]?.getAttribute("data-ua-content-id") || triggerButton.fragment_id
-  if(!contentId){
+  if(!contentId || fragmentWithoutContent){
     showEmtyTab()
-    
     return {buttonIndex:0,contentId:triggerButton.fragment_id}
   }
 
