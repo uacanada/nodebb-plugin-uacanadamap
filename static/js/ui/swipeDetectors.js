@@ -29,17 +29,19 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
 
   function bottomScrollablePanel(direction, element){
+
+    UacanadaMap.console.log({direction})
  
     if(direction==='down' && $('#innerScrollPanel').scrollTop() < 5) {
        UacanadaMap.api.scrollableBottomPanel.close() 
     } 
 
     if(direction==='right') {
-      UacanadaMap.api.switchBottomTab.next()
+      UacanadaMap.api.switchBottomTab.prev()
     } 
 
     if(direction==='left') {
-      UacanadaMap.api.switchBottomTab.prev()
+      UacanadaMap.api.switchBottomTab.next()
     } 
 
 
