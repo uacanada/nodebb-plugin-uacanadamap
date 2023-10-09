@@ -90,7 +90,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton,slideIndex) => {
   if(!contentId){
     showEmtyTab()
     
-    return {buttonIndex:slideIndex||0,contentId:triggerButton.fragment_id}
+    return {buttonIndex:0,contentId:triggerButton.fragment_id}
   }
 
   $('.showBottomPanel').removeClass('active-tab-button');
