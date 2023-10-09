@@ -41,7 +41,7 @@ async function switchTab(direction) {
 
   $('.showBottomPanel').removeClass('active-tab-button')
   let fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id');
-  await UacanadaMap.api.scrollableBottomPanel.open({fragment_id})
+  await UacanadaMap.api.scrollableBottomPanel.open({fragment_id},nextIndex)
   
   UacanadaMap.setTimeout(() => {
     UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
@@ -69,7 +69,7 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 };
 
 
-UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
+UacanadaMap.api.loadTabToBottomPanel = async (triggerButton,slideIndex) => {
 
   function showEmtyTab(){
     $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>') // TODO: move to ACP
@@ -89,7 +89,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
   let contentId =  triggerButton[0]?.getAttribute("data-ua-content-id") || triggerButton.fragment_id
   if(!contentId){
     showEmtyTab()
-    return {buttonIndex:0,contentId:triggerButton.fragment_id}
+    return {buttonIndex:slideIndex||0,contentId:triggerButton.fragment_id}
   }
 
   $('.showBottomPanel').removeClass('active-tab-button');
@@ -190,8 +190,8 @@ UacanadaMap.api.scrollableBottomPanel = {
     return $('#scrollableBottomPanel');
   },
 
-  open: async function(reason) {
-      let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(reason)
+  open: async function(reason,slideIndex) {
+      let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(reason,slideIndex)
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
       this.toggleBodyClass(true);
