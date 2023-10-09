@@ -20,14 +20,20 @@ UacanadaMap.api.switchBottomTab = {
 
 function switchTab(direction) {
   let swiper = UacanadaMap.swipers.bottomPanelCategoryButtons;
-  let slidesCount = swiper.slides.length - 1;
+  let slidesCount = swiper.slides.length;
   let currentIndex = swiper.activeIndex;
   
   let nextIndex;
   if (direction === 'next') {
-      nextIndex = (currentIndex + 1) % slidesCount;
+    nextIndex = currentIndex + 1;
+    if (nextIndex >= slidesCount) {
+        nextIndex = 0;  
+    }
   } else if (direction === 'prev') {
-      nextIndex = (currentIndex - 1 + slidesCount) % slidesCount;
+      nextIndex = currentIndex - 1;
+      if (nextIndex < 0) {
+          nextIndex = slidesCount - 1; 
+      }
   } else {
       UacanadaMap.console.log("Invalid direction provided. Use either 'next' or 'prev'.");
       return;
