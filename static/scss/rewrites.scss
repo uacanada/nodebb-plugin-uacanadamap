@@ -155,9 +155,7 @@ body,
     white-space: nowrap;
     a {
       width: auto;
-      padding: 0.25rem 1rem;
       background: transparent;
-      color: rgba(var(--bs-body-color-rgb),1);
     }
     .list-group-item{
       background-color: transparent;
@@ -180,6 +178,10 @@ body,
       background: transparent;
       max-width: 90%;
       color: #000000;
+    }
+
+    a {
+      padding: 0.25rem 1rem;
     }
     
   }
