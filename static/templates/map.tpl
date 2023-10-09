@@ -18,7 +18,7 @@
 
             <div id="scrollableBottomPanel" class="user-select-none w-100 position-fixed no-propagation top-0 start-0" aria-hidden="true">
                
-                <div class="inner-scrollable-wrapper container p-0 w-100 h-100">
+                <div id="innerScrollPanel" class="inner-scrollable-wrapper container p-0 w-100 h-100">
                   <div class="inner-scrollable-content position-relative">
                     <div class="sheet-spacer user-select-none w-100"></div>
                     <div class="sheet-dragger text-center w-100 user-select-none" aria-label="Draggable sheet handler"><i class="fa-solid fa-minus"></i></div>

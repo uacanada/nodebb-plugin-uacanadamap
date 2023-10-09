@@ -246,7 +246,7 @@ zoomendHandler() {
 
 
 	bottomPanelScrollHandler = utils.debounce(() => {
-		const $panel = $('#scrollableBottomPanel');
+		const $panel = $('#innerScrollPanel');
 		const currentScrollTop = $panel.scrollTop();
 	
 		if (currentScrollTop < 25) {
@@ -259,7 +259,7 @@ zoomendHandler() {
 		const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
 	
 		if (currentScrollTop > UacanadaMap.PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
-		  const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
+		  const updatedScrollHeight = Math.floor(window.innerHeight * 0.80);
 		  $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
 		  UacanadaMap.previousScrollHeight = updatedScrollHeight;
 		} else {

@@ -292,7 +292,6 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 /* New panel */
 #scrollableBottomPanel{
   height: 100vh;
- 
   z-index: 600;
   transform-origin: bottom !important;
   transition: transform .2s ease-out;
@@ -306,8 +305,8 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .sheet-spacer{
-    height: 85vh;
-    
+    height: 70vh;
+    backdrop-filter: grayscale(1) brightness(1.05);
   }
 
   .sheet-dragger{
