@@ -271,10 +271,13 @@ a.ua-popup-link:hover{
   }
 }
 
+
+
+
 .cluster-icon {
   width: 100%;
   height: 100%;
-  background-color: $marker-bg;
+  background-color:rgba(99, 99, 99, 0.25);
   color:$marker-icon-color;
   padding: 1%;
   position: relative;
@@ -312,6 +315,13 @@ a.ua-popup-link:hover{
     i:nth-child(4) { animation-delay: 6s; }
     i:nth-child(5) { animation-delay: 8s; }
   }
+}
+
+body.map-touched{
+  .cluster-icon{
+    background-color: $marker-bg;
+  }
+  
 }
 
 @keyframes fadeInOut {
