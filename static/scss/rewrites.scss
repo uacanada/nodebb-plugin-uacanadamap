@@ -152,6 +152,7 @@ body,
     border-radius: 0.5rem;
     backdrop-filter: blur(3px);
     transition: all ease-in 0.2s;
+    white-space: nowrap;
     a {
       width: auto;
       padding: 0.25rem 1rem;
