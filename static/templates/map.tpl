@@ -24,6 +24,7 @@
                     <div class="sheet-dragger text-center w-100 user-select-none" aria-label="Draggable sheet handler"><i class="fa-solid fa-minus"></i></div>
                     <div class="sheet-content w-100 p-0 m-0" role="region" aria-label="Sheet content">
                         <div id="sheet-content-loader" class="p-3 m-0" aria-busy="true"></div>
+                        <div class="py-5"></div>
                     </div>
                   </div>
                 </div>

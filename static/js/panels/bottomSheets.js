@@ -71,6 +71,11 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 
 UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
+  function showEmtyTab(){
+    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>') // TODO: move to ACP
+   }
+  
+  
   if(!triggerButton){
     return {buttonIndex:0,contentId:null}
   }
@@ -83,6 +88,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
  
   let contentId =  triggerButton[0]?.getAttribute("data-ua-content-id")
   if(!contentId){
+    showEmtyTab()
     return {buttonIndex:0,contentId:null}
   }
 
@@ -103,7 +109,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
     UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',null,true);
     return {buttonIndex,contentId}
   } else {
-    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>') // TODO: move to ACP
+    showEmtyTab()
     return {buttonIndex,contentId}
   }
 
