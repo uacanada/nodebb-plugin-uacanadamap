@@ -33,7 +33,9 @@ function switchTab(direction) {
       return;
   }
 
+  $('.showBottomPanel').removeClass('active-tab-button')
   let fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id');
+  UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
   UacanadaMap.api.scrollableBottomPanel.open({fragment_id});
 }
 
