@@ -285,6 +285,7 @@ a.ua-popup-link:hover{
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: .5s;
   .badge-number {
     color:$marker-icon-color;
       position: absolute;
@@ -293,7 +294,7 @@ a.ua-popup-link:hover{
       font-weight: bold;
       border-radius: 50%;
       text-align: center;
-      text-shadow: 0px 2px 1px #1d1d1d;
+      text-shadow: 0px 1px 1px #383838;
   
   }
   .icon-wrapper {
