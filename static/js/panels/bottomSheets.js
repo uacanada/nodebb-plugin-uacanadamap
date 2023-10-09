@@ -42,11 +42,11 @@ function switchTab(direction) {
   $('.showBottomPanel').removeClass('active-tab-button')
   let fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id');
   UacanadaMap.api.scrollableBottomPanel.open({fragment_id})
-
+  
   UacanadaMap.setTimeout(() => {
     UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
-  })
+  },150)
 
  
 }
