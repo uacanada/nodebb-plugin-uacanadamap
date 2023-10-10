@@ -49,7 +49,7 @@ async function switchTab(direction) {
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
     $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+fragment_id+']').addClass("active-tab-button");
-    console.log({currentIndex,nextIndex})
+    UacanadaMap.console.log({currentIndex,nextIndex,slidesCount,fragment_id})
   },200)
 
  
@@ -213,9 +213,9 @@ UacanadaMap.api.scrollableBottomPanel = {
       }, 100);   
   },
 
-  slide: async function (fragment){
+  slide: function (fragment){
     UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert"); // TODO: make horizontal
-    let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(fragment)
+    UacanadaMap.api.loadTabToBottomPanel(fragment)
 
   },
 
