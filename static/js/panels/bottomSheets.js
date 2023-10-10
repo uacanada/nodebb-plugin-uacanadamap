@@ -103,11 +103,13 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
   if(!buttons || buttons.destroyed || !UacanadaMap.api.scrollableBottomPanel.openedButtons){
      // Create new swiper with category buttons
+
     let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
     UacanadaMap.swipers.bottomPanelCategoryButtons = new UacanadaMap.Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
     let hasSlides = UacanadaMap.swipers.bottomPanelCategoryButtons.slides.length > 0
     UacanadaMap.api.scrollableBottomPanel.setPanelState( { openedButtons: hasSlides, hidingButtons: hasSlides});
+    UacanadaMap.console.log('Create new swiper with category buttons ')
   }
   
   let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index;
