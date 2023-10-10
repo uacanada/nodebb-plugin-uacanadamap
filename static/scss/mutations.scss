@@ -169,13 +169,17 @@ body.before-map-expand:not(.map-touched) {
             visibility: hidden;
         }
         .badge-text {
-            color: gray;
+            display: none;
         }
+    }
+
+    .pro-m-marker.ua-marker-d:after{
+        display: none!important;
     }
 
     .leaflet-marker-icon.mycluster {
         color: transparent;
-        filter: drop-shadow(1px 1px 5px black);
+        filter: drop-shadow(1px 1px 3px rgb(49, 49, 49));
         width: 30px !important;
     }
 
