@@ -109,8 +109,7 @@ class FragmentManager {
       this.fragments[fragmentId] = fragment;
     }
 
-
-        /**
+    /**
      * Get a list of all fragment IDs.
      *
      * @returns {Array} An array of all fragment IDs.

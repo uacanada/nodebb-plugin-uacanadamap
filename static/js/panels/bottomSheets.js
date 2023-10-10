@@ -39,7 +39,7 @@ async function switchTab(direction) {
       return;
   }
 
-
+  
 
   $('.showBottomPanel').removeClass('active-tab-button')
   const fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id')
@@ -49,6 +49,7 @@ async function switchTab(direction) {
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
     $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+fragment_id+']').addClass("active-tab-button");
+    console.log({currentIndex,nextIndex})
   },200)
 
  
@@ -199,7 +200,6 @@ UacanadaMap.api.scrollableBottomPanel = {
 
   open: async function(reason) {
       let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(reason)
-      UacanadaMap.console.log('OPEN:::',{buttonIndex,contentId})
       const panel = this.getPanel();
       panel.show().attr('aria-hidden', 'false');
       this.toggleBodyClass(true);
