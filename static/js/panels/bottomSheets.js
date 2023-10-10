@@ -42,7 +42,7 @@ async function switchTab(direction) {
 
 
   $('.showBottomPanel').removeClass('active-tab-button')
-  await UacanadaMap.api.scrollableBottomPanel.slide($(swiper.slides[nextIndex]).data('ua-content-id'))
+  await UacanadaMap.api.scrollableBottomPanel.slide({fragment_id:$(swiper.slides[nextIndex]).data('ua-content-id')})
   UacanadaMap.setTimeout(() => {
     UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
