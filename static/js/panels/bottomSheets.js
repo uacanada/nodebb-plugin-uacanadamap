@@ -42,12 +42,14 @@ async function switchTab(direction) {
 
 
   $('.showBottomPanel').removeClass('active-tab-button')
-  await UacanadaMap.api.scrollableBottomPanel.slide({fragment_id:$(swiper.slides[nextIndex]).data('ua-content-id')})
+  const fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id')
+  await UacanadaMap.api.scrollableBottomPanel.slide({fragment_id})
   UacanadaMap.setTimeout(() => {
     UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
-  },300)
+    $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+fragment_id+']').addClass("active-tab-button");
+  },200)
 
  
 }
@@ -72,8 +74,8 @@ UacanadaMap.api.findSwipeIdByContentId = (attr) => {
 
 UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
-  function showEmtyTab(){
-    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty.</p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>') // TODO: move to ACP
+  function showEmtyTab(id){
+    $('#sheet-content-loader').html('<div class="mt-3 p-3 text-center fs-5"><p><i class="fa-solid fa-eye-slash"></i> This tab is currently empty. ['+id+'] </p><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></div>') // TODO: move to ACP
    }
   
   
@@ -93,7 +95,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
  
   let contentId =  triggerButton[0]?.getAttribute("data-ua-content-id") || triggerButton.fragment_id
   if(!contentId || fragmentWithoutContent){
-    showEmtyTab()
+    showEmtyTab(0)
     return {buttonIndex:0,contentId:triggerButton.fragment_id}
   }
 
@@ -102,13 +104,11 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 
   if(!buttons || buttons.destroyed || !UacanadaMap.api.scrollableBottomPanel.openedButtons){
      // Create new swiper with category buttons
-
     let fragmentCloneButtons = UacanadaMap.fragment.fragments.bottomPanelCategoryButtons.cloneNode(true);
     $("#bottomPanelCategoryButtons").html(fragmentCloneButtons.childNodes);
     UacanadaMap.swipers.bottomPanelCategoryButtons = new UacanadaMap.Swiper("#bottomPanelCategoryButtons", { slidesPerView: "auto",  freeMode: true })
     let hasSlides = UacanadaMap.swipers.bottomPanelCategoryButtons.slides.length > 0
     UacanadaMap.api.scrollableBottomPanel.setPanelState( { openedButtons: hasSlides, hidingButtons: hasSlides});
-    UacanadaMap.console.log('Create new swiper with category buttons ')
   }
   
   let buttonIndex = UacanadaMap.api.findSwipeIdByContentId(contentId).index;
@@ -116,7 +116,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
     UacanadaMap.fragment.loadFragmentToElement(contentId, 'sheet-content-loader',null,true);
     return {buttonIndex,contentId}
   } else {
-    showEmtyTab()
+    showEmtyTab(1)
     return {buttonIndex,contentId}
   }
 
