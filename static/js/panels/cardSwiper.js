@@ -165,7 +165,7 @@
       html += '</div></div>'
       places.length
   
-      UacanadaMap.api.contextButtonText({text:'Open '+places.length+' places... '+UacanadaMap.api.getCatName(cat),delay:1300,to:UacanadaMap.contextButton.router.cards})
+      //UacanadaMap.api.contextButtonText({text:'Open '+places.length+' places... '+UacanadaMap.api.getCatName(cat),delay:1300,to:UacanadaMap.contextButton.router.cards})
   
   
       await sleep(33);
@@ -503,7 +503,7 @@
   
   
   UacanadaMap.api.removeCards = async () => { 
-      UacanadaMap.api.contextButtonText({text:'',delay:100,to:0})
+      UacanadaMap.api.contextButtonText({text:'',delay:100,to:UacanadaMap.contextButton.router.main})
       UacanadaMap.api.rotateCards('horizontal');
       UacanadaMap.api.animateCards('close')
       UacanadaMap.api.scrollableBottomPanel.close()
