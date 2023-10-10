@@ -39,10 +39,10 @@ async function switchTab(direction) {
       return;
   }
 
+
+
   $('.showBottomPanel').removeClass('active-tab-button')
-  let fragment_id = $(swiper.slides[nextIndex]).data('ua-content-id');
-  await UacanadaMap.api.scrollableBottomPanel.open({fragment_id},nextIndex)
-  
+  await UacanadaMap.api.scrollableBottomPanel.slide($(swiper.slides[nextIndex]).data('ua-content-id'))
   UacanadaMap.setTimeout(() => {
     UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
@@ -81,8 +81,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
     return {buttonIndex:0,contentId:null}
   }
 
-
-  
+ 
   const hasFragmentContent = triggerButton.fragment_id && UacanadaMap.fragment.fragments[triggerButton.fragment_id]
   const fragmentWithoutContent = triggerButton.fragment_id && !hasFragmentContent
 
@@ -212,6 +211,12 @@ UacanadaMap.api.scrollableBottomPanel = {
         panel.removeClass('panel-hidden').addClass('panel-shown');
         $("#innerScrollPanel").animate({ scrollTop: PANEL_SCROLL_HEIGHT }, 300, "swing");
       }, 100);   
+  },
+
+  slide: async function (fragment){
+    UacanadaMap.api.shakeElements(["#sheet-content-loader"], "ua-shake-vert"); // TODO: make horizontal
+    let {buttonIndex,contentId} = await UacanadaMap.api.loadTabToBottomPanel(fragment)
+
   },
 
   close: function() {
