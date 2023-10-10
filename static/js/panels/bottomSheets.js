@@ -46,7 +46,8 @@ async function switchTab(direction) {
   UacanadaMap.setTimeout(() => {
     UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(nextIndex)
     UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex()
-  },150)
+    UacanadaMap.swipers.bottomPanelCategoryButtons.updateSlidesClasses()
+  },300)
 
  
 }
