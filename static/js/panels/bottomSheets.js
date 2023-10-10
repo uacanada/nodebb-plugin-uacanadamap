@@ -21,7 +21,8 @@ UacanadaMap.api.switchBottomTab = {
 async function switchTab(direction) {
   let swiper = UacanadaMap.swipers.bottomPanelCategoryButtons;
   let slidesCount = swiper.slides.length;
-  let currentIndex = swiper.activeIndex;
+  let prevFragmentId = $('.showBottomPanel.active-tab-button').data('ua-content-id')
+  let currentIndex =  UacanadaMap.api.findSwipeIdByContentId(prevFragmentId).index;
   
   let nextIndex;
   if (direction === 'next') {
@@ -248,7 +249,5 @@ UacanadaMap.api.scrollableBottomPanel = {
     }, 1500);
   }
 };
-
-
 
 })
