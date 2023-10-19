@@ -32,6 +32,8 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
  
     if(direction==='down' && $('#innerScrollPanel').scrollTop() < 1) {
+
+      UacanadaMap.console.log(`Force scrollableBottomPanel.close() cause:  scrollTop:`. $('#innerScrollPanel').scrollTop())
        UacanadaMap.api.scrollableBottomPanel.close() 
     } 
 
