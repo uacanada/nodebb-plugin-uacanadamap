@@ -314,6 +314,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   }
   .inner-scrollable-content{
     transition: 1s;
+    min-height: 100vh;
   }
   .sheet-dragger{
     position: relative;

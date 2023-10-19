@@ -250,7 +250,7 @@ zoomendHandler() {
 		const currentScrollTop = $panel.scrollTop();
 	
 		if (currentScrollTop < 5) {
-		  UacanadaMap.console.log(`Force scrollableBottomPanel.close() cause:  scrollTop:`. $panel.scrollTop())
+		  UacanadaMap.console.log(`Force scrollableBottomPanel.close() cause:  scrollTop:`.currentScrollTop)
 		  UacanadaMap.api.scrollableBottomPanel.close();
 		  UacanadaMap.previousScrollHeight = 0;
 		  return;
