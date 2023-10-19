@@ -304,13 +304,17 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
     -webkit-overflow-scrolling: auto;
   }
 
+  
+
   .sheet-spacer{
     position: relative;
     height: 70vh;
     backdrop-filter: grayscale(1) brightness(0.98);
     
   }
-
+  .inner-scrollable-content{
+    transition: 1s;
+  }
   .sheet-dragger{
     position: relative;
     z-index: 700;
@@ -334,11 +338,17 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
     transform: translateY(100%) rotateX(90deg);
     overflow: hidden;
     height: 100px;
+    .inner-scrollable-content{
+      backdrop-filter: grayscale(0) brightness(1);
+    }
 
   }
   
   &.panel-shown {
     transform: translateY(0%) rotateX(0deg);
+    .inner-scrollable-content{
+      backdrop-filter: grayscale(1) brightness(0.98);
+    }
   }
 
   
