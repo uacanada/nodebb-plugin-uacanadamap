@@ -128,7 +128,7 @@ UacanadaMap.api.loadTabToBottomPanel = async (triggerButton) => {
 UacanadaMap.api.addCategoryButtons = async (buttonIndex,contentId) => {
 
   let buttonsVisibleBefore = UacanadaMap.api.scrollableBottomPanel.openedButtons || !UacanadaMap.api.scrollableBottomPanel.hidingButtons 
-  $("#bottomPanelCategoryButtons").addClass("shown");
+  $("#bottomButtonsWrapper").addClass("shown");
   if(!buttonsVisibleBefore) UacanadaMap.swipers.bottomPanelCategoryButtons.slideTo(buttonIndex);
   $('#bottomPanelCategoryButtons .swiper-slide[data-ua-content-id='+contentId+']').addClass("active-tab-button");
   UacanadaMap.swipers.bottomPanelCategoryButtons.updateActiveIndex(buttonIndex)
@@ -229,7 +229,7 @@ UacanadaMap.api.scrollableBottomPanel = {
     panel.removeClass('panel-shown').addClass('panel-hidden').attr('aria-hidden', 'true');
     this.toggleBodyClass(false);
     this.setPanelState( { openedButtons: false, opened: false, hiding: true, hidingButtons: true });
-    $("#bottomPanelCategoryButtons").removeClass("shown");
+    $("#bottomButtonsWrapper").removeClass("shown");
 
     UacanadaMap.setTimeout(() => {
       if (!UacanadaMap.api.scrollableBottomPanel.hiding) return;

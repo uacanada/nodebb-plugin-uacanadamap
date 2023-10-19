@@ -52,7 +52,7 @@ define('events/mapReady',["core/variables" /*   Global object UacanadaMap  */], 
         UacanadaMap.api.detectUrlParam();
         UacanadaMap.api.fancyHeroText.start();
         $('body').addClass('before-map-expand').removeClass('far-away-zoom hiddenElements addPlaceMode cards-opened bottomPanelOpened');
-        $('#bottomPanelCategoryButtons').removeClass('shown')
+        $('#bottomButtonsWrapper').removeClass('shown')
         $('#scrollableBottomPanel').removeClass('panel-shown')
         UacanadaMap.isFullscreenMode = false;
         

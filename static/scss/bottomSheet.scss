@@ -132,17 +132,16 @@ transition: 0.1s ease;
   margin: 0;
 }
 
-#bottomPanelCategoryButtons{
-  background: var(--bs-body-bg)!important;
+
+
+#bottomButtonsWrapper{
   z-index: 700;
-  transition: .2s ease;
+  transition: .6s ease;
   transform: translate3d(0, 100%, 0);
   overflow: hidden;
    &.shown{
     transform: translate3d(0, 0, 0); 
   }
-
- 
 }
 
 
@@ -290,6 +289,8 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 
 
 /* New panel */
+
+
 #scrollableBottomPanel{
   height: 100vh;
   z-index: 600;
@@ -311,16 +312,17 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .sheet-dragger{
-    position: absolute;
+    position: relative;
     z-index: 700;
     font-size: 2rem;
     height: 3rem;
     margin-top: -2rem;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 2rem 2rem 0 0;
     text-align: center;
     background: var(--bs-body-bg);
-    box-shadow: 0px -4px 7px 4px rgba(10, 54, 89, 0.28), 0 1px 2px 1px rgba(0, 0, 0, 0.2);
-  
+    box-shadow: 0px -7px 6px 0px rgba(10,54,89,.1), 1px -4px 4px 0px rgba(0,0,0,.1);
   }
 
   .sheet-content{
@@ -342,4 +344,6 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   
 
 }
+
+
 

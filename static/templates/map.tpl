@@ -22,7 +22,7 @@
                   
                 <div class="inner-scrollable-content position-relative w-100">
                     <div class="sheet-spacer user-select-none w-100"></div>
-                    <div class="sheet-dragger text-center container mx-auto user-select-none" aria-label="Draggable sheet handler"><i class="fa-solid fa-minus"></i></div>
+                    <div class="sheet-dragger text-center container user-select-none" aria-label="Draggable sheet handler"><i class="fa-solid fa-minus"></i></div>
                     <div class="sheet-content container mx-auto p-0" role="region" aria-label="Sheet content">
                         <div id="sheet-content-loader" class="p-3 m-0" aria-busy="true"></div>
                         <div class="py-5"></div>
@@ -70,7 +70,7 @@
 
              <div id="geocoderSearchbox"></div>
 
-             <div class="position-fixed bottom-0 start-0 w-100">
+             <div id="bottomButtonsWrapper" class="position-fixed bottom-0 start-0 w-100">
                <div id="bottomPanelCategoryButtons" class="swiper no-propagation container mx-auto p-0"></div>
              </div>
 
