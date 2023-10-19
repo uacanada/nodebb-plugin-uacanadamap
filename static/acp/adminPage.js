@@ -1,33 +1,16 @@
 'use strict';
-define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect', 'benchpress', 'bootbox', 'categorySelector','ace/ace'], 
-								function(hooks,settings, uploader, iconSelect, Benchpress, bootbox, categorySelector, ace) {
+define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect', 'benchpress', 'bootbox', 'categorySelector','ace/ace'], function(hooks,settings, uploader, iconSelect, Benchpress, bootbox, categorySelector, ace) {
 		
-	var ACP = {};
+	let ACP = {};
 	let loadedSettings;
-	console.log('ACP')
-
-	const createOptionsHtml = (loadedSettings) =>{
-		let optionsHtml = ''
-		try {
-			loadedSettings.tabCategories?.forEach((cat)=>{
-				optionsHtml+= '<option value="'+cat.slug+'">'+cat.title+'</option>'
-			})
-		} catch (error) {
-			optionsHtml+='ERROR'
-		}
-		return optionsHtml
-	}
-
+	
 	ACP.init = function () {
 		setupUploader();
+		
 		settings.load('uacanadamap', $('.uacanadamap-settings'), function (err, currentSettings) { 
 
 			loadedSettings = currentSettings
-
-			
 			$('#console_log').on('click', logConsoleSettings);
-			
-
 			try {
 				const cities = loadedSettings.citiesData.split(',')
 				cities.forEach(function(tag) { $('#citiesData').tagsinput('add', tag); });
@@ -46,10 +29,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		});
 
 
-		async function setValuesParentTag(slug,tags){
-		
-		}
-		
 
 
 		Benchpress.registerHelper('tagsFromString', function(input) {
@@ -101,8 +80,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			}
 			
 			const parentsArray = tagsArray.join();
-			setValuesParentTag(slug,parentsArray)
-			
 			return parentsArray
 		});
 		
@@ -222,6 +199,17 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	};
 
 
+	function createOptionsHtml(loadedSettings){
+		let optionsHtml = ''
+		try {
+			loadedSettings.tabCategories?.forEach((cat)=>{
+				optionsHtml+= '<option value="'+cat.slug+'">'+cat.title+'</option>'
+			})
+		} catch (error) {
+			optionsHtml+='ERROR'
+		}
+		return optionsHtml
+	}
 	
 	async function logConsoleSettings(){
 		
@@ -232,11 +220,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		console.log({allsettings,testsettings})
 	}
 
-
-
-	setTimeout(() => {
-		$('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) }) 
-	}, 2000);
 
 	function fillBrokenSubCatValues(i,formItem) {
 		
@@ -290,25 +273,14 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	  
 
 	function saveSettings() {
-		console.log('try save')
-		var data = [];
-		
-
-			Promise.all([
-			
+		Promise.all([
 				new Promise((resolve, reject) => {
 					settings.save('uacanadamap', $('.uacanadamap-settings'), (err,s) => (!err ? resolve(s) : reject(err)));
 				}),
 			]).then((s) => {
-				
-				// app.alert({
-				// 	type: 'success',
-				// 	alert_id: 'uacanadamap-saved',
-				// 	title: 'Settings Saved',
-				// });
+				 app.alert({ type: 'success', alert_id: 'uacanadamap-saved', title: 'Settings Saved', });
 			}).catch(console.log);
 		
-	
 	}
 
 	function setupColorInputs(modal) {
@@ -362,6 +334,9 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			$(holder).val(editorEl.getValue());
 		});
 	}
+
+
+	setTimeout(() => { $('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) })  }, 2000);
 
 
 	return ACP;
