@@ -136,10 +136,10 @@ transition: 0.1s ease;
   background: var(--bs-body-bg)!important;
   z-index: 700;
   transition: .2s ease;
-  transform: translate3d(-50%, 100%, 0);
+  transform: translate3d(0, 100%, 0);
   overflow: hidden;
    &.shown{
-    transform: translate3d(-50%, 0, 0); 
+    transform: translate3d(0, 0, 0); 
   }
 
  
