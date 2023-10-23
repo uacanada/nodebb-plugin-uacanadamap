@@ -47,8 +47,10 @@ body.uacanada-map-page main#panel{
   transition: 200ms;
 }
 
-
-
+// Prevent offcanvas padding manipulation
+body.template-map.theme-harmony {
+  padding-right: 0!important;
+}
 
 
 
