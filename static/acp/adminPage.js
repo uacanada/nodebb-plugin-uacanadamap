@@ -258,6 +258,24 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 	function resetSettings(){
 		settings.save('uacanadamap', $('<form></form>'))
+		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
+		if (confirmationInput === "I confirm the deletion of settings") {
+			const apiUrl = `/api/map/flush_settings/${encodeURIComponent(confirmation)}`;
+			fetch(apiUrl, {
+				method: 'GET'
+			  })
+			  .then(response => response.json())
+			  .then(data => {
+				// Handle the response here
+				console.log("Settings have been flushed:", data);
+			  })
+			  .catch((error) => {
+				console.log("Error:", error);
+			  });
+		} else {
+			console.log("Not confirmed");
+		}
+		
 	}
     
 	
