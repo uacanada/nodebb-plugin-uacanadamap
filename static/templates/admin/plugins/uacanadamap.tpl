@@ -569,11 +569,11 @@
 
 
 										<div class="input-group mt-5">
-										    <label for="resetSettingsConfirmation">Enter confirmation text to reset settings:</label>
+								
 											<input type="text" id="resetSettingsConfirmation" class="form-control" placeholder="Confirmation text" aria-label="Reset Settings" aria-describedby="resetSettings">
-											<button class="btn btn btn-danger mt-5 reset-settings-uacanadamap" type="button" id="resetSettings"><i class="fa fa-fw fas fa-solid fa-arrows-rotate"></i> Reset Settings</button>
+											<button class="btn btn btn-danger reset-settings-uacanadamap" type="button" id="resetSettings"><i class="fa fa-fw fas fa-solid fa-arrows-rotate"></i> Reset Settings</button>
 									    </div>
-										<small>You must enter "I confirm the deletion of settings" to proceed.</small>
+										<small>Enter confirmation text to reset settings: You must enter "I confirm the deletion of settings" to proceed.</small>
 									  
 
 
