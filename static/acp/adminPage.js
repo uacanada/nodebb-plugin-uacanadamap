@@ -260,13 +260,15 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		settings.save('uacanadamap', $('<form></form>'))
 		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
 		if (confirmationInput === "I confirm the deletion of settings") {
-			const apiUrl = `/api/map/flush_settings/${encodeURIComponent(confirmationInput)}`;
-			fetch(apiUrl, {
-				method: 'GET'
-			  })
+			const apiUrl = '/api/map/flushsettings';
+			fetch(apiUrl, { method: 'PUT',headers: {
+			  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+			  confirmation:confirmationInput
+			}) })
 			  .then(response => response.json())
 			  .then(data => {
-				// Handle the response here
 				console.log("Settings have been flushed:", data);
 			  })
 			  .catch((error) => {
