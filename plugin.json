@@ -75,15 +75,14 @@
    
 },
 
-  
-
   "templates": "static/templates",
   "hooks": [
     {
       "hook": "static:app.load",
       "method": "init"
     },
-    { "hook": "static:api.routes", "method": "addRoutes" },
+    { "hook": "static:api.routes", 
+    "method": "addRoutes" },
     {
       "hook": "action:plugin.activate",
       "method": "activate"
