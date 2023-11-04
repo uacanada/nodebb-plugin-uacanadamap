@@ -460,6 +460,35 @@
 					</div>
 
 
+					<div class="accordion mb-5" id="advancedJsonSettingsAccordion">
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="advancedJsonSettingsHeading">
+								<button
+									class="accordion-button collapsed tracking-tight settings-header bg-primary text-bg-primary"
+									type="button" data-bs-toggle="collapse" data-bs-target="#advancedJsonSettingsCollapse"
+									aria-expanded="false" aria-controls="advancedJsonSettingsCollapse">
+									Advanced JSON Settings
+								</button>
+							</h2>
+							<div id="advancedJsonSettingsCollapse" class="accordion-collapse collapse"
+								aria-labelledby="advancedJsonSettingsHeading" data-bs-parent="#advancedJsonSettingsAccordion">
+								<div class="accordion-body">
+									<div class="mb-5">
+										<label class="form-label" for="jsonInput">Insert your JSON configuration here:</label>
+										<div id="jsonInputEditor"></div>
+										<textarea type="text" id="jsonInput" name="jsonInput"
+											class="d-none"></textarea>
+										<small class="form-text">
+										Use this section to enter custom JSON settings that will enhance the default plugin configurations. Your JSON must be correctly formatted; errors may impair functionality. You are responsible for ensuring the validity of your JSON.
+										</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
 
 
 					<div class="accordion mb-5" id="acpAccordion">
