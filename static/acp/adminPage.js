@@ -1,5 +1,5 @@
 'use strict';
-define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect', 'benchpress', 'bootbox', 'categorySelector','ace/ace'], function(hooks,settings, uploader, iconSelect, Benchpress, bootbox, categorySelector, ace) {
+define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect', 'benchpress', 'bootbox', 'categorySelector','ace/ace',  'admin/modules/instance'], function(hooks,settings, uploader, iconSelect, Benchpress, bootbox, categorySelector, ace, instance) {
 		
 	let ACP = {};
 	let loadedSettings;
@@ -302,7 +302,31 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 					settings.save('uacanadamap', $('.uacanadamap-settings'), (err,s) => (!err ? resolve(s) : reject(err)));
 				}),
 			]).then((s) => {
-				 app.alert({ type: 'success', alert_id: 'uacanadamap-saved', title: 'Settings Saved', });
+				
+
+				bootbox.confirm('Settings have been saved. Now, you need to rebuild the forum. Please confirm rebuild and restart by clicking the button below.', function (confirm) {
+					if (confirm) {
+						instance.rebuildAndRestart();
+					}
+				});
+
+
+				//  bootbox.alert({
+				// 	title: '',
+				// 	message: '',
+				// 	closeButton: false,
+				// 	onEscape: false,
+				// 	buttons: {
+				// 		ok: {
+				// 			label: '',
+				// 			classname: 'btn-primary',
+				// 		},
+				// 	},
+				// 	callback: function () {
+						
+				// 	},
+				// });
+
 			}).catch(console.log);
 		
 	}
