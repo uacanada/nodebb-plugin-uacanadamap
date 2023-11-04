@@ -409,7 +409,7 @@
 										<label class="form-label" for="contextButtonSlide">HTML and Bootstrap+FontAwesome classes</label>
 										<div id="contextButtonSlideEditor"></div>
 										<textarea type="text" id="contextButtonSlide" name="contextButtonSlide"
-											class="d-none"></textarea>
+											class="d-none ace-editor-textarea"></textarea>
 
 
 
@@ -449,7 +449,7 @@
 										<label class="form-label" for="placeInstruction">HTML and Bootstrap+FontAwesome classes</label>
 										<div id="placeInstructionEditor"></div>
 										<textarea type="text" id="placeInstruction" name="placeInstruction"
-											class="d-none"></textarea>
+											class="d-none ace-editor-textarea"></textarea>
 										<small class="form-text">
 										Enter your customized HTML instructions to guide users in adding a location to the map. These instructions will appear in a bottom sheet popup above a permanent search bar. When crafting your content, consider leading into the search bar functionality as it will always be present at the bottom of the instructions panel.
 										</small>
@@ -477,7 +477,7 @@
 										<label class="form-label" for="jsonInput">Insert your JSON configuration here:</label>
 										<div id="jsonInputEditor"></div>
 										<textarea type="text" id="jsonInput" name="jsonInput"
-											class="d-none"></textarea>
+											class="d-none ace-editor-textarea"></textarea>
 										<small class="form-text">
 										Use this section to enter custom JSON settings that will enhance the default plugin configurations. Your JSON must be correctly formatted; errors may impair functionality. You are responsible for ensuring the validity of your JSON.
 										</small>

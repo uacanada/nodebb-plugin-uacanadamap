@@ -22,8 +22,17 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			 return parentOptionsHtml;
 			});
 
-			initACE('contextButtonSlideEditor', 'html', '#contextButtonSlide' );
-			initACE('placeInstructionEditor', 'html', '#placeInstruction' );
+
+			$('.ace-editor-textarea').each((i, el) => {
+				const elementId = $(el).attr('id'); 
+				initACE(elementId + 'Editor', 'html', '#' + elementId);
+			});
+			
+			
+
+			// initACE('contextButtonSlideEditor', 'html', '#contextButtonSlide' );
+			// initACE('placeInstructionEditor', 'html', '#placeInstruction' );
+			// initACE('jsonInputEditor', 'html', '#jsonInput' );
 
 		
 		});
