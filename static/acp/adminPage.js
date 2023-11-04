@@ -25,7 +25,8 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 			$('.ace-editor-textarea').each((i, el) => {
 				const elementId = $(el).attr('id'); 
-				initACE(elementId + 'Editor', 'html', '#' + elementId);
+				const mode = $(el).attr('ace-mode') || 'html';
+				initACE(elementId + 'Editor', mode, '#' + elementId);
 			});
 			
 			
