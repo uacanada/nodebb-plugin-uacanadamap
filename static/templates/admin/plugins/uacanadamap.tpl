@@ -581,7 +581,12 @@
 										</small>
 									</div>
 
+									<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal"
+									class="export-settings-uacanadamap btn btn-primary"
+									type="button" style="width: 64px; height: 64px; bottom: 1rem"><i
+										class="fa fa-fw fas fa-solid fa-download"></i></button>  
 
+										
 										<div class="input-group mt-5">
 								
 											<input type="text" id="resetSettingsConfirmation" class="form-control" placeholder="Confirmation text" aria-label="Reset Settings" aria-describedby="resetSettings">
@@ -602,18 +607,6 @@
 
 
 				</div>
-
-
-
-
-
-
-
-
-				<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal"
-					class="export-settings-uacanadamap btn btn-primary position-fixed end-0 px-3 py-2 mb-4 me-4 rounded-circle fs-4"
-					type="button" style="width: 64px; height: 64px; bottom: 1rem"><i
-						class="fa fa-fw fas fa-solid fa-download"></i></button>
 				
 			</form>
 
@@ -634,7 +627,7 @@
 					<h5 class="modal-title">Settings JSON</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body" style="background-color: rgb(33, 26, 68); color:rgb(34, 233, 167)">
+				<div class="modal-body" style="background-color: rgb(33, 26, 68); color:rgb(44, 255, 97)">
 					<pre><code id="exportedJson" ></code></pre>
 				</div>
 			</div>
