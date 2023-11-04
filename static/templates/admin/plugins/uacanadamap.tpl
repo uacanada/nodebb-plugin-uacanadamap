@@ -402,33 +402,19 @@
 							<div id="collapseContextButton" class="accordion-collapse collapse"
 								aria-labelledby="headingExpert" data-bs-parent="#acpAccordionMb">
 								<div class="accordion-body">
-
-
-
 									<div class="mb-5">
 										<label class="form-label" for="contextButtonSlide">HTML and Bootstrap+FontAwesome classes</label>
 										<div id="contextButtonSlideEditor"></div>
 										<textarea type="text" id="contextButtonSlide" name="contextButtonSlide"
 											class="d-none ace-editor-textarea"></textarea>
-
-
-
 										<small class="form-text">
 										Customize the context buttons that will appear at the bottom of the screen. You can utilize these buttons to provide links or to trigger off-canvas panels. Knowledge of HTML and Bootstrap is essential to craft effective buttons. Consider using standard Bootstrap classes and FontAwesome icons to ensure compatibility and visual coherence.
-
 										</small>
 
 									</div>
-
- 
-
-
 								</div>
 							</div>
 						</div>
-
-
-
 					</div>
 
 
@@ -476,7 +462,7 @@
 									<div class="mb-5">
 										<label class="form-label" for="jsonInput">Insert your JSON configuration here:</label>
 										<div id="jsonInputEditor"></div>
-										<textarea type="text" id="jsonInput" name="jsonInput"
+										<textarea type="text" id="jsonInput" name="customExtraSettings"
 											class="d-none ace-editor-textarea"></textarea>
 										<small class="form-text">
 										Use this section to enter custom JSON settings that will enhance the default plugin configurations. Your JSON must be correctly formatted; errors may impair functionality. You are responsible for ensuring the validity of your JSON.
