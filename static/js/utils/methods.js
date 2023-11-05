@@ -338,7 +338,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     if (!fromAddress && UacanadaMap.isMapBoxKeyExist) {
       reverseGeocodeLocation(eventData.latlng, map);
     } else {
-      const addressData = fromAddress || { properties: defaultAddressProperties };
+      const addressData = fromAddress || { center:eventData.latlng, properties: defaultAddressProperties };
       UacanadaMap.api.showPopupWithCreationSuggest(addressData);
     }
   }
@@ -489,10 +489,16 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 
 
-
   UacanadaMap.api.showPopupWithCreationSuggest = (r) => {
     const { map } = UacanadaMap;
-    let { lat, lng } = r.center || map.getCenter();
+  
+    // Error check if r or its expected properties are not defined
+    if (!r || !r.center || !r.properties) {
+      console.error("Invalid result structure provided to showPopupWithCreationSuggest.",r);
+      return;
+    }
+  
+    let { lat, lng } = r.center;
     let {
       address,
       text,
@@ -503,50 +509,56 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       region,
       country,
     } = r.properties;
+    
     let popupHtml = "";
+  
     if (country === "Canada") {
-      var addressIcon = address ? "📮 " : "📍 ";
-      var addressLine = r.name; // (address||'')+' '+text+', '+place+' '+postcode;
-      var subAdress = (neighborhood || "") + " " + district + ", " + region;
-       popupHtml = `<div class="p-1 d-flex flex-column align-items-start">
-       <div class="ua-popup-codes">
-         <code>${addressIcon}${addressLine}</code></br>
-         <code>🗺️ ${subAdress}</code></br>
-         <code>🧭 ${lat.toString().substring(0, 8)},${lng.toString().substring(0, 10)}</code>
-       </div>
-       <small>You can edit or remove the legal address for privacy in the next step.</small>
-       <div class="d-flex mt-2">
-         <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
-       </div>
-     </div>
-     
-    `;
-    
-    
-
+      let addressIcon = address ? "📮 " : "📍 ";
+      let addressLine = r.name; // assuming r.name is defined and is the intended content to show
+      let subAdress = `${neighborhood || ''} ${district || ''}, ${region || ''}`.trim();
+      popupHtml = `
+        <div class="p-1 d-flex flex-column align-items-start">
+          <div class="ua-popup-codes">
+            <code>${addressIcon}${addressLine}</code></br>
+            <code>🗺️ ${subAdress}</code></br>
+            <code>🧭 ${lat.toFixed(8)},${lng.toFixed(8)}</code>
+          </div>
+          <small>You can edit or remove the legal address for privacy in the next step.</small>
+          <div class="d-flex mt-2">
+            <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
+          </div>
+        </div>
+      `;
+  
       $("#uaMapAddress").val(addressLine);
       $("#subaddress").val(subAdress);
       if (place) $("#ua-newplace-city").val(place);
-
-    if (region && UacanadaMap.provinceMapper[region])
-        $('#location-province option[value="' + UacanadaMap.provinceMapper[region] +  '"' ).prop("selected", true); // TODO: refactor to more friendly aprocach
+  
+      if (region && UacanadaMap.provinceMapper[region]) {
+        $('#location-province option[value="' + UacanadaMap.provinceMapper[region] +  '"' ).prop("selected", true);
+      }
     } else {
       popupHtml = `
-      <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
-      <code>${country} ${place} ${neighborhood} ${region}</code></br>
-      Correct your choice on the map!</b></br>
-    `; // TODO: Move To ACP
+        <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
+        <code>${country} ${place || ''} ${neighborhood || ''} ${region || ''}</code></br>
+        Correct your choice on the map!</b></br>
+      `;
     }
-
-    if (UacanadaMap.currentmarker) map.removeLayer(UacanadaMap.currentmarker);
+  
+    if (UacanadaMap.currentmarker) {
+      map.removeLayer(UacanadaMap.currentmarker);
+    }
+    
     UacanadaMap.currentmarker = UacanadaMap.L.marker(r.center, {
       icon: UacanadaMap.newPlaceMarker,
     })
       .addTo(map)
       .bindPopup(popupHtml)
       .openPopup();
+  
     UacanadaMap.api.removeCards();
   };
+  
 
  
 
