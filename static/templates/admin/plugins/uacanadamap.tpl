@@ -577,37 +577,41 @@
 											manually rewrite some CSS rules
 										</small>
 									</div>
-
+									<h4>Settings Management</h4>
+									<small>
+									  Use this section to manage your plugin settings. You can clear settings from the database, delete location cards, or restore from a backup file.
+									  Note: This will not remove topics associated with locations created by the plugin. To delete those topics, first gather all TIDs via the "getplaces" API.
+									</small>
 									
-
-
-										
-										<div class="mt-3">
-										<h4>Settings deletion</h4>
-										<small>In this section, you can delete the plugin's settings from the database, or location cards. You can also restore settings from a file (this can be your backup). 
-										It's important to understand that this will not delete the topics you created through the plugin. If you want to delete the topics as well, you can first collect all TIDs from "getplaces" API.</small>
-
-										<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal" class="export-settings-uacanadamap btn btn-primary" type="button"><i class="fa fa-fw fas fa-solid fa-download"></i> Show current settings in JSON format</button>  
-
-										<b class="d-block mt-3">To reset and reapply settings from a default file:</b>
-										Enter this phrase to overwrite current settings with the default from ./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json:</br>
-										<code>I confirm the resetting and recreation of settings from defaultSettings.json</code>
-										
-										
-										<b class="d-block mt-3">To permanently remove only plugin settings:</b>
-										Enter the following phrase to confirm your intent: <code>I confirm the deletion of settings</code>
-
-										<b class="d-block mt-3">For complete deletion of settings and all places from the database:</b></br>
-										Enter the text: "<code>I confirm the deletion of ALL settings AND ALL PLACES</code>".</br> 
-										Please note, this option will remove all settings and delete all locations from the database, however, it does not remove TOPICS associated with these locations. The plugin will not delete topics. If you want to back up location data before deletion, you can retrieve their JSON at the path /api/v3/plugins/map/getplaces.
-										</small>
-
-										<div class="input-group mt-5 mb-3">
-								
-											<input type="text" id="resetSettingsConfirmation" class="form-control" placeholder="Confirmation text" aria-label="Reset Settings" aria-describedby="resetSettings">
-											<button class="btn btn btn-danger reset-settings-uacanadamap" type="button" id="resetSettings"><i class="fa fa-fw fas fa-solid fa-arrows-rotate"></i> Flush Settings</button>
-									    </div>
-										<small>Enter confirmation text to proceed.</small>
+									<button id="exportJson" class="btn btn-sm btn-primary mt-3" type="button">
+									  <i class="fa fa-download"></i> Export Settings as JSON
+									</button>  
+									
+									<p class="mt-4">
+									  <strong>To apply default settings from a file:</strong>
+									  Enter the phrase below to replace current settings with defaults from <code>./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json</code>:
+									  <code>I confirm the resetting and recreation of settings from defaultSettings.json</code>
+									</p>
+									  
+									<p class="mt-4">
+									  <strong>To remove plugin settings only:</strong>
+									  Confirm your intent by entering: <code>I confirm the deletion of settings</code>
+									</p>
+									
+									<p class="mt-4">
+									  <strong>To completely clear settings and all places from the database:</strong>
+									  Type: <code>I confirm the deletion of ALL settings AND ALL PLACES</code>.<br>
+									  Warning: This action will delete all settings and locations but will not remove associated topics. To backup location data before deletion, access the JSON data at <code>/api/v3/plugins/map/getplaces</code>.
+									</p>
+									
+									<div class="input-group mt-5">
+									  <input type="text" id="resetSettingsConfirmation" class="form-control" placeholder="Enter confirmation text" aria-label="Reset Settings" aria-describedby="resetSettings">
+									  <button class="btn btn-danger" type="button" id="resetSettings">
+										<i class="fa fa-arrows-rotate"></i> Execute Setting Reset
+									  </button>
+									</div>
+									<small>Input the confirmation text to proceed with settings management.</small>
+									
 
 
 								</div>
