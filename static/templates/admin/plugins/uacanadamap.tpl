@@ -589,13 +589,13 @@
 									
 									<p class="mt-4">
 									  <strong>To apply default settings from a file:</strong>
-									  Enter the phrase below to replace current settings with defaults from <code>./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json</code>:
-									  <code>I confirm the resetting and recreation of settings from defaultSettings.json</code>
+									  Enter the phrase below to replace current settings with defaults from ./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json:
+									  <code class="d-block mt-2">I confirm the resetting and recreation of settings from defaultSettings.json</code>
 									</p>
 									  
 									<p class="mt-4">
 									  <strong>To remove plugin settings only:</strong>
-									  Confirm your intent by entering: <code>I confirm the deletion of settings</code>
+									  Confirm your intent by entering: <code class="d-block mt-2">I confirm the deletion of settings</code>
 									</p>
 									
 									<p class="mt-4">
