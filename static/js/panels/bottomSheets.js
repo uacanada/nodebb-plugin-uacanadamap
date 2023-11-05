@@ -139,12 +139,19 @@ UacanadaMap.api.addCategoryButtons = async (buttonIndex,contentId) => {
 
 
 UacanadaMap.api.saveWidgetsToFragment = ()=> {
-  let widgetsHtml = '';
-  ajaxify.data.widgets['ucm-pull-up-panel'].forEach((widget)=> {
-        widgetsHtml+=widget.html
-   })
-  UacanadaMap.fragment.createFragment('tab-widgets',widgetsHtml)
-  widgetsHtml = null
+  try {
+    if(ajaxify.data.widgets['ucm-pull-up-panel']){
+      let widgetsHtml = '';
+      ajaxify.data.widgets['ucm-pull-up-panel'].forEach((widget)=> {
+            widgetsHtml+=widget.html
+       })
+      UacanadaMap.fragment.createFragment('tab-widgets',widgetsHtml)
+      widgetsHtml = null
+      }
+  } catch (error) {
+    UacanadaMap.console.log(error)
+  }
+  
 }
 
 /**
