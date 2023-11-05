@@ -581,18 +581,15 @@
 										</small>
 									</div>
 
-									<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal"
-									class="export-settings-uacanadamap btn btn-primary"
-									type="button" style="width: 64px; height: 64px; bottom: 1rem"><i
-										class="fa fa-fw fas fa-solid fa-download"></i></button>  
+									<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal" class="export-settings-uacanadamap btn btn-primary" type="button"><i class="fa fa-fw fas fa-solid fa-download"></i> Show all settings in JSON format</button>  
 
-										
-										<div class="input-group mt-5">
+
+										<div class="input-group mt-5 mb-1">
 								
 											<input type="text" id="resetSettingsConfirmation" class="form-control" placeholder="Confirmation text" aria-label="Reset Settings" aria-describedby="resetSettings">
-											<button class="btn btn btn-danger reset-settings-uacanadamap" type="button" id="resetSettings"><i class="fa fa-fw fas fa-solid fa-arrows-rotate"></i> Reset Settings</button>
+											<button class="btn btn btn-danger reset-settings-uacanadamap" type="button" id="resetSettings"><i class="fa fa-fw fas fa-solid fa-arrows-rotate"></i> Flush Settings</button>
 									    </div>
-										<small>Enter confirmation text to reset settings: You must enter "I confirm the deletion of settings" to proceed.</small>
+										<small>Enter confirmation text to reset settings: You must enter "<code>I confirm the deletion of settings</code>" to proceed.</small>
 									  
 
 

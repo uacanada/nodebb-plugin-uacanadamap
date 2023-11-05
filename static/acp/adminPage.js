@@ -9,13 +9,19 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		
 		settings.load('uacanadamap', $('.uacanadamap-settings'), function (err, currentSettings) { 
 
+			if(err||!currentSettings){
+				bootbox.alert('Load default settings. Check the browser console for errors.');
+				console.error(err,currentSettings)
+				
+			}
+
 			loadedSettings = currentSettings
-			$('#console_log').on('click', logConsoleSettings);
+			
 			try {
 				const cities = loadedSettings.citiesData.split(',')
 				cities.forEach(function(tag) { $('#citiesData').tagsinput('add', tag); });
 			} catch (error) {
-				
+				console.log(error)
 			}
 			const parentOptionsHtml = createOptionsHtml(currentSettings)
 			Benchpress.registerHelper('renderParentsOptions', function() {
@@ -28,14 +34,9 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				const mode = $(el).attr('data-ace-mode') || 'html';
 				initACE(elementId + 'Editor', mode, '#' + elementId);
 			});
-			
-			
 
-			// initACE('contextButtonSlideEditor', 'html', '#contextButtonSlide' );
-			// initACE('placeInstructionEditor', 'html', '#placeInstruction' );
-			// initACE('jsonInputEditor', 'html', '#jsonInput' );
 
-		
+			$('#console_log').on('click', logConsoleSettings);
 		});
 
 
@@ -156,12 +157,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				var currentTags = tagsInputField.val();
 				tagsInputField.val('');
 				tagInputEl.html('<div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span> </div>')
-				
-
-				
-				
-				
-				
 				tagInputEl.html('<input data-field-type="tagsinput" type="text" id="'+tagsInputField.attr('id')+'" name="'+tagsInputField.attr('id')+'"  placeholder="tag,tag..."/>');
 				
 				
@@ -178,10 +173,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 			if(dialogOpened.subCategories){ 
 				var category = findItemBySlug(modalSlug,subCategories)
-				var slugs = [];
-				var selectedTabs = []
-				
-			
 				// ITERATE THIS MODAL AND ALSO HIDDEN FORM 
 				$('form[data-sorted-list-uuid="'+uuid+'"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) }) 
 				
@@ -194,7 +185,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				var selector = categorySelector.init(modal.find('[component="category-selector"]'),{ onSelect: onCategorySelected, privilege: 'moderate'});
 				if(category && category.cid){
 				selector.selectCategory(Number(category.cid));
-
 				modal.find('[component="category-selector-selected"]').html(
 					'<b>Category ID:'+category.cid+' [  '+category.cidname+' ]</b>' 
 				);
@@ -232,23 +222,16 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 
 	function fillBrokenSubCatValues(i,formItem) {
-		
-
-			try {
+		   try {
 				const uuid = $(formItem).attr('data-sorted-list-uuid')
 				const listItem = $('div[data-sorted-list="subCategories"] li[data-sorted-list-uuid="'+uuid+'"]')
 				const subcat = listItem.attr('data-item-slug')
 				const parents = listItem.find('[data-parents-for="'+subcat+'"]').text().split(',')
-				console.log({parents})
 				const selector = $(formItem).find('select#acpParentTabsSelector')
-			
 				selector.val(parents)
-
-		
-
-
-				// TODO SET NOTICE IF NO PARENT!!
+				bootbox.alert('Please configure at least one parent and sub-category.');
 			} catch (error) {
+				bootbox.alert('Please configure at least one parent and sub-category. See console for errors');
 				console.log(error)
 			}
 			
@@ -270,16 +253,32 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		settings.save('uacanadamap', $('<form></form>'))
 		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
 		if (confirmationInput === "I confirm the deletion of settings") {
-			fetch('/api/v3/plugins/uacanadamap/flushsettings/'+encodeURIComponent(confirmationInput), { method: 'GET'})
+
+			bootbox.confirm('Settings have been saved. Now, you need to rebuild the forum. Please confirm rebuild and restart by clicking the button below.', function (confirm) {
+				if (confirm) {
+
+					fetch('/api/v3/plugins/uacanadamap/flushsettings/'+encodeURIComponent(confirmationInput), { method: 'GET'})
 			  .then(response => response.json())
 			  .then(data => {
 				console.log("Settings have been flushed:", data, confirmationInput);
+				instance.rebuildAndRestart();
+				bootbox.alert('Settings have been reset, the forum will now be rebuilt with the default settings.');
 			  })
 			  .catch((error) => {
+				bootbox.alert('Failed to delete settings, please check the browser console logs.');
 				console.log("Error:", error);
 			  });
+
+					
+				}
+			});
+
+
+			
+
+			
 		} else {
-			console.log("Not confirmed");
+			bootbox.alert('Incorrect confirmation text for resetting settings.');
 		}
 		
 	}
@@ -327,7 +326,10 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				// 	},
 				// });
 
-			}).catch(console.log);
+			}).catch(error => {
+				console.error(error)
+				bootbox.alert('Error: ' + error.message);
+			  });
 		
 	}
 
