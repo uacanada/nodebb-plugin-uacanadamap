@@ -451,6 +451,8 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	function typingEffect(element, fullHtml, typingSpeed) {
 		let charIndex = 0;
 		let htmlBuffer = '';
+
+		$(element).removeClass('d-none')
 	
 		function nextChar() {
 			// If we're currently inside an HTML tag
