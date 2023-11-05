@@ -274,6 +274,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 
   UacanadaMap.api.createMarkerAtLocation = (event, fromAddress) => {
+    UacanadaMap.console.log({event})
     const location = event.latlng;
     UacanadaMap.api.clearPreviousMarker();
     UacanadaMap.api.setNewMarker(location);
