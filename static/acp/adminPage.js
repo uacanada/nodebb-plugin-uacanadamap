@@ -276,7 +276,24 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			  	.then(data => {
 				console.log("Default settings loaded:", data);
 				instance.rebuildAndRestart();
-				bootbox.alert('Default settings loaded, the forum will now be rebuilt with the default settings. Please, reload this page after the forum rebuilding and restarting process is complete.');
+				
+
+				 bootbox.alert({
+					title: 'Settings',
+					message: 'Default settings loaded, the forum will now be rebuilt with the default settings. Please, reload this page after the forum rebuilding and restarting process is complete.',
+					closeButton: false,
+					onEscape: false,
+					buttons: {
+						ok: {
+							label: 'Reload Page',
+							classname: 'btn-primary',
+						},
+					},
+					callback: function () {
+						ajaxify.go('/admin/plugins/uacanadamap');
+					},
+				});
+
 			  })
 			  .catch((error) => {
 				bootbox.alert('Failed to load default settings, please check the browser console logs.');
