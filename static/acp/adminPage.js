@@ -50,7 +50,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 
 		    if(currentSettings.mapBoxApiKey.length < 30){
-				typingEffect(document.getElementById('msg-about-api'), document.getElementById('msg-about-api').innerHTML, 50);
+				typingEffect(document.getElementById('msg-about-api'), document.getElementById('msg-about-api').innerHTML, 5);
 			}
 		    
 		      
