@@ -455,41 +455,38 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	function typingEffect(element, fullHtml, typingSpeed) {
 		let charIndex = 0;
 		let htmlBuffer = '';
-
-		$(element).removeClass('d-none')
+		let inTag = false;
+	
+		$(element).removeClass('d-none');
 	
 		function nextChar() {
-			// If we're currently inside an HTML tag
-			if (fullHtml[charIndex] === '<') {
-				// Find the end of the tag
-				let tagEnd = fullHtml.indexOf('>', charIndex);
-				if (tagEnd !== -1) {
-					// Print out the entire tag
-					htmlBuffer += fullHtml.slice(charIndex, tagEnd + 1);
-					charIndex = tagEnd + 1;
-					element.innerHTML = htmlBuffer;
-				}
-			} else {
-				// Find next HTML tag starting position
-				let nextTagStart = fullHtml.indexOf('<', charIndex);
-				let nextPortion = (nextTagStart === -1) ?
-					fullHtml.slice(charIndex) : // No more tags, print the rest
-					fullHtml.slice(charIndex, nextTagStart); // Print text up to the next tag
-	
-				// Print the next portion of text
-				htmlBuffer += nextPortion;
-				charIndex += nextPortion.length;
-				element.innerHTML = htmlBuffer;
-			}
-	
-			// Only proceed with typing if we have more to type
 			if (charIndex < fullHtml.length) {
+				let char = fullHtml[charIndex];
+				if (char === '<') {
+					inTag = true;
+				} else if (char === '>') {
+					inTag = false;
+				}
+	
+				htmlBuffer += char;
+				element.innerHTML = htmlBuffer;
+				charIndex++;
+	
+				if (inTag) {
+					// If we're inside a tag, keep adding characters until we reach the end of the tag.
+					let tagEnd = fullHtml.indexOf('>', charIndex);
+					if (tagEnd !== -1) {
+						charIndex = tagEnd;
+					}
+				}
+	
 				setTimeout(nextChar, typingSpeed);
 			}
 		}
 	
 		nextChar();
 	}
+	
 	
 	
 	
