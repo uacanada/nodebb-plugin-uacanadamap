@@ -316,7 +316,12 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   };
   
   UacanadaMap.api.setViewToLocation = (location) => {
-    UacanadaMap.map.setView(location, 14);
+    try {
+      UacanadaMap.map.setView(location, 14);
+    } catch (error) {
+      UacanadaMap.console.log(error)
+    }
+   
   };
   
 
@@ -326,7 +331,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       const { lat, lng } = location;
       $("#ua-latlng-text").val(`${lat},${lng}`);
     } catch (error) {
-      console.log(error)
+      UacanadaMap.console.log(error)
     }
    
   };
@@ -335,8 +340,13 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     if (!fromAddress && UacanadaMap.isMapBoxKeyExist) {
       UacanadaMap.api.reverseGeocode(location);
     } else {
-      const defaultAddress = UacanadaMap.api.getDefaultAddress(fromAddress);
-      UacanadaMap.api.showPopupWithCreationSuggest(defaultAddress);
+      try {
+        const defaultAddress = UacanadaMap.api.getDefaultAddress(fromAddress);
+        UacanadaMap.api.showPopupWithCreationSuggest(defaultAddress);
+      } catch (error) {
+        UacanadaMap.console.log(error)
+      }
+     
     }
   };
   
