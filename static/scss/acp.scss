@@ -36,6 +36,19 @@ body.page-admin-uacanadamap{
     .visibleOnlyWhenChosenon{
         background-color: brown;
     }
+
+
+    .gradient-msg{
+        transition: 1s all ease-in;
+        overflow: hidden;
+        background: linear-gradient(147deg, #a93fb7, #41b9ff);
+        padding: 1rem;
+        border-radius: 1rem;
+        color: white;
+        font-size: 1rem!important;
+        box-shadow: -3px 5px 7px 0px rgba(0, 0, 0, 0.3);
+       
+    }
    
 }
 

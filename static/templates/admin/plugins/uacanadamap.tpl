@@ -22,21 +22,18 @@
 
 							<div class="mb-5">
 								<label class="form-label d-block" for="mapBoxApiKey">MapBox API Key</label>
-								<small class="form-text">Enter your MapBox API key for enhanced map capabilities like
-									geocoding and reverse geocoding. Without it, the map defaults to OSM tiles with
-									reduced functionality. We suggest using MapBox due to its free access to
-									customizability and geocoding services. This plugin aims to maximize the utilization
-									of MapBox's free tier.
-									When entering your Mapbox API key, please note that this key may be accessible on
-									the client-side. In order to prevent potential misuse of your key by malicious
-									actors, it's crucial that you configure certain usage restrictions in the settings
-									of your Mapbox service.
-									Specifically, you should create a rule for your key that limits its use to your
-									domain only. This ensures that even if someone else acquires your API key, they will
-									not be able to use it on a different domain. Therefore, remember to secure your key
-									with these domain restrictions to safeguard your service from any unauthorized
-									usage.
-								</small>
+								<div class="d-none gradient-msg" id="msg-about-api">
+								
+								<p><strong>Why MapBox API Key Recommended:</strong></p>
+								<ul>
+								  <li>Finds latitude and longitude from an address input.</li>
+								  <li>Derives the address by clicking on a map coordinate.</li>
+								  <li>Offers MapBox's advanced map customization.</li>
+								</ul>
+								<p>Use MapBox’s free tier for less trafficked sites. <strong>Security Tip:</strong> Configure the key to operate only on your domain via MapBox settings to secure it against misuse.</p>
+								<p>Without the key, functionality is reduced to OpenStreetMap visuals, where users can only add new locations by pinning on the map.</p>
+							
+							  </div>
 								<input type="text" id="mapBoxApiKey" name="mapBoxApiKey"
 									title="Enter your MapBox API Key" class="form-control  mt-2"
 									placeholder="Enter your MapBox API Key here">

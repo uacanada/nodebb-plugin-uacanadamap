@@ -544,7 +544,9 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     `;
   
       $("#uaMapAddress").val(addressLine);
+     if(subAdress.length>3){
       $("#subaddress").val(subAdress);
+     }
       if (place) $("#ua-newplace-city").val(place);
   
       if (region && UacanadaMap.provinceMapper[region]) {

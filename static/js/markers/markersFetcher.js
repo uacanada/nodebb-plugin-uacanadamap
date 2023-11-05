@@ -38,12 +38,6 @@ define('markers/markerFetcher', ["core/variables" /*   Global object UacanadaMap
         } catch (error) {
           return []
         }
-         
-  
-  
-  
-  
-  
   
          // TODO  await UacanadaMap.api.populatePlaces( UacanadaMap.previousPlacesArray )
   
