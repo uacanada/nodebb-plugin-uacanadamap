@@ -455,35 +455,32 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		let charIndex = 0;
 		let htmlBuffer = '';
 		let isInsideTag = false;
-	
-		$(element).removeClass('d-none');
+		let tagBuffer = '';
+		element.classList.remove('d-none');
 	
 		function nextChar() {
 			if (charIndex < fullHtml.length) {
 				let nextChar = fullHtml[charIndex];
-				htmlBuffer += nextChar;
 	
-				// Check if we are entering or leaving an HTML tag
-				if (nextChar === '<') isInsideTag = true;
-				if (nextChar === '>') isInsideTag = false;
-	
-				// Set innerHTML to the current content of htmlBuffer
-				element.innerHTML = htmlBuffer;
+				if (nextChar === '<') {
+					isInsideTag = true;
+					tagBuffer += nextChar;
+				} else if (isInsideTag) {
+					tagBuffer += nextChar;
+					if (nextChar === '>') {
+						isInsideTag = false;
+						htmlBuffer += tagBuffer;
+						tagBuffer = '';
+						element.innerHTML = htmlBuffer; // Update the element after closing a tag
+					}
+				} else {
+					htmlBuffer += nextChar;
+					element.innerHTML = htmlBuffer;
+				}
 	
 				charIndex++;
 	
-				// If we are inside an HTML tag, jump to the end of the tag
-				if (isInsideTag) {
-					let tagEnd = fullHtml.indexOf('>', charIndex);
-					if (tagEnd !== -1) {
-						// Append the entire tag to the buffer
-						htmlBuffer += fullHtml.slice(charIndex, tagEnd + 1);
-						charIndex = tagEnd + 1;
-						element.innerHTML = htmlBuffer;
-					}
-				}
-	
-				// If there are more characters to add, set a timeout for the next character
+				// Continue typing effect
 				if (charIndex < fullHtml.length) {
 					setTimeout(nextChar, typingSpeed);
 				}
@@ -492,6 +489,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	
 		nextChar();
 	}
+	
 	
 	
 	
