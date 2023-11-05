@@ -230,8 +230,9 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				const subcat = listItem.attr('data-item-slug')
 				const parents = listItem.find('[data-parents-for="'+subcat+'"]').text().split(',')
 				const selector = $(formItem).find('select#acpParentTabsSelector')
+				console.log({uuid,subcat,parents})
 				selector.val(parents)
-				bootbox.alert('Please configure at least one parent and sub-category.');
+				// bootbox.alert('Please configure at least one parent and sub-category.');
 			} catch (error) {
 				bootbox.alert('Please configure at least one parent and sub-category. See console for errors');
 				console.log(error)
