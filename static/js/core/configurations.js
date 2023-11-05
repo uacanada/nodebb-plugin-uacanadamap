@@ -348,7 +348,7 @@ define('core/configuration', function (require) {
     }
     
     function getLatLng(e) {
-        UacanadaMap.console.log({getLatLng:e, test:e.latlng})
+        UacanadaMap.console.log({getLatLng:e, test:e.latlng.lat})
         const lat = e.latlng?.lat || e.latlng[0];
         const lng = e.latlng?.lng || e.latlng[1];
         return { lat, lng };
