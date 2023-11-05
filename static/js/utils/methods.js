@@ -267,59 +267,114 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       });
   };
 
-  UacanadaMap.api.createMarkerButton = (e, fromAddress) => {
-    UacanadaMap.api.locationSelection.cleanMarker()
-    if (UacanadaMap.currentmarker) {
-      UacanadaMap.currentmarker.bindPopup("Detecting address... ").openPopup();
-    }
-    const { map, L } = UacanadaMap;
 
-    const { lat, lng } = e.latlng;
-    UacanadaMap.choosedLocation = [lat, lng];
-    localStorage.setItem(  "uamaplocation",
-      JSON.stringify(UacanadaMap.choosedLocation)
-    );
-    map.setView(e.latlng, 14);
 
-    UacanadaMap.api.clearFormFields();
-    $("#ua-latlng-text").val(lat + "," + lng);
-    
+
+
+
+
+  UacanadaMap.api.createMarkerAtLocation = (event, fromAddress) => {
+    const location = event.latlng;
+    this.clearPreviousMarker();
+    this.setNewMarker(location);
+    this.updateLocationStorage(location);
+    this.setViewToLocation(location);
+    this.clearFormFields();
+    this.updateLatLngText(location);
+  
     if (UacanadaMap.userRegistered) {
-      if (!fromAddress && UacanadaMap.isMapBoxKeyExist){
-        UacanadaMap.hiddenControls.geocoder.options.geocoder.reverse(
-          e.latlng,
-          map.options.crs.scale(map.getZoom()),
-          function (results) {
-            UacanadaMap.api.showPopupWithCreationSuggest(results[0]);
-          }
-        );
-    } else{ 
-      
-      const addressArray = fromAddress || {
-        address:"",
-        text:"",
-        neighborhood:"",
-        place:"",
-        postcode:"",
-        district:"",
-        region:"",
-        country:"",
-      }
-      UacanadaMap.api.showPopupWithCreationSuggest(addressArray) 
-    };
+      this.processRegisteredUser(location, fromAddress);
     } else {
-      UacanadaMap.currentmarker = L.marker(e.latlng, {
-        icon: UacanadaMap.errorMarker,
-      })
-        .addTo(map)
-        .bindPopup(ajaxify.data.UacanadaMapSettings.unregisteredUserAlert)
-        .openPopup();
-      window.location.assign(window.location.origin + "/register");
+      this.alertUnregisteredUser(location);
     }
-
-    UacanadaMap.api.hideBrandTitle(true);
-    if (UacanadaMap.isFullscreenMode) map.toggleFullscreen();
+  
+    this.adjustMapUI();
   };
+  
+  UacanadaMap.api.clearPreviousMarker = () => {
+    UacanadaMap.api.locationSelection.cleanMarker();
+  };
+  
+  UacanadaMap.api.setNewMarker = (location) => {
+    if (UacanadaMap.currentmarker) {
+      UacanadaMap.currentmarker.bindPopup("Detecting address...").openPopup();
+    }
+  };
+  
+  UacanadaMap.api.updateLocationStorage = (location) => {
+    const { lat, lng } = location;
+    UacanadaMap.choosedLocation = [lat, lng];
+    localStorage.setItem("uamaplocation", JSON.stringify(UacanadaMap.choosedLocation));
+  };
+  
+  UacanadaMap.api.setViewToLocation = (location) => {
+    UacanadaMap.map.setView(location, 14);
+  };
+  
+  UacanadaMap.api.clearFormFields = () => {
+    // Assuming a function exists to clear fields
+  };
+  
+  UacanadaMap.api.updateLatLngText = (location) => {
+    const { lat, lng } = location;
+    $("#ua-latlng-text").val(`${lat},${lng}`);
+  };
+  
+  UacanadaMap.api.processRegisteredUser = (location, fromAddress) => {
+    if (!fromAddress && UacanadaMap.isMapBoxKeyExist) {
+      this.reverseGeocode(location);
+    } else {
+      const defaultAddress = this.getDefaultAddress(fromAddress);
+      UacanadaMap.api.showPopupWithCreationSuggest(defaultAddress);
+    }
+  };
+  
+  UacanadaMap.api.getDefaultAddress = (fromAddress) => {
+    return fromAddress || { properties: {
+      address: "",
+      text: "",
+      neighborhood: "",
+      place: "",
+      postcode: "",
+      district: "",
+      region: "",
+      country: "",
+    }};
+  };
+  
+  UacanadaMap.api.reverseGeocode = (location) => {
+    UacanadaMap.hiddenControls.geocoder.options.geocoder.reverse(
+      location,
+      UacanadaMap.map.options.crs.scale(UacanadaMap.map.getZoom()),
+      (results) => {
+        UacanadaMap.api.showPopupWithCreationSuggest(results[0]);
+      }
+    );
+  };
+  
+  UacanadaMap.api.alertUnregisteredUser = (location) => {
+    UacanadaMap.currentmarker = UacanadaMap.L.marker(location, {
+      icon: UacanadaMap.errorMarker,
+    })
+      .addTo(UacanadaMap.map)
+      .bindPopup(ajaxify.data.UacanadaMapSettings.unregisteredUserAlert)
+      .openPopup();
+    window.location.assign(`${window.location.origin}/register`);
+  };
+  
+  UacanadaMap.api.adjustMapUI = () => {
+    UacanadaMap.api.hideBrandTitle(true);
+    if (UacanadaMap.isFullscreenMode) {
+      UacanadaMap.map.toggleFullscreen();
+    }
+  };
+  
+
+
+
+
+
+
 
   UacanadaMap.api.showPopupWithCreationSuggest = (r) => {
     const { map } = UacanadaMap;
