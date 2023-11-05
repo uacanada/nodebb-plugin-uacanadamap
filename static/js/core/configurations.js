@@ -341,7 +341,7 @@ define('core/configuration', function (require) {
                 return console.warn('Location error');
             }
      $("#ua-latlng-text").val(`${lat},${lng}`);
-     UacanadaMap.api.createMarkerButton(e, false);
+     UacanadaMap.api.createMarkerAtLocation(e, false);
         } catch (error) {
             console.log(error);
         }

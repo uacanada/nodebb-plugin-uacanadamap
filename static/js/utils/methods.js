@@ -90,7 +90,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     },
 
     addPlace: function(){
-      UacanadaMap.api.createMarkerButton({latlng: UacanadaMap.map.getCenter()}, false); // cleanMarker also inside
+      UacanadaMap.api.createMarkerAtLocation({latlng: UacanadaMap.map.getCenter()}, false); // cleanMarker also inside
     },
   
 
@@ -214,7 +214,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     map
       .locate({ setView: true, maxZoom: 15 })
       .on("locationfound", function (ev) {
-        if (fornewplace) createMarkerButton(ev, false);
+        if (fornewplace) createMarkerAtLocation(ev, false);
       })
       .on("locationerror", function (e) {
         map.setView(UacanadaMap.latestLocation.latlng, 12);
@@ -311,9 +311,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     UacanadaMap.map.setView(location, 14);
   };
   
-  UacanadaMap.api.clearFormFields = () => {
-    // Assuming a function exists to clear fields
-  };
+
   
   UacanadaMap.api.updateLatLngText = (location) => {
     const { lat, lng } = location;
