@@ -297,6 +297,8 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   
       const { map, L } = UacanadaMap;
       const { lat, lng } = eventData.latlng;
+
+      console.log(`${lat},${lng}`)
   
       UacanadaMap.choosedLocation = [lat, lng];
       saveLocationToStorage(UacanadaMap.choosedLocation);
