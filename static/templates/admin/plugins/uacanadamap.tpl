@@ -24,14 +24,14 @@
 								<label class="form-label d-block" for="mapBoxApiKey">MapBox API Key</label>
 								<div class="d-none gradient-msg" id="msg-about-api">
 								
-								<p><strong>Why MapBox API Key Recommended:</strong></p>
+								<p><strong><div class="spinner-grow" role="status"> <span class="visually-hidden">Loading...</span> </div>Why MapBox API Key Recommended:</strong></p>
 								<ul>
 								  <li>Finds latitude and longitude from an address input.</li>
 								  <li>Derives the address by clicking on a map coordinate.</li>
 								  <li>Offers MapBox's advanced map customization.</li>
 								</ul>
-								<p>Use MapBox’s free tier for less trafficked sites. <strong>Security Tip:</strong> Configure the key to operate only on your domain via MapBox settings to secure it against misuse.</p>
-								<p>Without the key, functionality is reduced to OpenStreetMap visuals, where users can only add new locations by pinning on the map.</p>
+								<p><i class="fa-solid fa-gift"></i> Use MapBox’s free tier for less trafficked sites. <strong><i class="fa-solid fa-shield-halved"></i> Security Tip:</strong> Configure the key to operate only on your domain via MapBox settings to secure it against misuse.</p>
+								<p><strong>Without the key, functionality is reduced to OpenStreetMap basics, where users can only add new locations by pinning on the map (without geocoding features).</strong></p>
 							
 							  </div>
 								<input type="text" id="mapBoxApiKey" name="mapBoxApiKey"
