@@ -583,7 +583,7 @@
 									  Note: This will not remove topics associated with locations created by the plugin. To delete those topics, first gather all TIDs via the "getplaces" API.
 									</small>
 									
-									<button id="exportJson" class="btn btn-sm btn-primary mt-3" type="button">
+									<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal" class="export-settings-uacanadamap d-block btn btn-sm btn-primary" type="button">
 									  <i class="fa fa-download"></i> Export Settings as JSON
 									</button>  
 									
