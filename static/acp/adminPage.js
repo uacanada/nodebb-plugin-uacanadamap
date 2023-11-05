@@ -16,6 +16,17 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			}
 
 			loadedSettings = currentSettings
+
+			if(Object.keys(currentSettings).length === 0){
+
+				bootbox.confirm('The settings are empty. Click  "Confirm" to load the default settings.', function (confirm) {
+					if (confirm) {
+						loadSettingsFromDefault()
+					}
+				});
+
+				
+			}
 			
 			try {
 				const cities = loadedSettings.citiesData.split(',')
@@ -37,6 +48,8 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 		//	setTimeout(() => { $('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) })  }, 2000);
 
+          
+		      
 
 			$('#console_log').on('click', logConsoleSettings);
 		});
@@ -257,6 +270,20 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		console.log(loadedSettings)
 	}
 
+	function loadSettingsFromDefault(){
+			fetch("/api/v3/plugins/uacanadamap/setdefaults", { method: 'GET'})
+			  	.then(response => response.json())
+			  	.then(data => {
+				console.log("Default settings loaded:", data);
+				instance.rebuildAndRestart();
+				bootbox.alert('Default settings loaded, the forum will now be rebuilt with the default settings.');
+			  })
+			  .catch((error) => {
+				bootbox.alert('Failed to load default settings, please check the browser console logs.');
+				console.log("Error:", error);
+			  });		
+	}
+
 	function resetSettings(){
 		settings.save('uacanadamap', $('<form></form>'))
 		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
@@ -275,8 +302,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				bootbox.alert('Failed to delete settings, please check the browser console logs.');
 				console.log("Error:", error);
 			  });
-
-					
 				}
 			});
 
