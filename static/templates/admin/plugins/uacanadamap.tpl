@@ -486,7 +486,7 @@
 							<div id="collapseExpert" class="accordion-collapse collapse" aria-labelledby="headingExpert"
 								data-bs-parent="#acpAccordion">
 								<div class="accordion-body">
-								<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal" class="export-settings-uacanadamap d-block btn btn-sm btn-primary" type="button">
+								<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal" class="export-settings-uacanadamap my-3 d-block btn btn-sm btn-primary" type="button">
 								<i class="fa fa-download"></i> Export Settings as JSON
 							  </button>  
 
