@@ -73,10 +73,14 @@ define('core/configuration', function (require) {
         }
 
         
-        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):UacanadaMap.StreetsMap;
+        const OSM = L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  );
+
+        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):OSM;
+        
+        
         UacanadaMap.mapProviders = {
             MapBox: UacanadaMap.mapLayers.MapBox,
-            OSM:  L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  ),
+            OSM,
             Minimal: L.tileLayer.provider("Esri.WorldGrayCanvas"),
             BlackWhite: L.tileLayer.provider("Stamen.TonerLite"),
             Terrain: L.tileLayer.provider("Stamen.Terrain"),
