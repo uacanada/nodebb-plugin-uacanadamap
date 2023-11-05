@@ -275,20 +275,20 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
   UacanadaMap.api.createMarkerAtLocation = (event, fromAddress) => {
     const location = event.latlng;
-    this.clearPreviousMarker();
-    this.setNewMarker(location);
-    this.updateLocationStorage(location);
-    this.setViewToLocation(location);
-    this.clearFormFields();
-    this.updateLatLngText(location);
+    UacanadaMap.api.clearPreviousMarker();
+    UacanadaMap.api.setNewMarker(location);
+    UacanadaMap.api.updateLocationStorage(location);
+    UacanadaMap.api.setViewToLocation(location);
+    UacanadaMap.api.clearFormFields();
+    UacanadaMap.api.updateLatLngText(location);
   
     if (UacanadaMap.userRegistered) {
-      this.processRegisteredUser(location, fromAddress);
+      UacanadaMap.api.processRegisteredUser(location, fromAddress);
     } else {
-      this.alertUnregisteredUser(location);
+      UacanadaMap.api.alertUnregisteredUser(location);
     }
   
-    this.adjustMapUI();
+    UacanadaMap.api.adjustMapUI();
   };
   
   UacanadaMap.api.clearPreviousMarker = () => {
@@ -320,9 +320,9 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   
   UacanadaMap.api.processRegisteredUser = (location, fromAddress) => {
     if (!fromAddress && UacanadaMap.isMapBoxKeyExist) {
-      this.reverseGeocode(location);
+      UacanadaMap.api.reverseGeocode(location);
     } else {
-      const defaultAddress = this.getDefaultAddress(fromAddress);
+      const defaultAddress = UacanadaMap.api.getDefaultAddress(fromAddress);
       UacanadaMap.api.showPopupWithCreationSuggest(defaultAddress);
     }
   };
