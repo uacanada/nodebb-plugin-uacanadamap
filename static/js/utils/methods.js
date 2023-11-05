@@ -277,7 +277,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     UacanadaMap.console.log({event})
     
     const location = event.latlng;
-    UacanadaMap.console.log(UacanadaMap.L.getLatLngs(location))
+    
     UacanadaMap.api.clearPreviousMarker();
     UacanadaMap.api.setNewMarker(location);
     UacanadaMap.api.updateLocationStorage(location);
@@ -305,9 +305,14 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   };
   
   UacanadaMap.api.updateLocationStorage = (location) => {
-    const { lat, lng } = location;
-    UacanadaMap.choosedLocation = [lat, lng];
-    localStorage.setItem("uamaplocation", JSON.stringify(UacanadaMap.choosedLocation));
+    try {
+      const { lat, lng } = location;
+      UacanadaMap.choosedLocation = [lat, lng];
+      localStorage.setItem("uamaplocation", JSON.stringify(UacanadaMap.choosedLocation));
+    } catch (error) {
+      UacanadaMap.console.log(error)
+    }
+  
   };
   
   UacanadaMap.api.setViewToLocation = (location) => {
@@ -317,8 +322,13 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
   
   UacanadaMap.api.updateLatLngText = (location) => {
-    const { lat, lng } = location;
-    $("#ua-latlng-text").val(`${lat},${lng}`);
+    try {
+      const { lat, lng } = location;
+      $("#ua-latlng-text").val(`${lat},${lng}`);
+    } catch (error) {
+      console.log(error)
+    }
+   
   };
   
   UacanadaMap.api.processRegisteredUser = (location, fromAddress) => {
