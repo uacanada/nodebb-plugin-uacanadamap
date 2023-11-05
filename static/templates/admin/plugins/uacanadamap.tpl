@@ -463,7 +463,7 @@
 										<label class="form-label" for="jsonInput">Insert your JSON configuration here:</label>
 										<div id="jsonInputEditor"></div>
 										<textarea type="text" id="jsonInput" name="customExtraSettings"
-											class="d-none ace-editor-textarea" data-ace-mode="json"></textarea>
+											class="d-none ace-editor-textarea"></textarea>
 										<small class="form-text">
 										Use this section to enter custom JSON settings that will enhance the default plugin configurations. Your JSON must be correctly formatted; errors may impair functionality. You are responsible for ensuring the validity of your JSON.
 										</small>
