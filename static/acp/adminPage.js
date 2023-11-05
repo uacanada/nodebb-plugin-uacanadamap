@@ -451,41 +451,48 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			$(holder).val(editorEl.getValue());
 		});
 	}
-
 	function typingEffect(element, fullHtml, typingSpeed) {
 		let charIndex = 0;
 		let htmlBuffer = '';
-		let inTag = false;
+		let isInsideTag = false;
 	
 		$(element).removeClass('d-none');
 	
 		function nextChar() {
 			if (charIndex < fullHtml.length) {
-				let char = fullHtml[charIndex];
-				if (char === '<') {
-					inTag = true;
-				} else if (char === '>') {
-					inTag = false;
-				}
+				let nextChar = fullHtml[charIndex];
+				htmlBuffer += nextChar;
 	
-				htmlBuffer += char;
+				// Check if we are entering or leaving an HTML tag
+				if (nextChar === '<') isInsideTag = true;
+				if (nextChar === '>') isInsideTag = false;
+	
+				// Set innerHTML to the current content of htmlBuffer
 				element.innerHTML = htmlBuffer;
+	
 				charIndex++;
 	
-				if (inTag) {
-					// If we're inside a tag, keep adding characters until we reach the end of the tag.
+				// If we are inside an HTML tag, jump to the end of the tag
+				if (isInsideTag) {
 					let tagEnd = fullHtml.indexOf('>', charIndex);
 					if (tagEnd !== -1) {
-						charIndex = tagEnd;
+						// Append the entire tag to the buffer
+						htmlBuffer += fullHtml.slice(charIndex, tagEnd + 1);
+						charIndex = tagEnd + 1;
+						element.innerHTML = htmlBuffer;
 					}
 				}
 	
-				setTimeout(nextChar, typingSpeed);
+				// If there are more characters to add, set a timeout for the next character
+				if (charIndex < fullHtml.length) {
+					setTimeout(nextChar, typingSpeed);
+				}
 			}
 		}
 	
 		nextChar();
 	}
+	
 	
 	
 	
