@@ -317,7 +317,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 			bootbox.confirm('Click "Confirm" if you want to reset all settings to their default values. Caution, we recommend copying your current JSON settings as a backup copy.', function (confirm) {
 				if (confirm) {
-				fetch('/api/v3/plugins/uacanadamap/flushsettings/'+encodeURIComponent(confirmationInput), { method: 'GET'})
+				fetch('/api/v3/plugins/uacanadamap/flushsettings/'+encodeURIComponent(confirmationInput), { method: 'GET'}) // TODO MAKE IT PUT OR POST FOR BETTER SECURITY
 			  	.then(response => response.json())
 			  	.then(data => {
 				console.log("Settings have been flushed:", data, confirmationInput);
