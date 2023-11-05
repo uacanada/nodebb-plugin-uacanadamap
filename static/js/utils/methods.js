@@ -273,6 +273,13 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 
   UacanadaMap.api.createMarkerAtLocation = (eventData, fromAddress) => {
+
+    if (!eventData || !eventData.latlng) {
+      UacanadaMap.console.error("Invalid event data provided to createMarkerAtLocation.",eventData);
+      return;
+    }
+
+
     const defaultAddressProperties = {
       address: "",
       text: "",
