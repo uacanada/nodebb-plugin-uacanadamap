@@ -512,7 +512,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     
     let popupHtml = "";
   
-    if (country === "Canada") {
+    // if (country === "Canada") { TODO: Add to ACP Counrty Filter
       let addressIcon = address ? "📮 " : "📍 ";
       let addressLine = r.name; // assuming r.name is defined and is the intended content to show
       let subAdress = `${neighborhood || ''} ${district || ''}, ${region || ''}`.trim();
@@ -537,13 +537,13 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       if (region && UacanadaMap.provinceMapper[region]) {
         $('#location-province option[value="' + UacanadaMap.provinceMapper[region] +  '"' ).prop("selected", true);
       }
-    } else {
-      popupHtml = `
-        <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
-        <code>${country} ${place || ''} ${neighborhood || ''} ${region || ''}</code></br>
-        Correct your choice on the map!</b></br>
-      `;
-    }
+    // } else {
+    //   popupHtml = `
+    //     <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
+    //     <code>${country} ${place || ''} ${neighborhood || ''} ${region || ''}</code></br>
+    //     Correct your choice on the map!</b></br>
+    //   `;
+    // }
   
     if (UacanadaMap.currentmarker) {
       map.removeLayer(UacanadaMap.currentmarker);
