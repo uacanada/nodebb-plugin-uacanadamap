@@ -24,7 +24,7 @@
 								<label class="form-label d-block" for="mapBoxApiKey">MapBox API Key</label>
 								<div class="d-none gradient-msg" id="msg-about-api">
 								
-								<p><strong><div class="spinner-grow" role="status"> <span class="visually-hidden">Loading...</span> </div>Why MapBox API Key Recommended:</strong></p>
+								<p><div class="spinner-grow" role="status"><span class="visually-hidden">Loading...</span> </div> Why MapBox API Key Recommended:</p>
 								<ul>
 								  <li>Finds latitude and longitude from an address input.</li>
 								  <li>Derives the address by clicking on a map coordinate.</li>
