@@ -48,7 +48,11 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 		//	setTimeout(() => { $('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) })  }, 2000);
 
-		     typingEffect(document.getElementById('msg-about-api'), document.getElementById('msg-about-api').innerHTML, 50);
+
+		    if(currentSettings.mapBoxApiKey.length < 30){
+				typingEffect(document.getElementById('msg-about-api'), document.getElementById('msg-about-api').innerHTML, 50);
+			}
+		    
 		      
 
 			$('#console_log').on('click', logConsoleSettings);
