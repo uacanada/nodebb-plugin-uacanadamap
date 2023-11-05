@@ -272,8 +272,92 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
 
 
+  UacanadaMap.api.createMarkerAtLocation = (eventData, fromAddress) => {
+    const defaultAddressProperties = {
+      address: "",
+      text: "",
+      neighborhood: "",
+      place: "",
+      postcode: "",
+      district: "",
+      region: "",
+      country: ""
+    };
+  
+    try {
+      UacanadaMap.api.locationSelection.cleanMarker();
+      showCurrentMarkerPopup();
+  
+      const { map, L } = UacanadaMap;
+      const { lat, lng } = eventData.latlng;
+  
+      UacanadaMap.choosedLocation = [lat, lng];
+      saveLocationToStorage(UacanadaMap.choosedLocation);
+  
+      map.setView(eventData.latlng, 14);
+      UacanadaMap.api.clearFormFields();
+      updateLatLngText(lat, lng);
+  
+      if (UacanadaMap.userRegistered) {
+        processUserLocation(eventData, fromAddress, map, defaultAddressProperties);
+      } else {
+        promptUserToRegister(eventData, map, L);
+      }
+  
+      UacanadaMap.api.hideBrandTitle(true);
+      toggleFullscreenIfNeeded(map);
+    } catch (error) {
+      console.error("Error creating marker at location: ", error);
+    }
+  };
+  
+  function showCurrentMarkerPopup() {
+    if (UacanadaMap.currentmarker) {
+      UacanadaMap.currentmarker.bindPopup("Detecting address...").openPopup();
+    }
+  }
+  
+  function saveLocationToStorage(location) {
+    localStorage.setItem("uamaplocation", JSON.stringify(location));
+  }
+  
+  function updateLatLngText(lat, lng) {
+    $("#ua-latlng-text").val(`${lat},${lng}`);
+  }
+  
+  function processUserLocation(eventData, fromAddress, map, defaultAddressProperties) {
+    if (!fromAddress && UacanadaMap.isMapBoxKeyExist) {
+      reverseGeocodeLocation(eventData.latlng, map);
+    } else {
+      const addressData = fromAddress || { properties: defaultAddressProperties };
+      UacanadaMap.api.showPopupWithCreationSuggest(addressData);
+    }
+  }
+  
+  function reverseGeocodeLocation(latlng, map) {
+    UacanadaMap.hiddenControls.geocoder.options.geocoder.reverse(
+      latlng,
+      map.options.crs.scale(map.getZoom()),
+      results => UacanadaMap.api.showPopupWithCreationSuggest(results[0])
+    );
+  }
+  
+  function promptUserToRegister(eventData, map, L) {
+    UacanadaMap.currentmarker = L.marker(eventData.latlng, {
+      icon: UacanadaMap.errorMarker,
+    }).addTo(map).bindPopup(ajaxify.data.UacanadaMapSettings.unregisteredUserAlert).openPopup();
+    window.location.assign(`${window.location.origin}/register`);
+  }
+  
+  function toggleFullscreenIfNeeded(map) {
+    if (UacanadaMap.isFullscreenMode) map.toggleFullscreen();
+  }
+  
 
-  UacanadaMap.api.createMarkerAtLocation = (event, fromAddress) => {
+
+
+
+  UacanadaMap.api.createMarkerAtLocationTEST = (event, fromAddress) => {
     UacanadaMap.console.log({event})
     
     const location = event.latlng;
