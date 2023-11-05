@@ -35,7 +35,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				initACE(elementId + 'Editor', mode, '#' + elementId);
 			});
 
-			setTimeout(() => { $('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) })  }, 2000);
+		//	setTimeout(() => { $('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) })  }, 2000);
 
 
 			$('#console_log').on('click', logConsoleSettings);
@@ -390,10 +390,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		} else {
 			 editorEl.setValue($(holder).val())
 		}
-	
-
-	
-		
 		
 		editorEl.on('change', function () {
 			app.flags = app.flags || {};
