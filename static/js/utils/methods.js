@@ -497,7 +497,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       console.error("Invalid result structure provided to showPopupWithCreationSuggest.",r);
       return;
     }
-  
+
     let { lat, lng } = r.center;
     let {
       address,
@@ -516,7 +516,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       let addressIcon = address ? "📮 " : "📍 ";
       let addressLine = r.name; // assuming r.name is defined and is the intended content to show
       let subAdress = `${neighborhood || ''} ${district || ''}, ${region || ''}`.trim();
-      popupHtml = `
+      popupHtml = UacanadaMap.isMapBoxKeyExist ? `
         <div class="p-1 d-flex flex-column align-items-start">
           <div class="ua-popup-codes">
             <code>${addressIcon}${addressLine}</code></br>
@@ -528,7 +528,20 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
             <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
           </div>
         </div>
-      `;
+      `:`
+      <div class="p-1 d-flex flex-column align-items-start">
+        <div class="ua-popup-codes">
+          <code>${addressIcon} Address not available</code></br>
+          <code>🗺️ Enter address details manually in the next step if known</code></br>
+          <code>🧭 Latitude: ${lat.toFixed(12)}</code></br>
+          <code>🧭 Longitude: ${lng.toFixed(12)}</code>
+        </div>
+        
+        <div class="d-flex mt-2">
+          <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
+        </div>
+      </div>
+    `;
   
       $("#uaMapAddress").val(addressLine);
       $("#subaddress").val(subAdress);
