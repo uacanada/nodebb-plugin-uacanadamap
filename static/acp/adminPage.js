@@ -262,15 +262,14 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
 		if (confirmationInput === "I confirm the deletion of settings") {
 
-			bootbox.confirm('Settings have been saved. Now, you need to rebuild the forum. Please confirm rebuild and restart by clicking the button below.', function (confirm) {
+			bootbox.confirm('Click "Confirm" if you want to reset all settings to their default values. Caution, we recommend copying your current JSON settings as a backup copy.', function (confirm) {
 				if (confirm) {
-
-					fetch('/api/v3/plugins/uacanadamap/flushsettings/'+encodeURIComponent(confirmationInput), { method: 'GET'})
-			  .then(response => response.json())
-			  .then(data => {
+				fetch('/api/v3/plugins/uacanadamap/flushsettings/'+encodeURIComponent(confirmationInput), { method: 'GET'})
+			  	.then(response => response.json())
+			  	.then(data => {
 				console.log("Settings have been flushed:", data, confirmationInput);
 				instance.rebuildAndRestart();
-				bootbox.alert('Settings have been reset, the forum will now be rebuilt with the default settings.');
+				bootbox.alert('Settings have been flushed, the forum will now be rebuilt with the default settings.');
 			  })
 			  .catch((error) => {
 				bootbox.alert('Failed to delete settings, please check the browser console logs.');
