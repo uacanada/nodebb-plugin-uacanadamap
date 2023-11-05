@@ -453,42 +453,39 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	}
 	function typingEffect(element, fullHtml, typingSpeed) {
 		let charIndex = 0;
-		let htmlBuffer = '';
-		let isInsideTag = false;
-		let tagBuffer = '';
+		element.innerHTML = '';
 		element.classList.remove('d-none');
-	
-		function nextChar() {
-			if (charIndex < fullHtml.length) {
-				let nextChar = fullHtml[charIndex];
-	
-				if (nextChar === '<') {
-					isInsideTag = true;
-					tagBuffer += nextChar;
-				} else if (isInsideTag) {
-					tagBuffer += nextChar;
-					if (nextChar === '>') {
-						isInsideTag = false;
-						htmlBuffer += tagBuffer;
-						tagBuffer = '';
-						element.innerHTML = htmlBuffer; // Update the element after closing a tag
-					}
-				} else {
-					htmlBuffer += nextChar;
-					element.innerHTML = htmlBuffer;
-				}
-	
-				charIndex++;
-	
-				// Continue typing effect
-				if (charIndex < fullHtml.length) {
-					setTimeout(nextChar, typingSpeed);
-				}
-			}
+	  
+		function typeChar() {
+		  // Stop if we've reached the end of the string
+		  if (charIndex >= fullHtml.length) {
+			return;
+		  }
+	  
+		  // Get the current character
+		  let currentChar = fullHtml[charIndex];
+	  
+		  // Check if we're inside a tag
+		  if (currentChar === '<') {
+			// Find the end of the tag
+			let tagEnd = fullHtml.indexOf('>', charIndex);
+			// Append the tag without typing effect
+			element.innerHTML += fullHtml.substring(charIndex, tagEnd + 1);
+			// Move past the tag
+			charIndex = tagEnd;
+		  } else {
+			// Add the character
+			element.innerHTML += currentChar;
+		  }
+	  
+		  charIndex++;
+		  // Wait before adding the next character
+		  setTimeout(typeChar, typingSpeed);
 		}
-	
-		nextChar();
-	}
+	  
+		typeChar();
+	  }
+	  
 	
 	
 	
