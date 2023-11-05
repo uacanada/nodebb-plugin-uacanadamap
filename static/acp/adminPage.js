@@ -114,6 +114,9 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		$(document).on('click', '#exportJson', exportSettingsJson);
 		$(document).on('click', '#resetSettings', resetSettings);
 		$(document).on('click', '#save', saveSettings);
+
+		// TODO add off for eventListeners
+
 		categorySelector.init($('[component="category-selector"]'));
 		
 		hooks.on('action:settings.sorted-list.modal', function ({ modal }) {

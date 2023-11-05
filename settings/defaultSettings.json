@@ -108,6 +108,6 @@
       "templateName": "map",
       "zoomThreshold": "13",
       "debuginfo": {
-        "activation": 0
+        "activation": 1
       }
 }    

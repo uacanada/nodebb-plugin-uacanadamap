@@ -222,9 +222,13 @@ zoomendHandler() {
   }
   
   handleMarkGeocode(e) {
-	let { lat, lng } = e.geocode.center;
-	let loc = { latlng: { lat, lng } };
-	UacanadaMap.api.createMarkerButton(loc, e.geocode);
+	if(UacanadaMap.isMapBoxKeyExist){
+		let { lat, lng } = e.geocode.center;
+		let loc = { latlng: { lat, lng } };
+		UacanadaMap.api.createMarkerButton(loc, e.geocode);
+	} else {
+		UacanadaMap.console.log(handleMarkGeocode,e)
+	}
   }
 
 

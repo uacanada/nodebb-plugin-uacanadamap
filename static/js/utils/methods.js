@@ -276,16 +276,16 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
     const { lat, lng } = e.latlng;
     UacanadaMap.choosedLocation = [lat, lng];
-    localStorage.setItem(
-      "uamaplocation",
+    localStorage.setItem(  "uamaplocation",
       JSON.stringify(UacanadaMap.choosedLocation)
     );
     map.setView(e.latlng, 14);
 
     UacanadaMap.api.clearFormFields();
     $("#ua-latlng-text").val(lat + "," + lng);
+    
     if (UacanadaMap.userRegistered) {
-      if (!fromAddress)
+      if (!fromAddress && UacanadaMap.isMapBoxKeyExist){
         UacanadaMap.hiddenControls.geocoder.options.geocoder.reverse(
           e.latlng,
           map.options.crs.scale(map.getZoom()),
@@ -293,7 +293,20 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
             UacanadaMap.api.showPopupWithCreationSuggest(results[0]);
           }
         );
-      else UacanadaMap.api.showPopupWithCreationSuggest(fromAddress);
+    } else{ 
+      
+      const addressArray = fromAddress || {
+        address:"",
+        text:"",
+        neighborhood:"",
+        place:"",
+        postcode:"",
+        district:"",
+        region:"",
+        country:"",
+      }
+      UacanadaMap.api.showPopupWithCreationSuggest(addressArray) 
+    };
     } else {
       UacanadaMap.currentmarker = L.marker(e.latlng, {
         icon: UacanadaMap.errorMarker,
@@ -310,8 +323,8 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 
   UacanadaMap.api.showPopupWithCreationSuggest = (r) => {
     const { map } = UacanadaMap;
-    var { lat, lng } = r.center;
-    var {
+    let { lat, lng } = r.center || map.getCenter();
+    let {
       address,
       text,
       neighborhood,

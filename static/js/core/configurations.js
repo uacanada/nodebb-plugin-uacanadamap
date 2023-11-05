@@ -75,7 +75,9 @@ define('core/configuration', function (require) {
         
         const OSM = L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  );
 
-        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):OSM;
+        UacanadaMap.isMapBoxKeyExist = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30
+
+        UacanadaMap.mapLayers.MapBox = UacanadaMap.isMapBoxKeyExist ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):OSM;
         
         
         UacanadaMap.mapProviders = {
