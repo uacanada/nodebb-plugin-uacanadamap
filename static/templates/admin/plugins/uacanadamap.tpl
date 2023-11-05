@@ -586,16 +586,16 @@
 											<input type="text" id="resetSettingsConfirmation" class="form-control" placeholder="Confirmation text" aria-label="Reset Settings" aria-describedby="resetSettings">
 											<button class="btn btn btn-danger reset-settings-uacanadamap" type="button" id="resetSettings"><i class="fa fa-fw fas fa-solid fa-arrows-rotate"></i> Flush Settings</button>
 									    </div>
-										<small>Enter confirmation text to proceed.
+										<small>Enter confirmation text to proceed.</br> 
 										<b>To permanently remove plugin data:</b></br> 
 										Enter the following phrase to confirm your intent: <code>I confirm the deletion of settings</code>
 
-										<b class="mt-3">To reset and reapply settings from a default file:</b></br>
+										<b class="d-block mt-3">To reset and reapply settings from a default file:</b></br>
 										Enter this phrase to overwrite current settings with the default from ./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json:</br>
 										<code>I confirm the resetting and recreation of settings from defaultSettings.json</code>
 										
 										
-										<b class="mt-3">For complete deletion of settings and all places from the database:</b></br>
+										<b class="d-block mt-3">For complete deletion of settings and all places from the database:</b></br>
 										Enter the text: "<code>I confirm the deletion of ALL settings AND ALL PLACES</code>".</br> 
 										Please note, this option will remove all settings and delete all locations from the database, however, it does not remove TOPICS associated with these locations. The plugin will not delete topics. If you want to back up location data before deletion, you can retrieve their JSON at the path /api/v3/plugins/map/getplaces.
 										</small>
