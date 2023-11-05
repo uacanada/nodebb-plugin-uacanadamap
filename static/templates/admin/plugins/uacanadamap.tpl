@@ -486,7 +486,9 @@
 							<div id="collapseExpert" class="accordion-collapse collapse" aria-labelledby="headingExpert"
 								data-bs-parent="#acpAccordion">
 								<div class="accordion-body">
-
+								<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal" class="export-settings-uacanadamap d-block btn btn-sm btn-primary" type="button">
+								<i class="fa fa-download"></i> Export Settings as JSON
+							  </button>  
 
 
 									<div class="mb-5">
@@ -583,25 +585,23 @@
 									  Note: This will not remove topics associated with locations created by the plugin. To delete those topics, first gather all TIDs via the "getplaces" API.
 									</small>
 									
-									<button id="exportJson" data-bs-toggle="modal" data-bs-target="#exportedJsonModal" class="export-settings-uacanadamap d-block btn btn-sm btn-primary" type="button">
-									  <i class="fa fa-download"></i> Export Settings as JSON
-									</button>  
+									
 									
 									<p class="mt-4">
 									  <strong>To apply default settings from a file:</strong>
-									  Enter the phrase below to replace current settings with defaults from ./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json:
+									  <small>Enter the phrase below to replace current settings with defaults from ./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json file</small>
 									  <code class="d-block mt-2">I confirm the resetting and recreation of settings from defaultSettings.json</code>
 									</p>
 									  
 									<p class="mt-4">
 									  <strong>To remove plugin settings only:</strong>
-									  Confirm your intent by entering: <code class="d-block mt-2">I confirm the deletion of settings</code>
+									  <code class="d-block mt-2">I confirm the deletion of settings</code>
 									</p>
 									
 									<p class="mt-4">
 									  <strong>To completely clear settings and all places from the database:</strong>
-									  Type: <code>I confirm the deletion of ALL settings AND ALL PLACES</code>.<br>
-									  Warning: This action will delete all settings and locations but will not remove associated topics. To backup location data before deletion, access the JSON data at <code>/api/v3/plugins/map/getplaces</code>.
+									  <code class="d-block mt-2">I confirm the deletion of ALL settings AND ALL PLACES</code>.<br>
+									  <small>Warning: This action will delete all settings and locations but will not remove associated topics. To backup location data before deletion, access the JSON data at <code>/api/v3/plugins/map/getplaces</code>.</small>
 									</p>
 									
 									<div class="input-group mt-5">
