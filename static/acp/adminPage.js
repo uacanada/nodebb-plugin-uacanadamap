@@ -29,8 +29,13 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			}
 			
 			try {
-				const cities = loadedSettings.citiesData.split(',')
-				cities.forEach(function(tag) { $('#citiesData').tagsinput('add', tag); });
+				if(loadedSettings.citiesData){
+					const cities = loadedSettings.citiesData.split(',')
+					cities.forEach(function(tag) { $('#citiesData').tagsinput('add', tag); });
+				} else {
+					$('#citiesData').tagsinput('add', 'Vancouver');
+				}
+				
 			} catch (error) {
 				console.log(error)
 			}
