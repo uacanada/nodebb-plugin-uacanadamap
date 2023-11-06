@@ -22,7 +22,7 @@
 
 							<div class="mb-5">
 								<label class="form-label d-block" for="mapBoxApiKey">MapBox API Key</label>
-								<div class="d-none gradient-msg" id="msg-about-api">
+								<div class="d-none gradient-msg my-3" id="msg-about-api">
 								
 								<p>🌀 Why MapBox API Key Recommended:</p>
 								<ul>

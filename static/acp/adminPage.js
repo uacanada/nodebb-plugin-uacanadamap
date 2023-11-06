@@ -308,17 +308,25 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			  });		
 	}
 
-	function resetSettings(){
+	async function resetSettings(){
 		settings.save('uacanadamap', $('<form></form>'))
 		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
 		if ( ["I confirm the deletion of settings",
 		"I confirm the resetting and recreation of settings from defaultSettings.json",
 		"I confirm the deletion of ALL settings AND ALL PLACES" ].includes(confirmationInput)) {
 
-			bootbox.confirm('Click "Confirm" if you want to reset all settings to their default values. Caution, we recommend copying your current JSON settings as a backup copy.', function (confirm) {
+			const config = await fetch("/api/config");
+            if (!config.ok) throw new Error("Failed to fetch config for CSRF token");
+            const configJson = await response.json();
+			const csrfToken = configJson.csrf_token;
+        
+            
+
+			bootbox.confirm('Click "Confirm" if you want to perfom this action: "'+confirmationInput+'". Caution, we recommend copying your current JSON settings as a backup copy.', function (confirm) {
 				if (confirm) {
-				fetch('/api/v3/plugins/uacanadamap/flushsettings/'+encodeURIComponent(confirmationInput), { method: 'GET'}) // TODO MAKE IT PUT OR POST FOR BETTER SECURITY
-			  	.then(response => response.json())
+
+				fetch('/api/v3/plugins/uacanadamap/flushsettings/', { method: 'POST', headers: {  'Content-Type': 'application/json' , 'x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
+				.then(response => response.json())
 			  	.then(data => {
 				console.log("Settings have been flushed:", data, confirmationInput);
 				instance.rebuildAndRestart();
