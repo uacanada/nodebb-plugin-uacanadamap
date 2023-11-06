@@ -1,28 +1,31 @@
 {
-      "initialCoordinates": "51.509865, -0.118092",
+      "initialCoordinates": "49.28324,-123.11989",
       "alwaysUseDefaultLocation": "",
       "defaultZoom": "11",
       "maxZoomOut": "3",
-      "mapBoxApiKey": "YOUR_MAPBOX_API_KEY_HERE",
+      "mapBoxApiKey": "goto: docs.mapbox.com/api",
       "bottomRightCorner": "10, -20",
       "topLeftCorner": "60, -150",
-      "mapTitle": "Global Community",
-      "heroTitle": "GLOBAL",
-      "heroSubtitle": "Global Unity: Redefining the Landscape",
-      "slogans": [
-        {
-          "slogan": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        },
-        {
-          "slogan": "Suspendisse et nunc non orci suscipit aliquam."
-        }
-      ],
+      "mapTitle": "Uacanadamap Configuration",
+        "heroTitle": "MANAGE",
+        "heroSubtitle": "Your Mapping Dashboard Awaits",
+        "slogans": [
+          {
+            "slogan": "Tailor your mapping experience with precision. Dive into settings now."
+          },
+          {
+            "slogan": "For webmasters: A world of options in the admin panel is ready for your command."
+          },
+          {
+            "slogan": "Direct the narrative of your map. Engage, inform, and connect."
+          }
+        ],      
       "altContentTitle": "Alternate Version for lang ALT",
       "altContentTrigger": "ALT",
       "unregisteredUserAlert": "Please register <a href=\"/register\">here</a>",
       "locationSharingErrorAlert": "Lorem ipsum: <ul class=\"try-locate-me list-group p-0 mt-2\"><li class=\"list-group-item\"><i class=\"fa-solid fa-location-arrow\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-regular fa-hand-point-down\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-solid fa-magnifying-glass\"></i> Lorem ipsum</li></ul>",
-      "defaultMarkerImage": "/assets/plugins/YOUR_PLUGIN_PATH/icons/placeMarker.png",
-      "clusterIcon": "/assets/plugins/YOUR_PLUGIN_PATH/icons/cluster.svg",
+      "defaultMarkerImage": "/assets/plugins/uacanadamap/icons/placeMarker.png",
+      "clusterIcon": "/assets/plugins/uacanadamap/icons/cluster.svg",
       "citiesData": "London,Paris,New York,Vancouver",
       "countryLimit": "",
       "entityTitle": "Region",
@@ -86,16 +89,16 @@
       ],
       "advMarkers": [
         {
-          "advMarkerImg": "/assets/YOUR_PATH/logo.png",
+          "advMarkerImg": "/assets/plugins/uacanadamap/icons/logo.png",
           "advMarkerTags": "tag1,tag2,tag3,sponsored",
           "card": "Lorem ipsum dolor sit amet.",
           "color": "#fe62bd",
           "icon": "fa-star-of-life",
           "id": "sponsored",
-          "latlng": "51.509865, -0.118092",
+          "latlng": "49.28324,-123.11989",
           "popup": "<strong>Lorem ipsum dolor sit amet.</strong>",
           "title": "Lorem Ipsum",
-          "url": "https://yourwebsite.org/path"
+          "url": "/admin/plugins/uacanadamap"
         }
       ],
       "contextButtonSlide": "<a title=\"Forum Link\" href=\"/categories\"\r\n  ><button title=\"Open Forum\" class=\"btn btn-primary rounded-pill m-1 \" type=\"button\">\r\n    <i class=\"fa-solid fa-comment-dots\"></i> Community\r\n  </button>\r\n</a>\r\n\r\n<button title=\"Open Sheet\"\r\n  class=\"btn btn-primary rounded-pill m-1 \"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"main-first-tab\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n><i class=\"fa fas fa-solid fa-angle-up fa-fade\"></i>\r\n</button>\r\n\r\n<button title=\"Open Events\"\r\n  class=\"btn btn-primary rounded-pill m-1 \"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"events\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n>\r\n  <i class=\"fa fa-solid fa-calendar\"></i>\r\n</button>",
