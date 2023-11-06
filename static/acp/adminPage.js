@@ -317,7 +317,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 			const config = await fetch("/api/config");
             if (!config.ok) throw new Error("Failed to fetch config for CSRF token");
-            const configJson = await response.json();
+            const configJson = await config.json();
 			const csrfToken = configJson.csrf_token;
         
             
