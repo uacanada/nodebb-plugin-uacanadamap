@@ -328,7 +328,10 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				fetch('/api/v3/plugins/uacanadamap/flushsettings/', { method: 'POST', headers: {'x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
 				.then(response => response.json())
 			  	.then(data => {
-				console.log("Settings have been flushed:", data, confirmationInput);
+				console.log("Try flush settings:", data, confirmationInput);
+
+				// TODO 
+
 				instance.rebuildAndRestart();
 				bootbox.alert('Settings have been flushed.');
 			  })
