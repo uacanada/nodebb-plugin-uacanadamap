@@ -32,6 +32,7 @@
 								</ul>
 								<p><i class="fa-solid fa-gift"></i> Use MapBox’s free tier for less trafficked sites. <strong><i class="fa-solid fa-shield-halved"></i> Security Tip:</strong> Configure the key to operate only on your domain via MapBox settings to secure it against misuse.</p>
 								<p><strong>Without the key, functionality is reduced to OpenStreetMap basics, where users can only add new locations by pinning on the map (without geocoding features).</strong></p>
+								<p>Get your free API key for Mapbox on the page <a target="_blank" href="https://account.mapbox.com/auth/signup/">account.mapbox.com</a></p>
 							
 							  </div>
 								<input type="text" id="mapBoxApiKey" name="mapBoxApiKey"
@@ -78,6 +79,21 @@
 					</div>
 
 
+					<div class="card w-100 bg-light mb-5" style="">
+					<div class="card-header">Homepage Map Display</div>
+					<div class="card-body">
+						<h5 class="card-title">How To Set Map as Homepage</h5>
+						<p class="card-text">To showcase the map on your site's main page, follow these steps:</p>
+						<ol>
+						<li>Navigate to NodeBB settings at <a href="/admin/settings/general#home-page" target="_blank">/admin/settings/general#home-page</a>.</li>
+						<li>Locate the <strong>Home Page Route</strong> dropdown.</li>
+						<li>Select <b>Custom</b> from the options.</li>
+						<li>In the <strong>Custom Route</strong> field, type in <b>map</b></li>
+						</ol>
+					</div>
+					</div>
+
+
 					<div class="card w-100 mb-5">
 						<div class="card-header tracking-tight settings-header">Content</div>
 						<div class="card-body">
@@ -102,7 +118,7 @@
 								<small class="form-text d-block mb-2"> Define multiple dynamic slogans for your
 									map's landing page. These will display in a rotating manner, providing a diverse
 									introduction to your community map on each visit</small>
-								<button type="button" data-type="add" class="btn btn-sm btn-info">Add
+								<button type="button" data-type="add" class="btn btn-sm btn-primary">Add
 									slogan</button>
 							</div>
 						</div>
@@ -215,7 +231,7 @@
 									more extensive range of
 									subcategories and tags.
 								</small>
-								<button type="button" data-type="add" class="btn btn-sm btn-info mt-2">Add Place
+								<button type="button" data-type="add" class="btn btn-sm btn-primary mt-2">Add Place
 									Category</button>
 							</div>
 
@@ -238,7 +254,7 @@
 									Remember, these subcategories are distinct from your forum categories, though you
 									can link them by specifying forum category routing for each subcategory
 								</small>
-								<button type="button" data-type="add" class="btn btn-sm btn-info mt-2">Add Place Sub
+								<button type="button" data-type="add" class="btn btn-sm btn-primary mt-2">Add Place Sub
 									Category</button>
 							</div>
 
@@ -261,7 +277,7 @@
 									categories to indicate
 									the type of event they are creating.
 								</small>
-								<button type="button" data-type="add" class="btn btn-sm btn-info mt-2">Add events
+								<button type="button" data-type="add" class="btn btn-sm btn-primary mt-2">Add events
 									categories</button>
 							</div>
 
@@ -282,7 +298,7 @@
 								<ul data-type="list" class="list-group mb-2"></ul>
 								<small class="form-text d-block mb-2">List of custom Markers (Your advertisment, or
 									official, etc)</small>
-								<button type="button" data-type="add" class="btn btn-sm btn-info">Add
+								<button type="button" data-type="add" class="btn btn-sm btn-primary">Add
 									Marker</button>
 							</div>
 						</div>
@@ -308,7 +324,7 @@
 									Define a list of geographical entities (e.g., provinces, states, countries) for the
 									new location form. If global, list countries. If local, list relevant areas.
 								</small>
-								<button type="button" data-type="add" class="btn btn-sm btn-info mt-2">Add
+								<button type="button" data-type="add" class="btn btn-sm btn-primary mt-2">Add
 									Entity</button>
 
 

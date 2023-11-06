@@ -89,7 +89,7 @@
       ],
       "advMarkers": [
         {
-          "advMarkerImg": "/assets/plugins/uacanadamap/icons/logo.png",
+          "advMarkerImg": "/assets/plugins/uacanadamap/icons/placeMarker.png",
           "advMarkerTags": "tag1,tag2,tag3,sponsored",
           "card": "Lorem ipsum dolor sit amet.",
           "color": "#fe62bd",
