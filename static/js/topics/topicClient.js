@@ -22,7 +22,7 @@
 
             var osm = L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png")
 
-            var layer = accessToken ? mapbox:osm
+            var layer = accessToken && accessToken.length > 40 ? mapbox:osm
             
             var minimap = L.map("topicMap", {
                 attributionControl: true,
