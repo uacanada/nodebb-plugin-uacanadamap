@@ -314,27 +314,28 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		if ( ["I confirm the deletion of settings",
 		"I confirm the resetting and recreation of settings from defaultSettings.json",
 		"I confirm the deletion of ALL settings AND ALL PLACES" ].includes(confirmationInput)) {
+			bootbox.confirm('Click "Confirm" if you want to perfom this action: "'+confirmationInput+'". Caution, we recommend copying your current JSON settings as a backup copy.', async function (confirm) {
+				if (confirm) {
 
-			const config = await fetch("/api/config");
+					const config = await fetch("/api/config");
             if (!config.ok) throw new Error("Failed to fetch config for CSRF token");
             const configJson = await config.json();
 			const csrfToken = configJson.csrf_token;
-        
-            
-
-			bootbox.confirm('Click "Confirm" if you want to perfom this action: "'+confirmationInput+'". Caution, we recommend copying your current JSON settings as a backup copy.', function (confirm) {
-				if (confirm) {
-
 				fetch('/api/v3/plugins/uacanadamap/flushsettings', { method: 'POST', headers: {'x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
 				.then(response => response.json())
 			  	.then(data => {
-				console.log("Try flush settings:", data, confirmationInput);
 
-				console.log({data})
-				// TODO 
 
-				instance.rebuildAndRestart();
-				bootbox.alert('Settings have been flushed.');
+				console.log("Try flush settings:", {data, confirmationInput});
+
+				if(data.response){
+					instance.rebuildAndRestart();
+					bootbox.alert('Settings have been flushed.');
+				} else {
+					bootbox.alert('ERROR');
+				}
+
+				
 			  })
 			  .catch((error) => {
 				bootbox.alert('Failed to delete settings, please check the browser console logs.');
