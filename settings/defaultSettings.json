@@ -61,7 +61,7 @@
       ],
       "subCategories": [
         {
-          "cid": "23",
+          "cid": "1",
           "cidname": "Events",
           "icon": "fa-people-robbery",
           "name": "Meetups Events",
@@ -69,7 +69,7 @@
           "slug": "meetups"
         },
         {
-          "cid": "13",
+          "cid": "1",
           "cidname": "HELP",
           "icon": "fa-hand-holding-heart",
           "name": "Online Assistance",

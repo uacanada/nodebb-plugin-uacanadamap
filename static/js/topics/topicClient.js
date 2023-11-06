@@ -12,13 +12,17 @@
                 popupAnchor: [5, -5],
             });
             
-            var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + accessToken, {
+            var mapbox =  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + accessToken, {
                 maxZoom: 19,
                 id: 'mapbox/streets-v11',
                 tileSize: 512,
                 zoomOffset: -1,
                 accessToken: accessToken
             });
+
+            var osm = L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png")
+
+            var layer = accessToken ? mapbox:osm
             
             var minimap = L.map("topicMap", {
                 attributionControl: true,
@@ -28,7 +32,7 @@
                 contextmenu: false,
                 center: latlng,
                 zoom: 13,
-                layers: [mapbox],
+                layers: [layer],
                 tap: false,
                 minZoom: 8,
                 zoomControl: true,
