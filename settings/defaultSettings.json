@@ -24,8 +24,8 @@
       "altContentTrigger": "ALT",
       "unregisteredUserAlert": "Please register <a href=\"/register\">here</a>",
       "locationSharingErrorAlert": "Lorem ipsum: <ul class=\"try-locate-me list-group p-0 mt-2\"><li class=\"list-group-item\"><i class=\"fa-solid fa-location-arrow\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-regular fa-hand-point-down\"></i> Lorem ipsum</li><li class=\"list-group-item\"><i class=\"fa-solid fa-magnifying-glass\"></i> Lorem ipsum</li></ul>",
-      "defaultMarkerImage": "/assets/plugins/uacanadamap/icons/placeMarker.png",
-      "clusterIcon": "/assets/plugins/uacanadamap/icons/cluster.svg",
+      "defaultMarkerImage": "/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png",
+      "clusterIcon": "/assets/plugins/nodebb-plugin-uacanadamap/icons/cluster.svg",
       "citiesData": "London,Paris,New York,Vancouver",
       "countryLimit": "",
       "entityTitle": "Region",
@@ -89,7 +89,7 @@
       ],
       "advMarkers": [
         {
-          "advMarkerImg": "/assets/plugins/uacanadamap/icons/placeMarker.png",
+          "advMarkerImg": "/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png",
           "advMarkerTags": "tag1,tag2,tag3,sponsored",
           "card": "Lorem ipsum dolor sit amet.",
           "color": "#fe62bd",
