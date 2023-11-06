@@ -343,12 +343,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			  });
 				}
 			});
-
-
-			
-
-			
-		} else {
+			} else {
 			bootbox.alert('Incorrect confirmation text for resetting settings.');
 		}
 		
