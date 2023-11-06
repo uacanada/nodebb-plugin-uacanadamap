@@ -325,11 +325,12 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			bootbox.confirm('Click "Confirm" if you want to perfom this action: "'+confirmationInput+'". Caution, we recommend copying your current JSON settings as a backup copy.', function (confirm) {
 				if (confirm) {
 
-				fetch('/api/v3/plugins/uacanadamap/flushsettings/', { method: 'POST', headers: {'x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
+				fetch('/api/v3/plugins/uacanadamap/flushsettings', { method: 'POST', headers: {'x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
 				.then(response => response.json())
 			  	.then(data => {
 				console.log("Try flush settings:", data, confirmationInput);
 
+				console.log({data})
 				// TODO 
 
 				instance.rebuildAndRestart();
