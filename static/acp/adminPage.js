@@ -321,7 +321,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
             if (!config.ok) throw new Error("Failed to fetch config for CSRF token");
             const configJson = await config.json();
 			const csrfToken = configJson.csrf_token;
-				fetch('/api/v3/plugins/uacanadamap/flushsettings', { method: 'POST', headers: {'x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
+				fetch('/api/v3/plugins/uacanadamap/flushsettings', { method: 'POST', headers: {'Content-Type': 'application/json','x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
 				.then(response => response.json())
 			  	.then(data => {
 
