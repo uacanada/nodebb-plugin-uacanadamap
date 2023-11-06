@@ -32,7 +32,7 @@
 								</ul>
 								<p><i class="fa-solid fa-gift"></i> Use MapBox’s free tier for less trafficked sites. <strong><i class="fa-solid fa-shield-halved"></i> Security Tip:</strong> Configure the key to operate only on your domain via MapBox settings to secure it against misuse.</p>
 								<p><strong>Without the key, functionality is reduced to OpenStreetMap basics, where users can only add new locations by pinning on the map (without geocoding features).</strong></p>
-								<p>Get your free API key for Mapbox on the page <a target="_blank" href="https://account.mapbox.com/auth/signup/">account.mapbox.com</a></p>
+								<p>Get your free API key for Mapbox on the page <a target="_blank" href="https://account.mapbox.com/auth/signup/" style="color: white;border: 1px solid;padding: 0.2rem 0.5rem;">account.mapbox.com</a></p>
 							
 							  </div>
 								<input type="text" id="mapBoxApiKey" name="mapBoxApiKey"
