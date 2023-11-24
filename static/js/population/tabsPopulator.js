@@ -284,7 +284,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
           const tabInfo = getBySlug(ajaxify.data.UacanadaMapSettings.tabCategories, slug);
           if (!tabInfo) continue; 
           const {color, title, description, footer} = tabInfo;
-          const tabHtmlContent = `<li class="list-group-item"><div class="p-3"><h2 style="color:${color};">${title}</h2><p>${description}</p></div></li>${html}${footer?`<li class="list-group-item"><div class="p-3 tab-footer">${footer}</div> </li>`: ""}<li class="list-group-item tab-last-clearfix">Add your own place!</li> `;
+          const tabHtmlContent = `<li class="list-group-item"><div class="p-3"><h2 style="color:${color};">${title}</h2><p>${description}</p></div></li>${html}${footer?`<li class="list-group-item"><div class="p-3 tab-footer">${footer}</div> </li>`: ""}<li class="list-group-item tab-last-clearfix"><p class="newLocationOpenMarker btn btn-primary">Would you like to add your own location to the map?</p></li> `;
           processFragments("tab-"+slug,tabHtmlContent)// TODO: WIP
           }
         }
