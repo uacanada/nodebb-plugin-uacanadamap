@@ -259,9 +259,11 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 					bootbox.alert(`Please first configure at least one parent for "${subcat}" sub-category.`);
 				}
 
+
+				console.log({parents,val:selector.val()})
+
 				if(!parents[0]){
 					selector.val(selector.val())
-					console.log(selector.val())
 				} else {
 					selector.val(parents) 
 				}
