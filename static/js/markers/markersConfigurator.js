@@ -34,21 +34,20 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
          
           let eventHtml = "";
           
-          const editLink =
-            app.user?.uid &&
-            (app.user.isAdmin ||
-              app.user.isGlobalMod ||
-              Number(uid) === Number(app.user.uid))
-              ? `<div class="ua-edit-link"> <a href="#!" data-topic="${tid}" class="edit-place card-link"><i class="fa-regular fa-pen-to-square"></i> Edit</a></div>`
-              : "";
+          const editLink = app.user?.uid && (app.user.isAdmin || app.user.isGlobalMod || Number(uid) === Number(app.user.uid))
+          ? `<div class="ua-edit-link">
+              <a href="#!" data-place-author="${uid}" data-topic="${tid}" class="edit-place card-link">
+                <i class="fa-regular fa-pen-to-square"></i> Edit
+              </a>
+            </div>`
+          : "";
+
               
           
           const profileIcon = UacanadaMap.api.getProfileImage(item);
           const markerTitle = placeTitle || categoryName;
           const cardTitle = eventName ? eventName : placeTitle || markerTitle;
           const eventNameHtml = eventName ? `<b>${eventName}</b><br>` : "";
-          
-          
           const subCategoryData = UacanadaMap.subCategoryRouterObject[placeCategory]
           const parentTabs = subCategoryData.tabs || []
           const faIconClass = subCategoryData.icon || 'fa-map'
@@ -68,14 +67,10 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
               : `<span class="ua-event-popup">📅 Every ${eventWeekDay} ⏰ ${eventStartTime} ${eventCategoryName}</span>`;
           }
     
-          const socialIcon =
-            socialtype && socialtype !== "undefined"
-              ? UacanadaMap.socialMediaIcons[socialtype]
-              : '<i class="fa-brands fa-chrome"></i>';
+          const socialIcon =  socialtype && socialtype !== "undefined" ? UacanadaMap.socialMediaIcons[socialtype] : '<i class="fa-brands fa-chrome"></i>';
           const cardTitleWithLinkAndIcon = `${faIcon} ${cardTitle}`;
     
-          const language =
-            window.navigator.userLanguage || window.navigator.language; // TODO improve
+          const language = window.navigator.userLanguage || window.navigator.language; // TODO improve
           const langRegex = new RegExp(ajaxify.data.UacanadaMapSettings.altContentTrigger, "mig");
           const bodyTextDetected =
             language.match(langRegex) && placeDescriptionAlt
@@ -168,6 +163,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
               ${eventHtml}
               ${bodyText}
               </p>
+              ${editLink}
               </div>
             </div>
           </div>
