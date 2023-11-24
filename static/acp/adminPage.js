@@ -254,14 +254,11 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				const subcat = listItem.attr('data-item-slug')
 				const parentText = listItem.find('[data-parents-for="'+subcat+'"]').text();
 				const selector = $(formItem).find('select#acpParentTabsSelector')
-				const parents = parentText ? parentText.split(',') : selector.val();
+				const parents = parentText ? parentText.split(',') : selector.find('option:first').val();
 				
 				if(!loadedSettings.tabCategories || !loadedSettings.tabCategories[0]){
 					bootbox.alert(`Please first configure at least one parent for "${subcat}" sub-category.`);
 				}
-
-
-				console.log({parents})
 
 				selector.val(parents) 
 
