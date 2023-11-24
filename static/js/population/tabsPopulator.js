@@ -29,7 +29,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         return `<li class="${itemClass}">
         <div class="location-item place-with-coordinates d-flex align-items-start" data-marker-id="${tid}">
             <div class="me-3">
-                ${ img ? `<img src="${img}" alt="${mainUsername} profile image" class="rounded-circle" style="width: 50px; height: 50px;">`  : ""  }
+                ${ img ? `<img src="${img}" alt="${mainUsername} profile image" class="rounded-circle d-block" onerror="this.remove();" style="width: 50px; height: 50px;">`  : ""  }
             </div>
             <div>
                 <div class="location-title fw-bold">${placeTitle ?? mainUsername}</div>
