@@ -256,11 +256,12 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				const selector = $(formItem).find('select#acpParentTabsSelector')
 				
 				if(!loadedSettings.tabCategories || !loadedSettings.tabCategories[0]){
-					bootbox.alert(`Please configure at least one parent for "${subcat}" sub-category.`);
+					bootbox.alert(`Please first configure at least one parent for "${subcat}" sub-category.`);
 				}
 
 				if(!parents[0]){
 					selector.val(selector.val())
+					console.log(selector.val())
 				} else {
 					selector.val(parents) 
 				}
