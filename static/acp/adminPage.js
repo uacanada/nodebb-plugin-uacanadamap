@@ -51,8 +51,7 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				initACE(elementId + 'Editor', mode, '#' + elementId);
 			});
 
-		//	setTimeout(() => { $('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) })  }, 2000);
-
+		
 
 		    if(currentSettings.mapBoxApiKey?.length < 30){
 				typingEffect(document.getElementById('msg-about-api'), document.getElementById('msg-about-api').innerHTML, 5);
@@ -255,11 +254,15 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				const subcat = listItem.attr('data-item-slug')
 				const parents = listItem.find('[data-parents-for="'+subcat+'"]').text().split(',')
 				const selector = $(formItem).find('select#acpParentTabsSelector')
-				console.log({uuid,subcat,parents})
-				selector.val(parents)
+				
+				if(!loadedSettings.tabCategories || !loadedSettings.tabCategories[0]){
+					bootbox.alert(`Please configure at least one parent for "${subcat}" sub-category.`);
+				}
 
 				if(!parents[0]){
-					bootbox.alert(`Please configure at least one parent for "${subcat}" sub-category.`);
+					selector.val(selector.val())
+				} else {
+					selector.val(parents) 
 				}
 
 				
