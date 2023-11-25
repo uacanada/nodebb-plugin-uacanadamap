@@ -49,14 +49,37 @@ class EventListeners {
 		  $(document).on("change.uacanadamap", 'input[name="socialtype"]', function () {
 			UacanadaMap.form.socialTypeIconAdjust()
 		  });
+
+
+
+
 		  $(document).on("change.uacanadamap", "#ua-location-cover-img", function () {
-			var fileReader = new FileReader();
-			fileReader.onload = function () {
-			  var data = fileReader.result;
-			  $("#ua-form-img-holder").html('<img src="' + data + '"/>');
-			};
-			fileReader.readAsDataURL($("input#ua-location-cover-img")[0].files[0]);
-		  });
+			const files = $("input#ua-location-cover-img")[0].files;
+			$("#ua-form-img-holder").empty(); 
+		
+			for (let i = 0; i < files.length; i++) {
+				var fileReader = new FileReader();
+				fileReader.onload = function (event) {
+					var data = event.target.result;
+				
+					$("#ua-form-img-holder").append(
+						'<div class="image-preview">' +
+						'<img src="' + data + '" style="max-width: 100px; margin-right: 5px;">' +
+						'<button class="set-main-image" data-image-index="' + i + '">Set as Main</button>' +
+						'</div>'
+					);
+				};
+				fileReader.readAsDataURL(files[i]);
+			}
+		});
+		
+		
+		$(document).on('click', '.set-main-image', function() {
+			const imageIndex = $(this).data('image-index');
+			$('#mainImage').val(imageIndex);
+			
+		});
+		
 		  $(document).on("change.uacanadamap", "#location-category-filter", function () {
 			UacanadaMap.api.setCategoryAndOpenCards($(this).val());
 		  });
