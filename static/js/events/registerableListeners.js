@@ -65,7 +65,7 @@ class EventListeners {
 					let initMainMark = i === 0 ? 'mainPlaceImg' : ''
 				
 					$("#ua-form-img-holder").append(
-						'<div data-image-index="' + i + ' class="image-preview d-flex flex-column align-items-center m-2 '+initMainMark+'"><img src="' + data + '"></div>'
+						'<div data-image-index="' + i + ' class="image-preview d-flex flex-column align-items-center m-2 '+initMainMark+'"> <img class="me-1" src="' + data + '"/> </div>'
 					);
 					
 				};
@@ -75,7 +75,7 @@ class EventListeners {
 		
 		
 		$(document).on('click', '.image-preview', function() {
-			$('.image-preview').removeClass('mainPlaceImg')
+			$(this).removeClass('mainPlaceImg')
 			const imageIndex = $(this).data('image-index');
 			$('.image-preview[data-image-index="'+imageIndex+'"]').addClass('mainPlaceImg')
 			$('#mainImage').val(imageIndex);
