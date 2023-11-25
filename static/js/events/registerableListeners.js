@@ -61,11 +61,11 @@ class EventListeners {
 				var fileReader = new FileReader();
 				fileReader.onload = function (event) {
 					var data = event.target.result;
-
-					let initMainMark = i === 0 ? 'mainPlaceImg' : ''
+		
+					let initMainMark = i === 0 ? 'mainPlaceImg' : '';
 				
 					$("#ua-form-img-holder").append(
-						'<div data-image-index="' + i + ' class="image-preview d-flex flex-column align-items-center m-2 '+initMainMark+'"> <img class="me-1" src="' + data + '"/> </div>'
+						'<div data-image-index="' + i + '" class="image-preview d-flex flex-column align-items-center m-2 ' + initMainMark + '"> <img class="set-image me-1" src="' + data + '"/> </div>'
 					);
 					
 				};
@@ -74,13 +74,13 @@ class EventListeners {
 		});
 		
 		
-		$(document).on('click', '.image-preview', function() {
-			$(this).removeClass('mainPlaceImg')
-			const imageIndex = $(this).data('image-index');
-			$('.image-preview[data-image-index="'+imageIndex+'"]').addClass('mainPlaceImg')
+		$(document).on('click', '.set-image', function() {
+			$(".image-preview").removeClass('mainPlaceImg');
+			const imageIndex = $(this).parent().data('image-index');
+			$('.image-preview[data-image-index="' + imageIndex + '"]').addClass('mainPlaceImg');
 			$('#mainImage').val(imageIndex);
-			
 		});
+		
 		
 		  $(document).on("change.uacanadamap", "#location-category-filter", function () {
 			UacanadaMap.api.setCategoryAndOpenCards($(this).val());
