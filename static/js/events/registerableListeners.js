@@ -63,11 +63,12 @@ class EventListeners {
 					var data = event.target.result;
 				
 					$("#ua-form-img-holder").append(
-						'<div class="image-preview">' +
-						'<img src="' + data + '" style="max-width: 100px; margin-right: 5px;">' +
-						'<button class="set-main-image" data-image-index="' + i + '">Set as Main</button>' +
+						'<div class="image-preview d-flex flex-column align-items-center m-2">' +
+						'<img src="' + data + '" class="img-fluid">' +
+						'<button class="set-main-image btn btn-primary btn-sm mt-1" data-image-index="' + i + '">Set as Main</button>' +
 						'</div>'
 					);
+					
 				};
 				fileReader.readAsDataURL(files[i]);
 			}
