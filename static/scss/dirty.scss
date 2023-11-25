@@ -250,13 +250,14 @@ input#ua-location-cover-img:before {
 // }
 
 
-#ua-form-img-holder img {
+#ua-form-img-holder {
+position:relative;
+img {
   height: 100px;
   width: auto;
-  border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 0 6px -1px black;
   margin-bottom: 1rem;
+}
 }
 
 
@@ -1571,3 +1572,13 @@ body.uacanada-map-page #ua-mainframe {
     background: rgba(0, 88, 255, 0.03);
 }
 
+.image-preview.mainPlaceImg:before {
+  content: '\f2c2';
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  color: #00355f;
+  font-size: 2rem;
+  position: absolute;
+  text-shadow: -2px 1px 4px #293340;
+  top: -5px;
+}
