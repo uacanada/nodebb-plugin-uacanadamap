@@ -61,11 +61,13 @@ class EventListeners {
 				var fileReader = new FileReader();
 				fileReader.onload = function (event) {
 					var data = event.target.result;
+
+					let initMainMark = i === 0 ? 'mainPlaceImg' : ''
 				
 					$("#ua-form-img-holder").append(
 						'<div class="image-preview d-flex flex-column align-items-center m-2">' +
-						'<img src="' + data + '" class="img-fluid">' +
-						'<button class="set-main-image btn btn-primary btn-sm mt-1" data-image-index="' + i + '">Set as Main</button>' +
+						'<img src="' + data + '" class="set-main-image '+initMainMark+'" data-image-index="' + i + '">' +
+					//	'<button title="main" class="set-main-image btn btn-primary btn-sm mt-1" data-image-index="' + i + '"><i class="fa-solid fa-id-badge"></i></button>' +
 						'</div>'
 					);
 					
@@ -76,7 +78,9 @@ class EventListeners {
 		
 		
 		$(document).on('click', '.set-main-image', function() {
+			$('.set-main-image').removeClass('mainPlaceImg')
 			const imageIndex = $(this).data('image-index');
+			$('.set-main-image[data-image-index="'+imageIndex+'"]').addClass('mainPlaceImg')
 			$('#mainImage').val(imageIndex);
 			
 		});
