@@ -71,14 +71,15 @@ class EventListeners {
 				};
 				fileReader.readAsDataURL(files[i]);
 			}
+			$('#mainImage').val('0');
 		});
 		
 		
 		$(document).on('click', '.set-image', function() {
 			$(".image-preview").removeClass('mainPlaceImg');
-			const imageIndex = $(this).parent().data('image-index');
+			const imageIndex = $(this).parent().data('image-index') || 0;
 			$('.image-preview[data-image-index="' + imageIndex + '"]').addClass('mainPlaceImg');
-			$('#mainImage').val(imageIndex);
+			$('#mainImage').val(String(imageIndex));
 		});
 		
 		
