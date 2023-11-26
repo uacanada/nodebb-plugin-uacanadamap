@@ -96,7 +96,7 @@ define('forms/editPlace',["core/variables" /*   Global object UacanadaMap  */], 
                   $('#mainImage').val(mainImageIndex);
                   for (const [i, img] of place["gallery"].entries()) {
                     let initMainMark = i === mainImageIndex ? 'mainPlaceImg' : ''; 
-                    $("#ua-form-img-holder").append('<div data-image-index="' + i + '" class="image-preview d-flex flex-column align-items-center m-2 ' + initMainMark + '"> <img class="set-image me-1" src="/assets/' + img + '"/> </div>');
+                    $("#ua-form-img-holder").append('<div data-image-index="' + i + '" class="image-preview d-flex flex-column align-items-center m-2 ' + initMainMark + '"> <img class="set-image me-1" src="/assets/uploads' + img + '"/> </div>');
                   }
                   
 
