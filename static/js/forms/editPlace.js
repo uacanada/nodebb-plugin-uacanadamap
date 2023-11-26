@@ -90,11 +90,25 @@ define('forms/editPlace',["core/variables" /*   Global object UacanadaMap  */], 
                   $('#place-tag-input').val(tagString)
                   $('#place-tag-input').tagsinput('add',tagString)
 
+                } else if (inputKey == "gallery") {
+
+                  const mainImageIndex = Number(place["mainImage"]) || 0
+                  $('#mainImage').val(mainImageIndex);
+                  for (const [i, img] of place["gallery"].entries()) {
+                    let initMainMark = i === mainImageIndex ? 'mainPlaceImg' : ''; 
+                    $("#ua-form-img-holder").append('<div data-image-index="' + i + '" class="image-preview d-flex flex-column align-items-center m-2 ' + initMainMark + '"> <img class="set-image me-1" src="/assets/' + img + '"/> </div>');
+                  }
+                  
+
                 } else if (inputKey == "image") {
                    if(place["placethumb"]){
-                    $("#ua-form-img-holder").html('<img src="'+place["placethumb"]+'"/>')
+                    $("#ua-form-img-holder").append('<img src="'+place["placethumb"]+'"/>')
 
                    }
+
+                   
+
+
                  
                 } else {
                   $(`form#placeForm [name="${inputKey}"]`).val(place[inputKey]);
