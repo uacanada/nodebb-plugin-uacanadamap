@@ -70,7 +70,7 @@
                 );
             }
 
-            if (window.Swiper?.version) {
+            if (window.Swiper?.name) {
               console.log('Swiper OK [window]')
             } else {
                 $.getScript(  modulespath+"swiper/swiper-bundle.min.js",

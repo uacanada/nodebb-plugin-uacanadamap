@@ -212,6 +212,22 @@ UacanadaMap.api.setLocationCardtoPost = () => {
 
                 // $('.posts li[data-index="0"] .post-container .content').prepend(html)
 
+               
+               if(json.gallery){
+                let items = "";
+
+                for(imgsrc of json.gallery){
+                    items += `<div class="swiper-slide"><img src="${imgsrc}"></div>`
+                }
+
+                html += `<div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                 ${items}
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>`
+                }
+
                 html +=
                     '<div class="w-100 text-center position-relative" style="z-index: 900; "><i id="scrolldown-offset" class="fa fa-chevron-down bounce-scrolldown" aria-hidden="true"></i></div>';
 
