@@ -5,7 +5,8 @@
     "static": "static",
     "icons": "static/assets/icons",
     "images": "static/assets/images",
-    "leaflet": "../node_modules/leaflet/dist"
+    "leaflet": "../node_modules/leaflet/dist",
+    "swiper":"../node_modules/swiper"
   },
   
   "scss": [

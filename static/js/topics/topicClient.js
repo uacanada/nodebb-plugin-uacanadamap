@@ -57,16 +57,30 @@
     
     $(window).on("action:ajaxify.end", function (event, data) {
         const place = ajaxify?.data?.mapFields;
+        const modulespath = '/assets/plugins/nodebb-plugin-uacanadamap/'
         if (place?.placeCategory) {
+
             if (window.L?.version) {
                 setPlaceMap(window.L, place, false);
             } else {
-                $.getScript(
-                    "/assets/plugins/nodebb-plugin-uacanadamap/leaflet/leaflet.js",
+                $.getScript( modulespath+"leaflet/leaflet.js",
                     function () {
                         setPlaceMap(window.L, place, true);
                     }
                 );
             }
+
+            if (window.Swiper?.version) {
+              console.log('Swiper OK [window]')
+            } else {
+                $.getScript(  modulespath+"swiper/swiper-bundle.min.js",
+                    function () {
+                        console.log('Swiper OK [getScript]')
+                    }
+                );
+            }
+
+
+
         }
     });
