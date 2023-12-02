@@ -67,10 +67,7 @@
     }
 
     function initSwiper(){
-        const topicPlaceSwiper = new Swiper("#topicPlaceGallery", {
-            slidesPerView: "auto",
-            spaceBetween: 15,
-        })
+        const topicPlaceSwiper = new Swiper("#topicPlaceGallery", { slidesPerView: "auto" ,  mousewheel:true })
     }
     
    
@@ -107,6 +104,9 @@
             }
             loadSwiperCSS(modulespath+"swiper/swiper-bundle.min.css");
 
-
+            $('#topicPlaceGallery .swiper-slide a').off('click').on('click', function(event) {
+                event.preventDefault();
+            });
+            
         }
     });
