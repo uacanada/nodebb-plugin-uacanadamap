@@ -54,6 +54,22 @@
         
     
     }
+
+    function loadCSSIfNotLoaded(filename) {
+        if (!$('link[href="' + filename + '"]').length) {
+            var file = document.createElement("link");
+            file.setAttribute("rel", "stylesheet");
+            file.setAttribute("type", "text/css");
+            file.setAttribute("href", filename);
+    
+            document.head.appendChild(file);
+        }
+    }
+    
+   
+    
+    
+     
     
     $(window).on("action:ajaxify.end", function (event, data) {
         const place = ajaxify?.data?.mapFields;
@@ -78,6 +94,7 @@
                         console.log('Swiper OK [getScript]')
                     }
                 );
+                loadSwiperCSS(modulespath+"swiper/swiper-bundle.min.css");
             }
 
 
