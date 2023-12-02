@@ -69,8 +69,7 @@
     function initSwiper(){
         const topicPlaceSwiper = new Swiper("#topicPlaceGallery", {
             slidesPerView: "auto",
-            centeredSlides: true,
-            spaceBetween: 30,
+            spaceBetween: 15,
         })
     }
     
