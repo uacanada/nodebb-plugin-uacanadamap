@@ -55,15 +55,23 @@
     
     }
 
-    function loadCSSIfNotLoaded(filename) {
+    function loadSwiperCSS(filename) {
         if (!$('link[href="' + filename + '"]').length) {
-            var file = document.createElement("link");
+            let file = document.createElement("link");
             file.setAttribute("rel", "stylesheet");
             file.setAttribute("type", "text/css");
             file.setAttribute("href", filename);
     
             document.head.appendChild(file);
         }
+    }
+
+    function initSwiper(){
+        const topicPlaceSwiper = new Swiper("#topicPlaceGallery", {
+            slidesPerView: "auto",
+            centeredSlides: true,
+            spaceBetween: 30,
+        })
     }
     
    
@@ -87,16 +95,18 @@
             }
 
             if (window.Swiper?.name) {
-              console.log('Swiper OK [window]')
+                initSwiper()
+               
             } else {
                 $.getScript(  modulespath+"swiper/swiper-bundle.min.js",
                     function () {
-                        console.log('Swiper OK [getScript]')
+                       
+                        initSwiper()
                     }
                 );
-                loadSwiperCSS(modulespath+"swiper/swiper-bundle.min.css");
+               
             }
-
+            loadSwiperCSS(modulespath+"swiper/swiper-bundle.min.css");
 
 
         }
