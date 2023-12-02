@@ -67,7 +67,7 @@
     }
 
     function initSwiper(){
-        const topicPlaceSwiper = new Swiper("#topicPlaceGallery", { slidesPerView: "auto" ,  mousewheel:true })
+        const topicPlaceSwiper = new Swiper("#topicPlaceGallery", { slidesPerView: "auto" ,  mousewheel:true,  freeMode: true })
     }
     
    
@@ -104,9 +104,9 @@
             }
             loadSwiperCSS(modulespath+"swiper/swiper-bundle.min.css");
 
-            $('#topicPlaceGallery .swiper-slide a').off('click').on('click', function(event) {
-                event.preventDefault();
-            });
+            // $('#topicPlaceGallery .swiper-slide a').off('click').on('click', function(event) {
+            //     event.preventDefault();
+            // });
             
         }
     });
