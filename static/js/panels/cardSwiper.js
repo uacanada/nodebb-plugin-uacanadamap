@@ -322,12 +322,10 @@
         </div><div id="place-modal-comments"><div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>`
 
 
-
-
-        renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
-        
-        const topicPlaceSwiper = new UacanadaMap.Swiper("#topicPlaceGallery", { slidesPerView: "auto" ,  mousewheel:true,  freeMode: true })
+
+        await renderComments(tid)
+        initializeOrUpdatePlaceModalSwiper()
         
   
   
@@ -660,6 +658,22 @@ function handleSlideChange(e, places, UacanadaMap) {
       UacanadaMap.api.shakeElements(['#location-category-filter', '#ua-place-buttons button.active'],'accent-animation');
     }
 }
+
+
+function initializeOrUpdatePlaceModalSwiper() {
+  if (UacanadaMap.swipers && UacanadaMap.swipers.topicPlaceSwiper) {
+    UacanadaMap.swipers.topicPlaceSwiper.destroy(true, true);
+  }
+  UacanadaMap.swipers.topicPlaceSwiper = new UacanadaMap.Swiper("#topicPlaceGallery", {
+    slidesPerView: "auto",
+    mousewheel: true,
+    freeMode: true
+  });
+}
+
+
+
+
   
   })
   
