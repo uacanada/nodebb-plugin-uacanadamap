@@ -299,9 +299,8 @@
         const remainingPosts = generateRemainingPosts(topic.posts.slice(1));
     
         $("#place-modal-comments").html(firstPost + remainingPosts);
-
-        
         setTitle($(firstPost).find('#metaTab'))
+        
        
       }
 
@@ -327,6 +326,8 @@
 
         renderComments(tid)
         $("#ua-place-modal").offcanvas("show");
+        
+        const topicPlaceSwiper = new UacanadaMap.Swiper("#topicPlaceGallery", { slidesPerView: "auto" ,  mousewheel:true,  freeMode: true })
         
   
   
