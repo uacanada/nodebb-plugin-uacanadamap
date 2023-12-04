@@ -606,7 +606,10 @@
 									<p class="mt-4">
 									  <strong>To apply (replace) default settings from a file:</strong>
 									  <small>Enter the phrase below to replace current settings with defaults from ./node_modules/nodebb-plugin-uacanadamap/settings/defaultSettings.json file</small>
-									  <code class="d-block mt-2">I confirm the resetting and recreation of settings from defaultSettings.json</code>
+									  <code class="d-block mt-2">I confirm the resetting and recreation of settings from defaultSettings.json</code> 
+									  OR:
+									  <code class="d-block mt-2">I confirm the resetting and recreation of settings from [CUSTOM SETTINGS FILENAME].json</code> 
+
 									</p>
 									  
 									<p class="mt-4">
