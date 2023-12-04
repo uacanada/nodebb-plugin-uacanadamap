@@ -316,9 +316,14 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	async function resetSettings(){
 		settings.save('uacanadamap', $('<form></form>'))
 		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
-		if ( ["I confirm the deletion of settings",
-		"I confirm the resetting and recreation of settings from",
-		"I confirm the deletion of ALL settings AND ALL PLACES" ].includes(confirmationInput)) {
+
+		const phrases = [
+			"I confirm the deletion of settings",
+			"I confirm the resetting and recreation of settings from",
+			"I confirm the deletion of ALL settings AND ALL PLACES"
+		];
+		const isMatch = phrases.some(phrase => confirmationInput.startsWith(phrase));
+		if (isMatch) {
 			bootbox.confirm('Click "Confirm" if you want to perfom this action: "'+confirmationInput+'". Caution, we recommend copying your current JSON settings as a backup copy.', async function (confirm) {
 				if (confirm) {
 
