@@ -48,7 +48,7 @@ define('markers/markersConfigurator',["core/variables" /*   Global object Uacana
           const markerTitle = placeTitle || categoryName;
           const cardTitle = eventName ? eventName : placeTitle || markerTitle;
           const eventNameHtml = eventName ? `<b>${eventName}</b><br>` : "";
-          const subCategoryData = UacanadaMap.subCategoryRouterObject[placeCategory]
+          const subCategoryData = UacanadaMap.subCategoryRouterObject[placeCategory] || {tabs:"all"}
           const parentTabs = subCategoryData.tabs || []
           const faIconClass = subCategoryData.icon || 'fa-map'
           const parentTabColor = UacanadaMap.parentCategoriesObject[parentTabs[0]]?.color
