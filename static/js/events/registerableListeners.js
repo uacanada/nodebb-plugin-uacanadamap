@@ -49,14 +49,40 @@ class EventListeners {
 		  $(document).on("change.uacanadamap", 'input[name="socialtype"]', function () {
 			UacanadaMap.form.socialTypeIconAdjust()
 		  });
+
+
+
+
 		  $(document).on("change.uacanadamap", "#ua-location-cover-img", function () {
-			var fileReader = new FileReader();
-			fileReader.onload = function () {
-			  var data = fileReader.result;
-			  $("#ua-form-img-holder").html('<img src="' + data + '"/>');
-			};
-			fileReader.readAsDataURL($("input#ua-location-cover-img")[0].files[0]);
-		  });
+			const files = $("input#ua-location-cover-img")[0].files;
+			$("#ua-form-img-holder").empty(); 
+		
+			for (let i = 0; i < files.length; i++) {
+				var fileReader = new FileReader();
+				fileReader.onload = function (event) {
+					var data = event.target.result;
+		
+					let initMainMark = i === 0 ? 'mainPlaceImg' : '';
+				
+					$("#ua-form-img-holder").append(
+						'<div data-image-index="' + i + '" class="image-preview d-flex flex-column align-items-center m-2 ' + initMainMark + '"> <img class="set-image me-1" src="' + data + '"/> </div>'
+					);
+					
+				};
+				fileReader.readAsDataURL(files[i]);
+			}
+			$('#mainImage').val('0');
+		});
+		
+		
+		$(document).on('click', '.set-image', function() {
+			$(".image-preview").removeClass('mainPlaceImg');
+			const imageIndex = $(this).parent().data('image-index') || 0;
+			$('.image-preview[data-image-index="' + imageIndex + '"]').addClass('mainPlaceImg');
+			$('#mainImage').val(String(imageIndex));
+		});
+		
+		
 		  $(document).on("change.uacanadamap", "#location-category-filter", function () {
 			UacanadaMap.api.setCategoryAndOpenCards($(this).val());
 		  });
@@ -72,7 +98,7 @@ class EventListeners {
 		
 
 
-		  $('#scrollableBottomPanel').on('scroll', this.bottomPanelScrollHandler);
+		  $('#innerScrollPanel').on('scroll', this.bottomPanelScrollHandler);
 
 		  UacanadaMap.api.swipeZonesRegister()
                     
@@ -222,9 +248,13 @@ zoomendHandler() {
   }
   
   handleMarkGeocode(e) {
-	let { lat, lng } = e.geocode.center;
-	let loc = { latlng: { lat, lng } };
-	UacanadaMap.api.createMarkerButton(loc, e.geocode);
+	if(UacanadaMap.isMapBoxKeyExist){
+		let { lat, lng } = e.geocode.center;
+		let loc = { latlng: { lat, lng } };
+		UacanadaMap.api.createMarkerAtLocation(loc, e.geocode);
+	} else {
+		UacanadaMap.console.log(handleMarkGeocode,e)
+	}
   }
 
 
@@ -246,10 +276,11 @@ zoomendHandler() {
 
 
 	bottomPanelScrollHandler = utils.debounce(() => {
-		const $panel = $('#scrollableBottomPanel');
+		const $panel = $('#innerScrollPanel');
 		const currentScrollTop = $panel.scrollTop();
 	
-		if (currentScrollTop < 25) {
+		if (currentScrollTop < 5) {
+		  UacanadaMap.console.log(`Force scrollableBottomPanel.close() cause:  scrollTop:`.currentScrollTop)
 		  UacanadaMap.api.scrollableBottomPanel.close();
 		  UacanadaMap.previousScrollHeight = 0;
 		  return;
@@ -259,7 +290,7 @@ zoomendHandler() {
 		const isWithinViewHeight = currentScrollTop < Math.floor(window.innerHeight / 2);
 	
 		if (currentScrollTop > UacanadaMap.PANEL_SCROLL_HEIGHT && isScrollingDown && isWithinViewHeight) {
-		  const updatedScrollHeight = Math.floor(window.innerHeight * 0.77);
+		  const updatedScrollHeight = Math.floor(window.innerHeight * 0.7);
 		  $panel.animate({ scrollTop: updatedScrollHeight }, 300, 'swing');
 		  UacanadaMap.previousScrollHeight = updatedScrollHeight;
 		} else {
@@ -289,7 +320,7 @@ zoomendHandler() {
 		  '.newLocationCancelButton': 	() => UacanadaMap.api.locationSelection.cleanMarker(),
 		  '.newLocationOpenMarker': 	() => UacanadaMap.api.locationSelection.addMarker(),
 		  '.showBottomPanel':			() => UacanadaMap.api.scrollableBottomPanel.open(findEl('[data-ua-content-id]')),
-		 // '.leaflet-map-pane':		    () => UacanadaMap.api.scrollableBottomPanel.close() 
+		  '.sheet-spacer':		        () => UacanadaMap.api.scrollableBottomPanel.close() 
 		};
 	  
 		for (const selector in actions) {

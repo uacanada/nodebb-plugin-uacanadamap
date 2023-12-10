@@ -165,7 +165,7 @@
       html += '</div></div>'
       places.length
   
-      UacanadaMap.api.contextButtonText({text:'Open '+places.length+' places... '+UacanadaMap.api.getCatName(cat),delay:1300,to:UacanadaMap.contextButton.router.cards})
+      //UacanadaMap.api.contextButtonText({text:'Open '+places.length+' places... '+UacanadaMap.api.getCatName(cat),delay:1300,to:UacanadaMap.contextButton.router.cards})
   
   
       await sleep(33);
@@ -183,88 +183,181 @@
   }
   
   UacanadaMap.api.openPlaceModal = async (tid) => {
+        UacanadaMap.api.shakeElements(['#cardsSwiperPlaceholder'],'ua-shake-vert')
   
         if(!tid){
           tid = Number($('.swiper-slide-active .ua-place-card-inner').attr('data-ua-tid'))
         }
-  
+
+
+       
+        
+
         const p = UacanadaMap.allPlaces[tid].json
         const fa_icon = UacanadaMap.allPlaces[tid].marker?.icon
         const placeModal = document.getElementById('ua-place-modal')
         const modalTitle = placeModal.querySelector('#modal-place-title')
-        const modalBodyInput = placeModal.querySelector('#ua-place-modal .dyn-content')
-        modalTitle.innerHTML = `${fa_icon} ${p.placeTitle}`
+        const modalBodyInput = placeModal.querySelector('#placeLoader')
+
+
+
+        function setTitle(el){
+          
+
+          const author = {
+              color: el.data('authorcolor'),
+              avatar: el.data('authoravatar'),
+              name: el.data('authorname'),
+              letter: el.data('authorletter')
+          };
+
+         
+          const avatarImage = `<img alt="${author.name} Avatar" title="${author.name}" data-uid="${p.uid}" class="p-0 m-0 avatar avatar-rounded me-2" component="user/picture" src="${author.avatar}" style="--avatar-size: 2rem; border-radius: 50%; width: 2rem; height: 2rem;" onerror="this.remove();" itemprop="image"></img>`;
+          const avatarDiv = `<div class="me-2 avatar avatar-tooltip not-responsive avatar-rounded d-flex  align-items-center justify-content-center" component="avatar/picture" style="width:2rem; height:2rem; background-color:${author.color};" aria-label="${author.name}" data-bs-original-title="${author.name}"><b>${author.name[0]}</b></div>`
+            
+          const avatar = author.avatar ? avatarImage : avatarDiv;
+
+          modalTitle.innerHTML = `<div class="d-flex" style="line-height: 2rem;color:${author.color};text-transform: none;">${avatar}${author.name}</div>`;
+        }
+
         const img = UacanadaMap.api.getProfileImage(p)
-        const latlngSrting = p.latlng.join(',')
-        modalBodyInput.innerHTML = `<div style="background:url(${img}) center center;background-size:cover;width:5rem" class="me-2 mb-1 ratio ratio-1x1 rounded-circle"></div>
-        <div class="white-space-pre-line">
-        ${p.placeDescription}  ${p.placeDescriptionAlt?`<p class="w-100 d-flex justify-content-center"><i class="fa-solid fa-language"></i><p>${p.placeDescriptionAlt}`:''}
-        </div>
-  
-        <ul class="list-group mt-3">
-        ${p.mainUsername ? `<li class="list-group-item">${fa_icon} ${p.mainUsername}</li>` : ''}
-        ${p.placeExternalUrl ? `<li class="list-group-item">🔗 ${p.placeExternalUrl}</li>` : ''}
-        ${p.categoryName ? `<li class="list-group-item">🔖 ${p.categoryName}</li>` : ''}
-        ${p.city && p.province ? `<li class="list-group-item">🌆 ${p.city}, ${p.province}</li>` : ''}
-        ${p.streetAddress ? `<li class="list-group-item">📮 ${p.streetAddress}</li>` : ''}
-        ${p.subaddress ? `<li class="list-group-item">${p.subaddress}</li>` : ''}
-        <li class="list-group-item text-truncate"><i class="fa-brands fa-google"></i> <a title="google map" href="https://maps.google.com/?q=${latlngSrting}">${latlngSrting}</a></li>
-        </ul>
-      <div id="place-modal-comments"></div>
-      `
-        $("#ua-place-modal").offcanvas("show");
-  
-        const topicFromApi = await fetch(`/api/topic/${tid}`); // TODO add /1 in settings for comment sorting
-        const topic = await topicFromApi.json();
-        if(!topic || !topic.posts[0]) return
-  
-        let comments = `<ul id="recent_posts" class="mt-5 list-group" data-numposts="${topic.posts.length}" data-cid="${topic.cid}">`; // TODO chnage id="recent_posts" to anothe because this id loads comments from widget 
-        topic.posts.forEach((comment) => {
+
+
+        async function getTopicData(tid) {
+          try {
+              const topicFromApi = await fetch(`/api/topic/${tid}/1/1`);
+              const topic = await topicFromApi.json();
+              if(!topic || !topic.posts[0]) return {error:'Topic is empty: '+tid}
+              
+              return topic;
+          } catch (error) {
+            UacanadaMap.console.log(error);
+            return {error:`Fail fetch tid: ${tid}`}
+          }
+        }
+
+        function generateAvatar(comment) {
+          const name = comment.user.displayname || comment.user.fullname || comment.user.username || '?'
+          return comment.user.picture ?
+              `<img alt="${comment.user.fullname}" title="${comment.user.fullname}" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" src="${comment.user.picture}" style="width:3rem" onerror="this.remove();" itemprop="image">` :
+              `<div class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" style="width:3rem; height:3rem; display: flex; align-items: center; justify-content: center; background-color:${comment.user["icon:bgColor"]};" aria-label="${name}" data-bs-original-title="${name}">
+              ${String(name)[0]}
+              </div> `;       
+        }
+
+        function generateFirstPost(comment) {
+          const avatar = generateAvatar(comment);
+          return `<div class="comment-block">
+          <div class="comment-content d-flex align-items-start">
+              <div class="flex-grow-1">
+                  ${comment.content}
+                  <a class="float-end" href="/post/${comment.pid}">
+                      <i class="fa-regular fa-comment-dots fs-3"></i>
+                  </a>
+              </div>
+          </div>
           
-        const avatar = comment.user.picture? 
-        `<img alt="${comment.user.fullname}" title="${comment.user.fullname}" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/picture" src="${comment.user.picture}" style="width:3rem" onerror="this.remove();" itemprop="image">`: 
-        `<span alt="${comment.user.fullname}" title="${comment.user.fullname}" data-uid="${comment.user.userslug}" loading="lazy" class="avatar avatar-tooltip not-responsive avatar-rounded" component="avatar/icon" style="--avatar-size: 24px; background-color: #009688;">UA</span>`;
+      </div>`;
+        }
+
+        function generateRemainingPosts(posts) {
+          if(!posts[0]) return '';
+          let comments = `<ul id="recent_posts" class="mt-5 list-group" data-numposts="${posts.length}">`;
+      
+          posts.forEach((comment) => {
+              const avatar = generateAvatar(comment);
+      
+              comments += `
+              <li class="list-group-item d-flex align-items-start" data-pid="${comment.pid}">
+              <a class="flex-shrink-0 me-3" href="/user/${comment.user.userslug}">
+                  ${avatar}
+              </a>
+              <div class="flex-grow-1">
+                  ${comment.content}
+                  <a class="float-end" href="/post/${comment.pid}">
+                      <i class="fa-regular fa-comment-dots"></i>
+                  </a>
+              </div>
+             </li>
+          
+              `;
+          });
+      
+          comments += `</ul>`;
+          return comments;
+      }
+
+      async function renderComments(tid) {
+        const topic = await getTopicData(tid);
+    
+        if (topic.error){
+          UacanadaMap.console.log(topic);
+          return;
+        }
+    
+        const firstPost = generateFirstPost(topic.posts[0]);
+        const remainingPosts = generateRemainingPosts(topic.posts.slice(1));
+    
+        $("#place-modal-comments").html(firstPost + remainingPosts);
+        setTitle($(firstPost).find('#metaTab'))
         
-  
-        comments += `
-          <li  class="list-group-item" data-pid="${comment.pid}">
-          
-              <a class="text-decoration-none float-start me-3 mb-3" href="/user/${comment.user.userslug}">  ${avatar} </a>
-              ${comment.content} <a class="float-end" href="/post/${comment.pid}">  <i class="fa-regular fa-comment-dots"></i>  </a>
-            
-            
-          </li>
-        `;
-      });
-  
-      comments += `</ul> <p class="w-100 d-flex justify-content-center"> <a id="modal-place-link" href="/topic/${tid}"> read more </a> </p>`;
-  
-      $("#place-modal-comments").html(comments)
+       
+      }
+
+      try {
+        const markerOffset = Math.floor($(window).innerHeight() / 2) - 100
+				UacanadaMap.api.moveMarkerToTop(p.latlng, markerOffset);
+       } catch (error) {
+        UacanadaMap.console.log(error)
+       }
+      
+      const eventCategoryBadge = p.eventCategory ? `<span class="badge text-bg-primary rounded-pill me-1">${(p.eventCategory) ? (p.eventCategoryName && p.eventCategoryName !== 'undefined') ? p.eventCategoryName : p.eventCategory : '' }</span>`:''
+      const placeCategoryBadge = `<span class="badge text-bg-primary rounded-pill">${(p.categoryName && p.categoryName !== 'undefined') ? p.categoryName : p.placeCategory}</span>`
+      modalBodyInput.innerHTML = `<div class="d-flex mb-5 w-100 align-items-start">
+        <div class="me-auto">
+        <h5 class="mb-1">${fa_icon} ${p.placeTitle}</h5>
+          ${eventCategoryBadge+placeCategoryBadge}
+          </div>
+          <img src="${img}" alt="Profile Picture" class="ratio ratio-1x1 rounded-circle align-self-start" style="height: auto; width: auto; max-height: 4rem;"/>
+        </div><div id="place-modal-comments"><div class="spinner-grow spinner-grow-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>`
+
+
+        $("#ua-place-modal").offcanvas("show");
+
+        await renderComments(tid)
+        initializeOrUpdatePlaceModalSwiper()
+        
   
   
   }
   
   
   
-  UacanadaMap.api.openPlacesSwiper = (places,autoplay) => {
-  
-    let direction = UacanadaMap.swipers.cardsCarousel.params?.direction || (window.innerWidth<1000?"horizontal":"vertical")
+  UacanadaMap.api.openPlacesSwiper = (places, autoplay) => {
+    // Determine the direction of the swiper based on screen width and number of places
+    // If there are more than 6 places and screen width is more than 1000px, set vertical, else horizontal
+    let directionOnWideScreen = places?.length > 6 && window.innerWidth > 1000 ? "vertical" : "horizontal";
+
+    // Use the existing direction from swipers.cardsCarousel.params, if available, else use directionOnWideScreen
+    let direction = UacanadaMap.swipers.cardsCarousel?.params?.direction || directionOnWideScreen;
+
+    // Configuration for free mode of swiper
     let freeMode = {
         enabled: true,
         sticky: true,
-      }
+    };
 
+    // Initialize the Swiper with the determined direction and other configurations
     UacanadaMap.swipers.cardsCarousel = new Swiper('#ua-cards-slider', {
         direction,
         freeMode,
         slidesPerView: 'auto',
-        mousewheel: { invert: false, sensitivity: 0.25, eventsTarget: '#ua-cards-slider' }, // TODO: move sensitivity option to ACP
+        mousewheel: { invert: false, sensitivity: 0.25, eventsTarget: '#ua-cards-slider' },
         autoplay: autoplay ? { delay: 4200, disableOnInteraction: false } : false,
-      }).on('slideChangeTransitionEnd', (e) => handleSlideChange(e, places, UacanadaMap)).on('click', (J, event) => handleClick(J, event, UacanadaMap))
+    }).on('slideChangeTransitionEnd', (e) => handleSlideChange(e, places, UacanadaMap))
+      .on('click', (J, event) => handleClick(J, event, UacanadaMap));
+};
 
-     
-        
-}
   
   
   
@@ -415,7 +508,7 @@
   
   
   UacanadaMap.api.removeCards = async () => { 
-      UacanadaMap.api.contextButtonText({text:'',delay:100,to:0})
+      UacanadaMap.api.contextButtonText({text:'',delay:100,to:UacanadaMap.contextButton.router.main})
       UacanadaMap.api.rotateCards('horizontal');
       UacanadaMap.api.animateCards('close')
       UacanadaMap.api.scrollableBottomPanel.close()
@@ -571,6 +664,22 @@ function handleSlideChange(e, places, UacanadaMap) {
       UacanadaMap.api.shakeElements(['#location-category-filter', '#ua-place-buttons button.active'],'accent-animation');
     }
 }
+
+
+function initializeOrUpdatePlaceModalSwiper() {
+  if (UacanadaMap.swipers && UacanadaMap.swipers.topicPlaceSwiper) {
+    UacanadaMap.swipers.topicPlaceSwiper.destroy(true, true);
+  }
+  UacanadaMap.swipers.topicPlaceSwiper = new UacanadaMap.Swiper("#topicPlaceGallery", {
+    slidesPerView: "auto",
+    mousewheel: true,
+    freeMode: true
+  });
+}
+
+
+
+
   
   })
   

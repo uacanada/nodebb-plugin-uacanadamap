@@ -2,17 +2,18 @@
 define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */], function(UacanadaMap) { 
 
     UacanadaMap.api.swipeDetectorZones = {
-        '#cardsSwiperPlaceholder': cardCarousel,
-        '#ua-place-modal .offcanvas-body': postOffcanvas,
-        '[component="bottombar"]': bottomNav
+        '#cardsSwiperPlaceholder': {handle:cardCarousel,swipeResistance:50},
+        '#ua-place-modal .offcanvas-body': {handle:postOffcanvas},
+        '[component="bottombar"]':{handle: bottomNav},
+        '#innerScrollPanel': {handle:bottomScrollablePanel}
       };
 
   UacanadaMap.api.swipeZonesRegister = () => {
         UacanadaMap.api.swipeDetectorListeners = [];
     
         // Register
-        Object.entries(UacanadaMap.api.swipeDetectorZones).forEach(([selector, handle]) => {
-          const registration = UacanadaMap.api.listenSwipes(selector, handle);
+        Object.entries(UacanadaMap.api.swipeDetectorZones).forEach(([selector, prop]) => {
+          const registration = UacanadaMap.api.listenSwipes(selector, prop.handle, prop.swipeResistance);
           registration.register();
           UacanadaMap.api.swipeDetectorListeners.push(registration);
         });
@@ -26,6 +27,27 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
     }
 
 
+
+  function bottomScrollablePanel(direction, element){
+
+ 
+    if(direction==='down' && $('#innerScrollPanel').scrollTop() < 1) {
+
+      UacanadaMap.console.log(`Force scrollableBottomPanel.close() cause:  scrollTop:`. $('#innerScrollPanel').scrollTop())
+       UacanadaMap.api.scrollableBottomPanel.close() 
+    } 
+
+    if(direction==='right') {
+      UacanadaMap.api.switchBottomTab.prev()
+    } 
+
+    if(direction==='left') {
+      UacanadaMap.api.switchBottomTab.next()
+    } 
+
+
+  }
+  
 
   function cardCarousel(direction, element) {
 
@@ -59,7 +81,7 @@ define('ui/swipeDetectors',["core/variables" /*   Global object UacanadaMap  */]
 
   function bottomNav (direction, element) {
     if(direction==='up'){
-        UacanadaMap.api.scrollableBottomPanel.open()
+        UacanadaMap.api.scrollableBottomPanel.open() // TODO: add default content when swipe on nav bar
     }
     
   }

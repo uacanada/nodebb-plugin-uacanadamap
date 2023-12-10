@@ -1,11 +1,10 @@
-<div id="ua-place-modal" class="offcanvas offcanvas-bottom no-propagation" tabindex="-1"
-        aria-labelledby="ua-place-modal" aria-hidden="true">
-        <div class="offcanvas-header">
+<div id="ua-place-modal" class="offcanvas offcanvas-bottom no-propagation" tabindex="-1" aria-labelledby="ua-place-modal" aria-hidden="true">
+        <div class="offcanvas-header shadow-sm">
                 <h1 class="offcanvas-title fs-5" id="modal-place-title"></h1>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body overflow-auto text-break dyn-content">
+        <div id="placeLoader" class="offcanvas-body overflow-auto text-break">
                 <!-- Modal body content goes here -->
         </div>
 

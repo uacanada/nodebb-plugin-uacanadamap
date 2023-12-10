@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-uacanadamap",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "Interactive map plugin for NodeBB forums. Enhance user engagement by allowing location additions and explore monetization opportunities.",
   "main": "lib/backend/main.js",
   "repository": {
@@ -54,6 +54,6 @@
     "leaflet-providers": "^1.13.0",
     "leaflet.locatecontrol": "^0.79.0",
     "leaflet.markercluster": "^1.5.3",
-    "swiper": "^10.2.0"
+    "swiper": "^11.0.5"
   }
 }

@@ -47,3 +47,5 @@ Turn your NodeBB forum into a powerful app with an interactive map using this pl
 ## About Me (🇺🇦,🇨🇦)
 
 Hi, I'm Viktor from Ukraine. On February 24, 2022, due to the unprovoked and barbaric full-scale invasion by Russia on Ukraine, I was forced to leave my home. Currently, I reside in Canada and am actively assisting the local Ukrainian community in integrating into the Canadian landscape.
+
+[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)

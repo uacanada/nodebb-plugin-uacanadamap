@@ -312,9 +312,13 @@
             </div>
 
 
-            <div class="col-12 col-sm-6 mb-5">
-                <div id="ua-form-img-holder"></div>
-                <input name="image" type="file" accept="image/*" class="form-control" id="ua-location-cover-img">
+            <div class="col-12 mb-5">
+            <div id="ua-form-img-holder" class="d-flex flex-row flex-nowrap overflow-auto"> </div>
+        
+                <input name="image[]" type="file" accept="image/*" class="form-control" id="ua-location-cover-img" multiple>
+
+                <input type="hidden" name="mainImage" id="mainImage" value="">
+
             </div>
 
 

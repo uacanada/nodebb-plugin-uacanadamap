@@ -90,7 +90,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     },
 
     addPlace: function(){
-      UacanadaMap.api.createMarkerButton({latlng: UacanadaMap.map.getCenter()}, false); // cleanMarker also inside
+      UacanadaMap.api.createMarkerAtLocation({latlng: UacanadaMap.map.getCenter()}, false); // cleanMarker also inside
     },
   
 
@@ -214,7 +214,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
     map
       .locate({ setView: true, maxZoom: 15 })
       .on("locationfound", function (ev) {
-        if (fornewplace) createMarkerButton(ev, false);
+        if (fornewplace) createMarkerAtLocation(ev, false);
       })
       .on("locationerror", function (e) {
         map.setView(UacanadaMap.latestLocation.latlng, 12);
@@ -267,51 +267,239 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       });
   };
 
-  UacanadaMap.api.createMarkerButton = (e, fromAddress) => {
-    UacanadaMap.api.locationSelection.cleanMarker()
-    if (UacanadaMap.currentmarker) {
-      UacanadaMap.currentmarker.bindPopup("Detecting address... ").openPopup();
-    }
-    const { map, L } = UacanadaMap;
 
-    const { lat, lng } = e.latlng;
-    UacanadaMap.choosedLocation = [lat, lng];
-    localStorage.setItem(
-      "uamaplocation",
-      JSON.stringify(UacanadaMap.choosedLocation)
-    );
-    map.setView(e.latlng, 14);
 
-    UacanadaMap.api.clearFormFields();
-    $("#ua-latlng-text").val(lat + "," + lng);
-    if (UacanadaMap.userRegistered) {
-      if (!fromAddress)
-        UacanadaMap.hiddenControls.geocoder.options.geocoder.reverse(
-          e.latlng,
-          map.options.crs.scale(map.getZoom()),
-          function (results) {
-            UacanadaMap.api.showPopupWithCreationSuggest(results[0]);
-          }
-        );
-      else UacanadaMap.api.showPopupWithCreationSuggest(fromAddress);
-    } else {
-      UacanadaMap.currentmarker = L.marker(e.latlng, {
-        icon: UacanadaMap.errorMarker,
-      })
-        .addTo(map)
-        .bindPopup(ajaxify.data.UacanadaMapSettings.unregisteredUserAlert)
-        .openPopup();
-      window.location.assign(window.location.origin + "/register");
+
+
+
+  UacanadaMap.api.createMarkerAtLocation = (eventData, fromAddress) => {
+
+    if (!eventData || !eventData.latlng) {
+      UacanadaMap.console.error("Invalid event data provided to createMarkerAtLocation.",eventData);
+      return;
     }
 
-    UacanadaMap.api.hideBrandTitle(true);
-    if (UacanadaMap.isFullscreenMode) map.toggleFullscreen();
+
+    const defaultAddressProperties = {
+      address: "",
+      text: "",
+      neighborhood: "",
+      place: "",
+      postcode: "",
+      district: "",
+      region: "",
+      country: ""
+    };
+  
+    try {
+      UacanadaMap.api.locationSelection.cleanMarker();
+      showCurrentMarkerPopup();
+  
+      const { map, L } = UacanadaMap;
+      const { lat, lng } = eventData.latlng;
+
+      console.log(`${lat},${lng}`)
+  
+      UacanadaMap.choosedLocation = [lat, lng];
+      saveLocationToStorage(UacanadaMap.choosedLocation);
+  
+      map.setView(eventData.latlng, 14);
+      UacanadaMap.api.clearFormFields();
+      updateLatLngText(lat, lng);
+  
+      if (UacanadaMap.userRegistered) {
+        processUserLocation(eventData, fromAddress, map, defaultAddressProperties);
+      } else {
+        promptUserToRegister(eventData, map, L);
+      }
+  
+      UacanadaMap.api.hideBrandTitle(true);
+      toggleFullscreenIfNeeded(map);
+    } catch (error) {
+      console.error("Error creating marker at location: ", error);
+    }
   };
+  
+  function showCurrentMarkerPopup() {
+    if (UacanadaMap.currentmarker) {
+      UacanadaMap.currentmarker.bindPopup("Detecting address...").openPopup();
+    }
+  }
+  
+  function saveLocationToStorage(location) {
+    localStorage.setItem("uamaplocation", JSON.stringify(location));
+  }
+  
+  function updateLatLngText(lat, lng) {
+    $("#ua-latlng-text").val(`${lat},${lng}`);
+  }
+  
+  function processUserLocation(eventData, fromAddress, map, defaultAddressProperties) {
+    if (!fromAddress && UacanadaMap.isMapBoxKeyExist) {
+      reverseGeocodeLocation(eventData.latlng, map);
+    } else {
+      const addressData = fromAddress || { center:eventData.latlng, properties: defaultAddressProperties };
+      UacanadaMap.api.showPopupWithCreationSuggest(addressData);
+    }
+  }
+  
+  function reverseGeocodeLocation(latlng, map) {
+    UacanadaMap.hiddenControls.geocoder.options.geocoder.reverse(
+      latlng,
+      map.options.crs.scale(map.getZoom()),
+      results => UacanadaMap.api.showPopupWithCreationSuggest(results[0])
+    );
+  }
+  
+  function promptUserToRegister(eventData, map, L) {
+    UacanadaMap.currentmarker = L.marker(eventData.latlng, {
+      icon: UacanadaMap.errorMarker,
+    }).addTo(map).bindPopup(ajaxify.data.UacanadaMapSettings.unregisteredUserAlert).openPopup();
+    window.location.assign(`${window.location.origin}/register`);
+  }
+  
+  function toggleFullscreenIfNeeded(map) {
+    if (UacanadaMap.isFullscreenMode) map.toggleFullscreen();
+  }
+  
+
+
+
+
+  UacanadaMap.api.createMarkerAtLocationTEST = (event, fromAddress) => {
+    UacanadaMap.console.log({event})
+    
+    const location = event.latlng;
+    
+    UacanadaMap.api.clearPreviousMarker();
+    UacanadaMap.api.setNewMarker(location);
+    UacanadaMap.api.updateLocationStorage(location);
+    UacanadaMap.api.setViewToLocation(location);
+    UacanadaMap.api.clearFormFields();
+    UacanadaMap.api.updateLatLngText(location);
+  
+    if (UacanadaMap.userRegistered) {
+      UacanadaMap.api.processRegisteredUser(location, fromAddress);
+    } else {
+      UacanadaMap.api.alertUnregisteredUser(location);
+    }
+  
+    UacanadaMap.api.adjustMapUI();
+  };
+  
+  UacanadaMap.api.clearPreviousMarker = () => {
+    UacanadaMap.api.locationSelection.cleanMarker();
+  };
+  
+  UacanadaMap.api.setNewMarker = (location) => {
+    if (UacanadaMap.currentmarker) {
+      UacanadaMap.currentmarker.bindPopup("Detecting address...").openPopup();
+    }
+  };
+  
+  UacanadaMap.api.updateLocationStorage = (location) => {
+    try {
+      const { lat, lng } = location;
+      UacanadaMap.choosedLocation = [lat, lng];
+      localStorage.setItem("uamaplocation", JSON.stringify(UacanadaMap.choosedLocation));
+    } catch (error) {
+      UacanadaMap.console.log(error)
+    }
+  
+  };
+  
+  UacanadaMap.api.setViewToLocation = (location) => {
+    try {
+      UacanadaMap.map.setView(location, 14);
+    } catch (error) {
+      UacanadaMap.console.log(error)
+    }
+   
+  };
+  
+
+  
+  UacanadaMap.api.updateLatLngText = (location) => {
+    try {
+      const { lat, lng } = location;
+      $("#ua-latlng-text").val(`${lat},${lng}`);
+    } catch (error) {
+      UacanadaMap.console.log(error)
+    }
+   
+  };
+  
+  UacanadaMap.api.processRegisteredUser = (location, fromAddress) => {
+    if (!fromAddress && UacanadaMap.isMapBoxKeyExist) {
+      UacanadaMap.api.reverseGeocode(location);
+    } else {
+      try {
+        const defaultAddress = UacanadaMap.api.getDefaultAddress(fromAddress);
+        UacanadaMap.api.showPopupWithCreationSuggest(defaultAddress);
+      } catch (error) {
+        UacanadaMap.console.log(error)
+      }
+     
+    }
+  };
+  
+  UacanadaMap.api.getDefaultAddress = (fromAddress) => {
+    return fromAddress || { properties: {
+      address: "",
+      text: "",
+      neighborhood: "",
+      place: "",
+      postcode: "",
+      district: "",
+      region: "",
+      country: "",
+    }};
+  };
+  
+  UacanadaMap.api.reverseGeocode = (location) => {
+    UacanadaMap.hiddenControls.geocoder.options.geocoder.reverse(
+      location,
+      UacanadaMap.map.options.crs.scale(UacanadaMap.map.getZoom()),
+      (results) => {
+        UacanadaMap.api.showPopupWithCreationSuggest(results[0]);
+      }
+    );
+  };
+  
+  UacanadaMap.api.alertUnregisteredUser = (location) => {
+    UacanadaMap.currentmarker = UacanadaMap.L.marker(location, {
+      icon: UacanadaMap.errorMarker,
+    })
+      .addTo(UacanadaMap.map)
+      .bindPopup(ajaxify.data.UacanadaMapSettings.unregisteredUserAlert)
+      .openPopup();
+    window.location.assign(`${window.location.origin}/register`);
+  };
+  
+  UacanadaMap.api.adjustMapUI = () => {
+    UacanadaMap.api.hideBrandTitle(true);
+    if (UacanadaMap.isFullscreenMode) {
+      UacanadaMap.map.toggleFullscreen();
+    }
+  };
+  
+
+
+
+
+
 
   UacanadaMap.api.showPopupWithCreationSuggest = (r) => {
     const { map } = UacanadaMap;
-    var { lat, lng } = r.center;
-    var {
+  
+    // Error check if r or its expected properties are not defined
+    if (!r || !r.center || !r.properties) {
+      console.error("Invalid result structure provided to showPopupWithCreationSuggest.",r);
+      return;
+    }
+
+    let { lat, lng } = r.center;
+    let {
       address,
       text,
       neighborhood,
@@ -321,50 +509,71 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
       region,
       country,
     } = r.properties;
+    
     let popupHtml = "";
-    if (country === "Canada") {
-      var addressIcon = address ? "📮 " : "📍 ";
-      var addressLine = r.name; // (address||'')+' '+text+', '+place+' '+postcode;
-      var subAdress = (neighborhood || "") + " " + district + ", " + region;
-       popupHtml = `<div class="p-1 d-flex flex-column align-items-start">
-       <div class="ua-popup-codes">
-         <code>${addressIcon}${addressLine}</code></br>
-         <code>🗺️ ${subAdress}</code></br>
-         <code>🧭 ${lat.toString().substring(0, 8)},${lng.toString().substring(0, 10)}</code>
-       </div>
-       <small>You can edit or remove the legal address for privacy in the next step.</small>
-       <div class="d-flex mt-2">
-         <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
-       </div>
-     </div>
-     
+  
+    // if (country === "Canada") { TODO: Add to ACP Counrty Filter
+      let addressIcon = address ? "📮 " : "📍 ";
+      let addressLine = r.name; // assuming r.name is defined and is the intended content to show
+      let subAdress = `${neighborhood || ''} ${district || ''}, ${region || ''}`.trim();
+      popupHtml = UacanadaMap.isMapBoxKeyExist ? `
+        <div class="p-1 d-flex flex-column align-items-start">
+          <div class="ua-popup-codes">
+            <code>${addressIcon}${addressLine}</code></br>
+            <code>🗺️ ${subAdress}</code></br>
+            <code>🧭 ${lat.toFixed(8)},${lng.toFixed(8)}</code>
+          </div>
+          <small>You can edit or remove the legal address for privacy in the next step.</small>
+          <div class="d-flex mt-2">
+            <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
+          </div>
+        </div>
+      `:`
+      <div class="p-1 d-flex flex-column align-items-start">
+        <div class="ua-popup-codes">
+          <code>${addressIcon} Address not available</code></br>
+          <code>🗺️ Enter address details manually in the next step if known</code></br>
+          <code>🧭 Latitude: ${lat.toFixed(12)}</code></br>
+          <code>🧭 Longitude: ${lng.toFixed(12)}</code>
+        </div>
+        
+        <div class="d-flex mt-2">
+          <button title="Confirm creating place here" type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#place-creator-offcanvas">Confirm</button>
+        </div>
+      </div>
     `;
-    
-    
-
+  
       $("#uaMapAddress").val(addressLine);
+     if(subAdress.length>3){
       $("#subaddress").val(subAdress);
+     }
       if (place) $("#ua-newplace-city").val(place);
-
-    if (region && UacanadaMap.provinceMapper[region])
-        $('#location-province option[value="' + UacanadaMap.provinceMapper[region] +  '"' ).prop("selected", true); // TODO: refactor to more friendly aprocach
-    } else {
-      popupHtml = `
-      <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
-      <code>${country} ${place} ${neighborhood} ${region}</code></br>
-      Correct your choice on the map!</b></br>
-    `; // TODO: Move To ACP
+  
+      if (region && UacanadaMap.provinceMapper[region]) {
+        $('#location-province option[value="' + UacanadaMap.provinceMapper[region] +  '"' ).prop("selected", true);
+      }
+    // } else {
+    //   popupHtml = `
+    //     <b>⁉️ Looks like the location you provided is not in Allowed region: </br>
+    //     <code>${country} ${place || ''} ${neighborhood || ''} ${region || ''}</code></br>
+    //     Correct your choice on the map!</b></br>
+    //   `;
+    // }
+  
+    if (UacanadaMap.currentmarker) {
+      map.removeLayer(UacanadaMap.currentmarker);
     }
-
-    if (UacanadaMap.currentmarker) map.removeLayer(UacanadaMap.currentmarker);
+    
     UacanadaMap.currentmarker = UacanadaMap.L.marker(r.center, {
       icon: UacanadaMap.newPlaceMarker,
     })
       .addTo(map)
       .bindPopup(popupHtml)
       .openPopup();
+  
     UacanadaMap.api.removeCards();
   };
+  
 
  
 
@@ -395,8 +604,6 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
   UacanadaMap.api.moveMarkerToTop = (c, markerOffset) => {
     const { map, showOnlyArea, L } = UacanadaMap;
     if (showOnlyArea) {
-      console.log(`Marker not move cause showOnlyArea=true`);
-      // TODO
       return;
     }
     var latlng = c.lat ? c : { lat: c[0], lng: c[1] };
@@ -472,7 +679,7 @@ define('utils/methods', ["core/variables" /*   Global object UacanadaMap  */], f
 			return '/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png';
 		}
 
-		const profileIcon = baseIcon.includes('/assets/uploads') ? baseIcon : `/assets/uploads/${baseIcon}`;
+		const profileIcon = baseIcon.includes('/assets/uploads') ? baseIcon : `/assets/uploads${baseIcon}`;
 		return profileIcon;
 	}
 

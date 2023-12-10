@@ -5,7 +5,8 @@
     "static": "static",
     "icons": "static/assets/icons",
     "images": "static/assets/images",
-    "leaflet": "../node_modules/leaflet/dist"
+    "leaflet": "../node_modules/leaflet/dist",
+    "swiper":"../node_modules/swiper"
   },
   
   "scss": [
@@ -75,18 +76,14 @@
    
 },
 
-  
-
   "templates": "static/templates",
   "hooks": [
     {
       "hook": "static:app.load",
       "method": "init"
     },
-    {
-      "hook": "static:api.routes",
-      "method": "addRoutes"
-    },
+    { "hook": "static:api.routes", 
+    "method": "addRoutes" },
     {
       "hook": "action:plugin.activate",
       "method": "activate"
@@ -120,6 +117,6 @@
     "leaflet.locatecontrol": "^0.79.0",
     "leaflet.markercluster": "^1.5.3",
     "leaflet-providers": "^1.13.0",
-    "swiper": "^10.2.0"
+    "swiper": "^11.0.5"
   }
 }

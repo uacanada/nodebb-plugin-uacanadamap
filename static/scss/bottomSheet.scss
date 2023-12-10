@@ -132,17 +132,16 @@ transition: 0.1s ease;
   margin: 0;
 }
 
-#bottomPanelCategoryButtons{
-  background: var(--bs-body-bg)!important;
+
+
+#bottomButtonsWrapper{
   z-index: 700;
-  transition: .2s ease;
-  transform: translate3d(-50%, 100%, 0);
+  transition: .6s ease;
+  transform: translate3d(0, 100%, 0);
   overflow: hidden;
    &.shown{
-    transform: translate3d(-50%, 0, 0); 
+    transform: translate3d(0, 0, 0); 
   }
-
- 
 }
 
 
@@ -247,6 +246,40 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
   box-shadow: 0px -5px 7px -7px rgba(0,0,0,.7);
   z-index: 8;
 }
+
+
+
+
+.place-ctx-buttons {
+  display: flex;
+    justify-content: flex-end;
+  width: 100%;
+    text-align: right;
+  .place-ctx-buttons-wrapper{
+    .btn {
+      text-rendering: geometricPrecision;
+      transition: .2s ease;
+    }
+    a.go-to-comment{
+      display:none;
+    }
+
+  }
+  
+}
+
+#ua-place-modal .place-ctx-buttons {
+  position: absolute;
+  z-index: 8;
+  right: 0.25rem;
+  width: 2rem;
+  bottom: 1rem;
+  a.go-to-comment{
+    display:inline-flex;
+  }
+}
+
+
 #map-controls {
   max-width: 500px;
   margin: 0 auto;
@@ -256,55 +289,72 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
 
 
 /* New panel */
+
+
 #scrollableBottomPanel{
   height: 100vh;
- 
   z-index: 600;
   transform-origin: bottom !important;
-  transition: transform 2s ease-out;
+  transition: transform .2s ease-out;
   transform: translateY(100%) rotateX(90deg);
-  background: linear-gradient(0deg,rgba(5,17,32,.2),transparent);
-  scrollbar-width: none;  // Firefox
-  -ms-overflow-style: none;  // IE and Edge
-  &::-webkit-scrollbar {  // Chrome, Safari, Opera
-    display: none;
+  -webkit-overflow-scrolling: auto;
+
+  .inner-scrollable-wrapper{
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: auto;
   }
+
+  
 
   .sheet-spacer{
-    height: 85vh;
+    position: relative;
+    height: 70vh;
+    backdrop-filter: grayscale(1) brightness(0.98);
     
   }
-
+  .inner-scrollable-content{
+    transition: 1s;
+    min-height: 100vh;
+  }
   .sheet-dragger{
+    position: relative;
+    z-index: 700;
     font-size: 2rem;
     height: 3rem;
     margin-top: -2rem;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 2rem 2rem 0 0;
     text-align: center;
     background: var(--bs-body-bg);
-    box-shadow: 0px -4px 7px 4px rgba(10, 54, 89, 0.28), 0 1px 2px 1px rgba(0, 0, 0, 0.2);
-  
+    box-shadow: 0px -7px 6px 0px rgba(10,54,89,.1), 1px -4px 4px 0px rgba(0,0,0,.1);
   }
 
   .sheet-content{
     background: var(--bs-body-bg);
-    min-height: 100vh;
+    min-height: 30vh;
   }
 
   &.panel-hidden {
-    transition: transform 2s ease-out;
     transform: translateY(100%) rotateX(90deg);
     overflow: hidden;
+    height: 100px;
+    .inner-scrollable-content{
+      backdrop-filter: grayscale(0) brightness(1);
+    }
 
   }
   
   &.panel-shown {
-    transition: transform .2s ease-out;
     transform: translateY(0%) rotateX(0deg);
-    overflow-y: scroll;
+    .inner-scrollable-content{
+      backdrop-filter: grayscale(1) brightness(0.98);
+    }
   }
 
   
 
 }
+
+
 

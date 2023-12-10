@@ -1,55 +1,68 @@
 'use strict';
-define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect', 'benchpress', 'bootbox', 'categorySelector','ace/ace'], 
-								function(hooks,settings, uploader, iconSelect, Benchpress, bootbox, categorySelector, ace) {
+define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect', 'benchpress', 'bootbox', 'categorySelector','ace/ace',  'admin/modules/instance'], function(hooks,settings, uploader, iconSelect, Benchpress, bootbox, categorySelector, ace, instance) {
 		
-	var ACP = {};
+	let ACP = {};
 	let loadedSettings;
-	console.log('ACP')
-
-	const createOptionsHtml = (loadedSettings) =>{
-		let optionsHtml = ''
-		try {
-			loadedSettings.tabCategories?.forEach((cat)=>{
-				optionsHtml+= '<option value="'+cat.slug+'">'+cat.title+'</option>'
-			})
-		} catch (error) {
-			optionsHtml+='ERROR'
-		}
-		return optionsHtml
-	}
-
+	
 	ACP.init = function () {
 		setupUploader();
+		
 		settings.load('uacanadamap', $('.uacanadamap-settings'), function (err, currentSettings) { 
+
+			if(err||!currentSettings){
+				bootbox.alert('Load default settings. Check the browser console for errors.');
+				console.error(err,currentSettings)
+				
+			}
 
 			loadedSettings = currentSettings
 
-			
-			$('#console_log').on('click', logConsoleSettings);
-			
+			if(Object.keys(currentSettings).length === 0){
 
-			try {
-				const cities = loadedSettings.citiesData.split(',')
-				cities.forEach(function(tag) { $('#citiesData').tagsinput('add', tag); });
-			} catch (error) {
+				bootbox.confirm('The settings are empty. Click  "Confirm" to load the default settings.', function (confirm) {
+					if (confirm) {
+						loadSettingsFromDefault()
+					}
+				});
+
 				
+			}
+			
+			try {
+				if(loadedSettings.citiesData){
+					const cities = loadedSettings.citiesData.split(',')
+					cities.forEach(function(tag) { $('#citiesData').tagsinput('add', tag); });
+				} else {
+					$('#citiesData').tagsinput('add', 'Vancouver');
+				}
+				
+			} catch (error) {
+				console.log(error)
 			}
 			const parentOptionsHtml = createOptionsHtml(currentSettings)
 			Benchpress.registerHelper('renderParentsOptions', function() {
 			 return parentOptionsHtml;
 			});
 
-			initACE('contextButtonSlideEditor', 'html', '#contextButtonSlide' );
-			initACE('placeInstructionEditor', 'html', '#placeInstruction' );
+
+			$('.ace-editor-textarea').each((i, el) => {
+				const elementId = $(el).attr('id'); 
+				const mode =  $(el).attr('data-ace-mode') || 'html';
+				initACE(elementId + 'Editor', mode, '#' + elementId);
+			});
 
 		
+
+		    if(currentSettings.mapBoxApiKey?.length < 30){
+				typingEffect(document.getElementById('msg-about-api'), document.getElementById('msg-about-api').innerHTML, 5);
+			}
+		    
+		      
+
+			$('#console_log').on('click', logConsoleSettings);
 		});
 
 
-		async function setValuesParentTag(slug,tags){
-		
-		}
-		
 
 
 		Benchpress.registerHelper('tagsFromString', function(input) {
@@ -101,8 +114,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			}
 			
 			const parentsArray = tagsArray.join();
-			setValuesParentTag(slug,parentsArray)
-			
 			return parentsArray
 		});
 		
@@ -111,6 +122,9 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		$(document).on('click', '#exportJson', exportSettingsJson);
 		$(document).on('click', '#resetSettings', resetSettings);
 		$(document).on('click', '#save', saveSettings);
+
+		// TODO add off for eventListeners
+
 		categorySelector.init($('[component="category-selector"]'));
 		
 		hooks.on('action:settings.sorted-list.modal', function ({ modal }) {
@@ -169,12 +183,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				var currentTags = tagsInputField.val();
 				tagsInputField.val('');
 				tagInputEl.html('<div class="spinner-border" role="status"> <span class="visually-hidden">Loading...</span> </div>')
-				
-
-				
-				
-				
-				
 				tagInputEl.html('<input data-field-type="tagsinput" type="text" id="'+tagsInputField.attr('id')+'" name="'+tagsInputField.attr('id')+'"  placeholder="tag,tag..."/>');
 				
 				
@@ -191,10 +199,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 
 			if(dialogOpened.subCategories){ 
 				var category = findItemBySlug(modalSlug,subCategories)
-				var slugs = [];
-				var selectedTabs = []
-				
-			
 				// ITERATE THIS MODAL AND ALSO HIDDEN FORM 
 				$('form[data-sorted-list-uuid="'+uuid+'"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) }) 
 				
@@ -207,7 +211,6 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 				var selector = categorySelector.init(modal.find('[component="category-selector"]'),{ onSelect: onCategorySelected, privilege: 'moderate'});
 				if(category && category.cid){
 				selector.selectCategory(Number(category.cid));
-
 				modal.find('[component="category-selector-selected"]').html(
 					'<b>Category ID:'+category.cid+' [  '+category.cidname+' ]</b>' 
 				);
@@ -222,6 +225,17 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	};
 
 
+	function createOptionsHtml(loadedSettings){
+		let optionsHtml = ''
+		try {
+			loadedSettings.tabCategories?.forEach((cat)=>{
+				optionsHtml+= '<option value="'+cat.slug+'">'+cat.title+'</option>'
+			})
+		} catch (error) {
+			optionsHtml+='ERROR'
+		}
+		return optionsHtml
+	}
 	
 	async function logConsoleSettings(){
 		
@@ -233,29 +247,24 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	}
 
 
-
-	setTimeout(() => {
-		$('form[data-sorted-list-object="subCategories"]').each((i,el)=>{ fillBrokenSubCatValues(i,el) }) 
-	}, 2000);
-
 	function fillBrokenSubCatValues(i,formItem) {
-		
-
-			try {
+		   try {
 				const uuid = $(formItem).attr('data-sorted-list-uuid')
 				const listItem = $('div[data-sorted-list="subCategories"] li[data-sorted-list-uuid="'+uuid+'"]')
 				const subcat = listItem.attr('data-item-slug')
-				const parents = listItem.find('[data-parents-for="'+subcat+'"]').text().split(',')
-				console.log({parents})
+				const parentText = listItem.find('[data-parents-for="'+subcat+'"]').text();
 				const selector = $(formItem).find('select#acpParentTabsSelector')
-			
-				selector.val(parents)
+				const parents = parentText ? parentText.split(',') : selector.find('option:first').val();
+				
+				if(!loadedSettings.tabCategories || !loadedSettings.tabCategories[0]){
+					bootbox.alert(`Please first configure at least one parent for "${subcat}" sub-category.`);
+				}
 
-		
+				selector.val(parents) 
 
-
-				// TODO SET NOTICE IF NO PARENT!!
+				
 			} catch (error) {
+				bootbox.alert('Please configure at least one parent and sub-category. See console for errors');
 				console.log(error)
 			}
 			
@@ -273,8 +282,81 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		console.log(loadedSettings)
 	}
 
-	function resetSettings(){
+	function loadSettingsFromDefault(){
+			fetch("/api/v3/plugins/uacanadamap/setdefaults", { method: 'GET'})
+			  	.then(response => response.json())
+			  	.then(data => {
+				console.log("Default settings loaded:", data);
+				instance.rebuildAndRestart();
+				
+
+				 bootbox.alert({
+					title: 'Settings',
+					message: 'Default settings loaded, the forum will now be rebuilt with the default settings. Please, reload this page after the forum rebuilding and restarting process is complete.',
+					closeButton: false,
+					onEscape: false,
+					buttons: {
+						ok: {
+							label: 'Reload Page',
+							classname: 'btn-primary',
+						},
+					},
+					callback: function () {
+						ajaxify.go('/admin/plugins/uacanadamap');
+					},
+				});
+
+			  })
+			  .catch((error) => {
+				bootbox.alert('Failed to load default settings, please check the browser console logs.');
+				console.log("Error:", error);
+			  });		
+	}
+
+	async function resetSettings(){
 		settings.save('uacanadamap', $('<form></form>'))
+		const confirmationInput = document.getElementById("resetSettingsConfirmation").value;
+
+		const phrases = [
+			"I confirm the deletion of settings",
+			"I confirm the resetting and recreation of settings from",
+			"I confirm the deletion of ALL settings AND ALL PLACES"
+		];
+		const isMatch = phrases.some(phrase => confirmationInput.startsWith(phrase));
+		if (isMatch) {
+			bootbox.confirm('Click "Confirm" if you want to perfom this action: "'+confirmationInput+'". Caution, we recommend copying your current JSON settings as a backup copy.', async function (confirm) {
+				if (confirm) {
+
+					const config = await fetch("/api/config");
+            if (!config.ok) throw new Error("Failed to fetch config for CSRF token");
+            const configJson = await config.json();
+			const csrfToken = configJson.csrf_token;
+				fetch('/api/v3/plugins/uacanadamap/flushsettings', { method: 'POST', headers: {'Content-Type': 'application/json','x-csrf-token': csrfToken}, body: JSON.stringify({  confirmation: confirmationInput })  })
+				.then(response => response.json())
+			  	.then(data => {
+
+
+				console.log("Try flush settings:", {data, confirmationInput});
+
+				if(data.response){
+					instance.rebuildAndRestart();
+					bootbox.alert('Settings have been flushed.');
+				} else {
+					bootbox.alert('ERROR');
+				}
+
+				
+			  })
+			  .catch((error) => {
+				bootbox.alert('Failed to delete settings, please check the browser console logs.');
+				console.log("Error:", error);
+			  });
+				}
+			});
+			} else {
+			bootbox.alert('Incorrect confirmation text for resetting settings.');
+		}
+		
 	}
     
 	
@@ -290,25 +372,41 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 	  
 
 	function saveSettings() {
-		console.log('try save')
-		var data = [];
-		
-
-			Promise.all([
-			
+		Promise.all([
 				new Promise((resolve, reject) => {
 					settings.save('uacanadamap', $('.uacanadamap-settings'), (err,s) => (!err ? resolve(s) : reject(err)));
 				}),
 			]).then((s) => {
 				
-				// app.alert({
-				// 	type: 'success',
-				// 	alert_id: 'uacanadamap-saved',
-				// 	title: 'Settings Saved',
+
+				bootbox.confirm('Settings have been saved. Now, you need to rebuild the forum. Please confirm rebuild and restart by clicking the button below.', function (confirm) {
+					if (confirm) {
+						instance.rebuildAndRestart();
+					}
+				});
+
+
+				//  bootbox.alert({
+				// 	title: '',
+				// 	message: '',
+				// 	closeButton: false,
+				// 	onEscape: false,
+				// 	buttons: {
+				// 		ok: {
+				// 			label: '',
+				// 			classname: 'btn-primary',
+				// 		},
+				// 	},
+				// 	callback: function () {
+						
+				// 	},
 				// });
-			}).catch(console.log);
+
+			}).catch(error => {
+				console.error(error)
+				bootbox.alert('Error: ' + error.message);
+			  });
 		
-	
 	}
 
 	function setupColorInputs(modal) {
@@ -355,7 +453,18 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 			fontSize: 12,
 		});
 
-		editorEl.setValue($(holder).val())
+		if(mode==='json'){
+			try {
+
+			let extraJson = JSON.parse(loadedSettings.customExtraSettings)
+			  editorEl.setValue(JSON.stringify(extraJson, null, '\t'));
+			} catch (error) {
+				console.log(error)
+			}
+		} else {
+			 editorEl.setValue($(holder).val())
+		}
+		
 		editorEl.on('change', function () {
 			app.flags = app.flags || {};
 			app.flags._unsaved = true;
@@ -363,6 +472,40 @@ define('admin/plugins/uacanadamap', ['hooks','settings', 'uploader', 'iconSelect
 		});
 	}
 
+
+
+	function typingEffect(element, fullHtml, typingSpeed) {
+		let charIndex = 0;
+		let htmlBuffer = '';
+		element.innerHTML = '';
+		element.classList.remove('d-none');
+	
+		function typeChar() {
+			if (charIndex < fullHtml.length) {
+				// Check if current char is the start of a tag
+				if (fullHtml[charIndex] === '<') {
+					// Find the end of the tag
+					let tagEnd = fullHtml.indexOf('>', charIndex);
+					if (tagEnd !== -1) {
+						// Append the tag to the buffer
+						htmlBuffer += fullHtml.substring(charIndex, tagEnd + 1);
+						charIndex = tagEnd;
+						element.innerHTML = htmlBuffer;
+					}
+				} else {
+					// Append any text outside of tags char by char
+					htmlBuffer += fullHtml[charIndex];
+					element.innerHTML = htmlBuffer;
+				}
+				charIndex++;
+				// Wait a bit before adding the next character
+				setTimeout(typeChar, typingSpeed);
+			}
+		}
+	
+		typeChar();
+	}
+	
 
 	return ACP;
 });
