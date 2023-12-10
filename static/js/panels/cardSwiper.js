@@ -333,25 +333,31 @@
   
   
   
-  UacanadaMap.api.openPlacesSwiper = (places,autoplay) => {
-  
-    let direction = UacanadaMap.swipers.cardsCarousel.params?.direction || (window.innerWidth<1000?"horizontal":"vertical")
+  UacanadaMap.api.openPlacesSwiper = (places, autoplay) => {
+    // Determine the direction of the swiper based on screen width and number of places
+    // If there are more than 6 places and screen width is more than 1000px, set vertical, else horizontal
+    let directionOnWideScreen = places?.length > 6 && window.innerWidth > 1000 ? "vertical" : "horizontal";
+
+    // Use the existing direction from swipers.cardsCarousel.params, if available, else use directionOnWideScreen
+    let direction = UacanadaMap.swipers.cardsCarousel?.params?.direction || directionOnWideScreen;
+
+    // Configuration for free mode of swiper
     let freeMode = {
         enabled: true,
         sticky: true,
-      }
+    };
 
+    // Initialize the Swiper with the determined direction and other configurations
     UacanadaMap.swipers.cardsCarousel = new Swiper('#ua-cards-slider', {
         direction,
         freeMode,
         slidesPerView: 'auto',
-        mousewheel: { invert: false, sensitivity: 0.25, eventsTarget: '#ua-cards-slider' }, // TODO: move sensitivity option to ACP
+        mousewheel: { invert: false, sensitivity: 0.25, eventsTarget: '#ua-cards-slider' },
         autoplay: autoplay ? { delay: 4200, disableOnInteraction: false } : false,
-      }).on('slideChangeTransitionEnd', (e) => handleSlideChange(e, places, UacanadaMap)).on('click', (J, event) => handleClick(J, event, UacanadaMap))
+    }).on('slideChangeTransitionEnd', (e) => handleSlideChange(e, places, UacanadaMap))
+      .on('click', (J, event) => handleClick(J, event, UacanadaMap));
+};
 
-     
-        
-}
   
   
   
