@@ -265,3 +265,34 @@ body.cards-opened{
    
   }
 }
+
+
+
+.placeTopicMetaWrapper {
+
+  .nav.nav-pills,
+  .nav.nav-pills li {
+    list-style: none!important;
+  }
+  #top-meta-tab a.active {
+    border-bottom: 1px solid rgba(var(--bs-link-hover-color-rgb),0.5);
+    padding-bottom: 0.25rem;
+  }
+
+  ul.list-unstyled .list-group-item {
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+
+  button{
+    transition: 1s ease;
+    opacity: 0.8;
+    &.active{
+      opacity: 1;
+    }
+  }
+  .list-group-item{
+    background-color: transparent!important;
+  }
+}
+

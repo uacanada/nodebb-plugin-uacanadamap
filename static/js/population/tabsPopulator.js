@@ -29,7 +29,7 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
         return `<li class="${itemClass}">
         <div class="location-item place-with-coordinates d-flex align-items-start" data-marker-id="${tid}">
             <div class="me-3">
-                ${ img ? `<img src="${img}" alt="${mainUsername} profile image" class="rounded-circle" style="width: 50px; height: 50px;">`  : ""  }
+                ${ img ? `<img src="${img}" alt="${mainUsername} profile image" class="rounded-circle d-block" onerror="this.remove();" style="width: 50px; height: 50px;">`  : ""  }
             </div>
             <div>
                 <div class="location-title fw-bold">${placeTitle ?? mainUsername}</div>
@@ -284,7 +284,27 @@ define('population/tabsPopulator', ["core/variables" /*   Global object Uacanada
           const tabInfo = getBySlug(ajaxify.data.UacanadaMapSettings.tabCategories, slug);
           if (!tabInfo) continue; 
           const {color, title, description, footer} = tabInfo;
-          const tabHtmlContent = `<li class="list-group-item"><div class="p-3"><h2 style="color:${color};">${title}</h2><p>${description}</p></div></li>${html}${footer?`<li class="list-group-item"><div class="p-3 tab-footer">${footer}</div> </li>`: ""}<li class="list-group-item tab-last-clearfix">Add your own place!</li> `;
+          const tabHtmlContent = `
+          <li class="list-group-item">
+            <div class="p-3">
+              <h2 class="title" style="color: ${color};">${title}</h2>
+              <p>${description}</p>
+            </div>
+          </li>
+          ${html}
+          ${footer ? `
+            <li class="list-group-item">
+              <div class="p-3 tab-footer">${footer}</div>
+            </li>` : ""}
+          <li class="list-group-item tab-last-clearfix text-center mt-5 mb-3">
+            <p class="newLocationOpenMarker btn btn-primary">
+              Would you like to add your own location to the map?
+            </p>
+          </li>
+        `;
+        
+       
+        
           processFragments("tab-"+slug,tabHtmlContent)// TODO: WIP
           }
         }

@@ -1,96 +1,46 @@
 {
-    
-      "initialCoordinates": "49.2826, -123.1208",
-      "mapBoxApiKey": "pk.*******SET CORS FIRST******",
+      "altContentTitle": "UA",
+
       "alwaysUseDefaultLocation": "on",
-      "defaultZoom": "11",
-      "maxZoomOut": "4",
-     
-      "bottomRightCorner": "15,-45",
-      "topLeftCorner": "70,-150",
-     
-      "mapTitle": "Ukrainian Community in Canada",
-      "heroTitle": "UACANADA",
-      "heroSubtitle": "Ukrainian Resilience: Redefining the Canadian Landscape",
-     
-      "slogans": [
-            {
-                  "slogan": "It's not just a platform, but a celebration of resilience, diversity, and a shared vision for a brighter future"
-            },
-            {
-                  "slogan": "Here, we show the world the unity of Ukrainians in Canada"
-            }
-      ],
-
-      "altContentTitle": "UA Version",
-      "altContentTrigger": "UA",
-
-      "unregisteredUserAlert": "Please register <a href=\"/register\">here</a>",
-      "locationSharingErrorAlert": "The location must be specified: <ul class=\"try-locate-me list-group p-0 mt-2\"><li class=\"list-group-item\"><i class=\"fa-solid fa-location-arrow\"></i> Allow geolocation</li><li class=\"list-group-item\"><i class=\"fa-regular fa-hand-point-down\"></i> Or select a by finger</li><li class=\"list-group-item\"><i class=\"fa-solid fa-magnifying-glass\"></i> Or search Street Address</li></ul>",
-    
-      "defaultMarkerImage": "/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png",
-      "clusterIcon": "/assets/plugins/nodebb-plugin-uacanadamap/icons/uaCluster.svg",
-
-
-      "citiesData": "Vancouver,Toronto,Calgary,Edmonton,Winnipeg,Victoria,Vernon,Burnaby,Coquitlam,Richmond,Surrey,Langley,Abbotsford,Chilliwack,MetroVancouver,Brampton,Hamilton,London,Kelowna,WhiteRock,Halifax",
+      "bottomRightCorner": " 15, -45",
+      "topLeftCorner": "70, -150",
+      "bottomSheetOffset": "100,40,10,0,0",
+      "citiesData": "Vancouver,Toronto,Calgary,Edmonton,Winnipeg,Victoria,Vernon,Burnaby,Coquitlam,Richmond,Surrey,Langley,Abbotsford,Chilliwack,MetroVancouver,Brampton,Hamilton,London,Kelowna,WhiteRock,Halifax,Ottawa,Montreal,Quebec,Mississauga,Halifax,Saskatoon,Regina,St. John's,Charlottetown,Fredericton,Moncton,Gatineau,Laval,Sherbrooke,Thunder Bay",
+   
+      "contextButtonSlide": "<a title=\"Forum Link\" href=\"/categories\">\r\n    <button \r\n        title=\"Open Forum\" \r\n        class=\"btn btn-primary rounded-pill m-1 py-1\" \r\n        data-bs-toggle=\"tooltip\" \r\n        data-bs-placement=\"top\" \r\n        data-bs-title=\"Community + Forums\" \r\n        type=\"button\">\r\n        <i class=\"fa-solid fa-comment-dots\"></i>\r\n    </button>\r\n</a>\r\n\r\n<button \r\n    title=\"Open Sheet\" \r\n    type=\"button\" \r\n    class=\"showBottomPanel btn btn-primary rounded-pill m-1 py-1\" \r\n    data-ua-content-id=\"tab-widgets\" \r\n    aria-controls=\"ua-bottom-sheet\" \r\n    style=\"outline-style: none;\">\r\n    <i class=\"fa fas fa-solid fa-angle-up fa-fade\"></i>\r\n</button>\r\n\r\n<button \r\n    title=\"Open Events\" \r\n    type=\"button\" \r\n    class=\"showBottomPanel btn btn-primary rounded-pill m-1 py-1\" \r\n    data-ua-content-id=\"tab-events\" \r\n    aria-controls=\"ua-bottom-sheet\">\r\n    <i class=\"fa fa-solid fa-calendar\"></i>\r\n</button>\r\n",
       "countryLimit": "CA",
-      "entityTitle": "Province",
+      "debuginfo": {
+            "activation": 1699234556
+      },
+      "defaultMarkerImage": "/assets/plugins/nodebb-plugin-uacanadamap/icons/placeMarker.png",
+      "clusterIcon": "/assets/plugins/nodebb-plugin-uacanadamap/icons/cluster.svg",
 
-      "geographicalEntities": [
-            {
-                  "province": "BC",
-                  "provinceTitle": "British Columbia"
-            },
-            {
-                  "province": "ON",
-                  "provinceTitle": "Ontario"
-            },
-            {
-                  "province": "AB",
-                  "provinceTitle": "Alberta"
-            },
-            {
-                  "province": "QC",
-                  "provinceTitle": "Quebec"
-            },
-            {
-                  "province": "MB",
-                  "provinceTitle": "Manitoba"
-            },
-            {
-                  "province": "NS",
-                  "provinceTitle": "Nova Scotia"
-            },
-            {
-                  "province": "SK",
-                  "provinceTitle": "Saskatchewan"
-            },
-            {
-                  "province": "PE",
-                  "provinceTitle": "Prince Edward Island"
-            },
-            {
-                  "province": "NL",
-                  "provinceTitle": "Newfoundland and Labrador"
-            },
-            {
-                  "province": "NB",
-                  "provinceTitle": "New Brunswick"
-            },
-            {
-                  "province": "YT",
-                  "provinceTitle": "Yukon"
-            },
-            {
-                  "province": "NU",
-                  "provinceTitle": "Nunavut"
-            },
-            {
-                  "province": "NT",
-                  "provinceTitle": "Northwest Territories"
-            }
-      ],
+      "entityTitle": "Province",
+      "heroSubtitle": "Ukrainian Resilience: Redefining the Canadian Landscape _",
+      "heroTitle": "UACANADA",
+      "initialCoordinates": "49.28580607791015,-123.1230350929093",
+      "mapBoxApiKey": "goto: docs.mapbox.com/api",
      
+  
+      "defaultZoom": "13",
+      "maxZoomOut": "5",
+
+
+      "mapPageRouter": "/map",
+      "mapTitle": "Ukrainian Community in Canada",
+      "mapTriggerClass": "uacanada-map-page",
+      "placeTopicTag": "place",
+      "swipeResistance": "40",
+      "templateName": "map",
+
+   
+      "altContentTrigger": "UA|RU",
+      "unregisteredUserAlert": "Please register <a href=\"/register\">here</a>",
+      "zoomThreshold": "13",
+      "placeInstruction": "Welcome to our location addition interface! Here, you can contribute to our growing community by adding a new place to the map. Whether it's your favorite café, a historical landmark, or a hidden gem, we'd love to include it!\r\n\r\n\r\n<div class=\"container mt-4\">\r\n        <div class=\"row\">\r\n        <div class=\"col-1 d-flex align-items-center justify-content-center\">\r\n        <i class=\"fa fa-map-marker-alt fa-2x text-primary\"></i>\r\n        </div>\r\n        <div class=\"col-11\">\r\n        <p class=\"mb-0\"><strong>To add a location on the map,</strong> simply navigate to the desired area and perform a long tap or right-click on the specific spot.</p>\r\n        </div>\r\n        </div>\r\n        <hr class=\"my-3\">\r\n        <div class=\"row\">\r\n        <div class=\"col-1 d-flex align-items-center justify-content-center\">\r\n        <i class=\"fa fa-search-location fa-2x text-primary\"></i>\r\n        </div>\r\n        <div class=\"col-11\">\r\n        <p class=\"mb-0\"><strong>If you have the exact address of the location</strong> you'd like to add, please enter it into the search field and select from the dropdown list that will present suggested matches.</p>\r\n        </div>\r\n        </div>\r\n        </div>",
+  
+      "locationSharingErrorAlert": "The location must be specified: <ul class=\"try-locate-me list-group p-0 mt-2\"><li class=\"list-group-item\"><i class=\"fa-solid fa-location-arrow\"></i> Allow geolocation</li><li class=\"list-group-item\"><i class=\"fa-regular fa-hand-point-down\"></i> Or select a by finger</li><li class=\"list-group-item\"><i class=\"fa-solid fa-magnifying-glass\"></i> Or search Street Address</li></ul>",
+   
       "tabCategories": [
             {
                   "color": "#004683",
@@ -192,336 +142,12 @@
                   "title": "Jobs"
             }
       ],
-      "subCategories": [
+      "slogans": [
             {
-                  "cid": "23",
-                  "cidname": "Events | Події та івенти ",
-                  "icon": "fa-people-robbery",
-                  "name": "⛳️ Meetups Events",
-                  "parents": "[\"events\"]",
-                  "slug": "meetups"
+                  "slogan": "It's not just a platform, but a celebration of resilience, diversity, and a shared vision for a brighter future"
             },
             {
-                  "cid": "13",
-                  "cidname": "HELP",
-                  "icon": "fa-hand-holding-heart",
-                  "name": "🥷🏻 Online Volunteers",
-                  "parents": "[\"all\",\"volunteers\"]",
-                  "slug": "onlinevolunteer"
-            },
-            {
-                  "cid": "29",
-                  "cidname": "Цікаві локації",
-                  "icon": "",
-                  "name": "💬 Communities",
-                  "parents": "[\"all\"]",
-                  "slug": "community"
-            },
-            {
-                  "cid": "18",
-                  "cidname": "Українські ютубери в Канаді",
-                  "icon": "",
-                  "name": "📺 Vloggers",
-                  "parents": "[\"all\",\"bloggers\"]",
-                  "slug": "blogger"
-            },
-            {
-                  "cid": "14",
-                  "cidname": "Дівоча краса",
-                  "icon": "fa-hand-scissors",
-                  "name": "💅🏾 Beauty",
-                  "parents": "[\"all\",\"beauty\"]",
-                  "slug": "beauty"
-            },
-            {
-                  "cid": "14",
-                  "cidname": "Дівоча краса",
-                  "icon": "",
-                  "name": "💅🏾 Hair Styling",
-                  "parents": "[\"all\",\"beauty\"]",
-                  "slug": "hair"
-            },
-            {
-                  "cid": "14",
-                  "cidname": "Дівоча краса",
-                  "icon": "",
-                  "name": "💅🏾 Nail Care",
-                  "parents": "[\"all\",\"beauty\"]",
-                  "slug": "nails"
-            },
-            {
-                  "cid": "14",
-                  "cidname": "Дівоча краса",
-                  "icon": "",
-                  "name": "💅🏾 Makeup",
-                  "parents": "[\"all\",\"beauty\"]",
-                  "slug": "makeup"
-            },
-            {
-                  "cid": "10",
-                  "cidname": "Пошук роботи ",
-                  "icon": "",
-                  "name": "🦺 Job Seekers",
-                  "parents": "[\"all\"]",
-                  "slug": "needjob"
-            },
-            {
-                  "cid": "10",
-                  "cidname": "Пошук роботи ",
-                  "icon": "",
-                  "name": "👷🏻 Job Offers",
-                  "parents": "[\"all\"]",
-                  "slug": "joboffer"
-            },
-            {
-                  "cid": "6",
-                  "cidname": "Імміграція до Канади CUAET ➜ PR ",
-                  "icon": "",
-                  "name": "🪪 Document Services",
-                  "parents": "[\"all\",\"businesses\",\"immigration\"]",
-                  "slug": "documents"
-            },
-            {
-                  "cid": "6",
-                  "cidname": "Імміграція до Канади CUAET ➜ PR ",
-                  "icon": "",
-                  "name": "💼 Immigration Services",
-                  "parents": "[\"all\"]",
-                  "slug": "immigration"
-            },
-            {
-                  "cid": "21",
-                  "cidname": "Медицина та лікарі",
-                  "icon": "",
-                  "name": "🏥 Healthcare",
-                  "parents": "[\"all\",\"health\"]",
-                  "slug": "health"
-            },
-            {
-                  "cid": "9",
-                  "cidname": "Автомобілі ",
-                  "icon": "",
-                  "name": "🚘 Driving Instructors",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "drivinginstructor"
-            },
-            {
-                  "cid": "16",
-                  "cidname": "Українські товари, пошта та рецепти",
-                  "icon": "",
-                  "name": "📦 Parcel Services",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "parcels"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "💳 Finance & Banking",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "finance"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "👨🏼‍🎓 Classes & Education",
-                  "parents": "[\"all\",\"immigration\"]",
-                  "slug": "classes"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "👶🏼 Children's Services",
-                  "parents": "[\"all\",\"childhood\"]",
-                  "slug": "children"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🐇 Pet Services",
-                  "parents": "[\"all\",\"childhood\"]",
-                  "slug": "pets"
-            },
-            {
-                  "cid": "29",
-                  "cidname": "Цікаві локації",
-                  "icon": "",
-                  "name": "🏤 Official Organizations",
-                  "parents": "[\"all\",\"volunteers\"]",
-                  "slug": "organization"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🗿 Landmark",
-                  "parents": "[\"all\"]",
-                  "slug": "landmark"
-            },
-            {
-                  "cid": "29",
-                  "cidname": "Цікаві локації",
-                  "icon": "",
-                  "name": "⛪️ Church",
-                  "parents": "[\"all\",\"volunteers\"]",
-                  "slug": "church"
-            },
-            {
-                  "cid": "29",
-                  "cidname": "Цікаві локації",
-                  "icon": "",
-                  "name": "⛪️ Charity Funds",
-                  "parents": "[\"all\",\"volunteers\"]",
-                  "slug": "charityfund"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🥾 Hiking Trails",
-                  "parents": "[\"all\",\"events\"]",
-                  "slug": "hikes"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🦸🏼‍♀️ Volunteering",
-                  "parents": "[\"all\",\"events\",\"volunteers\"]",
-                  "slug": "volunteer"
-            },
-            {
-                  "cid": "5",
-                  "cidname": "Кооперація Українців ",
-                  "icon": "",
-                  "name": "🤙 Consulting Services",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "consulting"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🏡 Housing Services",
-                  "parents": "[\"all\"]",
-                  "slug": "housing"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🚕 Driver Services",
-                  "parents": "[\"all\"]",
-                  "slug": "driver"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🚚 Moving Services",
-                  "parents": "[\"all\",\"volunteers\",\"businesses\"]",
-                  "slug": "moving"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🚙 Car Dealerships",
-                  "parents": "[\"all\"]",
-                  "slug": "dealership"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🔧 Car Repair Services",
-                  "parents": "[\"all\"]",
-                  "slug": "carrepair"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🧀 Grocery Stores",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "groceries"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "👩🏼‍🍳 Cafés",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "cafe"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "👩🏼‍🍳 Cooking Services",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "cooking"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🧵 Handmade Crafts",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "handmade"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🏪 Shops",
-                  "parents": "[\"all\",\"businesses\"]",
-                  "slug": "shop"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🦝 Wildfire",
-                  "parents": "[\"all\"]",
-                  "slug": "wildfire"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "⛰️ Nature",
-                  "parents": "[\"all\"]",
-                  "slug": "nature"
-            },
-            {
-                  "cid": "22",
-                  "cidname": "",
-                  "icon": "",
-                  "name": "🔑 Crypto (P2P)",
-                  "parents": "[\"businesses\"]",
-                  "slug": "crypto"
-            },
-            {
-                  "cid": "5",
-                  "cidname": "Кооперація Українців ",
-                  "icon": "",
-                  "name": "🇺🇦 Services for Ukrainians",
-                  "parents": "[\"all\",\"volunteers\"]",
-                  "slug": "uaservices"
-            }
-      ],
-      "eventCategories": [
-            {
-                  "name": "Meetups",
-                  "slug": "meetups"
-            },
-            {
-                  "name": "Hikes",
-                  "slug": "hikes"
+                  "slogan": "Here, we show the world the unity of Ukrainians in Canada"
             }
       ],
       "advMarkers": [
@@ -550,17 +176,431 @@
                   "url": "https://uacanada.org/services4ukrainians/koho/"
             }
       ],
-      "contextButtonSlide": "<a title=\"Forum Link\" href=\"/categories\"\r\n  ><button title=\"Open Forum\" class=\"btn btn-primary rounded-pill m-1 \" type=\"button\">\r\n    <i class=\"fa-solid fa-comment-dots\"></i> Community\r\n  </button>\r\n</a>\r\n\r\n<button title=\"Open Sheet\"\r\n  class=\"btn btn-primary rounded-pill m-1 \"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"main-first-tab\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n><i class=\"fa fas fa-solid fa-angle-up fa-fade\"></i>\r\n</button>\r\n\r\n<button title=\"Open Events\"\r\n  class=\"btn btn-primary rounded-pill m-1 \"\r\n  type=\"button\"\r\n  data-bs-toggle=\"offcanvas\"\r\n  data-bs-target=\"#ua-bottom-sheet\"\r\n  data-ua-tabtarget=\"events\"\r\n  aria-controls=\"ua-bottom-sheet\"\r\n>\r\n  <i class=\"fa fa-solid fa-calendar\"></i>\r\n</button>",
-      
-      "bottomSheetOffset": "100,40,10,0,0",
-      "mapTriggerClass": "uacanada-map-page",
-      "placeTopicTag": "place",
-      "swipeResistance": "40",
-      "mapPageRouter": "/map",
-      "templateName": "map",
-      "zoomThreshold": "13",
-      "debuginfo": {
-            "activation": 0
-      }
-     
+      "subCategories": [
+            {
+                  "cid": "23",
+                  "cidname": "Events | Події та івенти ",
+                  "icon": "fa-people-robbery",
+                  "name": "⛳️ Meetups Events",
+                  "parents": "[\"events\"]",
+                  "slug": "meetups",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "13",
+                  "cidname": "HELP",
+                  "icon": "fa-hand-holding-heart",
+                  "name": "🥷🏻 Online Volunteers",
+                  "parents": "[\"all\",\"volunteers\"]",
+                  "slug": "onlinevolunteer",
+                  "visibleOnlyWhenChosen": "on"
+            },
+            {
+                  "cid": "29",
+                  "cidname": "Цікаві локації",
+                  "icon": "",
+                  "name": "💬 Communities",
+                  "parents": "[\"all\"]",
+                  "slug": "community",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "18",
+                  "cidname": "Українські ютубери в Канаді",
+                  "icon": "",
+                  "name": "📺 Vloggers",
+                  "parents": "[\"all\",\"bloggers\"]",
+                  "slug": "blogger",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "14",
+                  "cidname": "Дівоча краса",
+                  "icon": "fa-hand-scissors",
+                  "name": "💅🏾 Beauty",
+                  "parents": "[\"all\",\"beauty\"]",
+                  "slug": "beauty",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "14",
+                  "cidname": "Дівоча краса",
+                  "icon": "",
+                  "name": "💅🏾 Hair Styling",
+                  "parents": "[\"all\",\"beauty\"]",
+                  "slug": "hair",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "14",
+                  "cidname": "Дівоча краса",
+                  "icon": "",
+                  "name": "💅🏾 Nail Care",
+                  "parents": "[\"all\",\"beauty\"]",
+                  "slug": "nails",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "14",
+                  "cidname": "Дівоча краса",
+                  "icon": "",
+                  "name": "💅🏾 Makeup",
+                  "parents": "[\"all\",\"beauty\"]",
+                  "slug": "makeup",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "10",
+                  "cidname": "Пошук роботи ",
+                  "icon": "",
+                  "name": "🦺 Job Seekers",
+                  "parents": "[\"all\"]",
+                  "slug": "needjob",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "10",
+                  "cidname": "Пошук роботи ",
+                  "icon": "",
+                  "name": "👷🏻 Job Offers",
+                  "parents": "[\"all\"]",
+                  "slug": "joboffer",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "6",
+                  "cidname": "Імміграція до Канади CUAET ➜ PR ",
+                  "icon": "",
+                  "name": "🪪 Document Services",
+                  "parents": "[\"all\",\"businesses\",\"immigration\"]",
+                  "slug": "documents",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "6",
+                  "cidname": "Імміграція до Канади CUAET ➜ PR ",
+                  "icon": "",
+                  "name": "💼 Immigration Services",
+                  "parents": "[\"all\"]",
+                  "slug": "immigration",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "21",
+                  "cidname": "Медицина та лікарі",
+                  "icon": "",
+                  "name": "🏥 Healthcare",
+                  "parents": "[\"all\",\"health\"]",
+                  "slug": "health",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "9",
+                  "cidname": "Автомобілі ",
+                  "icon": "",
+                  "name": "🚘 Driving Instructors",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "drivinginstructor",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "16",
+                  "cidname": "Українські товари, пошта та рецепти",
+                  "icon": "",
+                  "name": "📦 Parcel Services",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "parcels",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "💳 Finance & Banking",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "finance",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "👨🏼‍🎓 Classes & Education",
+                  "parents": "[\"all\",\"immigration\"]",
+                  "slug": "classes",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "👶🏼 Children's Services",
+                  "parents": "[\"all\",\"childhood\"]",
+                  "slug": "children",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🐇 Pet Services",
+                  "parents": "[\"all\",\"childhood\"]",
+                  "slug": "pets",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "29",
+                  "cidname": "Цікаві локації",
+                  "icon": "",
+                  "name": "🏤 Official Organizations",
+                  "parents": "[\"all\",\"volunteers\"]",
+                  "slug": "organization",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🗿 Landmark",
+                  "parents": "[\"all\"]",
+                  "slug": "landmark",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "29",
+                  "cidname": "Цікаві локації",
+                  "icon": "",
+                  "name": "⛪️ Church",
+                  "parents": "[\"all\",\"volunteers\"]",
+                  "slug": "church",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "29",
+                  "cidname": "Цікаві локації",
+                  "icon": "",
+                  "name": "⛪️ Charity Funds",
+                  "parents": "[\"all\",\"volunteers\"]",
+                  "slug": "charityfund",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🥾 Hiking Trails",
+                  "parents": "[\"all\",\"events\"]",
+                  "slug": "hikes",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🦸🏼‍♀️ Volunteering",
+                  "parents": "[\"all\",\"events\",\"volunteers\"]",
+                  "slug": "volunteer",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "5",
+                  "cidname": "Кооперація Українців ",
+                  "icon": "",
+                  "name": "🤙 Consulting Services",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "consulting",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🏡 Housing Services",
+                  "parents": "[\"all\"]",
+                  "slug": "housing",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🚕 Driver Services",
+                  "parents": "[\"all\"]",
+                  "slug": "driver",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🚚 Moving Services",
+                  "parents": "[\"all\",\"volunteers\",\"businesses\"]",
+                  "slug": "moving",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🚙 Car Dealerships",
+                  "parents": "[\"all\"]",
+                  "slug": "dealership",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🔧 Car Repair Services",
+                  "parents": "[\"all\"]",
+                  "slug": "carrepair",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🧀 Grocery Stores",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "groceries",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "👩🏼‍🍳 Cafés",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "cafe",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "👩🏼‍🍳 Cooking Services",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "cooking",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🧵 Handmade Crafts",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "handmade",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🏪 Shops",
+                  "parents": "[\"all\",\"businesses\"]",
+                  "slug": "shop",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🦝 Wildfire",
+                  "parents": "[\"all\"]",
+                  "slug": "wildfire",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "⛰️ Nature",
+                  "parents": "[\"all\"]",
+                  "slug": "nature",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "22",
+                  "cidname": "",
+                  "icon": "",
+                  "name": "🔑 Crypto (P2P)",
+                  "parents": "[\"businesses\"]",
+                  "slug": "crypto",
+                  "visibleOnlyWhenChosen": "off"
+            },
+            {
+                  "cid": "5",
+                  "cidname": "Кооперація Українців ",
+                  "icon": "",
+                  "name": "🇺🇦 Services for Ukrainians",
+                  "parents": "[\"all\",\"volunteers\"]",
+                  "slug": "uaservices",
+                  "visibleOnlyWhenChosen": "off"
+            }
+      ],
+      "eventCategories": [
+            {
+                  "name": "Meetups",
+                  "slug": "meetups"
+            },
+            {
+                  "name": "Hikes",
+                  "slug": "hikes"
+            }
+      ],
+      "geographicalEntities": [
+            {
+                  "province": "BC",
+                  "provinceTitle": "British Columbia"
+            },
+            {
+                  "province": "ON",
+                  "provinceTitle": "Ontario"
+            },
+            {
+                  "province": "AB",
+                  "provinceTitle": "Alberta"
+            },
+            {
+                  "province": "QC",
+                  "provinceTitle": "Quebec"
+            },
+            {
+                  "province": "MB",
+                  "provinceTitle": "Manitoba"
+            },
+            {
+                  "province": "NS",
+                  "provinceTitle": "Nova Scotia"
+            },
+            {
+                  "province": "SK",
+                  "provinceTitle": "Saskatchewan"
+            },
+            {
+                  "province": "PE",
+                  "provinceTitle": "Prince Edward Island"
+            },
+            {
+                  "province": "NL",
+                  "provinceTitle": "Newfoundland and Labrador"
+            },
+            {
+                  "province": "NB",
+                  "provinceTitle": "New Brunswick"
+            },
+            {
+                  "province": "YT",
+                  "provinceTitle": "Yukon"
+            },
+            {
+                  "province": "NU",
+                  "provinceTitle": "Nunavut"
+            },
+            {
+                  "province": "NT",
+                  "provinceTitle": "Northwest Territories"
+            }
+      ],
+      "customExtraSettings": ""
 }

@@ -47,8 +47,10 @@ body.uacanada-map-page main#panel{
   transition: 200ms;
 }
 
-
-
+// Prevent offcanvas padding manipulation
+body.template-map.theme-harmony {
+  padding-right: 0!important;
+}
 
 
 
@@ -101,26 +103,30 @@ body,
   position: absolute;
   top: 0;
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem 0.25rem;
   transition: .2s transform ease-in;
   transform: translate3d(0,-500px,0);
   z-index: 1020;
   &.show{
     transform: translate3d(0px,0,0);
   }
-  &:after {
-    content: 'Enter an address or drag the map to your preferred location';
-    border-radius: 5px;
-    margin-top: 5px;
+  .leaflet-control-geocoder-expanded:after{
+    content: '';
+    display: none!important;
+
+  }
+  .leaflet-control-geocoder:after {
+    content: "Enter a street address here";
+    margin-top: -1.5rem;
     text-align: center;
-    overflow: hidden;
     width: 100%;
-    backdrop-filter: blur(5px);
-    color: #445474;
+    color: #8a8a8a;
     display: block;
-    padding: 5px 2px;
-    font-size: 9px;
-    font-weight: bold;
+    padding: 0;
+    font-size: .75rem;
+    overflow: hidden;
+    height: 1rem;
+    line-height: 1;
   }
 }
 
@@ -145,23 +151,32 @@ body,
 
 
 
-
-.leaflet-control.btn-group.dropup{
-  .dropdown-menu {
-    -webkit-animation: map-buttons-dropdown-animation 0.2s both;
-    animation: map-buttons-dropdown-animation 0.2s both;
-    color: #000000;
-    width: 14rem;
+.dropdown-menu.custom-ua-dropdown{
+    background-color: rgba(var(--bs-body-bg-rgb),0.5);
+    color: rgba(var(--bs-body-color-rgb),1);
     max-width: 90vw;
     border-radius: 0.5rem;
     backdrop-filter: blur(3px);
-    background: transparent;
+    transition: all ease-in 0.2s;
+    white-space: nowrap;
     a {
       width: auto;
-      padding: 0.25rem 1rem;
       background: transparent;
-      color: #000000;
     }
+    .list-group-item{
+      background-color: transparent;
+      color: rgba(var(--bs-body-color-rgb),1);
+    }
+    &:not(.show) {
+      -webkit-animation: map-buttons-dropdown-animation 0.2s both;
+      animation: map-buttons-dropdown-animation 0.2s both;
+    }
+}
+
+
+.leaflet-control.btn-group.dropup{
+  .dropdown-menu.custom-ua-dropdown {
+    padding-right: 2.5rem;
     #tile-chooser button,
     #location-category-filter {
       padding: .25rem;
@@ -169,6 +184,10 @@ body,
       background: transparent;
       max-width: 90%;
       color: #000000;
+    }
+
+    a {
+      padding: 0.25rem 1rem;
     }
     
   }

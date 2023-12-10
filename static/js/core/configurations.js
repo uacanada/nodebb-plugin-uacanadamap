@@ -73,10 +73,16 @@ define('core/configuration', function (require) {
         }
 
         
-        UacanadaMap.mapLayers.MapBox = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30 ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):UacanadaMap.StreetsMap;
+        const OSM = L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  );
+
+        UacanadaMap.isMapBoxKeyExist = ajaxify.data.UacanadaMapSettings.mapBoxApiKey?.length > 30
+
+        UacanadaMap.mapLayers.MapBox = UacanadaMap.isMapBoxKeyExist ? L.tileLayer.provider("MapBox", { id: "mapbox/streets-v11",  accessToken:ajaxify.data.UacanadaMapSettings.mapBoxApiKey}):OSM;
+        
+        
         UacanadaMap.mapProviders = {
             MapBox: UacanadaMap.mapLayers.MapBox,
-            OSM:  L.tileLayer( "https://tile.openstreetmap.org/{z}/{x}/{y}.png",  { maxZoom: 19 }  ),
+            OSM,
             Minimal: L.tileLayer.provider("Esri.WorldGrayCanvas"),
             BlackWhite: L.tileLayer.provider("Stamen.TonerLite"),
             Terrain: L.tileLayer.provider("Stamen.Terrain"),
@@ -198,7 +204,7 @@ define('core/configuration', function (require) {
         UacanadaMap.mapLayers.addPlaceButton = new (UacanadaMap.api.addLeafletButton({classes: 'leaflet-control-addplace newLocationOpenMarker', title: 'Add New Place', icon: 'fa fa-solid fa-map-pin',btnclasses:'btn-primary'}));
         UacanadaMap.mapLayers.filterPlacesButton = new (UacanadaMap.api.addLeafletButton({classes: "filterPlaces btn-group dropup",  title: "Filter Places",  icon: "fa fa-fw fa-sliders",  btnclasses: "btn btn-blur dropdown-toggle", 
                attributes:`data-bs-toggle="dropdown" aria-expanded="false"`,
-                extendedhtml:`<div class="dropdown-menu">  <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
+                extendedhtml:`<div class="dropdown-menu custom-ua-dropdown">  <a class="ua-sort list-group-item list-group-item-action d-flex align-items-center border-bottom"
                 data-ua-sortby="distance" href="#">
                 <i class="fas fa-road me-2"></i> Distance
             </a>
@@ -227,7 +233,7 @@ define('core/configuration', function (require) {
         UacanadaMap.mapLayers.locateControl = UacanadaMap.L.control.locate({  position: "bottomright",  flyTo: true,  maxZoom: 16,  strings: { title: "Show me where I am" },});
         UacanadaMap.mapLayers.zoomControl = UacanadaMap.L.control.zoom({ position: "bottomright" });
         UacanadaMap.mapControlsUnused.layerControl = L.control.layers(  UacanadaMap.mapProviders,  UacanadaMap.markersOverlay,  { position: "topright" }  );
-        UacanadaMap.mapLayers.tileChooser = new (UacanadaMap.api.addLeafletButton({  classes: "tileChooser btn-group dropup",  title: "Tile Providers",  icon: "fa fa-solid fa-layer-group",  btnclasses: "btn btn-blur dropdown-toggle", attributes:`data-bs-toggle="dropdown" aria-expanded="false"`, extendedhtml:`<div class="dropdown-menu"><div id="tile-chooser"></div></div>` }));
+        UacanadaMap.mapLayers.tileChooser = new (UacanadaMap.api.addLeafletButton({  classes: "tileChooser btn-group dropup",  title: "Tile Providers",  icon: "fa fa-solid fa-layer-group",  btnclasses: "btn btn-blur dropdown-toggle", attributes:`data-bs-toggle="dropdown" aria-expanded="false"`, extendedhtml:`<div class="dropdown-menu custom-ua-dropdown"><div id="tile-chooser"></div></div>` }));
         
         const myFullscreen = UacanadaMap.L.Control.Fullscreen.extend({ options: {  pseudoFullscreenClass: "fa fa-expand" }  });
         UacanadaMap.mapLayers.fsControl = new myFullscreen({ position: "bottomright" });
@@ -329,23 +335,20 @@ define('core/configuration', function (require) {
 
     function handleContextMenuClick(e) {
         try {
-            const { lat, lng } = getLatLng(e);
+            const lat = e.latlng?.lat || e.latlng[0];
+            const lng = e.latlng?.lng || e.latlng[1];
     
             if (!lat || !lng) {
                 return console.warn('Location error');
             }
      $("#ua-latlng-text").val(`${lat},${lng}`);
-     UacanadaMap.api.createMarkerButton(e, false);
+     UacanadaMap.api.createMarkerAtLocation(e, false);
         } catch (error) {
             console.log(error);
         }
     }
     
-    function getLatLng(e) {
-        const lat = e.latlng?.lat || e.latlng[0];
-        const lng = e.latlng?.lng || e.latlng[1];
-        return { lat, lng };
-    }
+   
 
 
     function addMapLayer(layer) {
